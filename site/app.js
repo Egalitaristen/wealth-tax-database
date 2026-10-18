@@ -21,7 +21,9 @@ function makeMap(svg, box, tip, vb, nameOf, onPick) {
   let x = vx, y = vy, w = vw, h = vh, drag = null, moved = false, selKey = null;
   const set = () => svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`);
   function fit() {
-    const r = svg.getBoundingClientRect(), asp = (r.width / r.height) || 1;
+    const r = svg.getBoundingClientRect();
+    if (r.width < 2 || r.height < 2) return; // hidden or collapsed: keep the last view
+    const asp = r.width / r.height;
     let nw = vw, nh = vh;
     if (nw / nh > asp) nh = nw / asp; else nw = nh * asp;
     w = nw; h = nh; x = vx - (nw - vw) / 2; y = vy - (nh - vh) / 2; set();
