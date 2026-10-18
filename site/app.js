@@ -204,8 +204,9 @@ function renderCountry() {
       <select id="fg" aria-label="Grade"><option value="">Any grade</option><option value="A">A explicit</option><option value="B">B named</option><option value="C">C implied</option></select>
       <select id="fp" aria-label="Party"></select><select id="fk" aria-label="Kind"><option value="">People and organisations</option><option value="person">People</option><option value="organisation">Organisations</option></select>
       <select id="fv" aria-label="Verification"><option value="">Verified or not</option><option value="y">Has a verified row</option></select></div>
+      <p class="note" id="count" style="margin:0 0 8px" aria-live="polite"></p>
       <div class="grid"><div><div class="tw" style="max-height:74vh;overflow:auto"><table id="tbl"><thead><tr><th data-k="1">Name</th><th data-k="3">Type</th><th data-k="15">Party</th><th data-k="8">Grade</th><th data-k="9">Rows</th><th data-k="11">Latest</th></tr></thead><tbody></tbody></table></div>
-      <p class="note" id="count" style="margin-top:8px"></p></div><aside class="panel" id="pside"><p class="empty">Select a row to see the evidence behind it.</p></aside></div>`;
+      </div><aside class="panel" id="pside"><p class="empty">Select a row to see the evidence behind it.</p></aside></div>`;
     const ft = $('#ft'), fp = $('#fp');
     const parties = [...new Set(P.map(p => p[15]).filter(Boolean))].sort((a, b) => P.filter(p => p[15] === b).length - P.filter(p => p[15] === a).length);
     fp.innerHTML = '<option value="">Any party</option>' + parties.map(x => `<option value="${esc(x)}">${esc(x)} (${P.filter(p => p[15] === x).length})</option>`).join('');
