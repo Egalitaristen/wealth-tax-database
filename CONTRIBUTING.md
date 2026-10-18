@@ -48,3 +48,7 @@ Anyone can open a [data report](../../issues/new?template=data-report.yml). Main
 ## Party column
 
 For politicians, fill the `party` column with the party's common English name (`Labour`, `Green Party`, `Independent` if none), one name per party, so the site can filter on it. `validate` warns when a politician has no party.
+
+## More than one type
+
+Pick the main role for `actor_type` and list any others in `other_types`, separated by `;` (for example `journalist` with `economist`). The site filters and counts a person under every type they hold.

@@ -168,7 +168,7 @@ function renderCountry() {
   const card = i => {
     const p = P[i];
     const es = (evBy[p[0]] || []).slice().sort((a, b) => 'ABC'.indexOf(a[2]) - 'ABC'.indexOf(b[2]) || b[1].localeCompare(a[1]));
-    return `<h2>${esc(p[1])}</h2><div style="margin-bottom:8px"><span class="g g${p[8]}">${p[8]}</span> <span class="pill">${esc(TYPE[p[3]] || p[3])}</span> <span class="pill">${esc(p[6])}</span>${p[15] ? ` <span class="pill">${esc(p[15])}</span>` : ''}${p[7] ? ` <span class="pill">${esc(p[7])}</span>` : ''}</div>
+    return `<h2>${esc(p[1])}</h2><div style="margin-bottom:8px"><span class="g g${p[8]}">${p[8]}</span> ${[p[3], ...p[16]].map(x => `<span class="pill">${esc(TYPE[x] || x)}</span>`).join(' ')} <span class="pill">${esc(p[6])}</span>${p[15] ? ` <span class="pill">${esc(p[15])}</span>` : ''}${p[7] ? ` <span class="pill">${esc(p[7])}</span>` : ''}</div>
       <div style="font-size:14px">${esc(p[4])}</div>${p[5] && p[5] !== p[4] ? `<div class="note">${esc(p[5])}</div>` : ''}
       ${p[13] ? `<p class="note">${esc(p[13])}</p>` : ''}<h3 style="margin-top:14px">Evidence (${es.length})</h3>${es.map(e => evCard(e, cc)).join('')}
       <a class="report" href="${esc(issueUrl('[' + cc + '] Report: ' + p[1], {country: slug, entry: p[0]}))}" target="_blank" rel="noopener">Report a problem with this entry</a>`;
@@ -210,13 +210,13 @@ function renderCountry() {
     const ft = $('#ft'), fp = $('#fp');
     const parties = [...new Set(P.map(p => p[15]).filter(Boolean))].sort((a, b) => P.filter(p => p[15] === b).length - P.filter(p => p[15] === a).length);
     fp.innerHTML = '<option value="">Any party</option>' + parties.map(x => `<option value="${esc(x)}">${esc(x)} (${P.filter(p => p[15] === x).length})</option>`).join('');
-    ft.innerHTML = '<option value="">Any type</option>' + [...new Set(P.map(p => p[3]))].sort((a, b) => (TYPE[a] || a).localeCompare(TYPE[b] || b)).map(t => `<option value="${t}">${esc(TYPE[t] || t)}</option>`).join('');
+    ft.innerHTML = '<option value="">Any type</option>' + [...new Set(P.flatMap(p => [p[3], ...p[16]]))].sort((a, b) => (TYPE[a] || a).localeCompare(TYPE[b] || b)).map(t => `<option value="${t}">${esc(TYPE[t] || t)}</option>`).join('');
     let sortK = 1, sortD = 1, cur = PEOPLE_SEL;
     const rows = () => {
       const q = $('#q').value.toLowerCase(), t = ft.value, l = $('#fl').value, g = $('#fg').value, k = $('#fk').value, v = $('#fv').value, pa = fp.value;
       const r = P.map((p, i) => i).filter(i => {
         const p = P[i];
-        return (!t || p[3] === t) && (!l || p[6] === l) && (!g || p[8] === g) && (!k || p[2] === k) && (!pa || p[15] === pa) &&
+        return (!t || p[3] === t || p[16].includes(t)) && (!l || p[6] === l) && (!g || p[8] === g) && (!k || p[2] === k) && (!pa || p[15] === pa) &&
           (!v || (evBy[p[0]] || []).some(e => e[10] === 'y')) && (!q || (p[1] + ' ' + p[4] + ' ' + p[5] + ' ' + p[7] + ' ' + p[15]).toLowerCase().includes(q));
       });
       r.sort((a, b) => { const x = P[a][sortK], y = P[b][sortK]; return (typeof x === 'number' ? x - y : String(x).localeCompare(String(y))) * sortD; });
@@ -225,7 +225,7 @@ function renderCountry() {
     const draw = () => {
       const r = rows();
       $('#tbl tbody').innerHTML = r.slice(0, 400).map(i => { const p = P[i];
-        return `<tr tabindex="0" data-p="${i}" aria-selected="${i === cur}"><td><b>${esc(p[1])}</b><div class="role">${esc(p[4].slice(0, 90))}</div></td><td>${esc(TYPE[p[3]] || p[3])}</td><td>${esc(p[15])}</td><td><span class="g g${p[8]}">${p[8]}</span></td><td class="n">${p[9]}</td><td class="n">${esc(p[11].slice(0, 7))}</td></tr>`; }).join('');
+        return `<tr tabindex="0" data-p="${i}" aria-selected="${i === cur}"><td><b>${esc(p[1])}</b><div class="role">${esc(p[4].slice(0, 90))}</div></td><td>${esc([p[3], ...p[16]].map(x => TYPE[x] || x).join(', '))}</td><td>${esc(p[15])}</td><td><span class="g g${p[8]}">${p[8]}</span></td><td class="n">${p[9]}</td><td class="n">${esc(p[11].slice(0, 7))}</td></tr>`; }).join('');
       $('#count').textContent = `${r.length} of ${P.length} shown` + (r.length > 400 ? ' (first 400; narrow the filters to see the rest)' : '');
     };
     const pick = i => { cur = i; $('#pside').innerHTML = card(i); draw(); };
@@ -240,7 +240,7 @@ function renderCountry() {
 
   if (sub === 'timeline') {
     body.innerHTML = `<div class="panel"><h2>Evidence by year</h2><p class="note">Dated evidence rows by grade. Years with few rows reflect where the harvest started, so earlier support is under-counted.</p><div id="tl"></div></div>
-      <div class="charts"><div class="panel"><h3>Supporters by type</h3><div class="bars" id="btype"></div></div><div class="panel"><h3>Designs backed (supporters)</h3><div class="bars" id="bdes"></div></div><div class="panel" id="pparty"><h3>Politicians by party</h3><div class="bars" id="bparty"></div></div><div class="panel"><h3>Evidence by kind</h3><div class="bars" id="bev"></div></div></div>`;
+      <div class="charts"><div class="panel"><h3>Supporters by type</h3><p class="note" style="margin:0 0 8px">A person counts under each of their types.</p><div class="bars" id="btype"></div></div><div class="panel"><h3>Designs backed (supporters)</h3><div class="bars" id="bdes"></div></div><div class="panel" id="pparty"><h3>Politicians by party</h3><div class="bars" id="bparty"></div></div><div class="panel"><h3>Evidence by kind</h3><div class="bars" id="bev"></div></div></div>`;
     const yrs = {}; let y0 = 9999, y1 = 0;
     E.forEach(e => { const y = +String(e[1]).slice(0, 4); if (y >= 2000 && y <= 2100) { (yrs[y] ??= {A: 0, B: 0, C: 0})[e[2]]++; y0 = Math.min(y0, y); y1 = Math.max(y1, y); } });
     y0 = Math.min(y0, 2010); y1 = Math.max(y1, new Date().getFullYear());
@@ -256,7 +256,7 @@ function renderCountry() {
     $('#tl').innerHTML = s;
     const cnt = (arr, f) => { const o = {}; arr.forEach(x => { const k = f(x); if (k) o[k] = (o[k] || 0) + 1; }); return Object.entries(o).sort((a, b) => b[1] - a[1]); };
     const bars = (el, pairs, lab) => { const m = Math.max(1, ...pairs.map(p => p[1])); $(el).innerHTML = pairs.map(p => `<div class="bar"><span>${esc(lab(p[0]))}</span><div class="t"><i style="width:${p[1] / m * 100}%"></i></div><span class="v">${p[1]}</span></div>`).join(''); };
-    bars('#btype', cnt(P, p => p[3]), k => TYPE[k] || k);
+    (() => { const o = {}; P.forEach(p => [p[3], ...p[16]].forEach(x => { o[x] = (o[x] || 0) + 1; })); bars('#btype', Object.entries(o).sort((a, b) => b[1] - a[1]), k => TYPE[k] || k); })();
     bars('#bdes', cnt(P, p => p[12][0] && (['annual_net_wealth', 'one_off_levy', 'billionaire_minimum', 'partial_wealth'].find(d => p[12].includes(d)) || 'wealth_tax_unspecified')), k => DES[k] || k);
     bars('#bparty', cnt(P, p => p[3] === 'politician' && p[15]), k => k);
     if (!P.some(p => p[3] === 'politician' && p[15])) $('#pparty').hidden = true;

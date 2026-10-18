@@ -134,7 +134,8 @@ def build_country(folder):
         designs = sorted({x["wt_design"] for x in es if x["wt_design"]})
         P.append([a["actor_id"], a["name"], a["kind"], a["actor_type"], a["role"], a["affiliation"], a["level"],
                   gname.get(a["geo_unit_id"], ""), "ABC"[best], len(es), dates[0] if dates else "",
-                  dates[-1] if dates else "", designs, a["notes"], a["website"], a.get("party", "")])
+                  dates[-1] if dates else "", designs, a["notes"], a["website"], a.get("party", ""),
+                  [x.strip() for x in a.get("other_types", "").split(";") if x.strip()]])
 
     bounds = None
     bfile = meta.get("boundaries")

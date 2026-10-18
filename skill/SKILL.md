@@ -103,7 +103,8 @@ International actors (Zucman, Oxfam International) are included in a country dat
 In this repository, `<area-slug>` is the lowercase ISO 3166-1 alpha-2 code (`gb`, `de`) or `<iso2>-<region>` (`us-ca`). Each folder also needs a `meta.json` (`name`, `iso2`, `lead`, `status`, optional `boundaries`); `init` creates it. Everything lives in `data/<area-slug>/` (e.g. `data/gb/`, `data/us-california/`, `data/eu/`). Create it with `python skill/scripts/wtdb.py init data/<slug> --area "<Area name>"`, or by hand with exactly these headers. IDs are prefix + zero-padded number (A0001, E00001, G0001, L0001, H0001, X0001, R001).
 
 **actors.csv** — one row per actor
-`actor_id, name, kind, actor_type, role, affiliation, party, affiliation_actor_id, country, level, geo_unit_id, wikidata_qid, website, status, alive_checked, prominence, notes, added_run, updated`
+`actor_id, name, kind, actor_type, other_types, role, affiliation, party, affiliation_actor_id, country, level, geo_unit_id, wikidata_qid, website, status, alive_checked, prominence, notes, added_run, updated`
+- `other_types`: extra `actor_type` values separated by `;`, for people who fit more than one (for example `journalist` primary with `economist` here). `actor_type` is the main role; the site and the coverage grid count a person under every type they hold.
 - `party`: for politicians, the party's common name in English (for example `Labour`, `Green Party`, `Scottish National Party`; `Independent` if none). Use one name per party so the site can filter on it; for a regional branch use the national party's name. Blank for non-politicians.
 - `level`: supranational · national · regional · local
 - `status`: active · former_role · dissolved

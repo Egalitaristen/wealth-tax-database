@@ -16,7 +16,7 @@ import argparse, csv, datetime as dt, difflib, json, os, re, sys, unicodedata
 from collections import Counter, defaultdict
 
 SCHEMA = {
-    "actors": ["actor_id", "name", "kind", "actor_type", "role", "affiliation", "party", "affiliation_actor_id", "country",
+    "actors": ["actor_id", "name", "kind", "actor_type", "other_types", "role", "affiliation", "party", "affiliation_actor_id", "country",
                "level", "geo_unit_id", "wikidata_qid", "website", "status", "alive_checked", "prominence", "notes",
                "added_run", "updated"],
     "evidence": ["evidence_id", "actor_id", "date", "stance", "grade", "evidence_type", "wt_design", "design_detail",
@@ -296,7 +296,10 @@ def validate(db):
             errs.append(f"{where}: geo_unit_id {r['geo_unit_id']} does not exist")
         if r.get("level") == "local" and not r.get("geo_unit_id"):
             warns.append(f"{where}: local actor without geo_unit_id")
-        if r.get("actor_type") == "politician" and not r.get("party"):
+        for ot in type_list(r)[1:]:
+            if ot not in ENUMS[("actors", "actor_type")]:
+                errs.append(f"{where}: other_types has unknown type '{ot}'")
+        if "politician" in type_list(r) and not r.get("party"):
             warns.append(f"{where}: politician without party (use the party's common name, or Independent)")
         if r.get("affiliation_actor_id") and r["affiliation_actor_id"] not in actors:
             errs.append(f"{where}: affiliation_actor_id {r['affiliation_actor_id']} does not exist")
@@ -386,11 +389,18 @@ def derive(db):
     return out
 
 
+def type_list(r):
+    """Primary type first, then any extra types (other_types is semicolon-separated)."""
+    extra = [x.strip() for x in (r.get("other_types") or "").split(";") if x.strip()]
+    return [r["actor_type"]] + [x for x in extra if x != r["actor_type"]]
+
+
 def coverage(db, derived):
     grid = defaultdict(Counter)
     for r in derived:
         if r["support_status"] == "supporter":
-            grid[r["actor_type"]][r["level"]] += 1
+            for ty in type_list(r):
+                grid[ty][r["level"]] += 1
     return grid
 
 
@@ -566,7 +576,7 @@ def cmd_export(a):
         row = grid.get(t, Counter())
         ws.append([t] + [row[l] for l in levels] + [sum(row.values())])
 
-    cols = ["actor_id", "name", "kind", "actor_type", "role", "affiliation", "party", "country", "level", "geo_unit",
+    cols = ["actor_id", "name", "kind", "actor_type", "other_types", "role", "affiliation", "party", "country", "level", "geo_unit",
             "prominence", "best_grade", "support_label", "designs", "evidence_types", "evidence_count", "first_date",
             "latest_date", "strongest_quote", "strongest_source", "wikidata_qid", "website", "status", "notes"]
     geo_name = {x["geo_unit_id"]: x["name"] for x in db["geo_units"]}
