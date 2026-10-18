@@ -44,3 +44,7 @@ CI runs `python skill/scripts/wtdb.py validate` on every changed country and bui
 ## Corrections and removals
 
 Anyone can open a [data report](../../issues/new?template=data-report.yml). Maintainers aim to fix clear errors quickly and will remove an entry when its source does not support it, when the person is not a public figure, or when the person has died.
+
+## Party column
+
+For politicians, fill the `party` column with the party's common English name (`Labour`, `Green Party`, `Independent` if none), one name per party, so the site can filter on it. `validate` warns when a politician has no party.
