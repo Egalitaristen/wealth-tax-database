@@ -19,6 +19,7 @@ SCHEMA = {
     "actors": ["actor_id", "name", "kind", "actor_type", "other_types", "role", "affiliation", "party", "affiliation_actor_id", "country",
                "level", "geo_unit_id", "wikidata_qid", "website", "status", "alive_checked", "prominence", "notes",
                "added_run", "updated"],
+    "profiles": ["profile_id", "actor_id", "platform", "url", "source", "checked"],
     "evidence": ["evidence_id", "actor_id", "date", "stance", "grade", "evidence_type", "wt_design", "design_detail",
                  "quote_original", "quote_lang", "quote_en", "source_url", "source_title", "publisher", "archive_url",
                  "accessed", "harvest_id", "grading_note", "verified", "run_id"],
@@ -32,13 +33,14 @@ SCHEMA = {
              "notes_next"],
 }
 PREFIX = {"actors": ("A", 4), "evidence": ("E", 5), "geo_units": ("G", 4), "links": ("L", 4),
-          "harvest": ("H", 4), "exclusions": ("X", 4), "runs": ("R", 3)}
+          "harvest": ("H", 4), "exclusions": ("X", 4), "runs": ("R", 3), "profiles": ("P", 5)}
 REQUIRED = {
     "actors": ["name", "kind", "actor_type", "country", "level", "status", "alive_checked"],
     "evidence": ["actor_id", "date", "stance", "grade", "evidence_type", "wt_design", "quote_original",
                  "quote_lang", "source_url", "grading_note"],
     "geo_units": ["name", "level", "sweep_status"],
     "links": ["from_actor_id", "to_actor_id", "link_type"],
+    "profiles": ["actor_id", "platform", "url"],
     "harvest": ["title", "list_type", "status"],
     "exclusions": ["name", "reason"],
     "runs": ["date", "focus"],
@@ -69,10 +71,16 @@ ENUMS = {
                              "coalition_partner", "party_of"},
     ("harvest", "list_type"): {"roll_call", "cosponsors", "motion_signatories", "open_letter", "coalition_members",
                                "report_authors", "commission_evidence", "conference_motion", "other"},
+    ("profiles", "platform"): {"website", "official_page", "x", "bluesky", "mastodon", "instagram", "facebook",
+                               "youtube", "tiktok", "linkedin", "substack", "wikipedia"},
     ("harvest", "status"): {"queued", "in_progress", "done", "failed"},
     ("exclusions", "reason"): {"out_of_definition", "pre_2010_only", "deceased", "private_individual", "opposes",
                                "insufficient_evidence", "duplicate"},
 }
+PLATFORM_DOMAINS = {"x": ("x.com", "twitter.com"), "bluesky": ("bsky.app",), "instagram": ("instagram.com",),
+                    "facebook": ("facebook.com", "fb.com"), "youtube": ("youtube.com", "youtu.be"),
+                    "tiktok": ("tiktok.com",), "linkedin": ("linkedin.com",), "substack": ("substack.com",),
+                    "wikipedia": ("wikipedia.org",)}
 FORMAL_TYPES = {"vote", "bill_sponsorship", "motion", "motion_signature", "open_letter", "publication", "report",
                 "manifesto", "policy_adoption", "testimony", "funding"}
 GRADE_RANK = {"A": 3, "B": 2, "C": 1}
@@ -321,6 +329,27 @@ def validate(db):
                 errs.append(f"links.csv line {i}: {c} {l[c]} does not exist")
         if l.get("evidence_id") and l["evidence_id"] not in ids["evidence"]:
             errs.append(f"links.csv line {i}: evidence_id {l['evidence_id']} does not exist")
+    seen_profiles = set()
+    for i, p in enumerate(db["profiles"], start=2):
+        where = f"profiles.csv line {i}"
+        a = actors.get(p.get("actor_id"))
+        if not a:
+            errs.append(f"{where}: actor_id {p.get('actor_id')} does not exist")
+        url = p.get("url", "")
+        m = re.match(r"^https://([^/\s]+)(/\S*)?$", url)
+        if not m:
+            errs.append(f"{where}: url must be an https link (no mailto:, tel: or bare handles)")
+        else:
+            host = m.group(1).lower().split(":")[0]
+            doms = PLATFORM_DOMAINS.get(p.get("platform"))
+            if doms and not any(host == d or host.endswith("." + d) for d in doms):
+                errs.append(f"{where}: {url} does not look like a {p.get('platform')} link")
+        key = (p.get("actor_id"), url.rstrip("/").lower())
+        if key in seen_profiles:
+            warns.append(f"{where}: duplicate link for {p.get('actor_id')}")
+        seen_profiles.add(key)
+        if a and set(type_list(a)) == {"wealthy_individual"}:
+            warns.append(f"{where}: {a.get('name')} is only a wealthy individual; link only official or professional pages of public figures")
     for i, g in enumerate(db["geo_units"], start=2):
         if g.get("parent_id") and g["parent_id"] not in geo:
             errs.append(f"geo_units.csv line {i}: parent_id {g['parent_id']} does not exist")
@@ -602,6 +631,10 @@ def cmd_export(a):
           [[actors.get(l["from_actor_id"], {}).get("name", "") if c == "from_name" else
             actors.get(l["to_actor_id"], {}).get("name", "") if c == "to_name" else l.get(c, "") for c in lcols]
            for l in db["links"]], url_cols=("source_url",))
+    pcols = ["profile_id", "actor_id", "name", "platform", "url", "source", "checked"]
+    sheet("Profiles", pcols,
+          [[actors.get(p["actor_id"], {}).get("name", "") if c == "name" else p.get(c, "") for c in pcols]
+           for p in db["profiles"]], url_cols=("url",))
     sheet("Harvest lists", SCHEMA["harvest"], [[h.get(c, "") for c in SCHEMA["harvest"]] for h in db["harvest"]],
           url_cols=("url",))
     sheet("Run log", SCHEMA["runs"], [[r.get(c, "") for c in SCHEMA["runs"]] for r in db["runs"]])

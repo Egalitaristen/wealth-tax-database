@@ -131,6 +131,11 @@ In this repository, `<area-slug>` is the lowercase ISO 3166-1 alpha-2 code (`gb`
 `link_id, from_actor_id, to_actor_id, link_type, evidence_id, source_url, note`
 - `link_type`: member_of · works_for · leads · co_author · co_signatory · funds · founded · coalition_partner · party_of
 
+**profiles.csv** — official or professional links for an actor, one row per link
+`profile_id, actor_id, platform, url, source, checked`
+- `platform`: website · official_page · x · bluesky · mastodon · instagram · facebook · youtube · tiktok · linkedin · substack · wikipedia
+- Only pages the person or their organisation publishes (their own site, party or parliament page, professional social accounts), or that Wikidata or a parliament lists for them. No personal accounts, email addresses or phone numbers, and nothing guessed from a name search. `url` must be https. `source` says where the link came from and `checked` is the date you read that source. Skip private individuals and people who are only known as wealthy signers.
+
 **harvest.csv** — bulk lists to process (see 6.3)
 `harvest_id, title, list_type, url, date, est_size, status, actors_added, notes`
 - `list_type`: roll_call · cosponsors · motion_signatories · open_letter · coalition_members · report_authors · commission_evidence · conference_motion · other

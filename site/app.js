@@ -13,6 +13,8 @@ $('#repo-link').href = `https://github.com/${REPO}`;
 const TYPE = {politician:'Politician',party:'Party',government_body:'Council or body',academic:'Academic',economist:'Economist',think_tank:'Think tank',ngo_campaign:'Campaign group',union:'Union',union_official:'Union official',journalist:'Commentator',media_outlet:'Media outlet',legal_tax_professional:'Legal or tax',wealthy_individual:'Wealthy individual',business_leader:'Business leader',faith:'Faith',cultural_figure:'Cultural figure',campaigner:'Campaigner or NGO leader',international_body:'International body',funder:'Funder'};
 const DES = {annual_net_wealth:'Annual net wealth tax',one_off_levy:'One-off levy',billionaire_minimum:'Billionaire minimum',partial_wealth:'Partial (e.g. property)',wealth_tax_unspecified:'Unspecified wealth tax',unrealised_gains:'Unrealised gains',exit_tax:'Exit tax'};
 const EVT = {open_letter:'Open letter',motion_signature:'Signed motion',motion:'Motion',vote:'Vote',campaign:'Campaign',op_ed:'Op-ed',editorial:'Editorial',speech:'Speech',statement:'Statement',policy_adoption:'Policy adopted',publication:'Publication',report:'Report',funding:'Funding',coalition_membership:'Coalition member',interview:'Interview',manifesto:'Manifesto',bill_sponsorship:'Bill sponsor',testimony:'Testimony',social_post:'Social post',other:'Other'};
+const PLAT = {official_page:'Official page',website:'Website',x:'X',bluesky:'Bluesky',mastodon:'Mastodon',instagram:'Instagram',facebook:'Facebook',youtube:'YouTube',tiktok:'TikTok',linkedin:'LinkedIn',substack:'Substack',wikipedia:'Wikipedia'};
+const PLAT_ORDER = Object.keys(PLAT);
 const STATE = {support:'Local supporter found',clear:'Meetings read, nothing found',open:'Not fully read yet'};
 
 // ---------- pan and zoom for any SVG map ----------
@@ -153,6 +155,14 @@ async function openCountry(slug, sub, replace) {
 }
 $('#subtabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b && CUR) go(CUR.slug + '.' + b.dataset.s); });
 
+function linksBlock(p) {
+  const ls = (p[17] || []).filter(l => safeUrl(l[1])).sort((a, b) => PLAT_ORDER.indexOf(a[0]) - PLAT_ORDER.indexOf(b[0]));
+  if (!ls.length) return '<p class="note" style="margin:6px 0">No links recorded yet.</p>';
+  const show = u => { try { const x = new URL(u); return x.hostname.replace(/^www\./, '') + (x.pathname.length > 1 ? x.pathname.replace(/\/$/, '') : ''); } catch (e) { return u; } };
+  return `<details class="links"><summary>Links and socials (${ls.length})</summary><ul>` +
+    ls.map(l => `<li><a href="${esc(l[1])}" target="_blank" rel="noopener noreferrer nofollow"><b>${esc(PLAT[l[0]] || l[0])}</b></a> <span class="m">${esc(show(l[1]).slice(0, 48))}</span></li>`).join('') +
+    '</ul><p class="note" style="margin:4px 0 0">Official or professional pages as published by the person or their organisation, or by Wikidata or Parliament.</p></details>';
+}
 function evCard(e, cc) {
   const u = safeUrl(e[7]);
   return `<div class="ev"><div><span class="g g${e[2]}">${e[2]}</span> <b>${esc(EVT[e[3]] || e[3])}</b> <span class="m">${esc(e[1])}${e[10] === 'y' ? '' : ' · not yet verified'}</span></div>
@@ -168,7 +178,7 @@ function renderCountry() {
   const card = i => {
     const p = P[i];
     const es = (evBy[p[0]] || []).slice().sort((a, b) => 'ABC'.indexOf(a[2]) - 'ABC'.indexOf(b[2]) || b[1].localeCompare(a[1]));
-    return `<h2>${esc(p[1])}</h2><div style="margin-bottom:8px"><span class="g g${p[8]}">${p[8]}</span> ${[p[3], ...p[16]].map(x => `<span class="pill">${esc(TYPE[x] || x)}</span>`).join(' ')} <span class="pill">${esc(p[6])}</span>${p[15] ? ` <span class="pill">${esc(p[15])}</span>` : ''}${p[7] ? ` <span class="pill">${esc(p[7])}</span>` : ''}</div>
+    return `<h2>${esc(p[1])}</h2>${linksBlock(p)}<div style="margin:8px 0"><span class="g g${p[8]}">${p[8]}</span> ${[p[3], ...p[16]].map(x => `<span class="pill">${esc(TYPE[x] || x)}</span>`).join(' ')} <span class="pill">${esc(p[6])}</span>${p[15] ? ` <span class="pill">${esc(p[15])}</span>` : ''}${p[7] ? ` <span class="pill">${esc(p[7])}</span>` : ''}</div>
       <div style="font-size:14px">${esc(p[4])}</div>${p[5] && p[5] !== p[4] ? `<div class="note">${esc(p[5])}</div>` : ''}
       ${p[13] ? `<p class="note">${esc(p[13])}</p>` : ''}<h3 style="margin-top:14px">Evidence (${es.length})</h3>${es.map(e => evCard(e, cc)).join('')}
       <a class="report" href="${esc(issueUrl('[' + cc + '] Report: ' + p[1], {country: slug, entry: p[0]}))}" target="_blank" rel="noopener">Report a problem with this entry</a>`;

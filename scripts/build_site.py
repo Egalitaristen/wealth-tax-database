@@ -115,6 +115,10 @@ def build_country(folder):
     meta = json.load(open(folder / "meta.json", encoding="utf-8"))
     slug = folder.name
     actors, ev, geo = rd(folder / "actors.csv"), rd(folder / "evidence.csv"), rd(folder / "geo_units.csv")
+    prof = collections.defaultdict(list)
+    for p in rd(folder / "profiles.csv"):
+        if p["url"].startswith("https://"):
+            prof[p["actor_id"]].append([p["platform"], p["url"]])
     links, runs, excl = rd(folder / "links.csv"), rd(folder / "runs.csv"), rd(folder / "exclusions.csv")
     gname = {g["geo_unit_id"]: g["name"] for g in geo}
     by = collections.defaultdict(list)
@@ -135,7 +139,7 @@ def build_country(folder):
         P.append([a["actor_id"], a["name"], a["kind"], a["actor_type"], a["role"], a["affiliation"], a["level"],
                   gname.get(a["geo_unit_id"], ""), "ABC"[best], len(es), dates[0] if dates else "",
                   dates[-1] if dates else "", designs, a["notes"], a["website"], a.get("party", ""),
-                  [x.strip() for x in a.get("other_types", "").split(";") if x.strip()]])
+                  [x.strip() for x in a.get("other_types", "").split(";") if x.strip()], prof.get(a["actor_id"], [])])
 
     bounds = None
     bfile = meta.get("boundaries")

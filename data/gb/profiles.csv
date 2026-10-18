@@ -1,0 +1,578 @@
+profile_id,actor_id,platform,url,source,checked
+P00001,A0060,website,https://www.tuc.org.uk,actors.csv website column,2026-10-18
+P00002,A0061,website,https://www.unite.org.uk,actors.csv website column,2026-10-18
+P00003,A0225,website,https://patrioticmillionaires.uk,actors.csv website column,2026-10-18
+P00004,A0326,website,https://www.greenparty.org.uk,actors.csv website column,2026-10-18
+P00005,A0327,website,https://www.scottishgreens.org.uk,actors.csv website column,2026-10-18
+P00006,A0328,website,https://taxjustice.uk,actors.csv website column,2026-10-18
+P00007,A0329,website,https://www.oxfam.org.uk,actors.csv website column,2026-10-18
+P00008,A0500,website,https://www.rmt.org.uk,actors.csv website column,2026-10-18
+P00009,A0501,website,https://www.taxobservatory.eu,actors.csv website column,2026-10-18
+P00010,A0504,website,https://www.church-poverty.org.uk,actors.csv website column,2026-10-18
+P00011,A0510,website,https://www.snp.org,actors.csv website column,2026-10-18
+P00012,A0511,website,https://www.partyof.wales,actors.csv website column,2026-10-18
+P00013,A0512,website,https://www.stuc.org.uk,actors.csv website column,2026-10-18
+P00014,A0538,website,https://www.38degrees.org.uk,actors.csv website column,2026-10-18
+P00015,A0539,website,https://www.greenpeace.org.uk,actors.csv website column,2026-10-18
+P00016,A0541,website,https://www.fbu.org.uk,actors.csv website column,2026-10-18
+P00017,A0547,website,https://dalevince.com,actors.csv website column,2026-10-18
+P00018,A0548,website,https://neweconomics.org,actors.csv website column,2026-10-18
+P00019,A0551,website,https://www.theguardian.com,actors.csv website column,2026-10-18
+P00020,A0555,website,https://equalitytrust.org.uk,actors.csv website column,2026-10-18
+P00021,A0556,website,https://www.cwu.org,actors.csv website column,2026-10-18
+P00022,A0557,website,https://www.tssa.org.uk,actors.csv website column,2026-10-18
+P00023,A0558,website,https://centax.org.uk,actors.csv website column,2026-10-18
+P00024,A0559,website,https://trustforlondon.org.uk,actors.csv website column,2026-10-18
+P00025,A0562,website,https://350.org,actors.csv website column,2026-10-18
+P00026,A0563,website,https://www.compassonline.org.uk,actors.csv website column,2026-10-18
+P00027,A0001,official_page,https://members.parliament.uk/member/4493/contact,UK Parliament Members API,2026-10-18
+P00028,A0001,website,https://www.richardburgon.com/,UK Parliament Members API,2026-10-18
+P00029,A0001,x,https://twitter.com/richardburgon,UK Parliament Members API,2026-10-18
+P00030,A0002,official_page,https://members.parliament.uk/member/4394/contact,UK Parliament Members API,2026-10-18
+P00031,A0002,website,https://www.imranhussain.org/,UK Parliament Members API,2026-10-18
+P00032,A0002,facebook,https://www.facebook.com/ImranHussain.BfdEast/,UK Parliament Members API,2026-10-18
+P00033,A0002,instagram,https://www.instagram.com/imran.hussain.mp/,UK Parliament Members API,2026-10-18
+P00034,A0002,x,https://twitter.com/Imran_HussainMP,UK Parliament Members API,2026-10-18
+P00035,A0003,official_page,https://members.parliament.uk/member/4764/contact,UK Parliament Members API,2026-10-18
+P00036,A0004,official_page,https://members.parliament.uk/member/4783/contact,UK Parliament Members API,2026-10-18
+P00037,A0005,official_page,https://members.parliament.uk/member/4824/contact,UK Parliament Members API,2026-10-18
+P00038,A0006,official_page,https://members.parliament.uk/member/4831/contact,UK Parliament Members API,2026-10-18
+P00039,A0006,website,https://www.ianbyrne.org,UK Parliament Members API,2026-10-18
+P00040,A0006,facebook,https://www.facebook.com/IanByrneMP,UK Parliament Members API,2026-10-18
+P00041,A0006,instagram,https://www.instagram.com/ianbyrne_mp,UK Parliament Members API,2026-10-18
+P00042,A0006,x,https://twitter.com/IanByrneMP,UK Parliament Members API,2026-10-18
+P00043,A0007,official_page,https://members.parliament.uk/member/410/contact,UK Parliament Members API,2026-10-18
+P00044,A0007,website,https://www.jontrickett.org.uk,UK Parliament Members API,2026-10-18
+P00045,A0007,x,https://twitter.com/jon_trickett,UK Parliament Members API,2026-10-18
+P00046,A0008,official_page,https://members.parliament.uk/member/5221/contact,UK Parliament Members API,2026-10-18
+P00047,A0009,official_page,https://members.parliament.uk/member/172/contact,UK Parliament Members API,2026-10-18
+P00048,A0009,website,https://www.dianeabbott.org.uk,UK Parliament Members API,2026-10-18
+P00049,A0009,x,https://twitter.com/HackneyAbbott,UK Parliament Members API,2026-10-18
+P00050,A0010,official_page,https://members.parliament.uk/member/4139/contact,UK Parliament Members API,2026-10-18
+P00051,A0010,website,https://www.ianlavery.co.uk/,UK Parliament Members API,2026-10-18
+P00052,A0010,x,https://twitter.com/IanLaveryMP,UK Parliament Members API,2026-10-18
+P00053,A0011,official_page,https://members.parliament.uk/member/178/contact,UK Parliament Members API,2026-10-18
+P00054,A0011,website,https://www.john-mcdonnell.net,UK Parliament Members API,2026-10-18
+P00055,A0011,x,https://twitter.com/johnmcdonnellMP,UK Parliament Members API,2026-10-18
+P00056,A0012,official_page,https://members.parliament.uk/member/5293/contact,UK Parliament Members API,2026-10-18
+P00057,A0012,facebook,https://www.facebook.com/cateccleslabour,UK Parliament Members API,2026-10-18
+P00058,A0012,instagram,https://www.instagram.com/catecclesmp/,UK Parliament Members API,2026-10-18
+P00059,A0012,x,https://x.com/catecclesstour,UK Parliament Members API,2026-10-18
+P00060,A0013,official_page,https://members.parliament.uk/member/4790/contact,UK Parliament Members API,2026-10-18
+P00061,A0014,official_page,https://members.parliament.uk/member/3973/contact,UK Parliament Members API,2026-10-18
+P00062,A0014,website,https://grahamemorrismp.co.uk/,UK Parliament Members API,2026-10-18
+P00063,A0014,x,https://twitter.com/grahamemorris,UK Parliament Members API,2026-10-18
+P00064,A0015,official_page,https://members.parliament.uk/member/4500/contact,UK Parliament Members API,2026-10-18
+P00065,A0015,website,https://www.clivelewis.org/,UK Parliament Members API,2026-10-18
+P00066,A0015,facebook,https://www.facebook.com/labourclivelewis,UK Parliament Members API,2026-10-18
+P00067,A0015,instagram,https://www.instagram.com/labourlewis/,UK Parliament Members API,2026-10-18
+P00068,A0015,tiktok,https://www.tiktok.com/@labourlewis,UK Parliament Members API,2026-10-18
+P00069,A0015,x,https://twitter.com/labourlewis,UK Parliament Members API,2026-10-18
+P00070,A0016,official_page,https://members.parliament.uk/member/4471/contact,UK Parliament Members API,2026-10-18
+P00071,A0016,website,https://www.rachaelmaskell.com/,UK Parliament Members API,2026-10-18
+P00072,A0016,facebook,https://www.facebook.com/rachaelmaskell4york,UK Parliament Members API,2026-10-18
+P00073,A0016,instagram,https://www.instagram.com/rachael_maskell/,UK Parliament Members API,2026-10-18
+P00074,A0016,x,https://twitter.com/rachaelmaskell,UK Parliament Members API,2026-10-18
+P00075,A0017,official_page,https://members.parliament.uk/member/1489/contact,UK Parliament Members API,2026-10-18
+P00076,A0017,x,https://twitter.com/dawnbutlerbrent,UK Parliament Members API,2026-10-18
+P00077,A0018,official_page,https://members.parliament.uk/member/5196/contact,UK Parliament Members API,2026-10-18
+P00078,A0019,official_page,https://members.parliament.uk/member/5359/contact,UK Parliament Members API,2026-10-18
+P00079,A0020,official_page,https://members.parliament.uk/member/4396/contact,UK Parliament Members API,2026-10-18
+P00080,A0020,website,https://www.rebeccalongbailey.com/,UK Parliament Members API,2026-10-18
+P00081,A0020,x,https://twitter.com/rlong_bailey,UK Parliament Members API,2026-10-18
+P00082,A0021,official_page,https://members.parliament.uk/member/5357/contact,UK Parliament Members API,2026-10-18
+P00083,A0021,x,https://x.com/AyoubKhanMP,UK Parliament Members API,2026-10-18
+P00084,A0022,official_page,https://members.parliament.uk/member/4630/contact,UK Parliament Members API,2026-10-18
+P00085,A0023,official_page,https://members.parliament.uk/member/5085/contact,UK Parliament Members API,2026-10-18
+P00086,A0024,official_page,https://members.parliament.uk/member/4521/contact,UK Parliament Members API,2026-10-18
+P00087,A0024,facebook,https://www.facebook.com/LizSavilleRoberts,UK Parliament Members API,2026-10-18
+P00088,A0024,x,https://twitter.com/lsrplaid,UK Parliament Members API,2026-10-18
+P00089,A0025,official_page,https://members.parliament.uk/member/5177/contact,UK Parliament Members API,2026-10-18
+P00090,A0026,official_page,https://members.parliament.uk/member/5125/contact,UK Parliament Members API,2026-10-18
+P00091,A0026,website,https://www.allianceparty.org/our_mp,UK Parliament Members API,2026-10-18
+P00092,A0026,x,https://x.com/SorchaEastwood,UK Parliament Members API,2026-10-18
+P00093,A0027,official_page,https://members.parliament.uk/member/4864/contact,UK Parliament Members API,2026-10-18
+P00094,A0027,facebook,https://www.facebook.com/oliviablakeuk,UK Parliament Members API,2026-10-18
+P00095,A0027,instagram,https://www.instagram.com/oliviablake_mp/,UK Parliament Members API,2026-10-18
+P00096,A0027,x,https://twitter.com/_oliviablake,UK Parliament Members API,2026-10-18
+P00097,A0028,official_page,https://members.parliament.uk/member/5314/contact,UK Parliament Members API,2026-10-18
+P00098,A0028,facebook,https://facebook.com/sianberrygreen,UK Parliament Members API,2026-10-18
+P00099,A0028,instagram,https://instagram.com/sian_berry,UK Parliament Members API,2026-10-18
+P00100,A0028,x,https://x.com/sianberry,UK Parliament Members API,2026-10-18
+P00101,A0029,official_page,https://members.parliament.uk/member/5268/contact,UK Parliament Members API,2026-10-18
+P00102,A0029,facebook,https://www.facebook.com/iqbalmohamedmp,UK Parliament Members API,2026-10-18
+P00103,A0029,instagram,https://www.instagram.com/iqbalmohamedmp,UK Parliament Members API,2026-10-18
+P00104,A0029,tiktok,https://tiktok.com/@iqbalmohamedmp,UK Parliament Members API,2026-10-18
+P00105,A0029,x,https://twitter.com/iqbalmohamedMP,UK Parliament Members API,2026-10-18
+P00106,A0030,official_page,https://members.parliament.uk/member/5120/contact,UK Parliament Members API,2026-10-18
+P00107,A0030,facebook,https://www.facebook.com/shockatadam,UK Parliament Members API,2026-10-18
+P00108,A0030,instagram,https://www.instagram.com/shockatadam/,UK Parliament Members API,2026-10-18
+P00109,A0030,tiktok,https://www.tiktok.com/@shockatadam,UK Parliament Members API,2026-10-18
+P00110,A0030,x,https://x.com/shockatadam,UK Parliament Members API,2026-10-18
+P00111,A0030,youtube,https://www.youtube.com/@ShockatAdam,UK Parliament Members API,2026-10-18
+P00112,A0031,official_page,https://members.parliament.uk/member/4827/contact,UK Parliament Members API,2026-10-18
+P00113,A0031,facebook,https://www.facebook.com/ClaireHannaSDLP,UK Parliament Members API,2026-10-18
+P00114,A0031,x,https://x.com/ClaireHanna,UK Parliament Members API,2026-10-18
+P00115,A0032,official_page,https://members.parliament.uk/member/5249/contact,UK Parliament Members API,2026-10-18
+P00116,A0032,website,https://elliechowns.org.uk/,UK Parliament Members API,2026-10-18
+P00117,A0032,facebook,https://www.facebook.com/EllieChowns,UK Parliament Members API,2026-10-18
+P00118,A0032,instagram,https://www.instagram.com/elliechowns/,UK Parliament Members API,2026-10-18
+P00119,A0032,x,https://x.com/EllieChowns,UK Parliament Members API,2026-10-18
+P00120,A0033,official_page,https://members.parliament.uk/member/4269/contact,UK Parliament Members API,2026-10-18
+P00121,A0033,website,https://www.andymcdonaldmp.org,UK Parliament Members API,2026-10-18
+P00122,A0033,x,https://twitter.com/AndyMcDonaldMP,UK Parliament Members API,2026-10-18
+P00123,A0034,official_page,https://members.parliament.uk/member/5320/contact,UK Parliament Members API,2026-10-18
+P00124,A0035,official_page,https://members.parliament.uk/member/4869/contact,UK Parliament Members API,2026-10-18
+P00125,A0036,official_page,https://members.parliament.uk/member/5030/contact,UK Parliament Members API,2026-10-18
+P00126,A0036,website,https://simonopher.org/,UK Parliament Members API,2026-10-18
+P00127,A0036,facebook,https://www.facebook.com/simonforstroud,UK Parliament Members API,2026-10-18
+P00128,A0036,instagram,https://www.instagram.com/simonforstroud/,UK Parliament Members API,2026-10-18
+P00129,A0037,official_page,https://members.parliament.uk/member/4736/contact,UK Parliament Members API,2026-10-18
+P00130,A0037,website,https://davedooganmp.scot,UK Parliament Members API,2026-10-18
+P00131,A0037,facebook,https://www.facebook.com/davedoogansnp,UK Parliament Members API,2026-10-18
+P00132,A0037,x,https://twitter.com/davedoogansnp,UK Parliament Members API,2026-10-18
+P00133,A0038,official_page,https://members.parliament.uk/member/5280/contact,UK Parliament Members API,2026-10-18
+P00134,A0038,website,https://seamuslogan.scot/,UK Parliament Members API,2026-10-18
+P00135,A0038,facebook,https://www.facebook.com/SeamusLoganMP/,UK Parliament Members API,2026-10-18
+P00136,A0038,instagram,https://www.instagram.com/seamusloganmp/,UK Parliament Members API,2026-10-18
+P00137,A0038,x,https://x.com/SeamusLoganMP,UK Parliament Members API,2026-10-18
+P00138,A0039,official_page,https://members.parliament.uk/member/5277/contact,UK Parliament Members API,2026-10-18
+P00139,A0039,website,https://grahamleadbitter.scot/,UK Parliament Members API,2026-10-18
+P00140,A0039,facebook,https://www.facebook.com/GrahamLeadbitterSNP,UK Parliament Members API,2026-10-18
+P00141,A0039,x,https://x.com/grahamsnp,UK Parliament Members API,2026-10-18
+P00142,A0040,official_page,https://members.parliament.uk/member/4846/contact,UK Parliament Members API,2026-10-18
+P00143,A0041,official_page,https://members.parliament.uk/member/5102/contact,UK Parliament Members API,2026-10-18
+P00144,A0042,official_page,https://members.parliament.uk/member/5110/contact,UK Parliament Members API,2026-10-18
+P00145,A0043,official_page,https://members.parliament.uk/member/185/contact,UK Parliament Members API,2026-10-18
+P00146,A0043,website,https://www.jeremycorbyn.org.uk/,UK Parliament Members API,2026-10-18
+P00147,A0043,facebook,https://www.facebook.com/JeremyCorbynMP/,UK Parliament Members API,2026-10-18
+P00148,A0043,x,https://twitter.com/jeremycorbyn,UK Parliament Members API,2026-10-18
+P00149,A0044,official_page,https://members.parliament.uk/member/4277/contact,UK Parliament Members API,2026-10-18
+P00150,A0044,website,https://lewellemp.com/,UK Parliament Members API,2026-10-18
+P00151,A0044,facebook,https://www.facebook.com/EmmaLewell,UK Parliament Members API,2026-10-18
+P00152,A0044,instagram,https://www.instagram.com/emmalewellmp/,UK Parliament Members API,2026-10-18
+P00153,A0044,x,https://x.com/emmalewell,UK Parliament Members API,2026-10-18
+P00154,A0045,official_page,https://members.parliament.uk/member/5232/contact,UK Parliament Members API,2026-10-18
+P00155,A0045,facebook,https://www.facebook.com/LorraineBeaversMP/,UK Parliament Members API,2026-10-18
+P00156,A0046,official_page,https://members.parliament.uk/member/4753/contact,UK Parliament Members API,2026-10-18
+P00157,A0047,official_page,https://members.parliament.uk/member/5231/contact,UK Parliament Members API,2026-10-18
+P00158,A0047,x,https://x.com/AdnanHussainMP,UK Parliament Members API,2026-10-18
+P00159,A0048,official_page,https://members.parliament.uk/member/4616/contact,UK Parliament Members API,2026-10-18
+P00160,A0048,website,https://www.rosieduffieldmp.co.uk/,UK Parliament Members API,2026-10-18
+P00161,A0048,x,https://twitter.com/RosieDuffield1,UK Parliament Members API,2026-10-18
+P00162,A0050,official_page,https://members.parliament.uk/member/5315/contact,UK Parliament Members API,2026-10-18
+P00163,A0050,website,https://www.leebarronmp.com,UK Parliament Members API,2026-10-18
+P00164,A0050,facebook,https://www.facebook.com/lbarron,UK Parliament Members API,2026-10-18
+P00165,A0050,instagram,https://www.instagram.com/LeeBarronMP,UK Parliament Members API,2026-10-18
+P00166,A0050,x,https://x.com/LeeBarronMP,UK Parliament Members API,2026-10-18
+P00167,A0050,youtube,https://www.youtube.com/@LeeBarronMP,UK Parliament Members API,2026-10-18
+P00168,A0051,official_page,https://members.parliament.uk/member/146/contact,UK Parliament Members API,2026-10-18
+P00169,A0051,website,https://www.barrygardiner.com,UK Parliament Members API,2026-10-18
+P00170,A0051,x,https://twitter.com/BarryGardiner,UK Parliament Members API,2026-10-18
+P00171,A0052,official_page,https://members.parliament.uk/member/3924/contact,UK Parliament Members API,2026-10-18
+P00172,A0052,website,https://www.yasminqureshi.org.uk,UK Parliament Members API,2026-10-18
+P00173,A0052,x,https://twitter.com/YasminQureshiMP,UK Parliament Members API,2026-10-18
+P00174,A0053,official_page,https://members.parliament.uk/member/4436/contact,UK Parliament Members API,2026-10-18
+P00175,A0053,website,https://www.catsmith.co.uk/,UK Parliament Members API,2026-10-18
+P00176,A0053,facebook,https://facebook.com/catsmithmp,UK Parliament Members API,2026-10-18
+P00177,A0053,x,https://twitter.com/CatSmithMP,UK Parliament Members API,2026-10-18
+P00178,A0054,official_page,https://members.parliament.uk/member/4131/contact,UK Parliament Members API,2026-10-18
+P00179,A0054,website,https://mydup.com/our-team/jim-shannon,UK Parliament Members API,2026-10-18
+P00180,A0054,x,https://twitter.com/jimshannonmp,UK Parliament Members API,2026-10-18
+P00181,A0055,official_page,https://members.parliament.uk/member/5447/contact,UK Parliament Members API,2026-10-18
+P00182,A0056,official_page,https://members.parliament.uk/member/227/contact,UK Parliament Members API,2026-10-18
+P00183,A0062,official_page,https://members.parliament.uk/member/4786/contact,UK Parliament Members API,2026-10-18
+P00184,A0062,website,https://zarahsultana.com,UK Parliament Members API,2026-10-18
+P00185,A0062,facebook,https://www.facebook.com/ZarahSultanaMP,UK Parliament Members API,2026-10-18
+P00186,A0062,instagram,https://www.instagram.com/zarahsultanamp,UK Parliament Members API,2026-10-18
+P00187,A0062,tiktok,https://www.tiktok.com/@zarahsultanamp,UK Parliament Members API,2026-10-18
+P00188,A0062,x,https://twitter.com/zarahsultana,UK Parliament Members API,2026-10-18
+P00189,A0063,official_page,https://members.parliament.uk/member/4747/contact,UK Parliament Members API,2026-10-18
+P00190,A0067,official_page,https://members.parliament.uk/member/4828/contact,UK Parliament Members API,2026-10-18
+P00191,A0072,official_page,https://members.parliament.uk/member/4602/contact,UK Parliament Members API,2026-10-18
+P00192,A0072,website,https://werahobhouse.org.uk/,UK Parliament Members API,2026-10-18
+P00193,A0072,bluesky,https://bsky.app/profile/werahobhouse.org.uk,UK Parliament Members API,2026-10-18
+P00194,A0072,facebook,https://www.facebook.com/WeraHobhouse,UK Parliament Members API,2026-10-18
+P00195,A0073,official_page,https://members.parliament.uk/member/4651/contact,UK Parliament Members API,2026-10-18
+P00196,A0073,facebook,https://www.facebook.com/DanCardenMP/,UK Parliament Members API,2026-10-18
+P00197,A0073,instagram,https://www.instagram.com/dancardenmp/,UK Parliament Members API,2026-10-18
+P00198,A0073,x,https://twitter.com/DanCardenMP,UK Parliament Members API,2026-10-18
+P00199,A0073,youtube,https://www.youtube.com/@dancardenmp,UK Parliament Members API,2026-10-18
+P00200,A0085,official_page,https://members.parliament.uk/member/394/contact,UK Parliament Members API,2026-10-18
+P00201,A0085,website,https://www.clivebetts.com/,UK Parliament Members API,2026-10-18
+P00202,A0087,official_page,https://members.parliament.uk/member/4457/contact,UK Parliament Members API,2026-10-18
+P00203,A0087,website,https://www.marierimmer.co.uk/,UK Parliament Members API,2026-10-18
+P00204,A0087,facebook,https://www.facebook.com/MarieRimmer/,UK Parliament Members API,2026-10-18
+P00205,A0087,x,https://twitter.com/MarieRimmerMP,UK Parliament Members API,2026-10-18
+P00206,A0092,official_page,https://members.parliament.uk/member/1593/contact,UK Parliament Members API,2026-10-18
+P00207,A0092,facebook,https://www.facebook.com/SammyWilsonMP/,UK Parliament Members API,2026-10-18
+P00208,A0092,x,https://twitter.com/eastantrimmp,UK Parliament Members API,2026-10-18
+P00209,A0094,official_page,https://members.parliament.uk/member/449/contact,UK Parliament Members API,2026-10-18
+P00210,A0095,official_page,https://members.parliament.uk/member/4360/contact,UK Parliament Members API,2026-10-18
+P00211,A0095,x,https://twitter.com/grobinsondup,UK Parliament Members API,2026-10-18
+P00212,A0103,official_page,https://members.parliament.uk/member/4598/contact,UK Parliament Members API,2026-10-18
+P00213,A0332,official_page,https://members.parliament.uk/member/1171/contact,UK Parliament Members API,2026-10-18
+P00214,A0332,website,https://www.liambyrnemp.co.uk/,UK Parliament Members API,2026-10-18
+P00215,A0332,x,https://twitter.com/LiamByrneMP,UK Parliament Members API,2026-10-18
+P00216,A0062,bluesky,https://bsky.app/profile/zarahsultana.bsky.social,Wikidata Q63929279,2026-10-18
+P00217,A0062,wikipedia,https://en.wikipedia.org/wiki/Zarah_Sultana,Wikidata Q63929279,2026-10-18
+P00218,A0063,x,https://x.com/CllrTahirAli,Wikidata Q76450672,2026-10-18
+P00219,A0063,wikipedia,https://en.wikipedia.org/wiki/Tahir_Ali,Wikidata Q76450672,2026-10-18
+P00220,A0064,x,https://x.com/bethpenderyn,Wikidata Q76363918,2026-10-18
+P00221,A0064,wikipedia,https://en.wikipedia.org/wiki/Beth_Winter,Wikidata Q76363918,2026-10-18
+P00222,A0065,website,https://www.jonathanedwards.org.uk/,Wikidata Q302892,2026-10-18
+P00223,A0065,x,https://x.com/JonathanPlaid,Wikidata Q302892,2026-10-18
+P00224,A0065,facebook,https://www.facebook.com/PlaidSirGar,Wikidata Q302892,2026-10-18
+P00225,A0065,wikipedia,https://en.wikipedia.org/wiki/Jonathan_Edwards_%28Welsh_politician%29,Wikidata Q302892,2026-10-18
+P00226,A0066,x,https://x.com/KennyMacAskill,Wikidata Q983174,2026-10-18
+P00227,A0066,wikipedia,https://en.wikipedia.org/wiki/Kenny_MacAskill,Wikidata Q983174,2026-10-18
+P00228,A0067,website,https://www.paulabarkermp.co.uk/,Wikidata Q76363951,2026-10-18
+P00229,A0067,x,https://x.com/PaulaBarker1,Wikidata Q76363951,2026-10-18
+P00230,A0067,bluesky,https://bsky.app/profile/paulabarkermp.bsky.social,Wikidata Q76363951,2026-10-18
+P00231,A0067,wikipedia,https://en.wikipedia.org/wiki/Paula_Barker,Wikidata Q76363951,2026-10-18
+P00232,A0068,x,https://x.com/ClaudiaWebbe,Wikidata Q5129278,2026-10-18
+P00233,A0068,instagram,https://www.instagram.com/claudiawebbe/,Wikidata Q5129278,2026-10-18
+P00234,A0068,facebook,https://www.facebook.com/claudiaforLE,Wikidata Q5129278,2026-10-18
+P00235,A0068,youtube,https://www.youtube.com/channel/UCN37-117poTi4qBbFfGZC_Q,Wikidata Q5129278,2026-10-18
+P00236,A0068,wikipedia,https://en.wikipedia.org/wiki/Claudia_Webbe,Wikidata Q5129278,2026-10-18
+P00237,A0069,x,https://x.com/GrassrootsMick1,Wikidata Q76363909,2026-10-18
+P00238,A0069,wikipedia,https://en.wikipedia.org/wiki/Mick_Whitley,Wikidata Q76363909,2026-10-18
+P00239,A0070,x,https://x.com/IanMearnsMP,Wikidata Q583906,2026-10-18
+P00240,A0070,wikipedia,https://en.wikipedia.org/wiki/Ian_Mearns,Wikidata Q583906,2026-10-18
+P00241,A0071,website,https://www.carolinelucas.com,Wikidata Q9670,2026-10-18
+P00242,A0071,x,https://x.com/CarolineLucas,Wikidata Q9670,2026-10-18
+P00243,A0071,bluesky,https://bsky.app/profile/carolinelucas.bsky.social,Wikidata Q9670,2026-10-18
+P00244,A0071,instagram,https://www.instagram.com/carolinelucasbrighton/,Wikidata Q9670,2026-10-18
+P00245,A0071,facebook,https://www.facebook.com/carolinelucas.page,Wikidata Q9670,2026-10-18
+P00246,A0071,wikipedia,https://en.wikipedia.org/wiki/Caroline_Lucas,Wikidata Q9670,2026-10-18
+P00247,A0072,x,https://x.com/Wera_Hobhouse,Wikidata Q30164280,2026-10-18
+P00248,A0072,instagram,https://www.instagram.com/wera_hobhouse/,Wikidata Q30164280,2026-10-18
+P00249,A0072,youtube,https://www.youtube.com/channel/UCYe9DMnUp829cNakNnWMKzA,Wikidata Q30164280,2026-10-18
+P00250,A0072,wikipedia,https://en.wikipedia.org/wiki/Wera_Hobhouse,Wikidata Q30164280,2026-10-18
+P00251,A0073,website,https://www.dancarden.co.uk/,Wikidata Q30226321,2026-10-18
+P00252,A0073,bluesky,https://bsky.app/profile/dancardenmp.bsky.social,Wikidata Q30226321,2026-10-18
+P00253,A0073,wikipedia,https://en.wikipedia.org/wiki/Dan_Carden,Wikidata Q30226321,2026-10-18
+P00254,A0074,x,https://x.com/AlanBrownSNP,Wikidata Q19883288,2026-10-18
+P00255,A0074,wikipedia,https://en.wikipedia.org/wiki/Alan_Brown_%28Scottish_politician%29,Wikidata Q19883288,2026-10-18
+P00256,A0075,website,https://whitford.scot,Wikidata Q19874405,2026-10-18
+P00257,A0075,x,https://x.com/Dr_PhilippaW,Wikidata Q19874405,2026-10-18
+P00258,A0075,facebook,https://www.facebook.com/Philippa.Whitford.political,Wikidata Q19874405,2026-10-18
+P00259,A0075,wikipedia,https://en.wikipedia.org/wiki/Philippa_Whitford,Wikidata Q19874405,2026-10-18
+P00260,A0076,website,https://andrewgwynne.co.uk/,Wikidata Q392216,2026-10-18
+P00261,A0076,x,https://x.com/GwynneMP,Wikidata Q392216,2026-10-18
+P00262,A0076,bluesky,https://bsky.app/profile/gwynnemp.bsky.social,Wikidata Q392216,2026-10-18
+P00263,A0076,instagram,https://www.instagram.com/gwynnemp/,Wikidata Q392216,2026-10-18
+P00264,A0076,facebook,https://www.facebook.com/GwynneMP,Wikidata Q392216,2026-10-18
+P00265,A0076,wikipedia,https://en.wikipedia.org/wiki/Andrew_Gwynne,Wikidata Q392216,2026-10-18
+P00266,A0077,website,https://www.blackburnlabour.org/homepage/kate-hollern,Wikidata Q19874280,2026-10-18
+P00267,A0077,x,https://x.com/Kate_HollernMP,Wikidata Q19874280,2026-10-18
+P00268,A0077,facebook,https://www.facebook.com/katehollernforblackburn,Wikidata Q19874280,2026-10-18
+P00269,A0077,wikipedia,https://en.wikipedia.org/wiki/Kate_Hollern,Wikidata Q19874280,2026-10-18
+P00270,A0078,x,https://x.com/AngusMacNeilSNP,Wikidata Q695092,2026-10-18
+P00271,A0078,facebook,https://www.facebook.com/AngusBMacNeil,Wikidata Q695092,2026-10-18
+P00272,A0078,wikipedia,https://en.wikipedia.org/wiki/Angus_MacNeil,Wikidata Q695092,2026-10-18
+P00273,A0079,website,https://www.joncruddas.org.uk/,Wikidata Q291591,2026-10-18
+P00274,A0079,x,https://x.com/JonCruddas_1,Wikidata Q291591,2026-10-18
+P00275,A0079,facebook,https://www.facebook.com/JonCruddas,Wikidata Q291591,2026-10-18
+P00276,A0079,wikipedia,https://en.wikipedia.org/wiki/Jon_Cruddas,Wikidata Q291591,2026-10-18
+P00277,A0080,website,https://lewellbuck.com/,Wikidata Q16190712,2026-10-18
+P00278,A0080,x,https://x.com/EmmaLewellBuck,Wikidata Q16190712,2026-10-18
+P00279,A0080,facebook,https://www.facebook.com/emma.lewellbuckmp,Wikidata Q16190712,2026-10-18
+P00280,A0080,wikipedia,https://en.wikipedia.org/wiki/Emma_Lewell,Wikidata Q16190712,2026-10-18
+P00281,A0081,x,https://x.com/allandorans,Wikidata Q75818980,2026-10-18
+P00282,A0081,wikipedia,https://en.wikipedia.org/wiki/Allan_Dorans,Wikidata Q75818980,2026-10-18
+P00283,A0082,x,https://x.com/TommySheppard,Wikidata Q19880278,2026-10-18
+P00284,A0082,facebook,https://www.facebook.com/TommySheppardSNP,Wikidata Q19880278,2026-10-18
+P00285,A0082,wikipedia,https://en.wikipedia.org/wiki/Tommy_Sheppard_%28politician%29,Wikidata Q19880278,2026-10-18
+P00286,A0083,website,https://www.geraintdavies.org.uk/,Wikidata Q296866,2026-10-18
+P00287,A0083,x,https://x.com/GeraintDaviesMP,Wikidata Q296866,2026-10-18
+P00288,A0083,facebook,https://www.facebook.com/GeraintDaviesMP,Wikidata Q296866,2026-10-18
+P00289,A0083,youtube,https://www.youtube.com/channel/UC5uuhQhSCbeXfGAW1FXleQg,Wikidata Q296866,2026-10-18
+P00290,A0083,wikipedia,https://en.wikipedia.org/wiki/Geraint_Davies_%28Labour_politician%29,Wikidata Q296866,2026-10-18
+P00291,A0084,x,https://x.com/CMonaghanSNP,Wikidata Q19875589,2026-10-18
+P00292,A0084,facebook,https://www.facebook.com/CarolMonaghanSNP,Wikidata Q19875589,2026-10-18
+P00293,A0084,wikipedia,https://en.wikipedia.org/wiki/Carol_Monaghan,Wikidata Q19875589,2026-10-18
+P00294,A0085,x,https://x.com/CliveBettsMP,Wikidata Q263508,2026-10-18
+P00295,A0085,facebook,https://www.facebook.com/clive.betts.sheffieldse,Wikidata Q263508,2026-10-18
+P00296,A0085,wikipedia,https://en.wikipedia.org/wiki/Clive_Betts,Wikidata Q263508,2026-10-18
+P00297,A0086,website,https://russell-moyle.co.uk,Wikidata Q30165113,2026-10-18
+P00298,A0086,x,https://x.com/lloyd_rm,Wikidata Q30165113,2026-10-18
+P00299,A0086,facebook,https://www.facebook.com/LloydRussellMoyle,Wikidata Q30165113,2026-10-18
+P00300,A0086,wikipedia,https://en.wikipedia.org/wiki/Lloyd_Russell-Moyle,Wikidata Q30165113,2026-10-18
+P00301,A0087,wikipedia,https://en.wikipedia.org/wiki/Marie_Rimmer,Wikidata Q20648527,2026-10-18
+P00302,A0088,x,https://x.com/ChrisStephens,Wikidata Q19059345,2026-10-18
+P00303,A0088,facebook,https://www.facebook.com/ChrisStephensSNP,Wikidata Q19059345,2026-10-18
+P00304,A0088,wikipedia,https://en.wikipedia.org/wiki/Chris_Stephens,Wikidata Q19059345,2026-10-18
+P00305,A0089,x,https://x.com/AmyCallaghanSNP,Wikidata Q75818988,2026-10-18
+P00306,A0089,facebook,https://www.facebook.com/AmyCallaghanSNP,Wikidata Q75818988,2026-10-18
+P00307,A0089,wikipedia,https://en.wikipedia.org/wiki/Amy_Callaghan,Wikidata Q75818988,2026-10-18
+P00308,A0090,x,https://x.com/AnumQaisarJaved,Wikidata Q106828783,2026-10-18
+P00309,A0090,wikipedia,https://en.wikipedia.org/wiki/Anum_Qaisar,Wikidata Q106828783,2026-10-18
+P00310,A0091,x,https://x.com/DougChapmanSNP,Wikidata Q19882922,2026-10-18
+P00311,A0091,facebook,https://www.facebook.com/DougChapmanSNP,Wikidata Q19882922,2026-10-18
+P00312,A0091,wikipedia,https://en.wikipedia.org/wiki/Douglas_Chapman_%28politician%29,Wikidata Q19882922,2026-10-18
+P00313,A0092,instagram,https://www.instagram.com/sammy_wilson_/,Wikidata Q262040,2026-10-18
+P00314,A0092,wikipedia,https://en.wikipedia.org/wiki/Sammy_Wilson_%28politician%29,Wikidata Q262040,2026-10-18
+P00315,A0093,x,https://x.com/DeidreBrock,Wikidata Q19871637,2026-10-18
+P00316,A0093,facebook,https://www.facebook.com/DeidreBrockSNP,Wikidata Q19871637,2026-10-18
+P00317,A0093,wikipedia,https://en.wikipedia.org/wiki/Deidre_Brock,Wikidata Q19871637,2026-10-18
+P00318,A0094,wikipedia,https://en.wikipedia.org/wiki/Graham_Stringer,Wikidata Q328737,2026-10-18
+P00319,A0095,facebook,https://www.facebook.com/GRobinsonDUP,Wikidata Q5528262,2026-10-18
+P00320,A0095,wikipedia,https://en.wikipedia.org/wiki/Gavin_Robinson,Wikidata Q5528262,2026-10-18
+P00321,A0096,website,https://www.rosiecoopermp.net,Wikidata Q290855,2026-10-18
+P00322,A0096,x,https://x.com/rosie4westlancs,Wikidata Q290855,2026-10-18
+P00323,A0096,facebook,https://www.facebook.com/Rosie4WestLancs,Wikidata Q290855,2026-10-18
+P00324,A0096,wikipedia,https://en.wikipedia.org/wiki/Rosie_Cooper,Wikidata Q290855,2026-10-18
+P00325,A0097,x,https://x.com/MartynDaySNP,Wikidata Q19883087,2026-10-18
+P00326,A0097,facebook,https://www.facebook.com/MartynDaySNP,Wikidata Q19883087,2026-10-18
+P00327,A0097,wikipedia,https://en.wikipedia.org/wiki/Martyn_Day_%28politician%29,Wikidata Q19883087,2026-10-18
+P00328,A0098,website,https://www.christinarees.org/,Wikidata Q20648332,2026-10-18
+P00329,A0098,x,https://x.com/Rees4Neath,Wikidata Q20648332,2026-10-18
+P00330,A0098,facebook,https://www.facebook.com/ChrisReesLabour,Wikidata Q20648332,2026-10-18
+P00331,A0098,wikipedia,https://en.wikipedia.org/wiki/Christina_Rees,Wikidata Q20648332,2026-10-18
+P00332,A0099,x,https://x.com/PaulGirvanMP,Wikidata Q7150909,2026-10-18
+P00333,A0099,wikipedia,https://en.wikipedia.org/wiki/Paul_Girvan,Wikidata Q7150909,2026-10-18
+P00334,A0100,x,https://x.com/HywelPlaidCymru,Wikidata Q266189,2026-10-18
+P00335,A0100,facebook,https://www.facebook.com/HywelWilliamsASMP,Wikidata Q266189,2026-10-18
+P00336,A0100,wikipedia,https://en.wikipedia.org/wiki/Hywel_Williams,Wikidata Q266189,2026-10-18
+P00337,A0101,x,https://x.com/PGibsonSNP,Wikidata Q19883132,2026-10-18
+P00338,A0101,facebook,https://www.facebook.com/PatriciaGibsonSNP,Wikidata Q19883132,2026-10-18
+P00339,A0101,wikipedia,https://en.wikipedia.org/wiki/Patricia_Gibson,Wikidata Q19883132,2026-10-18
+P00340,A0102,website,https://www.margaretgreenwood.org.uk,Wikidata Q19957949,2026-10-18
+P00341,A0102,x,https://x.com/MGreenwoodWW,Wikidata Q19957949,2026-10-18
+P00342,A0102,facebook,https://www.facebook.com/margaretgreenwoodww,Wikidata Q19957949,2026-10-18
+P00343,A0102,wikipedia,https://en.wikipedia.org/wiki/Margaret_Greenwood,Wikidata Q19957949,2026-10-18
+P00344,A0103,website,https://mohammadyasin.org/,Wikidata Q30234247,2026-10-18
+P00345,A0103,x,https://x.com/YasinForBedford,Wikidata Q30234247,2026-10-18
+P00346,A0103,bluesky,https://bsky.app/profile/yasinmp4bedford.bsky.social,Wikidata Q30234247,2026-10-18
+P00347,A0103,wikipedia,https://en.wikipedia.org/wiki/Mohammad_Yasin_%28politician%29,Wikidata Q30234247,2026-10-18
+P00348,A0104,x,https://x.com/MrJohnNicolson,Wikidata Q14948811,2026-10-18
+P00349,A0104,facebook,https://www.facebook.com/JohnN.SNP,Wikidata Q14948811,2026-10-18
+P00350,A0104,wikipedia,https://en.wikipedia.org/wiki/John_Nicolson,Wikidata Q14948811,2026-10-18
+P00351,A0105,x,https://x.com/JNHanvey,Wikidata Q75818970,2026-10-18
+P00352,A0105,wikipedia,https://en.wikipedia.org/wiki/Neale_Hanvey,Wikidata Q75818970,2026-10-18
+P00353,A0226,x,https://x.com/Gillian_Mac11,Wikidata Q63929148,2026-10-18
+P00354,A0226,wikipedia,https://en.wikipedia.org/wiki/Gillian_Mackay,Wikidata Q63929148,2026-10-18
+P00355,A0227,x,https://x.com/JimFairlieLogie,Wikidata Q106765814,2026-10-18
+P00356,A0227,wikipedia,https://en.wikipedia.org/wiki/Jim_Fairlie_%28MSP%29,Wikidata Q106765814,2026-10-18
+P00357,A0228,x,https://x.com/KarenAdamMSP,Wikidata Q106771122,2026-10-18
+P00358,A0228,wikipedia,https://en.wikipedia.org/wiki/Karen_Adam,Wikidata Q106771122,2026-10-18
+P00359,A0229,x,https://x.com/EvelynTweedSNP,Wikidata Q106758086,2026-10-18
+P00360,A0229,wikipedia,https://en.wikipedia.org/wiki/Evelyn_Tweed,Wikidata Q106758086,2026-10-18
+P00361,A0230,x,https://x.com/EmmaSNPHarper,Wikidata Q24034416,2026-10-18
+P00362,A0230,wikipedia,https://en.wikipedia.org/wiki/Emma_Harper,Wikidata Q24034416,2026-10-18
+P00363,A0231,x,https://x.com/uartlach,Wikidata Q1108343,2026-10-18
+P00364,A0231,wikipedia,https://en.wikipedia.org/wiki/Colin_Beattie,Wikidata Q1108343,2026-10-18
+P00365,A0232,website,https://humzayousaf.scot/,Wikidata Q174924,2026-10-18
+P00366,A0232,x,https://x.com/HumzaYousaf,Wikidata Q174924,2026-10-18
+P00367,A0232,linkedin,https://www.linkedin.com/in/humza-yousaf-b107852b/,Wikidata Q174924,2026-10-18
+P00368,A0232,wikipedia,https://en.wikipedia.org/wiki/Humza_Yousaf,Wikidata Q174924,2026-10-18
+P00369,A0233,x,https://x.com/BobDorisSNP,Wikidata Q887886,2026-10-18
+P00370,A0233,wikipedia,https://en.wikipedia.org/wiki/Bob_Doris,Wikidata Q887886,2026-10-18
+P00371,A0234,x,https://x.com/GeorgeAdam,Wikidata Q1282862,2026-10-18
+P00372,A0234,wikipedia,https://en.wikipedia.org/wiki/George_Adam,Wikidata Q1282862,2026-10-18
+P00373,A0235,x,https://x.com/JennyGilruth,Wikidata Q24026044,2026-10-18
+P00374,A0235,instagram,https://www.instagram.com/jennygilruthmsp/,Wikidata Q24026044,2026-10-18
+P00375,A0235,facebook,https://www.facebook.com/JennyGilruthMSP,Wikidata Q24026044,2026-10-18
+P00376,A0235,wikipedia,https://en.wikipedia.org/wiki/Jenny_Gilruth,Wikidata Q24026044,2026-10-18
+P00377,A0236,x,https://x.com/haughey_clare,Wikidata Q24025938,2026-10-18
+P00378,A0236,wikipedia,https://en.wikipedia.org/wiki/Clare_Haughey,Wikidata Q24025938,2026-10-18
+P00379,A0237,wikipedia,https://en.wikipedia.org/wiki/Collette_Stevenson,Wikidata Q106758077,2026-10-18
+P00380,A0238,x,https://x.com/MairiGougeon,Wikidata Q24014894,2026-10-18
+P00381,A0238,wikipedia,https://en.wikipedia.org/wiki/Mairi_Gougeon,Wikidata Q24014894,2026-10-18
+P00382,A0239,website,https://www.richardlochhead.org/,Wikidata Q1490268,2026-10-18
+P00383,A0239,x,https://x.com/RichardLochhead,Wikidata Q1490268,2026-10-18
+P00384,A0239,wikipedia,https://en.wikipedia.org/wiki/Richard_Lochhead,Wikidata Q1490268,2026-10-18
+P00385,A0240,website,https://www.john-mason.org/,Wikidata Q1700987,2026-10-18
+P00386,A0240,x,https://x.com/JohnMasonMSP,Wikidata Q1700987,2026-10-18
+P00387,A0240,wikipedia,https://en.wikipedia.org/wiki/John_Mason_%28Scottish_politician%29,Wikidata Q1700987,2026-10-18
+P00388,A0241,x,https://x.com/Ivan_McKee,Wikidata Q24052670,2026-10-18
+P00389,A0241,wikipedia,https://en.wikipedia.org/wiki/Ivan_McKee,Wikidata Q24052670,2026-10-18
+P00390,A0242,website,https://www.joefitzpatrick.net,Wikidata Q1612012,2026-10-18
+P00391,A0242,x,https://x.com/JoeFitzSNP,Wikidata Q1612012,2026-10-18
+P00392,A0242,wikipedia,https://en.wikipedia.org/wiki/Joe_FitzPatrick,Wikidata Q1612012,2026-10-18
+P00393,A0243,x,https://x.com/GillianMSP,Wikidata Q24014282,2026-10-18
+P00394,A0243,wikipedia,https://en.wikipedia.org/wiki/Gillian_Martin,Wikidata Q24014282,2026-10-18
+P00395,A0244,x,https://x.com/neilgraysnp,Wikidata Q19882694,2026-10-18
+P00396,A0244,facebook,https://www.facebook.com/NeilGraySNP,Wikidata Q19882694,2026-10-18
+P00397,A0244,wikipedia,https://en.wikipedia.org/wiki/Neil_Gray,Wikidata Q19882694,2026-10-18
+P00398,A0245,x,https://x.com/jenni_minto,Wikidata Q106759906,2026-10-18
+P00399,A0245,wikipedia,https://en.wikipedia.org/wiki/Jenni_Minto,Wikidata Q106759906,2026-10-18
+P00400,A0246,website,https://www.billkiddmsp.org/,Wikidata Q862234,2026-10-18
+P00401,A0246,x,https://x.com/BillKiddSNP,Wikidata Q862234,2026-10-18
+P00402,A0246,wikipedia,https://en.wikipedia.org/wiki/Bill_Kidd,Wikidata Q862234,2026-10-18
+P00403,A0247,x,https://x.com/ClareAdamsonSNP,Wikidata Q540328,2026-10-18
+P00404,A0247,wikipedia,https://en.wikipedia.org/wiki/Clare_Adamson,Wikidata Q540328,2026-10-18
+P00405,A0248,x,https://x.com/KevinStewartSNP,Wikidata Q1740263,2026-10-18
+P00406,A0248,wikipedia,https://en.wikipedia.org/wiki/Kevin_Stewart_%28Scottish_politician%29,Wikidata Q1740263,2026-10-18
+P00407,A0249,x,https://x.com/DavidHTorrance,Wikidata Q1176878,2026-10-18
+P00408,A0249,wikipedia,https://en.wikipedia.org/wiki/David_Torrance_%28politician%29,Wikidata Q1176878,2026-10-18
+P00409,A0250,website,https://www.angusrobertson.org,Wikidata Q480184,2026-10-18
+P00410,A0250,x,https://x.com/AngusRobertson,Wikidata Q480184,2026-10-18
+P00411,A0250,instagram,https://www.instagram.com/angusrobertsonmsp/,Wikidata Q480184,2026-10-18
+P00412,A0250,facebook,https://www.facebook.com/AngusRobertsonSNP,Wikidata Q480184,2026-10-18
+P00413,A0250,wikipedia,https://en.wikipedia.org/wiki/Angus_Robertson,Wikidata Q480184,2026-10-18
+P00414,A0251,x,https://x.com/PaulMcLennan7,Wikidata Q106754484,2026-10-18
+P00415,A0251,wikipedia,https://en.wikipedia.org/wiki/Paul_McLennan,Wikidata Q106754484,2026-10-18
+P00416,A0252,x,https://x.com/Ross_Greer,Wikidata Q24034374,2026-10-18
+P00417,A0252,bluesky,https://bsky.app/profile/ross-greer.bsky.social,Wikidata Q24034374,2026-10-18
+P00418,A0252,wikipedia,https://en.wikipedia.org/wiki/Ross_Greer,Wikidata Q24034374,2026-10-18
+P00419,A0253,website,https://www.patrickharviemsp.com/,Wikidata Q2057654,2026-10-18
+P00420,A0253,x,https://x.com/patrickharvie,Wikidata Q2057654,2026-10-18
+P00421,A0253,bluesky,https://bsky.app/profile/patrickharvie.bsky.social,Wikidata Q2057654,2026-10-18
+P00422,A0253,instagram,https://www.instagram.com/patrick.harvie/,Wikidata Q2057654,2026-10-18
+P00423,A0253,mastodon,https://mastodon.scot/@patrickharvie,Wikidata Q2057654,2026-10-18
+P00424,A0253,wikipedia,https://en.wikipedia.org/wiki/Patrick_Harvie,Wikidata Q2057654,2026-10-18
+P00425,A0254,x,https://x.com/NatalieDon_,Wikidata Q106758197,2026-10-18
+P00426,A0254,wikipedia,https://en.wikipedia.org/wiki/Natalie_Don-Innes,Wikidata Q106758197,2026-10-18
+P00427,A0255,website,https://jamiehepburn.net/,Wikidata Q1681399,2026-10-18
+P00428,A0255,x,https://x.com/jamiehepburn,Wikidata Q1681399,2026-10-18
+P00429,A0255,wikipedia,https://en.wikipedia.org/wiki/Jamie_Hepburn,Wikidata Q1681399,2026-10-18
+P00430,A0256,x,https://x.com/BenMacpherson,Wikidata Q24052665,2026-10-18
+P00431,A0256,wikipedia,https://en.wikipedia.org/wiki/Ben_Macpherson_%28politician%29,Wikidata Q24052665,2026-10-18
+P00432,A0257,x,https://x.com/glasgowcathcart,Wikidata Q509808,2026-10-18
+P00433,A0257,wikipedia,https://en.wikipedia.org/wiki/James_Dornan,Wikidata Q509808,2026-10-18
+P00434,A0258,website,https://www.snp-annabelle-ewing.org/,Wikidata Q564093,2026-10-18
+P00435,A0258,x,https://x.com/aewingmsp,Wikidata Q564093,2026-10-18
+P00436,A0258,wikipedia,https://en.wikipedia.org/wiki/Annabelle_Ewing,Wikidata Q564093,2026-10-18
+P00437,A0259,x,https://x.com/MichelleThomson,Wikidata Q20027903,2026-10-18
+P00438,A0259,facebook,https://www.facebook.com/MichelleThomsonEdi,Wikidata Q20027903,2026-10-18
+P00439,A0259,wikipedia,https://en.wikipedia.org/wiki/Michelle_Thomson,Wikidata Q20027903,2026-10-18
+P00440,A0260,x,https://x.com/alasdairallan,Wikidata Q559634,2026-10-18
+P00441,A0260,wikipedia,https://en.wikipedia.org/wiki/Alasdair_Allan,Wikidata Q559634,2026-10-18
+P00442,A0261,x,https://x.com/fultonsnp,Wikidata Q24052668,2026-10-18
+P00443,A0261,wikipedia,https://en.wikipedia.org/wiki/Fulton_MacGregor,Wikidata Q24052668,2026-10-18
+P00444,A0262,website,https://www.michaelmathesonmsp.org,Wikidata Q121780,2026-10-18
+P00445,A0262,x,https://x.com/MathesonMichael,Wikidata Q121780,2026-10-18
+P00446,A0262,wikipedia,https://en.wikipedia.org/wiki/Michael_Matheson_%28politician%29,Wikidata Q121780,2026-10-18
+P00447,A0263,wikipedia,https://en.wikipedia.org/wiki/Marie_McNair,Wikidata Q106752706,2026-10-18
+P00448,A0264,x,https://x.com/GMacdonaldMSP,Wikidata Q1538053,2026-10-18
+P00449,A0264,wikipedia,https://en.wikipedia.org/wiki/Gordon_MacDonald_%28Scottish_politician%29,Wikidata Q1538053,2026-10-18
+P00450,A0265,x,https://x.com/RonaMackayMSP,Wikidata Q24039795,2026-10-18
+P00451,A0265,wikipedia,https://en.wikipedia.org/wiki/Rona_Mackay,Wikidata Q24039795,2026-10-18
+P00452,A0266,wikipedia,https://en.wikipedia.org/wiki/Audrey_Nicoll,Wikidata Q106762597,2026-10-18
+P00453,A0267,website,https://www.gov.scot/About/People/Ministers/Cabinet-Secretary-for-Health-and-Wellbeing,Wikidata Q444675,2026-10-18
+P00454,A0267,x,https://x.com/ShonaRobison,Wikidata Q444675,2026-10-18
+P00455,A0267,wikipedia,https://en.wikipedia.org/wiki/Shona_Robison,Wikidata Q444675,2026-10-18
+P00456,A0268,x,https://x.com/KeithBrownSNP,Wikidata Q1738042,2026-10-18
+P00457,A0268,wikipedia,https://en.wikipedia.org/wiki/Keith_Brown_%28Scottish_politician%29,Wikidata Q1738042,2026-10-18
+P00458,A0269,x,https://x.com/StephySNP,Wikidata Q106765958,2026-10-18
+P00459,A0269,wikipedia,https://en.wikipedia.org/wiki/Stephanie_Callaghan,Wikidata Q106765958,2026-10-18
+P00460,A0270,x,https://x.com/_kateforbes,Wikidata Q24039479,2026-10-18
+P00461,A0270,wikipedia,https://en.wikipedia.org/wiki/Kate_Forbes,Wikidata Q24039479,2026-10-18
+P00462,A0271,x,https://x.com/ThomasCArthur,Wikidata Q24039804,2026-10-18
+P00463,A0271,wikipedia,https://en.wikipedia.org/wiki/Tom_Arthur_%28Scottish_politician%29,Wikidata Q24039804,2026-10-18
+P00464,A0272,x,https://x.com/lornaslater,Wikidata Q63929108,2026-10-18
+P00465,A0272,bluesky,https://bsky.app/profile/lornaslater.bsky.social,Wikidata Q63929108,2026-10-18
+P00466,A0272,youtube,https://www.youtube.com/channel/UC4goXzJ0r_Cad3YKyVwdPMw,Wikidata Q63929108,2026-10-18
+P00467,A0272,wikipedia,https://en.wikipedia.org/wiki/Lorna_Slater,Wikidata Q63929108,2026-10-18
+P00468,A0273,x,https://x.com/williecoffeysnp,Wikidata Q524532,2026-10-18
+P00469,A0273,wikipedia,https://en.wikipedia.org/wiki/Willie_Coffey,Wikidata Q524532,2026-10-18
+P00470,A0274,x,https://x.com/kaukabstewart,Wikidata Q106766550,2026-10-18
+P00471,A0274,wikipedia,https://en.wikipedia.org/wiki/Kaukab_Stewart,Wikidata Q106766550,2026-10-18
+P00472,A0275,website,https://www.christinegrahame.com/,Wikidata Q467108,2026-10-18
+P00473,A0275,wikipedia,https://en.wikipedia.org/wiki/Christine_Grahame,Wikidata Q467108,2026-10-18
+P00474,A0276,x,https://x.com/RBFMaguire,Wikidata Q24034376,2026-10-18
+P00475,A0276,wikipedia,https://en.wikipedia.org/wiki/Ruth_Maguire,Wikidata Q24034376,2026-10-18
+P00476,A0277,wikipedia,https://en.wikipedia.org/wiki/Kenneth_Gibson_%28Scottish_politician%29,Wikidata Q944741,2026-10-18
+P00477,A0278,wikipedia,https://en.wikipedia.org/wiki/Graeme_Dey,Wikidata Q1349075,2026-10-18
+P00478,A0279,x,https://x.com/JackieDunbarSNP,Wikidata Q106750784,2026-10-18
+P00479,A0279,wikipedia,https://en.wikipedia.org/wiki/Jackie_Dunbar,Wikidata Q106750784,2026-10-18
+P00480,A0280,website,https://www.fionahyslop.com/,Wikidata Q1418512,2026-10-18
+P00481,A0280,x,https://x.com/FionaHyslop,Wikidata Q1418512,2026-10-18
+P00482,A0280,facebook,https://www.facebook.com/fjhyslop,Wikidata Q1418512,2026-10-18
+P00483,A0280,wikipedia,https://en.wikipedia.org/wiki/Fiona_Hyslop,Wikidata Q1418512,2026-10-18
+P00484,A0281,x,https://x.com/Siobhianayr,Wikidata Q106762414,2026-10-18
+P00485,A0281,wikipedia,https://en.wikipedia.org/wiki/Siobhian_Brown,Wikidata Q106762414,2026-10-18
+P00486,A0282,x,https://x.com/ElenaWhitham,Wikidata Q106766023,2026-10-18
+P00487,A0282,wikipedia,https://en.wikipedia.org/wiki/Elena_Whitham,Wikidata Q106766023,2026-10-18
+P00488,A0283,website,https://firstminister.gov.scot/,Wikidata Q467112,2026-10-18
+P00489,A0283,x,https://x.com/NicolaSturgeon,Wikidata Q467112,2026-10-18
+P00490,A0283,instagram,https://www.instagram.com/nicolasturgeon/,Wikidata Q467112,2026-10-18
+P00491,A0283,facebook,https://www.facebook.com/NicolaSturgeonSNP,Wikidata Q467112,2026-10-18
+P00492,A0283,wikipedia,https://en.wikipedia.org/wiki/Nicola_Sturgeon,Wikidata Q467112,2026-10-18
+P00493,A0284,x,https://x.com/S_A_Somerville,Wikidata Q2279359,2026-10-18
+P00494,A0284,wikipedia,https://en.wikipedia.org/wiki/Shirley-Anne_Somerville,Wikidata Q2279359,2026-10-18
+P00495,A0285,x,https://x.com/StuMcMillanSNP,Wikidata Q2357916,2026-10-18
+P00496,A0285,wikipedia,https://en.wikipedia.org/wiki/Stuart_McMillan,Wikidata Q2357916,2026-10-18
+P00497,A0286,x,https://x.com/MareeToddMSP,Wikidata Q24034387,2026-10-18
+P00498,A0286,wikipedia,https://en.wikipedia.org/wiki/Maree_Todd,Wikidata Q24034387,2026-10-18
+P00499,A0287,website,https://maggiechapman.scot/,Wikidata Q16727932,2026-10-18
+P00500,A0287,x,https://x.com/MaggieChapman,Wikidata Q16727932,2026-10-18
+P00501,A0287,bluesky,https://bsky.app/profile/maggiechapman.bsky.social,Wikidata Q16727932,2026-10-18
+P00502,A0287,instagram,https://www.instagram.com/maggiechapman79/,Wikidata Q16727932,2026-10-18
+P00503,A0287,facebook,https://www.facebook.com/MaggieChapmanGreen,Wikidata Q16727932,2026-10-18
+P00504,A0287,tiktok,https://www.tiktok.com/@maggiechapman79,Wikidata Q16727932,2026-10-18
+P00505,A0287,mastodon,https://mastodon.scot/@maggiechapman,Wikidata Q16727932,2026-10-18
+P00506,A0287,wikipedia,https://en.wikipedia.org/wiki/Maggie_Chapman,Wikidata Q16727932,2026-10-18
+P00507,A0288,x,https://x.com/ArianeBurgessHI,Wikidata Q76130661,2026-10-18
+P00508,A0288,wikipedia,https://en.wikipedia.org/wiki/Ariane_Burgess,Wikidata Q76130661,2026-10-18
+P00509,A0289,x,https://x.com/markruskell,Wikidata Q1900397,2026-10-18
+P00510,A0289,wikipedia,https://en.wikipedia.org/wiki/Mark_Ruskell,Wikidata Q1900397,2026-10-18
+P00511,A0290,website,https://piketty.pse.ens.fr/,Wikidata Q984448,2026-10-18
+P00512,A0290,x,https://x.com/PikettyLeMonde,Wikidata Q984448,2026-10-18
+P00513,A0290,facebook,https://www.facebook.com/thomaspikettyofficiel,Wikidata Q984448,2026-10-18
+P00514,A0290,wikipedia,https://en.wikipedia.org/wiki/Thomas_Piketty,Wikidata Q984448,2026-10-18
+P00515,A0291,wikipedia,https://en.wikipedia.org/wiki/Jos%C3%A9_Antonio_Ocampo,Wikidata Q3076265,2026-10-18
+P00516,A0292,wikipedia,https://en.wikipedia.org/wiki/Jayati_Ghosh,Wikidata Q6167693,2026-10-18
+P00517,A0293,website,https://hajoonchang.net/,Wikidata Q32729,2026-10-18
+P00518,A0293,wikipedia,https://en.wikipedia.org/wiki/Ha-Joon_Chang,Wikidata Q32729,2026-10-18
+P00519,A0294,wikipedia,https://en.wikipedia.org/wiki/Mart%C3%ADn_Guzm%C3%A1n,Wikidata Q77605455,2026-10-18
+P00520,A0296,wikipedia,https://en.wikipedia.org/wiki/Valpy_FitzGerald,Wikidata Q125924795,2026-10-18
+P00521,A0308,wikipedia,https://en.wikipedia.org/wiki/Alfredo_Saad-Filho,Wikidata Q4723861,2026-10-18
+P00522,A0311,x,https://x.com/jryancollins,Wikidata Q96142339,2026-10-18
+P00523,A0332,bluesky,https://bsky.app/profile/liambyrnemp.bsky.social,Wikidata Q269697,2026-10-18
+P00524,A0332,instagram,https://www.instagram.com/liambyrnemp/,Wikidata Q269697,2026-10-18
+P00525,A0332,facebook,https://www.facebook.com/LiamByrneHodgeHill,Wikidata Q269697,2026-10-18
+P00526,A0332,wikipedia,https://en.wikipedia.org/wiki/Liam_Byrne,Wikidata Q269697,2026-10-18
+P00527,A0333,x,https://x.com/JulieMorganLAB,Wikidata Q6308404,2026-10-18
+P00528,A0333,wikipedia,https://en.wikipedia.org/wiki/Julie_Morgan,Wikidata Q6308404,2026-10-18
+P00529,A0334,website,https://www.janedodds.wales/,Wikidata Q42846969,2026-10-18
+P00530,A0334,x,https://x.com/DoddsJane,Wikidata Q42846969,2026-10-18
+P00531,A0334,facebook,https://www.facebook.com/janedoddswld,Wikidata Q42846969,2026-10-18
+P00532,A0334,wikipedia,https://en.wikipedia.org/wiki/Jane_Dodds,Wikidata Q42846969,2026-10-18
+P00533,A0335,x,https://x.com/Heledd_Plaid,Wikidata Q18535625,2026-10-18
+P00534,A0335,facebook,https://www.facebook.com/HeleddFychanPlaidCymru,Wikidata Q18535625,2026-10-18
+P00535,A0335,wikipedia,https://en.wikipedia.org/wiki/Heledd_Fychan,Wikidata Q18535625,2026-10-18
+P00536,A0499,website,https://sharongraham.org,Wikidata Q108280683,2026-10-18
+P00537,A0499,instagram,https://www.instagram.com/unitesharon/,Wikidata Q108280683,2026-10-18
+P00538,A0499,wikipedia,https://en.wikipedia.org/wiki/Sharon_Graham,Wikidata Q108280683,2026-10-18
+P00539,A0502,website,https://gabriel-zucman.eu/,Wikidata Q15811211,2026-10-18
+P00540,A0502,x,https://x.com/gabriel_zucman,Wikidata Q15811211,2026-10-18
+P00541,A0502,bluesky,https://bsky.app/profile/gabrielzucman.bsky.social,Wikidata Q15811211,2026-10-18
+P00542,A0502,wikipedia,https://en.wikipedia.org/wiki/Gabriel_Zucman,Wikidata Q15811211,2026-10-18
+P00543,A0503,wikipedia,https://en.wikipedia.org/wiki/Neil_Kinnock,Wikidata Q317258,2026-10-18
+P00544,A0513,website,https://zackpolanski.com/,Wikidata Q75974863,2026-10-18
+P00545,A0513,x,https://x.com/ZackPolanski,Wikidata Q75974863,2026-10-18
+P00546,A0513,bluesky,https://bsky.app/profile/zackpolanski.bsky.social,Wikidata Q75974863,2026-10-18
+P00547,A0513,instagram,https://www.instagram.com/greenpartyzack/,Wikidata Q75974863,2026-10-18
+P00548,A0513,facebook,https://www.facebook.com/zackpolanski,Wikidata Q75974863,2026-10-18
+P00549,A0513,tiktok,https://www.tiktok.com/@zackpolanski,Wikidata Q75974863,2026-10-18
+P00550,A0513,linkedin,https://www.linkedin.com/in/zackpolanskigreenparty/,Wikidata Q75974863,2026-10-18
+P00551,A0513,mastodon,https://mastodon.green/@ZackPolanski,Wikidata Q75974863,2026-10-18
+P00552,A0513,wikipedia,https://en.wikipedia.org/wiki/Zack_Polanski,Wikidata Q75974863,2026-10-18
+P00553,A0514,website,https://www.mothinali.com/,Wikidata Q127808409,2026-10-18
+P00554,A0514,x,https://x.com/mothinali,Wikidata Q127808409,2026-10-18
+P00555,A0514,bluesky,https://bsky.app/profile/mothinali.bsky.social,Wikidata Q127808409,2026-10-18
+P00556,A0514,instagram,https://www.instagram.com/mothin.ali/,Wikidata Q127808409,2026-10-18
+P00557,A0514,facebook,https://www.facebook.com/mothinspeaks,Wikidata Q127808409,2026-10-18
+P00558,A0514,youtube,https://www.youtube.com/channel/UCG2RWj-MppaH71gZmcpH8ag,Wikidata Q127808409,2026-10-18
+P00559,A0514,tiktok,https://www.tiktok.com/@mothinspeaks,Wikidata Q127808409,2026-10-18
+P00560,A0514,wikipedia,https://en.wikipedia.org/wiki/Mothin_Ali,Wikidata Q127808409,2026-10-18
+P00561,A0515,website,https://rachelforsussex.co.uk/,Wikidata Q135668504,2026-10-18
+P00562,A0515,x,https://x.com/rachelmillward,Wikidata Q135668504,2026-10-18
+P00563,A0515,bluesky,https://bsky.app/profile/rachelmillward.bsky.social,Wikidata Q135668504,2026-10-18
+P00564,A0515,instagram,https://www.instagram.com/millward_rachel/,Wikidata Q135668504,2026-10-18
+P00565,A0515,facebook,https://www.facebook.com/green.rachelmillward,Wikidata Q135668504,2026-10-18
+P00566,A0515,youtube,https://www.youtube.com/channel/UCrzNDkNd_EUKviOp2_cs21Q,Wikidata Q135668504,2026-10-18
+P00567,A0515,tiktok,https://www.tiktok.com/@green_rachelmillward,Wikidata Q135668504,2026-10-18
+P00568,A0515,linkedin,https://www.linkedin.com/in/rachelmillward/,Wikidata Q135668504,2026-10-18
+P00569,A0515,wikipedia,https://en.wikipedia.org/wiki/Rachel_Millward,Wikidata Q135668504,2026-10-18
+P00570,A0516,x,https://x.com/as_penarth,Wikidata Q63865625,2026-10-18
+P00571,A0516,facebook,https://www.facebook.com/AnthonySlaughterWGP,Wikidata Q63865625,2026-10-18
+P00572,A0516,wikipedia,https://en.wikipedia.org/wiki/Anthony_Slaughter,Wikidata Q63865625,2026-10-18
+P00573,A0518,website,https://www.parliament.uk/biographies/lords/baroness-jones-of-moulsecoomb/4297,Wikidata Q6179340,2026-10-18
+P00574,A0518,x,https://x.com/GreenJennyJones,Wikidata Q6179340,2026-10-18
+P00575,A0518,bluesky,https://bsky.app/profile/greenjennyjones.bsky.social,Wikidata Q6179340,2026-10-18
+P00576,A0518,facebook,https://www.facebook.com/greenjennyjones,Wikidata Q6179340,2026-10-18
+P00577,A0518,wikipedia,https://en.wikipedia.org/wiki/Jenny_Jones%2C_Baroness_Jones_of_Moulsecoomb,Wikidata Q6179340,2026-10-18

@@ -52,3 +52,7 @@ For politicians, fill the `party` column with the party's common English name (`
 ## More than one type
 
 Pick the main role for `actor_type` and list any others in `other_types`, separated by `;` (for example `journalist` with `economist`). The site filters and counts a person under every type they hold.
+
+## Links and socials
+
+Add rows to `profiles.csv` for public figures and organisations: their own website, their parliament, council or party page, and professional social accounts they publish, or links that Wikidata lists for them. Never add personal accounts, email addresses or phone numbers, and do not guess a handle from a name search. Skip private individuals, including people only known as wealthy signers of a letter. `validate` checks that links are https and match their platform.

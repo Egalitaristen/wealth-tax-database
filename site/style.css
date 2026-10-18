@@ -80,3 +80,9 @@ svg.chart text{fill:var(--muted);font:11px var(--mono)}
 @media(prefers-reduced-motion:no-preference){nav button,tbody tr{transition:background .12s}}
 #wmapbox{height:auto;aspect-ratio:1.9/1;min-height:0}
 @media(max-width:860px){#wmapbox{aspect-ratio:1.5/1}}
+
+details.links{margin:0 0 4px;border:1px solid var(--line);background:var(--bg);padding:6px 10px;border-radius:3px}
+details.links summary{cursor:pointer;font:600 13px var(--body)}
+details.links ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px}
+details.links li{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+details.links .m{font:12px var(--mono);color:var(--muted);overflow-wrap:anywhere}
