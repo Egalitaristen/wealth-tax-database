@@ -7,7 +7,7 @@ Reads every folder in data/ that has a meta.json, writes one JSON file per count
 world.json (country summary and projected world map paths), and copies the site files.
 Needs only the standard library, plus pycountry for ISO codes (pip install pycountry).
 """
-import argparse, csv, json, math, shutil, sys, collections, datetime
+import argparse, csv, hashlib, json, math, shutil, sys, collections, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -178,8 +178,14 @@ def main():
     if out.exists():
         shutil.rmtree(out)
     (out / "data").mkdir(parents=True)
-    for f in ("index.html", "app.js", "style.css"):
+    for f in ("app.js", "style.css"):
         shutil.copy(SITE / f, out / f)
+    # Pages caches files for 10 minutes; a content hash in the URL makes updates show at once.
+    html = (SITE / "index.html").read_text(encoding="utf-8")
+    for f in ("app.js", "style.css"):
+        h = hashlib.md5((SITE / f).read_bytes()).hexdigest()[:8]
+        html = html.replace(f'"{f}"', f'"{f}?v={h}"')
+    (out / "index.html").write_text(html, encoding="utf-8")
     countries = []
     for folder in sorted(DATA.iterdir()):
         if folder.is_dir() and (folder / "meta.json").exists():
