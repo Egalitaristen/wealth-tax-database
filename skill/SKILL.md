@@ -77,8 +77,8 @@ An actor's grade is the best grade among its support evidence. Grade each piece 
 | `politician` | person | Elected official or candidate at any level (supranational to local), or a minister, with qualifying evidence: vote, sponsorship, signed motion, speech or statement. Record level and geography. |
 | `party` | organisation | Party, party branch, council group or youth wing; evidence from a manifesto, policy document or conference motion. |
 | `government_body` | institution | A council, parliament, government or commission that **passed** a motion or adopted a position, or a commission that recommended it. A failed motion goes on the proposer, not the body. |
-| `academic` | person | Wrote in favour (paper, book, report, op-ed, testimony). Merely researching wealth taxes does not count. |
-| `economist` | person | Non-academic economist (central bank, international organisation, bank, consultancy) arguing in favour. |
+| `academic` | person | Scholar outside economics (law, politics, public health, sociology and so on) who wrote in favour (paper, book, report, op-ed, testimony). Merely researching wealth taxes does not count. |
+| `economist` | person | Any economist, whether at a university, central bank, international organisation, bank, think tank or consultancy, arguing in favour. Use this for economists in academia too, so that one filter finds them all. |
 | `think_tank` | organisation | Published a recommendation, or campaigns for it. |
 | `ngo_campaign` | organisation | NGO, charity, campaign group or coalition campaigning for or endorsing it. |
 | `union` | organisation | Union, union confederation or trades council with a policy, motion or campaign. |
