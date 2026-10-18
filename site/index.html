@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wealth Tax Map</title>
+<meta name="description" content="A sourced, open database of who publicly backs wealth taxation, country by country.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner" role="note">
+  <div class="wrap">
+    <b>AI-generated data, and it may be wrong.</b> Every entry links to its source, and many rows are not yet verified by a person.
+    Spotted a mistake or want an entry removed? <a id="report-top" href="#" target="_blank" rel="noopener">Report it on GitHub</a>.
+  </div>
+</div>
+<div class="wrap">
+<header>
+  <div><h1>Wealth Tax Map</h1>
+  <p class="sub">Who publicly backs an actual wealth tax, country by country, with the source behind every entry. Supporters only; petition signers are never recorded.</p></div>
+  <div class="stats" id="stats"></div>
+</header>
+<nav role="tablist" id="tabs" aria-label="Sections">
+  <button role="tab" data-t="world" aria-selected="true">World</button>
+  <button role="tab" data-t="country" aria-selected="false">Country</button>
+  <button role="tab" data-t="contribute" aria-selected="false">Add a country</button>
+</nav>
+
+<section id="world">
+  <div class="grid">
+    <div class="mapbox" id="wmapbox">
+      <svg class="map" id="wsvg" role="img" aria-label="World map; countries with a database are shaded"></svg>
+      <div class="legend">
+        <span><i class="sw sw-has"></i>Database started (darker = more supporters)</span>
+        <span><i class="sw sw-none"></i>No database yet</span>
+      </div>
+      <div class="tip" id="wtip" hidden></div>
+    </div>
+    <aside class="panel" id="wside"></aside>
+  </div>
+</section>
+
+<section id="country" hidden>
+  <div class="ctl"><select id="csel" aria-label="Country"></select>
+    <div class="sub-tabs" id="subtabs" role="tablist" aria-label="Country views">
+      <button data-s="map" aria-selected="true">Local map</button>
+      <button data-s="people" aria-selected="false">People and groups</button>
+      <button data-s="timeline" aria-selected="false">Over time</button>
+      <button data-s="method" aria-selected="false">Method and gaps</button>
+    </div>
+  </div>
+  <div id="cbody"></div>
+</section>
+
+<section id="contribute" hidden>
+  <div class="panel method">
+    <h2>Build a database for your country or region</h2>
+    <p>Each country is a folder of plain CSV files in <code>data/&lt;iso2&gt;/</code>. A GitHub Action rebuilds this site whenever a pull request is merged, so a new folder becomes a shaded country on the world map.</p>
+    <ol>
+      <li><b>Fork the repository</b> and read <code>CONTRIBUTING.md</code>.</li>
+      <li><b>Follow the workflow</b> in <code>skill/SKILL.md</code>, by hand or with an AI assistant. It covers where to look, how to grade evidence and how to record sources.</li>
+      <li><b>Create <code>data/&lt;iso2&gt;/</code></b> with <code>python skill/scripts/wtdb.py init</code>, add a <code>meta.json</code>, and fill the tables.</li>
+      <li><b>Validate</b> with <code>python skill/scripts/wtdb.py validate data/&lt;iso2&gt;</code>. The same check runs on your pull request.</li>
+      <li><b>Open a pull request.</b> New rows start as unverified; a second person confirms them.</li>
+    </ol>
+    <p>Optional: add a <code>boundaries.json</code> of your sub-national units to get a local map like the UK one.</p>
+    <p><a id="repo-link" href="#" target="_blank" rel="noopener">Open the repository on GitHub</a></p>
+    <h3 style="margin-top:20px">Rules that apply everywhere</h3>
+    <ul>
+      <li>Supporters only. Opponents and sceptics are not listed.</li>
+      <li>Public figures and organisations, with a dated source and a short quote.</li>
+      <li>Petition signers and other private individuals are never recorded.</li>
+      <li>People are assumed alive unless a death record is found; those people are removed.</li>
+    </ul>
+  </div>
+</section>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

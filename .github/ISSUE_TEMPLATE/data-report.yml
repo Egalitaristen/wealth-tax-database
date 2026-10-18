@@ -1,0 +1,47 @@
+name: Report a problem with the data
+description: Wrong information, a broken source, or a request to correct or remove an entry.
+labels: ["data-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. The data is AI-generated and may be wrong, so reports help a lot.
+        This issue is public. Please do not include private information such as home addresses or phone numbers.
+  - type: input
+    id: country
+    attributes:
+      label: Country folder
+      description: The folder name under `data/`, for example `gb`.
+    validations:
+      required: true
+  - type: input
+    id: entry
+    attributes:
+      label: Entry ID
+      description: An actor ID (A0123) or evidence ID (E00123). The Report links on the site fill this in.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is wrong?
+      options:
+        - The quote is wrong or not on the page
+        - The person or group does not support a wealth tax
+        - The source link is broken or points to the wrong page
+        - The role, party or date is wrong
+        - The person has died
+        - The person is a private individual (please remove)
+        - Duplicate entry
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Details
+      description: What should it say instead? A link to a better source helps.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Link to a source (optional)

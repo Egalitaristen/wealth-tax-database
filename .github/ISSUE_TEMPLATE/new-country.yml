@@ -1,0 +1,26 @@
+name: Start a country or region
+description: Say you are working on a new country so others do not duplicate the effort.
+labels: ["new-country"]
+body:
+  - type: input
+    id: area
+    attributes:
+      label: Country or region
+      description: Use the ISO 3166-1 alpha-2 code where you can, for example `de`, or `us-ca` for a sub-national area.
+    validations:
+      required: true
+  - type: dropdown
+    id: method
+    attributes:
+      label: How will you research it?
+      options:
+        - By hand
+        - With an AI assistant, checked by me
+        - Both
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Languages, main sources, anything others should know. Boundary files for a local map are welcome.

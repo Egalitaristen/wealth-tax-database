@@ -1,0 +1,271 @@
+link_id,from_actor_id,to_actor_id,link_type,evidence_id,source_url,note
+L0001,A0022,A0511,party_of,,,Party as recorded in the actor row
+L0002,A0023,A0511,party_of,,,Party as recorded in the actor row
+L0003,A0024,A0511,party_of,,,Party as recorded in the actor row
+L0004,A0025,A0511,party_of,,,Party as recorded in the actor row
+L0005,A0028,A0326,party_of,,,Party as recorded in the actor row
+L0006,A0032,A0326,party_of,,,Party as recorded in the actor row
+L0007,A0034,A0326,party_of,,,Party as recorded in the actor row
+L0008,A0037,A0510,party_of,,,Party as recorded in the actor row
+L0009,A0038,A0510,party_of,,,Party as recorded in the actor row
+L0010,A0039,A0510,party_of,,,Party as recorded in the actor row
+L0011,A0041,A0326,party_of,,,Party as recorded in the actor row
+L0012,A0055,A0326,party_of,,,Party as recorded in the actor row
+L0013,A0071,A0326,party_of,,,Party as recorded in the actor row
+L0014,A0074,A0510,party_of,,,Party as recorded in the actor row
+L0015,A0075,A0510,party_of,,,Party as recorded in the actor row
+L0016,A0078,A0510,party_of,,,Party as recorded in the actor row
+L0017,A0081,A0510,party_of,,,Party as recorded in the actor row
+L0018,A0082,A0510,party_of,,,Party as recorded in the actor row
+L0019,A0084,A0510,party_of,,,Party as recorded in the actor row
+L0020,A0088,A0510,party_of,,,Party as recorded in the actor row
+L0021,A0089,A0510,party_of,,,Party as recorded in the actor row
+L0022,A0090,A0510,party_of,,,Party as recorded in the actor row
+L0023,A0091,A0510,party_of,,,Party as recorded in the actor row
+L0024,A0093,A0510,party_of,,,Party as recorded in the actor row
+L0025,A0097,A0510,party_of,,,Party as recorded in the actor row
+L0026,A0100,A0511,party_of,,,Party as recorded in the actor row
+L0027,A0101,A0510,party_of,,,Party as recorded in the actor row
+L0028,A0104,A0510,party_of,,,Party as recorded in the actor row
+L0029,A0106,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0030,A0107,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0031,A0108,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0032,A0109,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0033,A0110,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0034,A0111,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0035,A0112,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0036,A0113,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0037,A0114,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0038,A0115,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0039,A0116,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0040,A0117,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0041,A0118,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0042,A0119,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0043,A0120,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0044,A0121,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0045,A0122,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0046,A0123,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0047,A0124,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0048,A0125,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0049,A0126,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0050,A0127,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0051,A0128,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0052,A0129,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0053,A0130,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0054,A0131,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0055,A0132,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0056,A0133,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0057,A0134,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0058,A0135,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0059,A0136,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0060,A0137,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0061,A0138,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0062,A0139,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0063,A0140,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0064,A0141,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0065,A0142,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0066,A0143,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0067,A0144,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0068,A0145,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0069,A0146,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0070,A0147,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0071,A0148,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0072,A0149,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0073,A0150,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0074,A0151,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0075,A0152,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0076,A0153,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0077,A0154,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0078,A0155,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0079,A0156,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0080,A0157,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0081,A0158,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0082,A0159,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0083,A0160,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0084,A0161,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0085,A0162,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0086,A0163,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0087,A0164,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0088,A0165,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0089,A0166,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0090,A0167,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0091,A0168,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0092,A0169,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0093,A0170,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0094,A0171,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0095,A0172,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0096,A0173,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0097,A0174,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0098,A0175,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0099,A0176,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0100,A0177,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0101,A0178,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0102,A0179,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0103,A0180,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0104,A0181,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0105,A0182,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0106,A0183,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0107,A0184,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0108,A0185,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0109,A0186,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0110,A0187,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0111,A0188,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0112,A0189,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0113,A0190,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0114,A0191,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0115,A0192,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0116,A0193,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0117,A0194,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0118,A0195,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0119,A0196,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0120,A0197,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0121,A0198,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0122,A0199,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0123,A0200,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0124,A0201,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0125,A0202,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0126,A0203,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0127,A0204,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0128,A0205,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0129,A0206,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0130,A0207,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0131,A0208,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0132,A0209,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0133,A0210,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0134,A0211,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0135,A0212,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0136,A0213,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0137,A0214,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0138,A0215,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0139,A0216,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0140,A0217,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0141,A0218,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0142,A0219,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0143,A0220,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0144,A0221,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0145,A0222,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0146,A0223,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0147,A0224,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0148,A0226,A0326,party_of,,,Party as recorded in the actor row
+L0149,A0227,A0510,party_of,,,Party as recorded in the actor row
+L0150,A0228,A0510,party_of,,,Party as recorded in the actor row
+L0151,A0229,A0510,party_of,,,Party as recorded in the actor row
+L0152,A0230,A0510,party_of,,,Party as recorded in the actor row
+L0153,A0231,A0510,party_of,,,Party as recorded in the actor row
+L0154,A0232,A0510,party_of,,,Party as recorded in the actor row
+L0155,A0233,A0510,party_of,,,Party as recorded in the actor row
+L0156,A0234,A0510,party_of,,,Party as recorded in the actor row
+L0157,A0235,A0510,party_of,,,Party as recorded in the actor row
+L0158,A0236,A0510,party_of,,,Party as recorded in the actor row
+L0159,A0237,A0510,party_of,,,Party as recorded in the actor row
+L0160,A0238,A0510,party_of,,,Party as recorded in the actor row
+L0161,A0239,A0510,party_of,,,Party as recorded in the actor row
+L0162,A0241,A0510,party_of,,,Party as recorded in the actor row
+L0163,A0242,A0510,party_of,,,Party as recorded in the actor row
+L0164,A0243,A0510,party_of,,,Party as recorded in the actor row
+L0165,A0244,A0510,party_of,,,Party as recorded in the actor row
+L0166,A0245,A0510,party_of,,,Party as recorded in the actor row
+L0167,A0246,A0510,party_of,,,Party as recorded in the actor row
+L0168,A0247,A0510,party_of,,,Party as recorded in the actor row
+L0169,A0248,A0510,party_of,,,Party as recorded in the actor row
+L0170,A0249,A0510,party_of,,,Party as recorded in the actor row
+L0171,A0250,A0510,party_of,,,Party as recorded in the actor row
+L0172,A0251,A0510,party_of,,,Party as recorded in the actor row
+L0173,A0252,A0326,party_of,,,Party as recorded in the actor row
+L0174,A0253,A0326,party_of,,,Party as recorded in the actor row
+L0175,A0254,A0510,party_of,,,Party as recorded in the actor row
+L0176,A0255,A0510,party_of,,,Party as recorded in the actor row
+L0177,A0256,A0510,party_of,,,Party as recorded in the actor row
+L0178,A0257,A0510,party_of,,,Party as recorded in the actor row
+L0179,A0258,A0510,party_of,,,Party as recorded in the actor row
+L0180,A0259,A0510,party_of,,,Party as recorded in the actor row
+L0181,A0260,A0510,party_of,,,Party as recorded in the actor row
+L0182,A0261,A0510,party_of,,,Party as recorded in the actor row
+L0183,A0262,A0510,party_of,,,Party as recorded in the actor row
+L0184,A0263,A0510,party_of,,,Party as recorded in the actor row
+L0185,A0264,A0510,party_of,,,Party as recorded in the actor row
+L0186,A0265,A0510,party_of,,,Party as recorded in the actor row
+L0187,A0266,A0510,party_of,,,Party as recorded in the actor row
+L0188,A0267,A0510,party_of,,,Party as recorded in the actor row
+L0189,A0268,A0510,party_of,,,Party as recorded in the actor row
+L0190,A0269,A0510,party_of,,,Party as recorded in the actor row
+L0191,A0270,A0510,party_of,,,Party as recorded in the actor row
+L0192,A0271,A0510,party_of,,,Party as recorded in the actor row
+L0193,A0272,A0326,party_of,,,Party as recorded in the actor row
+L0194,A0273,A0510,party_of,,,Party as recorded in the actor row
+L0195,A0274,A0510,party_of,,,Party as recorded in the actor row
+L0196,A0275,A0510,party_of,,,Party as recorded in the actor row
+L0197,A0276,A0510,party_of,,,Party as recorded in the actor row
+L0198,A0277,A0510,party_of,,,Party as recorded in the actor row
+L0199,A0278,A0510,party_of,,,Party as recorded in the actor row
+L0200,A0279,A0510,party_of,,,Party as recorded in the actor row
+L0201,A0280,A0510,party_of,,,Party as recorded in the actor row
+L0202,A0281,A0510,party_of,,,Party as recorded in the actor row
+L0203,A0282,A0510,party_of,,,Party as recorded in the actor row
+L0204,A0283,A0510,party_of,,,Party as recorded in the actor row
+L0205,A0284,A0510,party_of,,,Party as recorded in the actor row
+L0206,A0285,A0510,party_of,,,Party as recorded in the actor row
+L0207,A0286,A0510,party_of,,,Party as recorded in the actor row
+L0208,A0287,A0326,party_of,,,Party as recorded in the actor row
+L0209,A0288,A0326,party_of,,,Party as recorded in the actor row
+L0210,A0289,A0326,party_of,,,Party as recorded in the actor row
+L0211,A0330,A0329,works_for,,,
+L0212,A0331,A0061,works_for,,,
+L0213,A0335,A0511,party_of,,,Party as recorded in the actor row
+L0214,A0339,A0326,party_of,,,Party as recorded in the actor row
+L0215,A0341,A0326,party_of,,,Party as recorded in the actor row
+L0216,A0342,A0326,party_of,,,Party as recorded in the actor row
+L0217,A0345,A0326,party_of,,,Party as recorded in the actor row
+L0218,A0346,A0326,party_of,,,Party as recorded in the actor row
+L0219,A0349,A0326,party_of,,,Party as recorded in the actor row
+L0220,A0350,A0326,party_of,,,Party as recorded in the actor row
+L0221,A0352,A0326,party_of,,,Party as recorded in the actor row
+L0222,A0445,A0329,works_for,,,
+L0223,A0480,A0328,works_for,,,
+L0224,A0499,A0061,works_for,,,
+L0225,A0507,A0225,member_of,,,Signed the Proud to Pay letter or is named as a member
+L0226,A0513,A0326,party_of,,,Party as recorded in the actor row
+L0227,A0514,A0326,party_of,,,Party as recorded in the actor row
+L0228,A0515,A0326,party_of,,,Party as recorded in the actor row
+L0229,A0519,A0326,party_of,,,Party as recorded in the actor row
+L0230,A0520,A0326,party_of,,,Party as recorded in the actor row
+L0231,A0521,A0326,party_of,,,Party as recorded in the actor row
+L0232,A0522,A0326,party_of,,,Party as recorded in the actor row
+L0233,A0523,A0326,party_of,,,Party as recorded in the actor row
+L0234,A0524,A0326,party_of,,,Party as recorded in the actor row
+L0235,A0525,A0326,party_of,,,Party as recorded in the actor row
+L0236,A0526,A0326,party_of,,,Party as recorded in the actor row
+L0237,A0527,A0326,party_of,,,Party as recorded in the actor row
+L0238,A0528,A0326,party_of,,,Party as recorded in the actor row
+L0239,A0529,A0326,party_of,,,Party as recorded in the actor row
+L0240,A0530,A0326,party_of,,,Party as recorded in the actor row
+L0241,A0531,A0326,party_of,,,Party as recorded in the actor row
+L0242,A0532,A0326,party_of,,,Party as recorded in the actor row
+L0243,A0533,A0326,party_of,,,Party as recorded in the actor row
+L0244,A0534,A0326,party_of,,,Party as recorded in the actor row
+L0245,A0535,A0326,party_of,,,Party as recorded in the actor row
+L0246,A0536,A0326,party_of,,,Party as recorded in the actor row
+L0247,A0537,A0326,party_of,,,Party as recorded in the actor row
+L0248,A0566,A0328,works_for,,,
+L0249,A0553,A0328,leads,,,Executive Director from July 2025
+L0250,A0542,A0538,leads,,https://taxjustice.uk/blog/press-release-leading-organisations-call-for-wealth-taxes-at-the-budget/,CEO
+L0251,A0543,A0541,leads,,https://www.expressandstar.com/uk-news/calls-for-wealth-tax-to-fund-public-services-supported-at-labour-conference-5665670,General secretary
+L0252,A0513,A0326,leads,,,Leader
+L0253,A0057,A0558,leads,,https://centax.org.uk/policy/,Director
+L0254,A0059,A0558,leads,,https://centax.org.uk/policy/,Director
+L0255,A0057,A0059,co_author,,https://www.lse.ac.uk/asset-library/information/wealthtaxcommission-final-report.pdf,"Wealth Tax Commission final report, 2020"
+L0256,A0545,A0555,founded,,,Co-founder with Richard Wilkinson
+L0257,A0565,A0548,works_for,,https://tfn.scot/news/time-is-right-for-modest-wealth-tax-urge-campaigners,Economist
+L0258,A0559,A0328,funds,,https://trustforlondon.org.uk/news/spotlight-on-tax-justice-uk/,Funding since 2019
+L0259,A0328,A0548,coalition_partner,,https://tfn.scot/news/time-is-right-for-modest-wealth-tax-urge-campaigners,Joint 2023 analysis
+L0260,A0328,A0564,coalition_partner,,https://tfn.scot/news/time-is-right-for-modest-wealth-tax-urge-campaigners,Joint 2023 analysis
+L0261,A0328,A0225,coalition_partner,,https://taxjustice.uk/,Joint wealth tax policies (Mar 2023) and Nov 2025 petitions
+L0262,A0328,A0563,coalition_partner,,https://leftfootforward.org/?p=189770,Compass 2026 paper developed with Tax Justice UK
+L0263,A0538,A0328,coalition_partner,,https://taxjustice.uk/blog/press-release-leading-organisations-call-for-wealth-taxes-at-the-budget/,Nov 2025 joint release / petition delivery
+L0264,A0539,A0328,coalition_partner,,https://taxjustice.uk/blog/press-release-leading-organisations-call-for-wealth-taxes-at-the-budget/,Nov 2025 joint release / petition delivery
+L0265,A0329,A0328,coalition_partner,,https://taxjustice.uk/blog/press-release-leading-organisations-call-for-wealth-taxes-at-the-budget/,Nov 2025 joint release / petition delivery
+L0266,A0540,A0328,coalition_partner,,https://taxjustice.uk/blog/press-release-leading-organisations-call-for-wealth-taxes-at-the-budget/,Nov 2025 joint release / petition delivery
+L0267,A0541,A0328,coalition_partner,,https://taxjustice.uk/blog/press-release-leading-organisations-call-for-wealth-taxes-at-the-budget/,Nov 2025 joint release / petition delivery
+L0268,A0562,A0328,coalition_partner,,https://taxjustice.uk/blog/press-release-leading-organisations-call-for-wealth-taxes-at-the-budget/,Nov 2025 joint release / petition delivery
+L0269,A0549,A0504,coalition_partner,,https://www.churchtimes.co.uk/articles/2022/21-october/news/uk/tax-the-wealthy-to-reduce-inequality-church-leaders-tell-the-chancellor,Signed its Oct 2022 letter
+L0270,A0550,A0504,coalition_partner,,https://www.churchtimes.co.uk/articles/2022/21-october/news/uk/tax-the-wealthy-to-reduce-inequality-church-leaders-tell-the-chancellor,Signed its Oct 2022 letter

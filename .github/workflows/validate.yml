@@ -1,0 +1,29 @@
+name: Validate data
+
+on:
+  pull_request:
+    paths: ["data/**", "skill/**", "site/**", "scripts/**"]
+  push:
+    branches: [main]
+    paths: ["data/**", "skill/**", "site/**", "scripts/**"]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pycountry
+      - name: Validate every country
+        run: |
+          status=0
+          for d in data/*/; do
+            echo "== $d"
+            test -f "$d/meta.json" || { echo "::error::$d is missing meta.json"; status=1; continue; }
+            python skill/scripts/wtdb.py validate "$d" || status=1
+          done
+          exit $status
+      - name: Build the site
+        run: python scripts/build_site.py
