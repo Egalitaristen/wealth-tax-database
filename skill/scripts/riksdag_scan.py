@@ -12,7 +12,8 @@ Commands
           words, so the default also runs the stems; the hit filter then applies the regex in TERMS_RE.
   signers DOK_ID                      signatories (dokintressent) of one document
   speeches [--term T ...] [--from DATE] [--to DATE] [--party V] [--context 200] [--json OUT.json]
-          Speeches (anföranden) in the chamber containing a term, with speaker and party.
+          Hits in chamber debates (plenary protocols), attributed to the speaker (Anf. N Name (Party)).
+          The speech-list API cannot filter by text, so this reads the protocols found by a full-text search.
   votes   --rm 2013/14 --bet SkU21 [--punkt 3] [--names Nej] [--json OUT.json]
           Roll call of the votes on one committee report: counts per item and party; --names lists who voted that way.
   member  "First Last"                status from the member register ("Avliden" = deceased), party, birth year
@@ -32,7 +33,7 @@ Notes
     run wtdb.py checkquotes on them.
   * Be polite: one request at a time, cached under SE_CACHE (default /tmp/riksdag_cache).
 """
-import argparse, html, json, os, re, sys, time, urllib.parse, urllib.request
+import argparse, datetime as dt, html, json, os, re, sys, time, urllib.parse, urllib.request
 
 BASE = "https://data.riksdagen.se"
 CACHE = os.environ.get("SE_CACHE", "/tmp/riksdag_cache")
@@ -177,57 +178,40 @@ def cmd_signers(a):
         print(f"{nm}\t{p}\t{r}")
 
 
-def speech_text(x):
-    """Speech text: the list view leaves it empty, so fetch the speech itself (cached)."""
-    os.makedirs(CACHE, exist_ok=True)
-    p = os.path.join(CACHE, "anf_" + x["anforande_id"] + ".txt")
-    if os.path.exists(p):
-        return open(p, encoding="utf-8").read()
-    raw = get(x["anforande_url_xml"]) or ""
-    m = re.search(r"<anforandetext>(.*?)</anforandetext>", raw, re.S)
-    text = html.unescape(re.sub(r"<[^>]+>", " ", html.unescape(m.group(1)))) if m else ""
-    text = re.sub(r"\s+", " ", text)
-    open(p, "w", encoding="utf-8").write(text)
-    return text
+SPEAKER_RE = re.compile(r"Anf\.\s+(\d+)\s+(.{3,90}?\([A-Za-zÅÄÖåäö-]{1,4}\))")
 
 
 def cmd_speeches(a):
-    terms = a.term or ["förmögenhetsskatt", "miljardärsskatt", "förmögenhetsskatten", "miljardärsskatten",
-                       "förmögenhetsbeskattning", "miljardärskatt"]
-    seen = {}
-    for term in terms:
-        page = 1
-        while True:
-            q = {"sok": term, "utformat": "json", "sz": 200, "p": page}
-            if a.party:
-                q["parti"] = a.party
-            d = getjson(f"{BASE}/anforandelista/?" + urllib.parse.urlencode(q))
-            xs = (d or {}).get("anforandelista", {}).get("anforande") or []
-            xs = xs if isinstance(xs, list) else [xs]
-            if not xs:
-                break
-            for x in xs:
-                day = x["dok_datum"][:10]
-                if day >= a.frm and (not a.to or day <= a.to):
-                    seen[x["anforande_id"]] = x
-            page += 1
-    print(f"{len(seen)} speeches from the search", file=sys.stderr)
+    """Chamber speeches containing a term. The speech list API cannot filter by text, so search the plenary
+    protocols (doktyp prot, full-text) and attribute each hit to the nearest preceding 'Anf. N Name (Party)'."""
+    terms = a.term or ["förmögenhetsskatt", "miljardärsskatt", "miljardärskatt", "förmögenhetsbeskattning",
+                       "förmögenhetsskatten", "miljardärsskatten"]
+    docs = list_docs(terms, ["prot"], a.frm, a.to, "")
+    print(f"{len(docs)} protocols from the search", file=sys.stderr)
     out = []
-    for x in sorted(seen.values(), key=lambda x: x["dok_datum"]):
-        ctx, n = contexts(speech_text(x), a.context, 2)
-        if not ctx:
+    for x in docs:
+        text = fulltext(x["dok_id"])
+        if not text:
             continue
-        rec = {"id": x["anforande_id"], "date": x["dok_datum"][:10], "speaker": x["talare"], "party": x["parti"],
-               "debate": x.get("avsnittsrubrik", ""), "url": x.get("protokoll_url_www", ""), "contexts": ctx}
-        out.append(rec)
-        print(f"\n## {rec['date']} {rec['speaker']} | {rec['debate'][:70]}\n   {rec['url']}")
+        plain = re.sub(r"\s*\xad\s*", "", text)
+        speakers = [(m.start(), m.group(1), m.group(2).strip()) for m in SPEAKER_RE.finditer(plain)]
+        ctx, n = contexts(text, a.context, 50)
         for c in ctx:
+            pos = plain.find(c["context"])
+            sp = [s for s in speakers if s[0] <= pos + 200]
+            who = sp[-1] if sp else (0, "", "?")
+            if a.party and f"({a.party})" not in who[2]:
+                continue
+            rec = {"date": x["datum"], "protocol": x["dok_id"], "title": x["titel"], "anf": who[1], "speaker": who[2],
+                   "url": f"{BASE}/dokument/{x['dok_id']}.html", "context": c["context"],
+                   "for_cues": c["for_cues"], "against_cues": c["against_cues"]}
+            out.append(rec)
             tag = ("FOR? " + ",".join(c["for_cues"]) if c["for_cues"] else "") + \
                   (" AGAINST? " + ",".join(c["against_cues"]) if c["against_cues"] else "")
-            print(f"   - [{tag.strip()}] …{c['context']}…")
+            print(f"\n## {rec['date']} {rec['title'][:40]} Anf. {rec['anf']} {rec['speaker']}\n   {rec['url']}\n   - [{tag.strip()}] …{c['context']}…")
     if a.json:
         json.dump(out, open(a.json, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-        print(f"wrote {a.json}: {len(out)} speeches with hits", file=sys.stderr)
+        print(f"wrote {a.json}: {len(out)} hits", file=sys.stderr)
 
 
 def cmd_votes(a):

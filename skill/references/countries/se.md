@@ -17,6 +17,8 @@ The official list is SCB's region code table (`api.scb.se/OV0104/v1/doris/sv/ssd
 
 ## Where the national record is
 
+Use `skill/scripts/riksdag_scan.py` (stdlib only): `search` for documents and context, `speeches` for plenary debates, `votes`, `signers`, `member`. The raw API calls it wraps:
+
 The Riksdag open data API is the best bulk source in any of the three countries so far:
 
 ```bash
@@ -37,3 +39,7 @@ Other `doktyp` values worth the same search: `ip` (interpellation), `fr` (writte
 - Budget motions of the Left Party are the strongest source: they contain a costed design (threshold, rates, revenue, start date). The signatories listed in `dokintressent` are co-signatories of that proposal; record each with a `motion_signature` row quoting the proposal sentence.
 - *Förmögenhetsregister* (a register of wealth) and *förmögenhetsdeklaration* are about information, not a tax. Record the motion in `exclusions.csv` as `out_of_definition`.
 - The Wikidata API rate-limits shared addresses; `Special:EntityData/<QID>.json` still works.
+- The speech-list API (`anforandelista`) ignores `sok` and `p`; plenary debates are found by searching `doktyp=prot` (full text) and attributing each hit to the nearest preceding `Anf. N Name (Party)`, which is what `riksdag_scan.py speeches` does.
+- The member register also gives each member's constituency (`valkrets`) and flags deceased members (`Avliden`).
+- Chamber speeches are the best source for individual V and MP members; quote one sentence of the speech and cite the protocol page with the speech number.
+- Party websites (vansterpartiet.se) return 403 to plain HTTP clients; use a browser for party documents.

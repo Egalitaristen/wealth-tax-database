@@ -1,6 +1,6 @@
 geo_unit_id,name,level,unit_type,parent_id,website,sweep_status,swept_run,swept_date,queries_run,hits,notes
 G0001,Sweden,national,country,,,pending,,,,,
-G0002,Riksdag,national,legislature,G0001,https://www.riksdagen.se,in_progress,R001,2026-10-19,2,30,"R001: Riksdag open-data search for motions 2010- with förmögenhetsskatt/miljardärsskatt read in full (H0001). NOT done: votes (H0002), debates, interpellations and written questions (H0003), committee reports, stems such as förmögenhetsbeskattning."
+G0002,Riksdag,national,legislature,G0001,https://www.riksdagen.se,in_progress,R002,2026-10-19,40,51,"R001-R002: motions 2010- (H0001), interpellations, questions, committee reports and 196 plenary protocols (H0003) read for hits. Votes (H0002) only partly checked; EU Parliament, committee hearings and the new 2026/27 term (motions due early October) still to do. Unit stays in_progress until H0002 and the 2026/27 motions are done."
 G0003,Regeringen (Government of Sweden),national,executive,G0001,https://www.regeringen.se,pending,,,,,Tidö government opposes new wealth taxes (to source). Check post-election government (September 2026) in R002.
 G0004,European Parliament (Swedish MEPs),supranational,legislature,G0001,,pending,,,,,Jonas Sjöstedt (V) is a Member of the European Parliament; check his and other Swedish MEPs' statements and votes.
 G0005,Stockholms län,region,county,G0001,,pending,,,,,

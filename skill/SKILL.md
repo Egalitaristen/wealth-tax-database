@@ -19,6 +19,7 @@ Files in this skill (use them if present; the rules in this file are sufficient 
 - `scripts/profiles_wikidata.py` — fills `profiles.csv` (websites, socials, Wikipedia) from Wikidata IDs
 - `scripts/topo_to_boundaries.py` — turns a TopoJSON of areas into `boundaries.json`, so the country gets a local map on the site
 - `scripts/ocn_scan.py` — UK-only council meeting scanner (an example of a per-country source adapter)
+- `scripts/riksdag_scan.py` — Sweden-only Riksdag scanner: motions, questions, committee reports, plenary debates, votes, member register
 
 ---
 
