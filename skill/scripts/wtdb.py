@@ -305,6 +305,8 @@ def validate(db):
             warns.append(f"{where}: dissolved organisation marked alive_checked=y")
         if r.get("geo_unit_id") and r["geo_unit_id"] not in geo:
             errs.append(f"{where}: geo_unit_id {r['geo_unit_id']} does not exist")
+        if re.search(r"\balive\b|death record|no death|wikidata (id|match)|no wikidata", r.get("notes", ""), re.I):
+            warns.append(f"{where}: notes narrate the alive or Wikidata check; alive_checked records it, so remove that from notes")
         if r.get("level") == "local" and not r.get("geo_unit_id"):
             warns.append(f"{where}: local actor without geo_unit_id")
         for ot in type_list(r)[1:]:

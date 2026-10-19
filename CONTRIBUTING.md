@@ -9,7 +9,7 @@ Thanks for helping. This project records, with sources, who publicly supports a 
 3. **Quote what you read.** Do not quote from memory, from a search snippet or from a summary tool's paraphrase, and never write a sentence of your own into the quote column. Use the page's own text and run `python skill/scripts/wtdb.py checkquotes data/<iso2> --run <run>`.
 4. **Public figures and organisations only.** Never add petition signers or private individuals. Self-declared signers of a public open letter are fine.
 5. **Grade honestly.** A: formal act or a stated design. B: names a wealth tax. C: implied. When unsure, use the lower grade.
-6. **People are assumed alive.** Check for a death record (Wikidata is a good start). If dead, add them to `exclusions.csv` with reason `deceased`, not to `actors.csv`.
+6. **People are assumed alive.** Check for a death record (Wikidata is a good start) and set `alive_checked=y`. If dead, add them to `exclusions.csv` with reason `deceased`, not to `actors.csv`. Do not write "alive" or "no Wikidata match" in `notes`; notes are shown to readers and are for identity caveats and sources only.
 7. **New rows are `verified=n`.** Only a second person who opened the source and confirmed the quote may set `verified=y`.
 
 ## Adding a country or region
