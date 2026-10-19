@@ -17,7 +17,7 @@ The official list is SCB's region code table (`api.scb.se/OV0104/v1/doris/sv/ssd
 
 ## Where the national record is
 
-Use `skill/scripts/riksdag_scan.py` (stdlib only): `search` for documents and context, `speeches` for plenary debates, `votes`, `signers`, `member`. The raw API calls it wraps:
+Use `skill/scripts/adapters/se_riksdag_scan.py` (stdlib only): `search` for documents and context, `speeches` for plenary debates, `votes`, `signers`, `member`. The raw API calls it wraps:
 
 The Riksdag open data API is the best bulk source in any of the three countries so far:
 
@@ -47,7 +47,7 @@ Other `doktyp` values worth the same search: `ip` (interpellation), `fr` (writte
 
 ## Municipal and regional portals (local sweep)
 
-- **MeetingPlus** (Formpipe): `<base>/search?text=<word>*&psize=100&pindex=1`, server-rendered, searches agenda items and attached documents, whole-word so use the trailing `*`. Used by Stockholm (meetingspublic.stockholm.se), Huddinge (sammantraden.huddinge.se), Danderyd (meetingsplus.danderyd.se) and Region Gotland (sammantraden.gotland.se). Adapter: `skill/scripts/meetingplus_scan.py`.
+- **MeetingPlus** (Formpipe): `<base>/search?text=<word>*&psize=100&pindex=1`, server-rendered, searches agenda items and attached documents, whole-word so use the trailing `*`. Used by Stockholm (meetingspublic.stockholm.se), Huddinge (sammantraden.huddinge.se), Danderyd (meetingsplus.danderyd.se) and Region Gotland (sammantraden.gotland.se). Adapter: `skill/scripts/adapters/se_meetingplus_scan.py`.
 - **Nacka** has its own protocol search: `https://www.nacka.se/sok?q=<word>*`, documents under `handlingar.nacka.se`.
 - Most others publish protocols as PDF links on Sitevision pages (Botkyrka, Solna, Täby, Vallentuna, Katrineholm, Oxelösund ...). Their site search often covers pages only (Solna, Järfälla, Tyresö, Haninge, Södertälje, Uppsala return nothing for the word) so it does not prove absence. Search-engine queries limited to a municipality's domain return unrelated protocols.
 - A hit in an attachment (SOU, PM, report) is a mention. The useful hits are reservations, motions, interpellations and debate protocols by named councillors.

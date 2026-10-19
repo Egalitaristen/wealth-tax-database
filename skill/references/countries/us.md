@@ -1,6 +1,6 @@
 # United States: a federal system, with ballot measures
 
-A second worked example, next to the UK. It shows what changes in a federal country with many small, uneven layers. Check every URL still works before relying on it.
+A second worked example, next to the UK, at **Standard** depth: national and state level in full, local levels recorded when met but not swept. It is closer to what most countries need. It shows what changes in a federal country with many small, uneven layers. Check every URL still works before relying on it.
 
 ## Levels and the geography register
 

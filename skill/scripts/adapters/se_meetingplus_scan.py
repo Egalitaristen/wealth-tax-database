@@ -11,8 +11,8 @@ The portal's search page is  <base>/search?text=<term>&psize=<n>&pindex=<page>  
 (document title, committee, meeting date, type, link). It searches the text of agenda items and attached documents.
 
 Usage
-  python skill/scripts/meetingplus_scan.py BASE_URL [--term T ...] [--read] [--context 250] [--json OUT.json]
-  e.g. python skill/scripts/meetingplus_scan.py https://meetingspublic.stockholm.se --read
+  python skill/scripts/adapters/se_meetingplus_scan.py BASE_URL [--term T ...] [--read] [--context 250] [--json OUT.json]
+  e.g. python skill/scripts/adapters/se_meetingplus_scan.py https://meetingspublic.stockholm.se --read
 
 Without --read it lists the hits (title, committee, date, type, URL). With --read it downloads each hit that is a
 protocol, motion, interpellation or agenda text, extracts the text and prints the sentences around the terms, so

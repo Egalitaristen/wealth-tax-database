@@ -23,6 +23,10 @@ Three countries so far, all built with Claude and all work in progress: the Unit
 - **Public figures and organisations only.** Petition signers and other private individuals are never recorded.
 - People are assumed alive unless a death record is found; anyone found dead is removed.
 
+## How the research works
+
+The goal is a trustworthy list of who publicly backs an actual wealth tax, with the evidence behind every name, found by going after the most prominent supporters first. A first pass touches every layer once (legislature, parties, coalitions and unions, economists, commentators, wealthy and business, regional) and ends with a plan for later runs ordered by expected yield. Local sweeps are sampled first and expanded only where they pay. Coverage is reported honestly, so a blank means "not searched". The details are in [`skill/SKILL.md`](skill/SKILL.md); read its section 0 first.
+
 ## Add your country
 
 1. Fork this repository.
@@ -31,7 +35,7 @@ Three countries so far, all built with Claude and all work in progress: the Unit
    ```bash
    python skill/scripts/wtdb.py init data/de --area "Germany"
    ```
-4. Do the research, by hand or with an AI assistant, and fill the tables. Work on a branch, never on `main`.
+4. Do the research, by hand or with an AI assistant. Tell the assistant the country, the scope (national, plus regional, plus local) and the depth (a first-pass seed is the default). It should start with the biggest supporters, not with tooling. Work on a branch, never on `main`.
 5. Check your work:
    ```bash
    python skill/scripts/wtdb.py validate data/de

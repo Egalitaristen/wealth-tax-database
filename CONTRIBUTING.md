@@ -18,7 +18,9 @@ Thanks for helping. This project records, with sources, who publicly supports a 
 python skill/scripts/wtdb.py init data/<iso2> --area "<Name>"
 ```
 
-Use the lowercase ISO 3166-1 alpha-2 code (`de`, `fr`), or `<iso2>-<region>` for a sub-national area (`us-ca`). Then follow `skill/SKILL.md`. In `data/<iso2>/meta.json` set `name`, `iso2`, `lead` (your GitHub username) and `status`.
+Use the lowercase ISO 3166-1 alpha-2 code (`de`, `fr`), or `<iso2>-<region>` for a sub-national area (`us-ca`). Then follow `skill/SKILL.md`, starting with section 0.
+
+What a good first contribution looks like: the most prominent supporters across every layer (legislature, parties, coalitions and unions, economists, commentators, wealthy and business, regional), each with a checked quote, and a short plan for what to do next. Regional and local work is sampled first and expanded only where it finds support. You do not need to cover every municipality; say what you did not search. In `data/<iso2>/meta.json` set `name`, `iso2`, `lead` (your GitHub username) and `status`.
 
 For a local map, add a `boundaries.json` and name it in `meta.json`. If you have a TopoJSON of your areas, `python skill/scripts/topo_to_boundaries.py` writes it for you (the US map was made that way). Format:
 

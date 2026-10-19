@@ -19,10 +19,10 @@ Commands
   member  "First Last"                status from the member register ("Avliden" = deceased), party, birth year
 
 Examples
-  python skill/scripts/riksdag_scan.py search --doktyp mot --from 2025-01-01 --party V
-  python skill/scripts/riksdag_scan.py search --doktyp ip,fr,bet --json /tmp/se_other.json
-  python skill/scripts/riksdag_scan.py votes --rm 2013/14 --bet SkU21
-  python skill/scripts/riksdag_scan.py member "Nooshi Dadgostar"
+  python skill/scripts/adapters/se_riksdag_scan.py search --doktyp mot --from 2025-01-01 --party V
+  python skill/scripts/adapters/se_riksdag_scan.py search --doktyp ip,fr,bet --json /tmp/se_other.json
+  python skill/scripts/adapters/se_riksdag_scan.py votes --rm 2013/14 --bet SkU21
+  python skill/scripts/adapters/se_riksdag_scan.py member "Nooshi Dadgostar"
 
 Notes
   * Document types (doktyp): mot motion, ip interpellation, fr written question, frs question for oral answer,

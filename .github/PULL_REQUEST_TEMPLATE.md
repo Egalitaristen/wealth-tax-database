@@ -2,6 +2,10 @@
 
 <!-- Country folder(s) touched, number of actors and evidence rows added or changed. -->
 
+## Depth and what was left out
+
+<!-- Seed / Standard / Exhaustive. Which layers and units were not searched, and why (blocked, low yield, out of scope). The plan for the next runs is in the last row of runs.csv. -->
+
 ## Checklist
 
 - [ ] `python skill/scripts/wtdb.py validate data/<iso2>` passes

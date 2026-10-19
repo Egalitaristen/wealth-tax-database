@@ -1,27 +1,48 @@
 ---
 name: wealth-tax-database
-description: Systematically build or extend a sourced database of people, organisations and institutions in a country, region or supranational area that support (or appear to support) actual wealth taxation since 2010, down to local-government level. Use when asked to map, find, update or export wealth tax supporters for any area.
+description: Build or extend a sourced database of the people, organisations and institutions in a country, region or supranational area that publicly support actual wealth taxation since 2010. Goal-first: find the most prominent supporters across every layer, with verifiable evidence and honest coverage notes, then plan the next runs. Use when asked to add a country, or to find, update, check or export wealth tax supporters for any area.
 ---
 
 # Wealth Tax Database
 
 Build a comprehensive, verifiable overview of everyone in an area who supports — or appears to support — **actual wealth taxation**: politicians who voted for or sponsored it, academics who argued for it, journalists who advocate it, organisations campaigning for it, councils that passed motions for it, and so on.
 
-This is a database, not a ranking. Every entry rests on dated, sourced, quoted evidence. The work is done in repeatable **runs**; each run reads the current state from disk, works the biggest gaps, writes results as it goes, and logs what it did, so any assistant in any session can pick up where the last one stopped.
+This is a database, not a ranking. Every entry rests on dated, sourced, quoted evidence. The work is done in repeatable **runs**; each run reads the current state from disk, works the highest-yield gaps, writes results as it goes, and logs what it did and what to do next, so any assistant in any session can pick up where the last one stopped. **Read section 0 first.**
 
 Files in this skill (use them if present; the rules in this file are sufficient on their own):
 - `references/source-playbook.md` — layers, bulk-list sources, query templates, search terms in many languages
 - `references/area-profile-template.md` — what to establish about an area before searching
-- `references/countries/gb.md` — UK levels of government, sources, and the local sweep list (worked example for other countries)
+- `references/countries/gb.md` — the UK: levels of government, sources and an exhaustive council sweep (a worked example, not the template for every country)
 - `references/countries/us.md` — a federal system (states, ballot measures, coalition letters), and what worked there
 - `references/countries/se.md` — a unitary state with open parliamentary data, 21 regions and 290 municipalities
 - `scripts/wtdb.py` — Python helper (stdlib; `openpyxl` only for xlsx export): `init`, `add`, `set`, `validate`, `dedupe`, `merge`, `checkquotes`, `status`, `export`
 - `scripts/profiles_wikidata.py` — fills `profiles.csv` (websites, socials, Wikipedia) from Wikidata IDs
 - `scripts/topo_to_boundaries.py` — turns a TopoJSON of areas into `boundaries.json`, so the country gets a local map on the site
-- `scripts/ocn_scan.py` — UK-only council meeting scanner (an example of a per-country source adapter)
 - `scripts/fetch_page.py` — optional headless-browser reader for JavaScript pages and sites that answer 403 to plain clients, including their PDFs (needs `pip install playwright trafilatura`, a Chromium build, and optionally `npm install defuddle jsdom` in `scripts/`). `wtdb.py checkquotes` uses it automatically when a page cannot be read otherwise
-- `scripts/meetingplus_scan.py` — Sweden-only full-text search of MeetingPlus council portals (Stockholm, Huddinge, Danderyd, Region Gotland)
-- `scripts/riksdag_scan.py` — Sweden-only Riksdag scanner: motions, questions, committee reports, plenary debates, votes, member register
+- `scripts/adapters/se_meetingplus_scan.py` — optional Sweden adapter: full-text search of MeetingPlus council portals (Stockholm, Huddinge, Danderyd, Region Gotland)
+- `scripts/adapters/se_riksdag_scan.py` — optional Sweden adapter: Riksdag scanner: motions, questions, committee reports, plenary debates, votes, member register
+- `scripts/adapters/` — per-country source adapters (for example `gb_ocn_scan.py`, a UK council meeting scanner). Adapters are optional and always secondary to the first pass (6.5)
+
+---
+
+## 0. The goal, and how to use this skill
+
+**The goal:** produce a trustworthy, sourced list of the people, organisations and institutions in an area who publicly back an actual wealth tax, so that anyone can see where support comes from and check the evidence behind every name.
+
+**Success looks like:**
+1. The **most prominent supporters are found first**: legislators who sponsored or voted for a wealth tax, parties with it in their programme, the big coalitions, unions and NGOs, leading economists, well-known commentators, public wealthy supporters.
+2. **Every row is real**: a dated source you opened and a quote that is on the page.
+3. **The coverage is honest**: the area profile and `notes` say what was searched, what was blocked and what was left out, so a blank is understood as "not searched" and not as "no support".
+4. **The next person can continue**: the run log ends with a plan ordered by expected yield.
+
+**Success is not** finishing every step of a process, covering every tiny unit, or building clever tooling. A first pass that finds 150 well-sourced supporters across all the important layers is worth far more than a half-finished crawler over 300 municipalities.
+
+**How to use this skill:**
+- The **rules** (sections 1 to 4: no source no row, the definition, grades, supporters only, public figures only) are firm. The **data format** (section 5) is firm, so that every country merges into one site.
+- The **workflow** (section 6) is a default, not a script. Countries differ: some have powerful regions, some have no searchable local records, some have a single dominant campaign. Adapt the plan to the country, and write down what you changed and why in the area profile.
+- **Aim at yield.** Before any large piece of work, ask "how many supporters will this find, and how sure am I?" Test with a small sample first. If a sample finds almost nothing, do not scale it up.
+- **Look at what already exists** in the repository (the other countries' folders, notes in `skill/references/countries/`, helper scripts) before inventing something new.
+- **When something does not work, change approach quickly.** A blocked site, a missing archive or an unsearchable register is a reason to switch source (archive copy, a browser, another outlet, a bulk list) within a few minutes, not a reason to build a tool. Say what you did in the run log.
 
 ---
 
@@ -138,7 +159,7 @@ In this repository, `<area-slug>` is the lowercase ISO 3166-1 alpha-2 code (`gb`
 - `quote_original`: verbatim from the source page; `quote_lang`: ISO code; `quote_en`: translation if not English
 - `verified`: n · y · failed (y means re-opened in QA and the quote was found)
 
-**geo_units.csv** — the geography checklist for the local sweep
+**geo_units.csv** — the tree of places you report on, and the checklist for regional and local sweeps (6.5, 6.7)
 `geo_unit_id, name, level, unit_type, parent_id, website, sweep_status, swept_run, swept_date, queries_run, hits, notes`
 - The register is a **tree**. The top row is the **country root** (`unit_type=country`, `level=national`, no parent), named as the first part of every `location`. Regions, states and nations are its children (`parent_id`), and councils, counties or cities sit below those. Institutions such as the legislature or the executive are also children of the root, but actors are not placed on them (see `location`).
 - Unit names must be unique among siblings. Write the plain name (`California`), not `California (state legislature)`; put descriptions in `unit_type` and `notes`.
@@ -156,7 +177,7 @@ In this repository, `<area-slug>` is the lowercase ISO 3166-1 alpha-2 code (`gb`
 - `platform`: website · official_page · x · bluesky · mastodon · instagram · facebook · youtube · tiktok · linkedin · substack · wikipedia
 - Only pages the person or their organisation publishes (their own site, party or parliament page, professional social accounts), or that Wikidata or a parliament lists for them. No personal accounts, email addresses or phone numbers, and nothing guessed from a name search. `url` must be https. `source` says where the link came from and `checked` is the date you read that source. Skip private individuals and people who are only known as wealthy signers.
 
-**harvest.csv** — bulk lists to process (see 6.3)
+**harvest.csv** — bulk lists to process (see 6.4)
 `harvest_id, title, list_type, url, date, est_size, status, actors_added, notes`
 - `list_type`: roll_call · cosponsors · motion_signatories · open_letter · coalition_members · report_authors · commission_evidence · conference_motion · other
 - `status`: queued · in_progress · done · failed
@@ -168,7 +189,7 @@ In this repository, `<area-slug>` is the lowercase ISO 3166-1 alpha-2 code (`gb`
 **runs.csv** — one row per run
 `run_id, date, assistant, focus, targets, queries_run, sources_opened, candidates_seen, new_actors, new_evidence, grade_upgrades, verified_ok, verified_failed, saturation, notes_next`
 
-**area_profile.md** — the area profile (section 6.1).
+**area_profile.md** — the area profile (section 6.2).
 
 Helper commands (when Python is available):
 ```
@@ -190,79 +211,91 @@ Writing CSVs directly is fine too, but quote fields properly (quotes often conta
 
 ## 6. Workflow
 
-### 6.0 Start or resume
-- **In this repository, never push to `main`.** Work on a branch, open one pull request per run (or per country), and let the checks run (`validate` on every country, the site build). A person merges.
-- If `data/<slug>/` exists: read `area_profile.md`, the last 3 rows of `runs.csv` (especially `notes_next`), and the `status` output. Continue from there; do not redo finished work.
-- If not: confirm the area and its scope (which levels of government; whether to go below council level), then `init`. Start the run log entry in your head now and write it at the end.
+### 6.1 Start (brief)
+1. Read this file, the area's folder if it exists (`area_profile.md`, the last three `runs.csv` rows, `wtdb.py status`), and the notes for the nearest country in `skill/references/countries/`.
+2. Settle three things with the user, in **one short message**, each with a recommended default: **which area**, **scope** (national only; plus regional; plus local) and **depth** (see the ladder below). If the user has already told you, do not ask again. If they do not answer, use the defaults and say so.
+3. In this repository, work on a branch and open one pull request per run. Never push to `main`.
+4. `wtdb.py init data/<iso2> --area "<Name>"`, then go straight to 6.2. State your plan in a few lines and begin; do not wait for approval of the plan.
 
-### 6.1 Area profile (first run only, then update as needed)
-Fill in `area_profile.md` from `references/area-profile-template.md`: wealth-tax history and live proposals since 2010; legislatures and where their votes, motions and speeches are published; parties; the structure of government below national level and what each level can tax; official languages and the search terms for each; main national and regional media; registers (company, charity, grant, lobbying, donations); known coalitions and campaigns. Every factual line gets a source.
+**Depth ladder** (pick one, and say which in `meta.json` `notes`):
 
-### 6.2 Geography register (first run)
+| Depth | What it delivers | Local and regional |
+|---|---|---|
+| **Seed** (default for a new country) | The prominent supporters in every layer at the national level, with a plan for the next runs | Regional legislatures and the largest cities, sampled |
+| **Standard** | Seed, plus every harvest list and layer pass until new finds dry up | Regional bodies in full; local bodies where the sample showed they matter |
+| **Exhaustive** | Standard, plus every local unit | Every unit in scope, as in the UK run |
 
-**How to divide a country.** Use the administrative hierarchy where political and tax power sits, one tree per country: a federal country goes country → state → county or city; a unitary country goes country → nation or region → council. Choose a depth you will actually sweep, load only that depth, and write the choice in `meta.json` `notes` and the area profile. Finer places that you meet before you load them are not lost: put them in `location` as place text (`United States > California > Camarillo`) and they resolve later when you add that layer. Seats are places, not institutions: an MP belongs to the constituency, a US representative to the district. If the register has no layer for constituencies or districts, keep them as place text under the region or state. A second boundary file for such a layer (constituencies, districts) is a separate piece of work.
-Fetch the **official current list** of every sub-national unit down to the lowest level in scope (for the UK: nations → regions/counties → combined authorities → every principal council; see `references/countries/gb.md`). Load all of them into `geo_units.csv` with `sweep_status=pending`, with `parent_id` set so progress can be reported region by region. Do not work from memory; councils merge and change.
+### 6.2 Orient (an hour, not a day)
+Fill in `area_profile.md` from `references/area-profile-template.md`, briefly: the history of wealth taxes in the area since 2010; live bills, ballot measures and campaigns; which parties, unions, NGOs and economists have taken positions; which languages and search terms to use; where the legislature publishes votes, bills and motions; whether local bodies pass motions and publish records you can search; which sources block you. Every factual line gets a source. Mark anything from a search summary only as `[verify]`.
 
-For a country with a local map, also build `boundaries.json` from an official or open boundary source (see `scripts/topo_to_boundaries.py`) and set `boundaries` in `meta.json`. Do it in the first run; it costs little and makes coverage visible on the site.
+This step decides the plan. Spend your effort where the evidence says support lives.
 
-### 6.3 Bulk harvest (highest yield; always first priority)
-Lists produce many actors at once with uniform, strong evidence. Find them and queue them in `harvest.csv`, then process each list entry by entry:
+### 6.3 The first pass
+Touch **every layer once, highest yield first**, before going deep in any one. A typical order (adapt it):
+1. **Legislature:** sponsors and cosponsors of wealth-tax bills, roll-call votes, motions, amendments, committee evidence.
+2. **Parties:** programmes and manifestos since 2010, congress motions, party youth wings.
+3. **Coalitions, NGOs, unions, think tanks:** campaign coalitions and their member lists, union congress motions, tax-justice groups, think-tank reports.
+4. **Economists and academics:** open letters, commission and report authors, op-eds.
+5. **Commentators and media:** opinion columns, editorials, podcasters and video commentators with a public profile.
+6. **Wealthy individuals, business, faith, culture, funders:** public declarations and letters.
+7. **Regional and local:** regional parliaments and governments, then a sample of local units (6.5).
+
+For bulk lists (letters, rosters, coalition pages, bill cosponsor data) queue them in `harvest.csv` and process them whole; they produce many actors with uniform evidence (6.4). Use search in the area's languages (the playbook has terms). Check the definition against what each list or person actually calls for.
+
+**End the first pass when every layer has been touched and the biggest lists are in.** Then validate, run the quote check, open the pull request, and write the run plan (6.6). The first pass should take hours. If you find yourself building a crawler or loading hundreds of units, stop and check the plan against the goal.
+
+### 6.4 Bulk harvest
+Lists produce many actors at once with uniform, strong evidence. Queue each in `harvest.csv`, then process it entry by entry:
 - roll-call votes on wealth-tax bills or amendments, and bill co-sponsors
 - signatories of parliamentary or council motions
 - open letters with published signatory lists (economists, millionaires, faith leaders, organisations)
 - coalition and campaign member lists
-- authors of wealth-tax reports and commissions; witnesses and written evidence to commissions and committees
+- authors of wealth-tax reports and commissions; witnesses and written evidence
 - union and party conference motions (mover, seconder, supporting bodies)
 
 Rosters can be large (a ballot campaign's endorsement page listed about 250 names). Parse the page's structured data instead of retyping names, check each name against the database (name variants such as "Coalition for Human Needs" and "Coalition on Human Needs" are the same body: `merge`), and keep the list's own entry text as the quote. Wikipedia and other secondary lists are good for finding names, never as the source; re-read each name at its own cited page.
 
 For each person or organisation on a list: check for duplicates, check the definition applies to what the list actually calls for, check they are not dead (or, for an organisation, that it still exists), then add the actor and an evidence row whose `harvest_id` points to the list. Mark the list `done` with `actors_added`.
 
-### 6.4 Layer passes
-Work through the layers in the source playbook (legislatures, parties, executive, academia, think tanks, civil society, unions, media, legal and tax, wealthy and business, faith and culture, funders, international). For each, run the query pack in every relevant language, open the promising results, and add what qualifies. Choose layers using the `status` coverage grid (actor_type × level): go where the cells are thin.
+### 6.5 Regional and local: proportional, sampled, honest
+Local support is real in some countries (UK councils pass motions) and nearly absent or unsearchable in others. Decide from evidence, not from a checklist.
 
-### 6.5 Local sweep — every unit, no exceptions
-Supporters at council level rarely appear in national searches, so every geography unit is visited and marked, **including units with zero results**: a `done` with `hits=0` is what proves coverage.
+1. **Load the geography register to the depth you intend to use** (6.7), not deeper.
+2. **Sample first.** Pick 5 to 10 units: the largest cities, and units run by the parties most likely to support a wealth tax. Search each (site-restricted web search, the unit's own records search, local news, party and union branches). Count the supporters found and the time spent.
+3. **Decide from the sample.** If most sampled units yield something, continue region by region. If few do, stop sweeping units one by one and look for the aggregators instead: a party's list of its councillors who signed a letter, a union branch network, a campaign's local groups, a national motion template that councils copied.
+4. **Be honest in the register.** `sweep_status=done` means the unit was actually read. Units you chose not to search are `skipped` with a reason in `notes`. A unit you only sampled stays `in_progress`. Never mark a unit done to make progress look complete.
+5. **Prefer search to scraping.** A site-restricted web search ("site:example.se förmögenhetsskatt motion") over a municipality's own pages is usually enough. Build a crawler only when **all** of these hold: a sample shows the documents really contain hits; many units (about 30 or more) share one platform; and you have told the user what it will cost. Keep it in `skill/scripts/adapters/<iso2>_*.py` with a docstring, treat its hits as **leads** (confirm each in the source), and never let it replace the first pass.
+6. Failed motions still identify the proposer and seconder as supporters. Councils that **passed** a motion are `government_body` actors.
 
-For each unit (work one parent region at a time, so the region is finished before moving on):
-1. Run the local query pack from the source playbook, in local language(s), using the unit's name (and the main town names for counties).
-2. Search the council's own site for meeting minutes and motions (many councils' sites can be searched directly; a site-restricted web search works otherwise).
-3. Check local news (in the UK, the Local Democracy Reporting Service carries council motions) and local party groups, trades councils and campaign branches.
-4. Add every qualifying actor (councillor, council group, local branch, the council itself if a motion **passed**), with `location` set to that council's path.
-5. `set` the unit: `sweep_status=done`, `swept_run`, `swept_date`, `queries_run`, `hits`; in `notes`, record motions found even if they failed.
+### 6.6 Plan the next runs
+At the end of the first pass, write the plan into the last `runs.csv` row (`notes_next`) and the area profile (section 10): the layers and lists still to do, ordered by **expected yield per hour**, with what you expect from each and what is blocked. Include the regional and local decision from 6.5 and, if it is "continue", the order of regions. The user reads this to choose what to run next.
 
-Order within a region: larger cities and units with known signals first, but every unit is completed. Units below council level (town and parish councils) are swept only when the profile puts them in scope.
+### 6.7 Geography register
+A tree of the places you will report on, in `geo_units.csv`, with a country root and `parent_id` set (section 5). Use the administrative hierarchy where political and tax power sits: a federal country goes country → state → county or city; a unitary country goes country → nation or region → municipality. Fetch the **official current list** (a statistics office or interior ministry), not memory. Load only the depth you will use. Finer places you meet earlier are not lost: put them in `location` as place text and they resolve when that layer is added. Seats are places, not institutions: an MP belongs to the constituency, a US representative to the district. For a map, also build `boundaries.json` (see `scripts/topo_to_boundaries.py`).
 
-### 6.6 Snowball and upgrade
-- **Snowball:** for actors added this run, follow `links` outwards: co-authors, co-signatories, members of the same coalition, their organisation, their party's council group. Add new candidates, and record links.
-- **Upgrade:** for C- and B-graded actors, search for explicit evidence (a vote, a signed letter, a specified design) and add it. Leave the old evidence in place.
-- **Retractions:** for prominent supporters, check whether they have since retracted.
-
-### 6.7 QA, export and report (end of every run)
-1. `validate` → fix every error. Warnings: fix or justify in `notes`.
-2. `dedupe` → merge true duplicates: keep the older ID, move evidence across, and record the other in `exclusions.csv` with `reason=duplicate`.
-3. **Quote check:** run `checkquotes --run <this run>`. Fix or remove every row it reports as not found. Rows it skips (PDFs, blocked pages) need a manual look: open the page, find the quote.
-   Then spot-check at least 10% of the run's rows (minimum 5) by hand for grade and meaning, not just wording.
-   **`verified=y` is set only by someone other than the row's author**: a person, or a separate agent that has not seen the work. Authors leave rows at `n`. A row whose quote cannot be found is set to `failed` and then fixed or removed.
-4. Append the run row to `runs.csv`, including `saturation` (see 6.8) and `notes_next` (concrete next targets).
-5. Open or update the pull request (6.0). `export` if the user wants a spreadsheet, and report to the user: new actors and evidence by type and level, geography units completed versus remaining, grade upgrades, verification results, notable findings, and next targets. Use numbers from `status`, not from memory.
-
-### 6.8 Choosing what to do in a run, and when to stop
-Priority order for each run:
+### 6.8 Later runs
+Each run reads the folder (`status`, `notes_next`), picks the top of the plan, works it, and writes a new plan. A good run is one harvest list, or one region, plus one layer pass. Priority order when the plan is silent:
 1. queued harvest lists
-2. pending geography units (finish the current region)
-3. thin cells in the coverage grid
-4. upgrades of C-graded actors
-5. snowballing
+2. thin cells in the coverage grid (actor type × level)
+3. upgrades of C- and B-graded actors (look for a vote, a signed letter, a specified design; leave the old evidence in place)
+4. snowballing: follow co-authors, co-signatories, coalition members, their organisation and party outwards
+5. regional and local units, as decided in 6.5
+6. retractions: for prominent supporters, check whether they have since retracted
 
-**Saturation:** for a layer or region, `saturation = candidates already in the database (or excluded) ÷ candidates seen`. When it is ≥ 0.9 for two consecutive passes, mark that layer saturated in the run notes and move on. The database is "complete for now" when the harvest queue is empty, every geography unit is `done`, and every layer is saturated; from then on, runs are update sweeps (new evidence since the last run date).
+**Stopping.** A layer is saturated when about nine in ten of the candidates you find are already in the database (or excluded) for two passes in a row. The database is "complete for now" when the plan is empty or the remaining items are low yield; after that, runs are update sweeps (new evidence since the last run). Completeness is never a precondition for publishing: a partial database with honest coverage notes is the normal state.
 
-A good run size is one harvest list or one region of the local sweep plus a layer pass. Write to disk continuously, so an interrupted run loses nothing.
+### 6.9 QA, and the pull request (end of every run)
+1. `validate` → fix every error. Warnings: fix or justify in `notes`.
+2. `dedupe` → merge true duplicates with `merge`.
+3. **Quote check:** `checkquotes --run <this run>`. Fix or remove every row it reports as not found. Rows it skips (PDFs, blocked pages) need a manual look: open the page, find the quote. Then spot-check at least 10% of the run's rows (minimum 5) by hand for grade and meaning, not just wording. **`verified=y` is set only by someone other than the row's author**: a person, or a separate agent that has not seen the work. Authors leave rows at `n`. A row whose quote cannot be found is set to `failed` and then fixed or removed.
+4. `profiles_wikidata.py` for new actors with Wikidata IDs; add `boundaries.json` if the area has a map.
+5. Append the run row to `runs.csv`, including `saturation` and `notes_next` (the plan).
+6. Open or update the pull request and report to the user: new actors and evidence by type and level, what was left out and why, the plan for the next runs, and numbers from `status`, not from memory.
 
-### 6.9 Parallel work (if the assistant can run subagents)
-Split by region (local sweep) or by layer, never so that two workers write the same file. Each worker writes `staging_<worker>.jsonl` files (actors and evidence with temporary IDs) and returns them; the coordinator deduplicates against the database, adds with `wtdb.py add`, runs `validate`, and has a separate worker do the spot-check.
+### 6.10 Parallel work (if the assistant can run subagents)
+Split by layer or by region, never so that two workers write the same file. Each worker writes `staging_<worker>.jsonl` files (actors and evidence with temporary IDs) and returns them; the coordinator deduplicates against the database, adds with `wtdb.py add`, runs `validate`, and has a separate worker do the spot-check. Do not use parallel workers to do a large sweep that the sampling step (6.5) has not justified.
 
-### 6.10 Without code
+### 6.11 Without code
 Follow the same steps by hand: keep the CSVs in exactly the format above, check the `validate` rules yourself (required fields, allowed values, dates from 2010, a URL and a quote on every evidence row, no actor without evidence, no duplicates), and deliver the CSVs or a spreadsheet built from them.
 
 ---
@@ -289,3 +322,7 @@ The xlsx export contains: **Overview** (counts, grade mix, coverage and sweep pr
 - Pages that said "tax the wealthy" but not wealth tax were nearly counted → apply section 2 to the speaker's own words.
 - Progress reports that ignored higher-level units ("no geography units loaded") → `status` counts the lowest units of whatever depth you loaded.
 - Pushing straight to `main`, or setting `verified=y` on one's own rows → branch, pull request, and a different checker for `verified=y`.
+- A run began by writing a crawler for 290 municipalities' protocols before the national legislature, parties and major organisations had been searched, because "every unit, no exceptions" was read as an order → touch every layer once first, sample local units, and build tooling only when a sample shows it pays (6.5).
+- Several scoping questions asked one after another before any research → one short message with recommended defaults, then start.
+- The UK's exhaustive council sweep was treated as the template for every country. It fits where councils pass motions and publish searchable minutes. Elsewhere, regional or local work should be proportionate to what the sample finds.
+- Progress measured by units marked done rather than by supporters found and checked → report supporters, grades and checked rows.

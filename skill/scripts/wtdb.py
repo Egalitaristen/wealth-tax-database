@@ -537,19 +537,20 @@ def cmd_status(a):
     q = [h for h in db["harvest"] if h["status"] in ("queued", "in_progress")]
     if q:
         sugg.append(f"process harvest lists: " + "; ".join(f"{h['harvest_id']} {h['title']}" for h in q[:5]))
-    pend = [(reg, c) for reg, c in prog.items() if c["pending"] or c["in_progress"]]
-    if pend:
-        pend.sort(key=lambda x: (-(x[1]["in_progress"]), -x[1]["done"]))
-        sugg.append(f"local sweep: continue {pend[0][0]} ({pend[0][1]['pending']} pending)")
-    elif not db["geo_units"]:
-        sugg.append("load the geography register (section 6.2)")
     thin = [t for t in types if sum(grid.get(t, Counter()).values()) < 3]
     if thin:
-        sugg.append("thin actor types: " + ", ".join(thin))
+        sugg.append("thin actor types (cover these layers first): " + ", ".join(thin))
     if g["C"]:
         sugg.append(f"upgrade {g['C']} C-graded actors")
     if unver:
-        sugg.append(f"spot-check unverified evidence ({unver} rows)")
+        sugg.append(f"quote-check and spot-check unverified evidence ({unver} rows)")
+    pend = [(reg, c) for reg, c in prog.items() if c["pending"] or c["in_progress"]]
+    if pend:
+        pend.sort(key=lambda x: (-(x[1]["in_progress"]), -x[1]["done"]))
+        sugg.append(f"regional and local units remain ({pend[0][0]}: {pend[0][1]['pending']} pending). "
+                    f"Sweep them only if a sample showed they pay (SKILL.md 6.5)")
+    elif not db["geo_units"]:
+        sugg.append("load the geography register to the depth you will use (SKILL.md 6.7)")
     for s in sugg or ["all queues empty — run an update sweep for new evidence since the last run"]:
         print("  - " + s)
 

@@ -14,7 +14,7 @@ G0012,Gotlands län,region,county,G0001,,done,R005,2026-10-19,8,0,"R005: same as
 G0013,Blekinge län,region,county,G0001,,pending,,,,,
 G0014,Skåne län,region,county,G0001,,pending,,,,,
 G0015,Hallands län,region,county,G0001,,pending,,,,,
-G0016,Västra Götalands län,region,county,G0001,,in_progress,R006,2026-10-19,6,0,"Portal survey of 49 municipalities: Sitevision/PDF folders, Netpublicator (Bengtsfors), Ciceron (Lysekil), Alingsås sammantradesportal (not MeetingPlus-compatible). No full-text protocol search found; web search on goteborg.se/vgregion.se/boras.se/trollhattan.se/skovde.se returned no wealth-tax material. Region VG (S+V+MP+C majority from Oct 2026) not searched at protocol level."
+G0016,Västra Götalands län,region,county,G0001,,in_progress,R006,2026-10-19,6,0,"Sampled only: Göteborg full-text (2023 on) 0 hits, Trollhättan 70 PDFs 0 hits, web search on Borås, Skövde, Region VG nothing. Remaining municipalities skipped pending an aggregator-based approach (area_profile section 11)."
 G0017,Värmlands län,region,county,G0001,,pending,,,,,
 G0018,Örebro län,region,county,G0001,,pending,,,,,
 G0019,Västmanlands län,region,county,G0001,,pending,,,,,

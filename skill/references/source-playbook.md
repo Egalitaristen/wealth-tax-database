@@ -2,6 +2,8 @@
 
 Layers, the sources that work for each, and query templates. Replace `{TERM}` with each search term for the area's languages (table at the end), `{AREA}` with the area name, `{UNIT}` with a geography unit name, and `{DOMAIN}` with a site's domain. Use quotation marks around exact phrases. Always open the page itself; a search snippet is not evidence.
 
+**Where to start in a new country.** Do the first pass in this order, touching every layer once before going deep in any: legislature (bills, votes, motions) → parties → coalitions, NGOs, unions, think tanks → economists and academics → commentators and media → wealthy, business, faith, culture, funders → regional and local (sampled). Bulk lists first within each layer. See SKILL.md 6.3.
+
 Named organisations below are **candidates to check**, not assumed supporters: each must meet the definition with its own evidence.
 
 ---
@@ -43,7 +45,10 @@ International lists worth checking for every area (for actors from that area): t
 - Government programmes and coalition agreements; ministers' statements; tax commissions and their recommendations.
 - Queries: `coalition agreement "{TERM}"`, `minister "{TERM}" {AREA}`, `tax commission recommends "{TERM}"`
 
-### L4 Sub-national and local (see the local sweep pack below)
+### L4 Sub-national and local (sample first; see the local sweep pack below and SKILL.md 6.5)
+- Regional parliaments and governments behave like national ones: bills, votes, motions. Start there.
+- Local bodies vary. Test 5 to 10 units (largest cities, units run by the most sympathetic parties) before deciding to sweep more.
+- Aggregators beat unit-by-unit searching: a party's list of councillors who signed a letter, union branch networks, a campaign's local groups, a motion template that councils copied.
 
 ### L5 Academia and economists
 - Scholarly search (OpenAlex, Google Scholar, SSRN, RePEc) for papers recommending a wealth tax for the area; then check the author's own conclusion.
@@ -92,7 +97,7 @@ International lists worth checking for every area (for actors from that area): t
 
 ---
 
-## Local sweep pack (run for every geography unit)
+## Local sweep pack (for sampled units, and for every unit only at Exhaustive depth)
 
 1. `"{TERM}" "{UNIT}" council motion`
 2. `"{TERM}" "{UNIT}" councillor`
@@ -102,7 +107,7 @@ International lists worth checking for every area (for actors from that area): t
 6. `"{UNIT}" Green OR Labour OR Socialist (or the area's relevant parties) group "{TERM}"`
 7. Local newspaper sites for the unit: `site:{LOCAL_NEWS_DOMAIN} "{TERM}"`
 
-Record the number of queries run and hits on the unit. Failed motions still identify the proposer and seconder as supporters.
+Record the number of queries run and hits on the unit. Failed motions still identify the proposer and seconder as supporters. Use search first; write a crawler only when a sample shows documents contain hits and about 30 or more units share one platform (SKILL.md 6.5).
 
 ---
 
