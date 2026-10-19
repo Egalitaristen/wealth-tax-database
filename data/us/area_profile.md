@@ -42,6 +42,29 @@ First drafted 2026-10-19 (run R001). Lines marked **[verify]** come from a searc
 - Order: H0004 (Prop 40 endorsers, time-sensitive before November), H0002/H0003 (Congress.gov), H0005 (Patriotic Millionaires), H0006 (economists' letters), H0007 (state bills).
 - Quotes are checked by fetching the raw page; the WebFetch tool summarises and can paraphrase.
 
+## State-by-state sweep (R005, 2026-10-19)
+One search per state (50 states plus DC) for wealth tax, billionaire tax or net worth tax proposals. This replaces the earlier note that no other state had a measure: the Oregon initiative below was missed by the first searches. Results come from search summaries, so each item is a lead and is queued in `harvest.csv` (H0011 onward) to be opened and sourced.
+
+**Net-wealth or unrealised-gains designs (qualify):**
+- **Oregon:** IP 70, the Very Rich Pay Their Fair Share Act (Jonathan Tasini): 2% a year on assets of residents worth $30m or more. Stalled in 2026 and not on the ballot ([Northwest Labor Press](https://nwlaborpress.org/2026/08/oregon-wealth-tax-initiative-campaign-stalls/)); initiative text at [Tax the Very Wealthy](https://taxtheverywealthy.com/the-initiative/). A coalition of progressive groups and unions plans a 2028 measure ([States Newsroom](https://washingtonstatestandard.com/?p=17425)); its design is unconfirmed.
+- **Hawaii:** SB 925 (2023), SB 313 (2025) and HB 1235 (2026): 1% a year on net worth over $20m; Sen. Karl Rhoads.
+- **Minnesota:** HF 4616 (Rep. Aisha Gomez): 1% on wealth over $10m, heard in committee, not in the final tax bill.
+- **Rhode Island:** S2361 (2026): 1% of worldwide wealth, $25m exempt; Sen. Tiara Mack and Rep. Brandon Potter. Referred to committee.
+- **New York:** S1570 / A3252 Billionaire Mark-to-Market Tax Act (2023-24).
+- **Illinois:** SB 3376 (Sen. Karina Villa) applies income tax to the growth in billionaires' assets; backed by the Illinois Revenue Alliance (labor and community groups).
+- **Maryland:** HB 1238 (2026), titled Ultra-High-Net-Worth Individual Surtax and Wealth Tax.
+- **Vermont:** 2024 bill (Rep. Emilie Kornheiser) on unrealised gains above $10m net worth.
+- **Washington:** done for 2025-26 (H0010); 2023-24 bills queued.
+- **A coordinated push** by lawmakers in CA, CT, IL, HI, MD, NY and WA filed bills together (Common Dreams); the Connecticut bill is not yet identified.
+
+**Income-tax measures (do not qualify, listed so they are not re-checked):** Maine 2% surcharge over $1m (law, 2026); Rhode Island millionaire's income tax (law, 2026); Washington 9.9% millionaire's tax; Massachusetts surtax; Michigan "fair share" surcharge (shelved initiative and July 2026 resolution); Colorado Initiative 195 graduated income tax; Virginia HB 188 and HB 979; North Carolina HB 1073; Connecticut, New Jersey, Louisiana, Utah, Nebraska, Kentucky, Montana, Idaho and Arizona income-tax proposals; DC councilmember Nadeau's 3% surtax on investment income (tax on income from assets, not on net wealth).
+
+**Think-tank only (ITEP "wealth proceeds tax" reports, no bill found):** Arkansas, Virginia, West Virginia. A wealth proceeds tax is a tax on investment income, so it would not qualify even if introduced.
+
+**No wealth-tax proposal found:** Alabama, Alaska, Delaware, Florida, Georgia, Indiana, Kansas, Mississippi, Missouri, Nevada, New Hampshire, New Mexico, North Carolina, North Dakota, Ohio, Oklahoma, South Carolina, South Dakota, Tennessee, Texas, Utah, West Virginia, Wisconsin, Wyoming. Texas voters adopted a constitutional ban on net worth taxes in 2023. A thin search does not prove absence; legislature bill trackers have not been searched.
+
+**Federal-candidate and campaign statements to harvest:** Iowa state senator and US Senate candidate Zach Wahls (May 2026); Pennsylvania legislators (April 2026).
+
 ## Findings on other states' ballot measures and bills (R004)
 - **Ballot measures:** the Tax Foundation's 2026 list ([source](https://taxfoundation.org/research/state-tax/2026-state-tax-ballot-measures/)) describes California Prop 40 as the first US wealth tax to reach a ballot. No other wealth-tax ballot measure was found. Other states' union-backed measures are income taxes, which do not qualify: Washington's 9.9% "millionaire's tax" (referred to voters in 2026), Massachusetts's income surtax (2022) and its 2026 Question 5, and California's Prop 3 (extends high income tax rates).
 - **DSA:** Ballotpedia ([source](https://news.ballotpedia.org/2026/10/13/democratic-socialists-of-america-dsa-takes-positions-on-22-state-and-local-ballot-measures-ahead-of-the-nov-2026-election/)) reports DSA took positions on 26 measures; the only wealth-tax measure among those it names is Prop 40 (supported), and it opposes Props 41 and 42, which would undo Prop 40. Its California chapters (state, East Bay, Long Beach) campaign for Prop 40.
