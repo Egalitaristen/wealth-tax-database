@@ -1,0 +1,52 @@
+link_id,from_actor_id,to_actor_id,link_type,evidence_id,source_url,note
+L0001,A0004,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0002,A0005,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0003,A0006,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0004,A0007,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0005,A0008,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0006,A0009,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0007,A0010,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0008,A0011,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0009,A0012,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0010,A0013,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0011,A0014,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0012,A0015,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0013,A0016,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0014,A0017,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0015,A0018,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0016,A0019,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0017,A0020,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0018,A0021,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0019,A0022,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0020,A0023,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0021,A0024,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0022,A0025,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0023,A0026,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0024,A0027,A0001,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0025,A0028,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0026,A0029,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0027,A0030,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0028,A0033,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0029,A0036,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0030,A0037,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0031,A0038,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0032,A0039,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0033,A0040,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0034,A0041,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0035,A0042,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0036,A0043,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0037,A0044,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0038,A0045,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0039,A0046,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0040,A0047,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0041,A0048,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0042,A0049,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0043,A0050,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0044,A0051,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0045,A0052,A0002,party_of,,,Party membership as stated by the Riksdag member register (2026-10-19) and the motion
+L0046,A0060,A0001,party_of,,,Youth wing of the Left Party
+L0047,A0061,A0002,party_of,,,Youth wing of the Green Party
+L0048,A0074,A0073,member_of,,,Signed the reservation as V representatives
+L0049,A0075,A0073,member_of,,,Signed the reservation as V representatives
+L0050,A0073,A0001,party_of,,,Local group of the Left Party
+L0051,A0076,A0001,party_of,,,Local branch of the Left Party

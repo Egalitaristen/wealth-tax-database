@@ -13,7 +13,7 @@ An open, sourced database of who publicly backs an actual wealth tax, built coun
 | `site/` | The static front end (world map, country views). |
 | `scripts/build_site.py` | Turns `data/` into the site data. No framework, standard library only. |
 
-Two countries so far, both built with Claude and both work in progress: the United Kingdom (`data/gb/`, with a council-level map) and the United States (`data/us/`, federal and state level, with a state map). Most rows are still marked `verified=n`.
+Three countries so far, all built with Claude and all work in progress: the United Kingdom (`data/gb/`, with a council-level map), the United States (`data/us/`, federal and state level, with a state map) and Sweden (`data/se/`, national first pass done; regional and local sweep planned, with a municipality map). Most rows are still marked `verified=n`.
 
 ## What counts
 

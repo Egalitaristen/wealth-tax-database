@@ -14,9 +14,13 @@ Files in this skill (use them if present; the rules in this file are sufficient 
 - `references/area-profile-template.md` — what to establish about an area before searching
 - `references/countries/gb.md` — the UK: levels of government, sources and an exhaustive council sweep (a worked example, not the template for every country)
 - `references/countries/us.md` — a federal system (states, ballot measures, coalition letters), and what worked there
+- `references/countries/se.md` — a unitary state with open parliamentary data, 21 regions and 290 municipalities
 - `scripts/wtdb.py` — Python helper (stdlib; `openpyxl` only for xlsx export): `init`, `add`, `set`, `validate`, `dedupe`, `merge`, `checkquotes`, `status`, `export`
 - `scripts/profiles_wikidata.py` — fills `profiles.csv` (websites, socials, Wikipedia) from Wikidata IDs
 - `scripts/topo_to_boundaries.py` — turns a TopoJSON of areas into `boundaries.json`, so the country gets a local map on the site
+- `scripts/fetch_page.py` — optional headless-browser reader for JavaScript pages and sites that answer 403 to plain clients, including their PDFs (needs `pip install playwright trafilatura`, a Chromium build, and optionally `npm install defuddle jsdom` in `scripts/`). `wtdb.py checkquotes` uses it automatically when a page cannot be read otherwise
+- `scripts/adapters/se_meetingplus_scan.py` — optional Sweden adapter: full-text search of MeetingPlus council portals (Stockholm, Huddinge, Danderyd, Region Gotland)
+- `scripts/adapters/se_riksdag_scan.py` — optional Sweden adapter: Riksdag scanner: motions, questions, committee reports, plenary debates, votes, member register
 - `scripts/adapters/` — per-country source adapters (for example `gb_ocn_scan.py`, a UK council meeting scanner). Adapters are optional and always secondary to the first pass (6.5)
 
 ---
@@ -46,7 +50,7 @@ Files in this skill (use them if present; the rules in this file are sufficient 
 
 1. **Apply the definition (section 2) to every piece of evidence.** Support for a mansion tax, capital gains reform or inheritance tax is not support for wealth taxation.
 2. **No source, no row.** Every claim is an evidence row with a URL you actually opened and a **verbatim** quote found on that page. Never add an actor or evidence from memory or from a search-result snippet alone.
-   - Fetch tools that return a summary can paraphrase. Quote from the raw page text (download it, or use a browser) and run `wtdb.py checkquotes` on the rows you add.
+   - Fetch tools that return a summary can paraphrase. Quote from the raw page text (download it, or use a browser) and run `wtdb.py checkquotes` on the rows you add. It reads PDFs with `pdftotext` and falls back to the headless browser (`fetch_page.py`) for pages that block plain clients.
    - Never compose a sentence of your own and put it in `quote_original`. For list or roster pages where the only text is a name, use the text the page itself prints for that entry: a claim sentence in the page's structured data (JSON-LD), an official bill-status field such as `Rep. Lee, Barbara [D-CA-13]`, or the name and role as listed. Keep quotes short (about 25 words or fewer).
 3. **Time window and the living.** Only evidence dated 2010-01-01 or later counts. Individuals are assumed alive unless a death record is found. Check before adding (Wikidata's date of death, or an obituary search when in doubt); anyone found dead goes in `exclusions.csv` (`deceased`), not in `actors.csv`. Record the check by setting `alive_checked=y`; do not narrate it in `notes`. Dissolved organisations may stay, marked `dissolved`.
 4. **Supporters only.** Opponents are not recorded as actors. If an existing supporter later retracts or votes against, add evidence with `stance=retracted`; they then show as a former supporter.
