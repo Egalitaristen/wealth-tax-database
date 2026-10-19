@@ -1,38 +1,38 @@
 geo_unit_id,name,level,unit_type,parent_id,website,sweep_status,swept_run,swept_date,queries_run,hits,notes
-G0001,UK Parliament (House of Commons and House of Lords),national,legislature,,,in_progress,R010,2026-10-18,,,"R010: Early day motions 893, 420 (2021-22), 340, 1725, 1909, 276 (2024-26) processed (H0001-H0004, H0008). Commons divisions on Finance Bills Dec 2025-Mar 2026 searched, none on a wealth tax. NOT done: Lords, Hansard debates, earlier divisions, EDMs 2010-2020, written questions."
-G0002,"European Parliament (UK MEPs, 2010-2020)",supranational,legislature,,,pending,,,,,UK left the EU 31 Jan 2020; only evidence dated 2010-2020 applies
-G0003,Scottish Parliament,devolved,legislature,,,in_progress,R010,2026-10-18,,,"R010: 26 Nov 2025 division (64 Ayes, H0010) and 4 Jun 2026 debate (no explicit wealth tax, H0011) processed. NOT done: S6 and S7 motions with supporters, committee evidence, earlier sessions."
-G0004,Senedd Cymru (Welsh Parliament),devolved,legislature,,,in_progress,R010,2026-10-18,,,"R010: Senedd debate 19 Nov 2025 (Morgan, Dodds, Fychan) recorded from press; Plaid budget motion 19 Nov 2025 read via CIOT. NOT done: Record of Proceedings and Senedd votes."
-G0005,Northern Ireland Assembly,devolved,legislature,,,in_progress,R010,2026-10-18,,,"R010: one web search found no NI Assembly motion on a wealth tax; People Before Profit 2024 UK manifesto proposes a wealth tax on millionaires (source paywalled, not recorded). NOT done: niassembly.gov.uk Hansard and motions."
-G0006,"UK Government (ministers, departments, commissions)",national,executive,,,pending,,,,,
-G0007,East Midlands,region,english_region,,,pending,,,,,
-G0008,East of England,region,english_region,,,pending,,,,,
-G0009,London,region,english_region,,,pending,,,,,
-G0010,North East,region,english_region,,,pending,,,,,
-G0011,North West,region,english_region,,,pending,,,,,
-G0012,South East,region,english_region,,,pending,,,,,
-G0013,South West,region,english_region,,,pending,,,,,
-G0014,West Midlands,region,english_region,,,pending,,,,,
-G0015,Yorkshire and The Humber,region,english_region,,,pending,,,,,
-G0016,Scotland,region,nation,,,pending,,,,,
-G0017,Wales,region,nation,,,pending,,,,,
-G0018,Northern Ireland,region,nation,,,pending,,,,,
+G0001,UK Parliament (House of Commons and House of Lords),national,legislature,G0417,,in_progress,R010,2026-10-18,,,"R010: Early day motions 893, 420 (2021-22), 340, 1725, 1909, 276 (2024-26) processed (H0001-H0004, H0008). Commons divisions on Finance Bills Dec 2025-Mar 2026 searched, none on a wealth tax. NOT done: Lords, Hansard debates, earlier divisions, EDMs 2010-2020, written questions."
+G0002,"European Parliament (UK MEPs, 2010-2020)",supranational,legislature,G0417,,pending,,,,,UK left the EU 31 Jan 2020; only evidence dated 2010-2020 applies
+G0003,Scottish Parliament,devolved,legislature,G0417,,in_progress,R010,2026-10-18,,,"R010: 26 Nov 2025 division (64 Ayes, H0010) and 4 Jun 2026 debate (no explicit wealth tax, H0011) processed. NOT done: S6 and S7 motions with supporters, committee evidence, earlier sessions."
+G0004,Senedd Cymru (Welsh Parliament),devolved,legislature,G0417,,in_progress,R010,2026-10-18,,,"R010: Senedd debate 19 Nov 2025 (Morgan, Dodds, Fychan) recorded from press; Plaid budget motion 19 Nov 2025 read via CIOT. NOT done: Record of Proceedings and Senedd votes."
+G0005,Northern Ireland Assembly,devolved,legislature,G0417,,in_progress,R010,2026-10-18,,,"R010: one web search found no NI Assembly motion on a wealth tax; People Before Profit 2024 UK manifesto proposes a wealth tax on millionaires (source paywalled, not recorded). NOT done: niassembly.gov.uk Hansard and motions."
+G0006,"UK Government (ministers, departments, commissions)",national,executive,G0417,,pending,,,,,
+G0007,East Midlands,region,english_region,G0417,,pending,,,,,
+G0008,East of England,region,english_region,G0417,,pending,,,,,
+G0009,London,region,english_region,G0417,,pending,,,,,
+G0010,North East,region,english_region,G0417,,pending,,,,,
+G0011,North West,region,english_region,G0417,,pending,,,,,
+G0012,South East,region,english_region,G0417,,pending,,,,,
+G0013,South West,region,english_region,G0417,,pending,,,,,
+G0014,West Midlands,region,english_region,G0417,,pending,,,,,
+G0015,Yorkshire and The Humber,region,english_region,G0417,,pending,,,,,
+G0016,Scotland,region,nation,G0417,,pending,,,,,
+G0017,Wales,region,nation,G0417,,pending,,,,,
+G0018,Northern Ireland,region,nation,G0417,,pending,,,,,
 G0019,Greater London Authority (Mayor and London Assembly),combined_authority,strategic_authority,G0009,,in_progress,R006,2026-10-18,19,0,"R006: scanned 19 full-council meetings on Open Council Network (london-assembly-plenary, london-assembly-mayor-s-question-time; earliest meeting 2026-01-15, latest held 2026-10-15; later dates are scheduled meetings) for wealth tax, levy and similar terms. No wealth tax motion or speech found. Coverage on Open Council Network is thin (before 2022 or few meetings), so this unit is left in_progress; read the council's own minutes. Lead from R005: Zack Polanski pressed the Mayor on a wealth tax at MQT on 20 Nov 2025 (The Canary, partisan); not captured in the Open Council Network summaries."
-G0020,Cambridgeshire and Peterborough,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): East of England
-G0021,Devon and Torbay,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): South West
-G0022,East Midlands,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): East Midlands
-G0023,Greater Lincolnshire,combined_authority,combined_authority,,,pending,,,,,"ONS Dec 2025 boundary layer; region(s): East Midlands, Yorkshire and The Humber"
-G0024,Greater Manchester,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): North West
-G0025,Hull and East Yorkshire,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): Yorkshire and The Humber
-G0026,Lancashire,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): North West
-G0027,Liverpool City Region,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): North West
-G0028,North East,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): North East
-G0029,South Yorkshire,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): Yorkshire and The Humber
-G0030,Tees Valley,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): North East
-G0031,West Midlands,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): West Midlands
-G0032,West Yorkshire,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): Yorkshire and The Humber
-G0033,West of England,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): South West
-G0034,York and North Yorkshire,combined_authority,combined_authority,,,pending,,,,,ONS Dec 2025 boundary layer; region(s): Yorkshire and The Humber
+G0020,Cambridgeshire and Peterborough,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): East of England
+G0021,Devon and Torbay,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): South West
+G0022,East Midlands,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): East Midlands
+G0023,Greater Lincolnshire,combined_authority,combined_authority,G0417,,pending,,,,,"ONS Dec 2025 boundary layer; region(s): East Midlands, Yorkshire and The Humber"
+G0024,Greater Manchester,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): North West
+G0025,Hull and East Yorkshire,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): Yorkshire and The Humber
+G0026,Lancashire,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): North West
+G0027,Liverpool City Region,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): North West
+G0028,North East,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): North East
+G0029,South Yorkshire,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): Yorkshire and The Humber
+G0030,Tees Valley,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): North East
+G0031,West Midlands,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): West Midlands
+G0032,West Yorkshire,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): Yorkshire and The Humber
+G0033,West of England,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): South West
+G0034,York and North Yorkshire,combined_authority,combined_authority,G0417,,pending,,,,,ONS Dec 2025 boundary layer; region(s): Yorkshire and The Humber
 G0035,Cambridgeshire County Council,county,county_council,G0008,,in_progress,R008,2026-10-18,1,0, | R008: not covered by Open Council Network scanner; one combined web search across five counties found nothing; council minutes not read.
 G0036,Derbyshire County Council,county,county_council,G0007,,done,R008,2026-10-18,20,0, | R008: scanned 20 full-council meetings from 2022 on Open Council Network (council-2) for wealth tax terms; none found. Window is 2022 onward only; 2010-2021 and non-scanned bodies not covered. Based on AI-generated summaries that can omit motions mentioned in passing or only as document titles.
 G0037,Devon County Council,county,county_council,G0013,,in_progress,R008,2026-10-18,1,0," | R008: scanned 1 full-council meetings from 2022 on Open Council Network (council) for wealth tax terms; none found. Too few meetings or no council committee on Open Council Network: left in_progress, council minutes not read. Based on AI-generated summaries that can omit motions mentioned in passing or only as document titles."
@@ -415,3 +415,4 @@ G0413,Wychavon,council,district,G0055,,in_progress,R008,2026-10-18,2,0,"ONS E070
 G0414,Wyre,council,district,G0044,,in_progress,R008,2026-10-18,21,0,"ONS E07000128; combined authority: Lancashire | R008: scanned 21 full-council meetings from 2022 on Open Council Network (council-2) for wealth tax terms; none found. Window is 2022 onward only; 2010-2021 and non-scanned bodies not covered. Based on AI-generated summaries that can omit motions mentioned in passing or only as document titles. | REVISED R008: 20 of 21 scanned meetings (2022 on) have no automated summary on Open Council Network, so only document titles and attendee lists were searched. Not accepted as covered; read decision pages or minutes."
 G0415,Wyre Forest,council,district,G0055,,in_progress,R008,2026-10-18,0,0,ONS E07000239 | R008: not covered by Open Council Network scanner; no web search run; council minutes not read.
 G0416,York,council,unitary,G0015,,in_progress,R008,2026-10-18,1,0,"ONS E06000014; combined authority: York and North Yorkshire | R008: scanned 1 full-council meetings from 2022 on Open Council Network (council) for wealth tax terms; none found. Too few meetings or no council committee on Open Council Network: left in_progress, council minutes not read. Based on AI-generated summaries that can omit motions mentioned in passing or only as document titles."
+G0417,United Kingdom,national,country,,,in_progress,,,,,Country root: actors known only to the country sit here. Parent of the units below.

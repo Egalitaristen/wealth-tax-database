@@ -178,7 +178,7 @@ function renderCountry() {
   const card = i => {
     const p = P[i];
     const es = (evBy[p[0]] || []).slice().sort((a, b) => 'ABC'.indexOf(a[2]) - 'ABC'.indexOf(b[2]) || b[1].localeCompare(a[1]));
-    return `<h2>${esc(p[1])}</h2>${linksBlock(p)}<div style="margin:8px 0"><span class="g g${p[8]}">${p[8]}</span> ${[p[3], ...p[16]].map(x => `<span class="pill">${esc(TYPE[x] || x)}</span>`).join(' ')} <span class="pill">${esc(p[6])}</span>${p[15] ? ` <span class="pill">${esc(p[15])}</span>` : ''}${p[7] ? ` <span class="pill">${esc(p[7])}</span>` : ''}</div>
+    return `<h2>${esc(p[1])}</h2>${linksBlock(p)}<div style="margin:8px 0"><span class="g g${p[8]}">${p[8]}</span> ${[p[3], ...p[16]].map(x => `<span class="pill">${esc(TYPE[x] || x)}</span>`).join(' ')} <span class="pill">${esc(p[6])}</span>${p[15] ? ` <span class="pill">${esc(p[15])}</span>` : ''}${p[7] ? ` <span class="pill">${esc(p[7].split(' > ').join(' \u203a '))}</span>` : ''}</div>
       <div style="font-size:14px">${esc(p[4])}</div>${p[5] && p[5] !== p[4] ? `<div class="note">${esc(p[5])}</div>` : ''}
       ${p[13] ? `<p class="note">${esc(p[13])}</p>` : ''}<h3 style="margin-top:14px">Evidence (${es.length})</h3>${es.map(e => evCard(e, cc)).join('')}
       <a class="report" href="${esc(issueUrl('[' + cc + '] Report: ' + p[1], {country: slug, entry: p[0]}))}" target="_blank" rel="noopener">Report a problem with this entry</a>`;
@@ -197,11 +197,11 @@ function renderCountry() {
     const m = makeMap(svg, $('#mapbox'), $('#tip'), data.vb, k => C[k][0], k => { m.select(k); side(+k); });
     $('#zi').onclick = () => m.zoom(.6); $('#zo').onclick = () => m.zoom(1 / .6); $('#zr').onclick = m.fit;
     const home = () => { $('#mapside').innerHTML = `<h2>Click an area</h2><p class="note">Drag to pan, use the buttons to zoom.</p>` +
-      (data.O.length ? '<h3 style="margin-top:14px">Not on the map</h3>' + data.O.map(o => `<div class="ev"><b>${esc(o[0])}</b><div class="note">${o[4].length} supporters recorded</div></div>`).join('') : ''); };
+      (data.O.length ? '<h3 style="margin-top:14px">Not on the map</h3>' + data.O.map(o => `<div class="ev"><b>${esc(o[0])}</b><div class="note">${o[4].length} supporters located exactly here</div></div>`).join('') : ''); };
     const side = i => {
       const c = C[i];
       $('#mapside').innerHTML = `<h2>${esc(c[0])}</h2><p><span class="pill">${esc(STATE[c[2]])}</span> ${c[1] ? `<span class="pill">${esc(c[1])}</span>` : ''}</p>
-        ${c[6].length ? `<h3>Supporters here (${c[6].length})</h3>${c[6].length > 12 ? `<p style="margin:0 0 6px"><a href="#" data-area="${esc((P[pid[c[6][0]]] || [])[7] || '')}">Open all ${c[6].length} in the People list</a></p>` : ''}` + c[6].slice(0, 12).map(id => { const p = P[pid[id]]; return p ? `<div class="ev" data-p="${pid[id]}" style="cursor:pointer"><span class="g g${p[8]}">${p[8]}</span> <b>${esc(p[1])}</b><div class="note">${esc(p[4])}</div></div>` : ''; }).join('') : '<p class="note">No supporter recorded for this area yet.</p>'}
+        ${c[6].length ? `<h3>Supporters in this area (${c[6].length})</h3><p class="note" style="margin:0 0 6px">Counts everyone located here or somewhere inside.</p>${c[6].length > 12 ? `<p style="margin:0 0 6px"><a href="#" data-area="${esc(c[8] || '')}">Open all ${c[6].length} in the People list</a></p>` : ''}` + c[6].slice(0, 12).map(id => { const p = P[pid[id]]; return p ? `<div class="ev" data-p="${pid[id]}" style="cursor:pointer"><span class="g g${p[8]}">${p[8]}</span> <b>${esc(p[1])}</b><div class="note">${esc(p[4])}</div></div>` : ''; }).join('') : '<p class="note">No supporter recorded for this area yet.</p>'}
         ${c[5] ? `<h3 style="margin-top:14px">Sweep notes</h3><p class="note">${esc(c[5])}</p>` : ''}
         <a class="report" href="${esc(issueUrl('[' + cc + '] Report: ' + c[0], {country: slug}))}" target="_blank" rel="noopener">Report a problem with this area</a>`;
     };
@@ -221,10 +221,13 @@ function renderCountry() {
       <div class="grid"><div><div class="tw" style="max-height:74vh;overflow:auto"><table id="tbl"><thead><tr><th data-k="1">Name</th><th data-k="3">Type</th><th data-k="15">Party</th><th data-k="8">Grade</th><th data-k="9">Rows</th><th data-k="11">Latest</th></tr></thead><tbody></tbody></table></div>
       </div><aside class="panel" id="pside"><p class="empty">Select a row to see the evidence behind it.</p></aside></div>`;
     const ft = $('#ft'), fp = $('#fp'), fa = $('#fa');
-    const areas = [...new Set(P.map(p => p[7]).filter(Boolean))].sort();
-    fa.innerHTML = areas.length ? '<option value="">Any area</option>' + areas.map(x => `<option value="${esc(x)}">${esc(x.replace(/ \(.*$/, ''))} (${P.filter(p => p[7] === x).length})</option>`).join('') : '';
+    const areaOf = p => (p[7] || '').split(' > ').slice(0, 2).join(' > ');
+    const inArea = (p, x) => p[7] === x || (p[7] || '').startsWith(x + ' > ');
+    const areas = [...new Set(P.map(areaOf).filter(x => x.includes(' > ')))].sort((a, b) => P.filter(p => inArea(p, b)).length - P.filter(p => inArea(p, a)).length);
+    if (PEOPLE_AREA && !areas.includes(PEOPLE_AREA)) areas.unshift(PEOPLE_AREA);
+    fa.innerHTML = areas.length ? '<option value="">Any area</option>' + areas.map(x => `<option value="${esc(x)}">${esc(x.split(' > ').slice(1).join(' \u203a '))} (${P.filter(p => inArea(p, x)).length})</option>`).join('') : '';
     fa.hidden = !areas.length;
-    if (PEOPLE_AREA && areas.includes(PEOPLE_AREA)) fa.value = PEOPLE_AREA;
+    if (PEOPLE_AREA) fa.value = PEOPLE_AREA;
     PEOPLE_AREA = '';
     const parties = [...new Set(P.map(p => p[15]).filter(Boolean))].sort((a, b) => P.filter(p => p[15] === b).length - P.filter(p => p[15] === a).length);
     fp.innerHTML = '<option value="">Any party</option>' + parties.map(x => `<option value="${esc(x)}">${esc(x)} (${P.filter(p => p[15] === x).length})</option>`).join('');
@@ -234,7 +237,7 @@ function renderCountry() {
       const q = $('#q').value.toLowerCase(), t = ft.value, l = $('#fl').value, g = $('#fg').value, k = $('#fk').value, v = $('#fv').value, pa = fp.value, ar = fa.value;
       const r = P.map((p, i) => i).filter(i => {
         const p = P[i];
-        return (!t || p[3] === t || p[16].includes(t)) && (!l || p[6] === l) && (!g || p[8] === g) && (!k || p[2] === k) && (!pa || p[15] === pa) && (!ar || p[7] === ar) &&
+        return (!t || p[3] === t || p[16].includes(t)) && (!l || p[6] === l) && (!g || p[8] === g) && (!k || p[2] === k) && (!pa || p[15] === pa) && (!ar || inArea(p, ar)) &&
           (!v || (evBy[p[0]] || []).some(e => e[10] === 'y')) && (!q || (p[1] + ' ' + p[4] + ' ' + p[5] + ' ' + p[7] + ' ' + p[15]).toLowerCase().includes(q));
       });
       r.sort((a, b) => { const x = P[a][sortK], y = P[b][sortK]; return (typeof x === 'number' ? x - y : String(x).localeCompare(String(y))) * sortD; });

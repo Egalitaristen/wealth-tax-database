@@ -20,7 +20,7 @@ from collections import Counter, defaultdict
 
 SCHEMA = {
     "actors": ["actor_id", "name", "kind", "actor_type", "other_types", "role", "affiliation", "party", "affiliation_actor_id", "country",
-               "level", "geo_unit_id", "wikidata_qid", "website", "status", "alive_checked", "prominence", "notes",
+               "level", "location", "wikidata_qid", "website", "status", "alive_checked", "prominence", "notes",
                "added_run", "updated"],
     "profiles": ["profile_id", "actor_id", "platform", "url", "source", "checked"],
     "evidence": ["evidence_id", "actor_id", "date", "stance", "grade", "evidence_type", "wt_design", "design_detail",
@@ -293,6 +293,7 @@ def validate(db):
         if e.get("verified") == "failed":
             errs.append(f"{where}: verification failed — fix or remove the row")
     geo = {g["geo_unit_id"] for g in db["geo_units"]}
+    gidx = geo_index(db["geo_units"])
     names = defaultdict(list)
     qids = defaultdict(list)
     for i, r in enumerate(db["actors"], start=2):
@@ -303,12 +304,16 @@ def validate(db):
             errs.append(f"{where}: person must have alive_checked=y")
         if r.get("kind") != "person" and r.get("alive_checked") == "y" and r.get("status") == "dissolved":
             warns.append(f"{where}: dissolved organisation marked alive_checked=y")
-        if r.get("geo_unit_id") and r["geo_unit_id"] not in geo:
-            errs.append(f"{where}: geo_unit_id {r['geo_unit_id']} does not exist")
+        uid, depth, rest = resolve_location(r.get("location", ""), gidx)
+        if not r.get("location"):
+            warns.append(f"{where}: no location (use at least the country name)")
+        elif gidx[2] and not uid:
+            errs.append(f"{where}: location must start with the country root unit "
+                        f"({', '.join(gidx[0][u]['name'] for u in gidx[2].values())})")
+        elif r.get("level") == "local" and depth <= 1 and not rest:
+            warns.append(f"{where}: local actor located only at country level")
         if re.search(r"\balive\b|death record|no death|wikidata (id|match)|no wikidata", r.get("notes", ""), re.I):
             warns.append(f"{where}: notes narrate the alive or Wikidata check; alive_checked records it, so remove that from notes")
-        if r.get("level") == "local" and not r.get("geo_unit_id"):
-            warns.append(f"{where}: local actor without geo_unit_id")
         for ot in type_list(r)[1:]:
             if ot not in ENUMS[("actors", "actor_type")]:
                 errs.append(f"{where}: other_types has unknown type '{ot}'")
@@ -424,6 +429,39 @@ def derive(db):
     return out
 
 
+def _bare(n):
+    return re.sub(r"\s*\(.*$", "", n or "").strip().lower()
+
+
+def geo_index(geo):
+    """Index the geography register: id lookup, children by bare name, and the country root unit(s)."""
+    by_id = {g["geo_unit_id"]: g for g in geo}
+    kids, roots = defaultdict(dict), {}
+    for g in geo:
+        if g.get("parent_id") and g["parent_id"] in by_id:
+            kids[g["parent_id"]].setdefault(_bare(g["name"]), g["geo_unit_id"])
+        elif g.get("unit_type") == "country":
+            roots[_bare(g["name"])] = g["geo_unit_id"]
+    return by_id, kids, roots
+
+
+def resolve_location(location, idx):
+    """Walk an actor's 'Country > Region > Place' path down the register.
+    Returns (unit_id or '', number of segments matched, the segments left over as plain place text)."""
+    by_id, kids, roots = idx
+    parts = [p.strip() for p in (location or "").split(">") if p.strip()]
+    uid = roots.get(_bare(parts[0])) if parts else None
+    if not uid:
+        return "", 0, parts
+    depth = 1
+    for seg in parts[1:]:
+        nxt = kids.get(uid, {}).get(_bare(seg))
+        if not nxt:
+            break
+        uid, depth = nxt, depth + 1
+    return uid, depth, parts[depth:]
+
+
 def type_list(r):
     """Primary type first, then any extra types (other_types is semicolon-separated)."""
     extra = [x.strip() for x in (r.get("other_types") or "").split(";") if x.strip()]
@@ -532,7 +570,15 @@ def cmd_export(a):
     slug = os.path.basename(os.path.normpath(a.dir))
     out = a.out or os.path.join(a.dir, f"{slug}_wealth_tax_supporters.xlsx")
     actors = {r["actor_id"]: r for r in db["actors"]}
-    geo_count = Counter(r["geo_unit_id"] for r in d if r["geo_unit_id"] and r["support_status"] == "supporter")
+    gidx = geo_index(db["geo_units"])
+    geo_count = Counter()  # supporters in each unit, counting everyone located in it or below it
+    for r in d:
+        if r["support_status"] != "supporter":
+            continue
+        uid = resolve_location(r.get("location", ""), gidx)[0]
+        seen = set()
+        while uid and uid in gidx[0] and uid not in seen:
+            seen.add(uid); geo_count[uid] += 1; uid = gidx[0][uid].get("parent_id", "")
     wb = Workbook()
     head_fill = PatternFill("solid", fgColor="1F3A5F")
     head_font = Font(bold=True, color="FFFFFF")
@@ -612,13 +658,13 @@ def cmd_export(a):
         row = grid.get(t, Counter())
         ws.append([t] + [row[l] for l in levels] + [sum(row.values())])
 
-    cols = ["actor_id", "name", "kind", "actor_type", "other_types", "role", "affiliation", "party", "country", "level", "geo_unit",
+    cols = ["actor_id", "name", "kind", "actor_type", "other_types", "role", "affiliation", "party", "country", "level", "location",
             "prominence", "best_grade", "support_label", "designs", "evidence_types", "evidence_count", "first_date",
             "latest_date", "strongest_quote", "strongest_source", "wikidata_qid", "website", "status", "notes"]
     geo_name = {x["geo_unit_id"]: x["name"] for x in db["geo_units"]}
     order = sorted(sup, key=lambda r: (-GRADE_RANK.get(r["best_grade"], 0), r["actor_type"], r["name"]))
     sheet("Supporters", cols,
-          [[r.get(c, "") if c != "geo_unit" else geo_name.get(r["geo_unit_id"], "") for c in cols] for r in order],
+          [[r.get(c, "") for c in cols] for r in order],
           widths={"strongest_quote": 70, "notes": 50, "strongest_source": 40}, url_cols=("strongest_source", "website"))
     ecols = ["evidence_id", "actor_id", "actor_name"] + SCHEMA["evidence"][2:]
     ev = sorted(db["evidence"], key=lambda e: e.get("date", ""), reverse=True)
@@ -647,8 +693,8 @@ def cmd_export(a):
     sheet("Run log", SCHEMA["runs"], [[r.get(c, "") for c in SCHEMA["runs"]] for r in db["runs"]])
     former = [r for r in d if r["support_status"] == "retracted"]
     if former:  # omit the sheet while nobody has retracted
-        sheet("Former supporters", cols, [[r.get(c, "") if c != "geo_unit" else geo_name.get(r["geo_unit_id"], "")
-                                           for c in cols] for r in former], url_cols=("strongest_source",))
+        sheet("Former supporters", cols, [[r.get(c, "") for c in cols] for r in former],
+              url_cols=("strongest_source",))
     wb.save(out)
     print(f"Wrote {out}")
 
