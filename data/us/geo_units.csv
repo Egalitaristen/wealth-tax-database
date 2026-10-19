@@ -12,19 +12,19 @@ G0010,Delaware (state legislature and state government),region,state,,,pending,,
 G0011,District of Columbia (state legislature and state government),region,district,,,pending,,,,,
 G0012,Florida (state legislature and state government),region,state,,,pending,,,,,
 G0013,Georgia (state legislature and state government),region,state,,,pending,,,,,
-G0014,Hawaii (state legislature and state government),region,state,,,pending,,,,,
+G0014,Hawaii (state legislature and state government),region,state,,,in_progress,R006,2026-10-19,,,"R006: SB 313/SB 925 sponsors (H0016). NOT done: HB 1235, official introducer lists."
 G0015,Idaho (state legislature and state government),region,state,,,pending,,,,,
-G0016,Illinois (state legislature and state government),region,state,,,pending,,,,,
+G0016,Illinois (state legislature and state government),region,state,,,in_progress,R006,2026-10-19,,,"R006: SB 3376 Villa and Illinois Revenue Alliance (H0017). NOT done: other sponsors, bill text."
 G0017,Indiana (state legislature and state government),region,state,,,pending,,,,,
 G0018,Iowa (state legislature and state government),region,state,,,pending,,,,,
 G0019,Kansas (state legislature and state government),region,state,,,pending,,,,,
 G0020,Kentucky (state legislature and state government),region,state,,,pending,,,,,
 G0021,Louisiana (state legislature and state government),region,state,,,pending,,,,,
 G0022,Maine (state legislature and state government),region,state,,,pending,,,,,
-G0023,Maryland (state legislature and state government),region,state,,,pending,,,,,
+G0023,Maryland (state legislature and state government),region,state,,,in_progress,R006,2026-10-19,,,R006: HB 1238 sponsors (H0018).
 G0024,Massachusetts (state legislature and state government),region,state,,,pending,,,,,
 G0025,Michigan (state legislature and state government),region,state,,,pending,,,,,
-G0026,Minnesota (state legislature and state government),region,state,,,pending,,,,,
+G0026,Minnesota (state legislature and state government),region,state,,,in_progress,R006,2026-10-19,,,"R006: HF 4616 authors (H0019). NOT done: bill text, 'Lee, K.'."
 G0027,Mississippi (state legislature and state government),region,state,,,pending,,,,,
 G0028,Missouri (state legislature and state government),region,state,,,pending,,,,,
 G0029,Montana (state legislature and state government),region,state,,,pending,,,,,
@@ -33,20 +33,20 @@ G0031,Nevada (state legislature and state government),region,state,,,pending,,,,
 G0032,New Hampshire (state legislature and state government),region,state,,,pending,,,,,
 G0033,New Jersey (state legislature and state government),region,state,,,pending,,,,,
 G0034,New Mexico (state legislature and state government),region,state,,,pending,,,,,
-G0035,New York (state legislature and state government),region,state,,,pending,,,,,
+G0035,New York (state legislature and state government),region,state,,,in_progress,R006,2026-10-19,,,"R006: S1570 and A03252 sponsors (H0020). NOT done: 2025-26 versions, Carroll/Ardila."
 G0036,North Carolina (state legislature and state government),region,state,,,pending,,,,,
 G0037,North Dakota (state legislature and state government),region,state,,,pending,,,,,
 G0038,Ohio (state legislature and state government),region,state,,,pending,,,,,
 G0039,Oklahoma (state legislature and state government),region,state,,,pending,,,,,
-G0040,Oregon (state legislature and state government),region,state,,,pending,,,,,
+G0040,Oregon (state legislature and state government),region,state,,,in_progress,R006,2026-10-19,,,"R006: IP 70 (2026) and 2028 coalition (H0014, H0015). NOT done: initiative text, rest of the coalition, 2028 endorsers."
 G0041,Pennsylvania (state legislature and state government),region,state,,,pending,,,,,
-G0042,Rhode Island (state legislature and state government),region,state,,,pending,,,,,
+G0042,Rhode Island (state legislature and state government),region,state,,,in_progress,R006,2026-10-19,,,R006: S 2361 introducers (H0021). NOT done: House companion.
 G0043,South Carolina (state legislature and state government),region,state,,,pending,,,,,
 G0044,South Dakota (state legislature and state government),region,state,,,pending,,,,,
 G0045,Tennessee (state legislature and state government),region,state,,,pending,,,,,
 G0046,Texas (state legislature and state government),region,state,,,pending,,,,,
 G0047,Utah (state legislature and state government),region,state,,,pending,,,,,
-G0048,Vermont (state legislature and state government),region,state,,,pending,,,,,
+G0048,Vermont (state legislature and state government),region,state,,,in_progress,R006,2026-10-19,,,R006: H.827 sponsor (H0022).
 G0049,Virginia (state legislature and state government),region,state,,,pending,,,,,
 G0050,Washington (state legislature and state government),region,state,,,in_progress,R004,2026-10-19,,,"R004: HB 1319 and SB 5797 (2025-26) sponsors processed (H0010). NOT done: 2023-24 bills, votes, committee testimony."
 G0051,West Virginia (state legislature and state government),region,state,,,pending,,,,,
