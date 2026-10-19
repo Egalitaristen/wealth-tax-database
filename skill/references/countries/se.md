@@ -43,3 +43,4 @@ Other `doktyp` values worth the same search: `ip` (interpellation), `fr` (writte
 - The member register also gives each member's constituency (`valkrets`) and flags deceased members (`Avliden`).
 - Chamber speeches are the best source for individual V and MP members; quote one sentence of the speech and cite the protocol page with the speech number.
 - Party websites (vansterpartiet.se) return 403 to plain HTTP clients; use a browser for party documents.
+- Web search: use `allowed_domains` per outlet group instead of one broad query. DN, SvD, Aftonbladet and Expressen are rejected by the search tool (crawler-blocked), but Dagens Arena, Arbetet, Flamman, mp.se, arenaide.se and most think-tank sites work. `blocked_domains` removes the same recycled EFN/Realtid/Dagens PS pages.
