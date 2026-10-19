@@ -27,7 +27,7 @@ Files in this skill (use them if present; the rules in this file are sufficient 
 2. **No source, no row.** Every claim is an evidence row with a URL you actually opened and a **verbatim** quote found on that page. Never add an actor or evidence from memory or from a search-result snippet alone.
    - Fetch tools that return a summary can paraphrase. Quote from the raw page text (download it, or use a browser) and run `wtdb.py checkquotes` on the rows you add.
    - Never compose a sentence of your own and put it in `quote_original`. For list or roster pages where the only text is a name, use the text the page itself prints for that entry: a claim sentence in the page's structured data (JSON-LD), an official bill-status field such as `Rep. Lee, Barbara [D-CA-13]`, or the name and role as listed. Keep quotes short (about 25 words or fewer).
-3. **Time window and the living.** Only evidence dated 2010-01-01 or later counts. Individuals must be alive; check before adding (Wikidata or an obituary search when in doubt). Dissolved organisations may stay, marked `dissolved`.
+3. **Time window and the living.** Only evidence dated 2010-01-01 or later counts. Individuals are assumed alive unless a death record is found. Check before adding (Wikidata's date of death, or an obituary search when in doubt); anyone found dead goes in `exclusions.csv` (`deceased`), not in `actors.csv`. Record the check by setting `alive_checked=y`; do not narrate it in `notes`. Dissolved organisations may stay, marked `dissolved`.
 4. **Supporters only.** Opponents are not recorded as actors. If an existing supporter later retracts or votes against, add evidence with `stance=retracted`; they then show as a former supporter.
 5. **Public role, public record.** Only people acting in a public capacity (elected officials, officials, published authors, journalists, organisation leaders, people who publicly declared themselves, e.g. signed a published letter). Never record private individuals (ordinary petition signers, private social-media users), and never record home addresses, personal phone numbers or personal emails. Organisation websites and official pages are fine.
 6. **The CSV files are the database.** Write each actor and its evidence to disk as soon as it is verified — never hold a batch in memory to write at the end. The xlsx is a generated export, never edited by hand.
@@ -118,7 +118,8 @@ In this repository, `<area-slug>` is the lowercase ISO 3166-1 alpha-2 code (`gb`
 - `party`: for politicians, the party's common name in English (for example `Labour`, `Green Party`, `Democratic Party`; `Independent` if none). Use one name per party so the site can filter on it; a regional or state branch uses the national party's name (the Minnesota DFL is `Democratic Party`). Blank for non-politicians, and for local officials in non-partisan offices when the party is not known. `validate` warns about a missing party above local level.
 - `level`: supranational · national · regional · local
 - `status`: active · former_role · dissolved
-- `alive_checked`: y · na (organisations and institutions)
+- `alive_checked`: y · na (organisations and institutions). `y` means you looked for a death record and found none.
+- `notes`: only what a reader needs: an identity caveat (a common name, a role taken from a list), where the party or role came from, or context the evidence rows do not show. **Never** write that the person is alive, that Wikidata has no match, or that no death record was found; `alive_checked` already says it, and the site shows the notes to readers. Leave `notes` empty when there is nothing to add.
 - `prominence`: international · national · regional · local (how widely they are known on this issue)
 
 **evidence.csv** — one row per piece of evidence (an actor can have many)
@@ -206,7 +207,7 @@ Lists produce many actors at once with uniform, strong evidence. Find them and q
 
 Rosters can be large (a ballot campaign's endorsement page listed about 250 names). Parse the page's structured data instead of retyping names, check each name against the database (name variants such as "Coalition for Human Needs" and "Coalition on Human Needs" are the same body: `merge`), and keep the list's own entry text as the quote. Wikipedia and other secondary lists are good for finding names, never as the source; re-read each name at its own cited page.
 
-For each person or organisation on a list: check for duplicates, check the definition applies to what the list actually calls for, check they are alive or still exist, then add the actor and an evidence row whose `harvest_id` points to the list. Mark the list `done` with `actors_added`.
+For each person or organisation on a list: check for duplicates, check the definition applies to what the list actually calls for, check they are not dead (or, for an organisation, that it still exists), then add the actor and an evidence row whose `harvest_id` points to the list. Mark the list `done` with `actors_added`.
 
 ### 6.4 Layer passes
 Work through the layers in the source playbook (legislatures, parties, executive, academia, think tanks, civil society, unions, media, legal and tax, wealthy and business, faith and culture, funders, international). For each, run the query pack in every relevant language, open the promising results, and add what qualifies. Choose layers using the `status` coverage grid (actor_type × level): go where the cells are thin.
@@ -271,6 +272,7 @@ The xlsx export contains: **Overview** (counts, grade mix, coverage and sweep pr
 - Related tables existed only in the assistant's memory and never reached the file; earlier turns "compressed" in the log → write to disk continuously; log every run.
 - Theme-by-theme, name-by-name searching gave few new actors per turn → bulk lists first, then the geography sweep, then snowballing.
 - Reporters counted as supporters because they quoted one → journalists need opinion pieces.
+- Notes full of "alive on the basis of..." and "no Wikidata match" on hundreds of rows, shown to readers on the site → `alive_checked=y` records the check; `validate` now warns when notes narrate it.
 - Paraphrased "quotes": a roster import wrote its own sentence ("Campaign lists X as an endorser…") into 252 rows, because the fetch tool summarises pages → quote the page's own text, and run `checkquotes`.
 - One bucket hid a group: all university economists were typed `academic`, so the Economist filter showed four people → type by discipline (`economist` for any economist) and use `other_types` for people who fit two.
 - Near-duplicate organisations from different letters and rosters ("Coalition for Human Needs" and "Coalition on Human Needs") → `dedupe` after every large import, then `merge`.
