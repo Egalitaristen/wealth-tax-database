@@ -15,7 +15,7 @@ const DES = {annual_net_wealth:'Annual net wealth tax',one_off_levy:'One-off lev
 const EVT = {open_letter:'Open letter',motion_signature:'Signed motion',motion:'Motion',vote:'Vote',campaign:'Campaign',op_ed:'Op-ed',editorial:'Editorial',speech:'Speech',statement:'Statement',policy_adoption:'Policy adopted',publication:'Publication',report:'Report',funding:'Funding',coalition_membership:'Coalition member',interview:'Interview',manifesto:'Manifesto',bill_sponsorship:'Bill sponsor',testimony:'Testimony',social_post:'Social post',other:'Other'};
 const PLAT = {official_page:'Official page',website:'Website',x:'X',bluesky:'Bluesky',mastodon:'Mastodon',instagram:'Instagram',facebook:'Facebook',youtube:'YouTube',tiktok:'TikTok',linkedin:'LinkedIn',substack:'Substack',wikipedia:'Wikipedia'};
 const PLAT_ORDER = Object.keys(PLAT);
-const STATE = {support:'Local supporter found',clear:'Meetings read, nothing found',open:'Not fully read yet'};
+const STATE = {support:'Supporters recorded',clear:'Read, nothing found',open:'Not fully read yet'};
 
 // ---------- pan and zoom for any SVG map ----------
 function makeMap(svg, box, tip, vb, nameOf, onPick) {
@@ -188,11 +188,12 @@ function renderCountry() {
   if (sub === 'map') {
     body.innerHTML = `<div class="grid"><div class="mapbox" id="mapbox"><svg class="map local" id="svg" role="img" aria-label="Local map coloured by findings"></svg>
       <div class="zoom"><button id="zi" aria-label="Zoom in">+</button><button id="zo" aria-label="Zoom out">&minus;</button><button id="zr" aria-label="Reset view" style="font-size:13px">&#8634;</button></div>
-      <div class="legend"><span><i style="background:var(--support)"></i>Local supporter found</span><span><i style="background:var(--clear)"></i>Meetings read, nothing found</span><span><i style="background:var(--open)"></i>Not fully read yet</span></div>
+      <div class="legend"><span><i style="background:var(--support)"></i>Supporters recorded (darker = more)</span><span><i style="background:var(--clear)"></i>Read, nothing found</span><span><i style="background:var(--open)"></i>Not fully read yet</span></div>
       <div class="tip" id="tip" hidden></div></div><aside class="panel" id="mapside"></aside></div>
-      <p class="note" style="margin-top:10px">Unshaded areas are not evidence of opposition: most are only partly read, and many council sites block automated reading.</p>`;
+      <p class="note" style="margin-top:10px">Unshaded areas are not evidence of opposition: most are only partly read, and some sources block automated reading.</p>`;
     const C = data.C, svg = $('#svg');
-    svg.innerHTML = C.map((c, i) => `<path data-k="${i}" class="${c[2]}" d="${c[7]}"></path>`).join('');
+    const maxN = Math.max(1, ...C.map(c => c[6].length));
+    svg.innerHTML = C.map((c, i) => `<path data-k="${i}" class="${c[2]}" ${c[2] === 'support' ? `style="fill-opacity:${(.45 + .55 * Math.log(c[6].length + 1) / Math.log(maxN + 1)).toFixed(2)}"` : ''} d="${c[7]}"></path>`).join('');
     const m = makeMap(svg, $('#mapbox'), $('#tip'), data.vb, k => C[k][0], k => { m.select(k); side(+k); });
     $('#zi').onclick = () => m.zoom(.6); $('#zo').onclick = () => m.zoom(1 / .6); $('#zr').onclick = m.fit;
     const home = () => { $('#mapside').innerHTML = `<h2>Click an area</h2><p class="note">Drag to pan, use the buttons to zoom.</p>` +
@@ -200,11 +201,13 @@ function renderCountry() {
     const side = i => {
       const c = C[i];
       $('#mapside').innerHTML = `<h2>${esc(c[0])}</h2><p><span class="pill">${esc(STATE[c[2]])}</span> ${c[1] ? `<span class="pill">${esc(c[1])}</span>` : ''}</p>
-        ${c[6].length ? `<h3>Supporters here (${c[6].length})</h3>` + c[6].map(id => { const p = P[pid[id]]; return p ? `<div class="ev" data-p="${pid[id]}" style="cursor:pointer"><span class="g g${p[8]}">${p[8]}</span> <b>${esc(p[1])}</b><div class="note">${esc(p[4])}</div></div>` : ''; }).join('') : '<p class="note">No supporter recorded for this area yet.</p>'}
+        ${c[6].length ? `<h3>Supporters here (${c[6].length})</h3>${c[6].length > 12 ? `<p style="margin:0 0 6px"><a href="#" data-area="${esc((P[pid[c[6][0]]] || [])[7] || '')}">Open all ${c[6].length} in the People list</a></p>` : ''}` + c[6].slice(0, 12).map(id => { const p = P[pid[id]]; return p ? `<div class="ev" data-p="${pid[id]}" style="cursor:pointer"><span class="g g${p[8]}">${p[8]}</span> <b>${esc(p[1])}</b><div class="note">${esc(p[4])}</div></div>` : ''; }).join('') : '<p class="note">No supporter recorded for this area yet.</p>'}
         ${c[5] ? `<h3 style="margin-top:14px">Sweep notes</h3><p class="note">${esc(c[5])}</p>` : ''}
         <a class="report" href="${esc(issueUrl('[' + cc + '] Report: ' + c[0], {country: slug}))}" target="_blank" rel="noopener">Report a problem with this area</a>`;
     };
-    $('#mapside').addEventListener('click', e => { const r = e.target.closest('[data-p]'); if (r) { PEOPLE_SEL = +r.dataset.p; go(slug + '.people'); } });
+    $('#mapside').addEventListener('click', e => {
+      const ar = e.target.closest('[data-area]'); if (ar) { e.preventDefault(); PEOPLE_AREA = ar.dataset.area; go(slug + '.people'); return; }
+      const r = e.target.closest('[data-p]'); if (r) { PEOPLE_SEL = +r.dataset.p; go(slug + '.people'); } });
     home();
   }
 
@@ -212,21 +215,26 @@ function renderCountry() {
     body.innerHTML = `<div class="ctl"><input type="search" id="q" placeholder="Search names, roles, parties" aria-label="Search"><select id="ft" aria-label="Type"></select>
       <select id="fl" aria-label="Level"><option value="">Any level</option><option value="national">National</option><option value="regional">Regional</option><option value="local">Local</option><option value="supranational">Supranational</option></select>
       <select id="fg" aria-label="Grade"><option value="">Any grade</option><option value="A">A explicit</option><option value="B">B named</option><option value="C">C implied</option></select>
-      <select id="fp" aria-label="Party"></select><select id="fk" aria-label="Kind"><option value="">People and organisations</option><option value="person">People</option><option value="organisation">Organisations</option></select>
+      <select id="fp" aria-label="Party"></select><select id="fa" aria-label="Area"></select><select id="fk" aria-label="Kind"><option value="">People and organisations</option><option value="person">People</option><option value="organisation">Organisations</option></select>
       <select id="fv" aria-label="Verification"><option value="">Verified or not</option><option value="y">Has a verified row</option></select></div>
       <p class="note" id="count" style="margin:0 0 8px" aria-live="polite"></p>
       <div class="grid"><div><div class="tw" style="max-height:74vh;overflow:auto"><table id="tbl"><thead><tr><th data-k="1">Name</th><th data-k="3">Type</th><th data-k="15">Party</th><th data-k="8">Grade</th><th data-k="9">Rows</th><th data-k="11">Latest</th></tr></thead><tbody></tbody></table></div>
       </div><aside class="panel" id="pside"><p class="empty">Select a row to see the evidence behind it.</p></aside></div>`;
-    const ft = $('#ft'), fp = $('#fp');
+    const ft = $('#ft'), fp = $('#fp'), fa = $('#fa');
+    const areas = [...new Set(P.map(p => p[7]).filter(Boolean))].sort();
+    fa.innerHTML = areas.length ? '<option value="">Any area</option>' + areas.map(x => `<option value="${esc(x)}">${esc(x.replace(/ \(.*$/, ''))} (${P.filter(p => p[7] === x).length})</option>`).join('') : '';
+    fa.hidden = !areas.length;
+    if (PEOPLE_AREA && areas.includes(PEOPLE_AREA)) fa.value = PEOPLE_AREA;
+    PEOPLE_AREA = '';
     const parties = [...new Set(P.map(p => p[15]).filter(Boolean))].sort((a, b) => P.filter(p => p[15] === b).length - P.filter(p => p[15] === a).length);
     fp.innerHTML = '<option value="">Any party</option>' + parties.map(x => `<option value="${esc(x)}">${esc(x)} (${P.filter(p => p[15] === x).length})</option>`).join('');
     ft.innerHTML = '<option value="">Any type</option>' + [...new Set(P.flatMap(p => [p[3], ...p[16]]))].sort((a, b) => (TYPE[a] || a).localeCompare(TYPE[b] || b)).map(t => `<option value="${t}">${esc(TYPE[t] || t)}</option>`).join('');
     let sortK = 1, sortD = 1, cur = PEOPLE_SEL;
     const rows = () => {
-      const q = $('#q').value.toLowerCase(), t = ft.value, l = $('#fl').value, g = $('#fg').value, k = $('#fk').value, v = $('#fv').value, pa = fp.value;
+      const q = $('#q').value.toLowerCase(), t = ft.value, l = $('#fl').value, g = $('#fg').value, k = $('#fk').value, v = $('#fv').value, pa = fp.value, ar = fa.value;
       const r = P.map((p, i) => i).filter(i => {
         const p = P[i];
-        return (!t || p[3] === t || p[16].includes(t)) && (!l || p[6] === l) && (!g || p[8] === g) && (!k || p[2] === k) && (!pa || p[15] === pa) &&
+        return (!t || p[3] === t || p[16].includes(t)) && (!l || p[6] === l) && (!g || p[8] === g) && (!k || p[2] === k) && (!pa || p[15] === pa) && (!ar || p[7] === ar) &&
           (!v || (evBy[p[0]] || []).some(e => e[10] === 'y')) && (!q || (p[1] + ' ' + p[4] + ' ' + p[5] + ' ' + p[7] + ' ' + p[15]).toLowerCase().includes(q));
       });
       r.sort((a, b) => { const x = P[a][sortK], y = P[b][sortK]; return (typeof x === 'number' ? x - y : String(x).localeCompare(String(y))) * sortD; });
@@ -239,7 +247,7 @@ function renderCountry() {
       $('#count').textContent = `${r.length} of ${P.length} shown` + (r.length > 400 ? ' (first 400; narrow the filters to see the rest)' : '');
     };
     const pick = i => { cur = i; $('#pside').innerHTML = card(i); draw(); };
-    ['#q', '#ft', '#fp', '#fl', '#fg', '#fk', '#fv'].forEach(s => $(s).addEventListener('input', draw));
+    ['#q', '#ft', '#fp', '#fa', '#fl', '#fg', '#fk', '#fv'].forEach(s => $(s).addEventListener('input', draw));
     $('#tbl thead').addEventListener('click', e => { const th = e.target.closest('th'); if (!th) return; const k = +th.dataset.k; if (sortK === k) sortD *= -1; else { sortK = k; sortD = (k === 11 || k === 9) ? -1 : 1; } draw(); });
     $('#tbl tbody').addEventListener('click', e => { const tr = e.target.closest('tr'); if (tr) pick(+tr.dataset.p); });
     $('#tbl tbody').addEventListener('keydown', e => { if (e.key === 'Enter') { const tr = e.target.closest('tr'); if (tr) pick(+tr.dataset.p); } });
@@ -288,5 +296,5 @@ function renderCountry() {
       <a class="report" href="${esc(issueUrl('[' + cc + '] Report: ' + m.name, {country: slug}))}" target="_blank" rel="noopener">Report a problem with this country</a></div>`;
   }
 }
-let PEOPLE_SEL = null;
+let PEOPLE_SEL = null, PEOPLE_AREA = '';
 boot();

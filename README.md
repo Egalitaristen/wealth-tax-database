@@ -9,11 +9,11 @@ An open, sourced database of who publicly backs an actual wealth tax, built coun
 | Path | What it holds |
 |---|---|
 | `data/<iso2>/` | One database per country or region, for example `data/gb/`. Plain CSV files plus a `meta.json`. |
-| `skill/` | The research workflow (`SKILL.md`), source playbook, templates and the `wtdb.py` helper. Works for people and for AI assistants. |
+| `skill/` | The research workflow (`SKILL.md`), source playbook, country examples and helper scripts (`wtdb.py`, `profiles_wikidata.py`, `topo_to_boundaries.py`). Works for people and for AI assistants. |
 | `site/` | The static front end (world map, country views). |
 | `scripts/build_site.py` | Turns `data/` into the site data. No framework, standard library only. |
 
-The United Kingdom (`data/gb/`) is the first country, built over 20 runs with Claude. It is a work in progress: many rows are marked `verified=n`.
+Two countries so far, both built with Claude and both work in progress: the United Kingdom (`data/gb/`, with a council-level map) and the United States (`data/us/`, federal and state level, with a state map). Most rows are still marked `verified=n`.
 
 ## What counts
 
@@ -31,12 +31,15 @@ The United Kingdom (`data/gb/`) is the first country, built over 20 runs with Cl
    ```bash
    python skill/scripts/wtdb.py init data/de --area "Germany"
    ```
-4. Do the research, by hand or with an AI assistant, and fill the tables.
+4. Do the research, by hand or with an AI assistant, and fill the tables. Work on a branch, never on `main`.
 5. Check your work:
    ```bash
    python skill/scripts/wtdb.py validate data/de
+   python skill/scripts/wtdb.py checkquotes data/de --run R001     # quotes really are on the pages
+   python skill/scripts/profiles_wikidata.py data/de               # websites and socials from Wikidata
    ```
-6. Open a pull request. New rows start unverified; a second person confirms them.
+6. For a local map, build a boundary file (see `skill/scripts/topo_to_boundaries.py`) and name it in `meta.json`.
+7. Open a pull request. New rows start unverified; a second person confirms them.
 
 ## Build the site locally
 
