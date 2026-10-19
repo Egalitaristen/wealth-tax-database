@@ -52,3 +52,10 @@ Other `doktyp` values worth the same search: `ip` (interpellation), `fr` (writte
 - Most others publish protocols as PDF links on Sitevision pages (Botkyrka, Solna, Täby, Vallentuna, Katrineholm, Oxelösund ...). Their site search often covers pages only (Solna, Järfälla, Tyresö, Haninge, Södertälje, Uppsala return nothing for the word) so it does not prove absence. Search-engine queries limited to a municipality's domain return unrelated protocols.
 - A hit in an attachment (SOU, PM, report) is a mention. The useful hits are reservations, motions, interpellations and debate protocols by named councillors.
 - Local actors are placed at the municipality: `location = Sweden > Stockholms län > Stockholm`.
+
+## Tooling that changed what was reachable
+
+- `vansterpartiet.se` and its PDFs return 403 to curl, WebFetch and Playwright's request API, but `skill/scripts/fetch_page.py` (headless Chromium, file fetched with `fetch()` from inside the site's own page) reads them: the election manifesto 2026, the congress motion book and the board's answers.
+- DN Debatt articles can be read in full the same way (no login needed for the ones tried); DN, SvD, Aftonbladet and Expressen are still rejected by the web-search tool, so the search itself must be run on the site: `fetch_page.py "<site search URL>" --consent --wait 5000`. Mind the spelling of search words (an encoded typo returns "0 hits" that looks like a result).
+- `wtdb.py checkquotes` now reads PDFs (pdftotext, with line-end hyphens joined) and retries in the browser when a page differs for plain clients.
+- Network limits remain: attac.se, fairfinance.se, kristnafredsrorelsen.se and rattvisepartiet.se are unreachable from this environment even with a browser.

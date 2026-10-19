@@ -748,9 +748,59 @@ def _plain(s):
     return re.sub(r"\s+", " ", s).strip()
 
 
+def _pdf_to_text(data):
+    """Text of a PDF via poppler's pdftotext when installed, else None."""
+    import shutil, subprocess, tempfile
+    if not shutil.which("pdftotext"):
+        return None
+    with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
+        f.write(data)
+        path = f.name
+    try:
+        return subprocess.run(["pdftotext", path, "-"], capture_output=True, text=True).stdout
+    finally:
+        os.unlink(path)
+
+
+def _browser_text(url):
+    """Fallback for pages a plain client cannot read (403, JavaScript): skill/scripts/fetch_page.py, if playwright is installed."""
+    import importlib.util, subprocess
+    helper = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fetch_page.py")
+    if not os.path.exists(helper) or importlib.util.find_spec("playwright") is None:
+        return None
+    try:
+        r = subprocess.run([sys.executable, helper, url, "--text", "--no-extract"], capture_output=True, text=True, timeout=180)
+    except Exception:
+        return None
+    return r.stdout if r.returncode == 0 and r.stdout.strip() else None
+
+
+def _fetch_for_check(u, timeout):
+    """Page or PDF text for a quote check: plain HTTP first, then pdftotext for PDFs, then the headless browser."""
+    import urllib.request
+    raw = None
+    try:
+        req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0 (wtdb quote check)"})
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            raw = resp.read()
+            ctype = resp.headers.get("Content-Type", "").lower()
+        if raw[:4] == b"%PDF" or "pdf" in ctype:
+            text = _pdf_to_text(raw)
+            return _plain(text) if text else None
+        return _plain(raw.decode("utf-8", "ignore"))
+    except Exception:
+        text = _browser_text(u)
+        return _plain(text) if text else None
+
+
+def _dehyphenate(page):
+    """Line-end hyphens in PDFs split words ("miljardärs- skatt"); join them for a second comparison."""
+    return re.sub(r"(?<=\w)- (?=[a-zåäö])", "", page)
+
+
 def cmd_checkquotes(a):
-    """Fetch each source page and check that the quote really appears on it (raw page text, not a summary)."""
-    import random, urllib.request
+    """Fetch each source page (HTML, PDF via pdftotext, walled pages via the headless browser if installed) and check that the quote appears on it."""
+    import random
     need_dir(a.dir)
     rows = [e for e in load(a.dir, "evidence") if e.get("source_url")]
     if a.run:
@@ -760,26 +810,30 @@ def cmd_checkquotes(a):
     if a.sample and len(rows) > a.sample:
         random.seed(a.seed)
         rows = random.sample(rows, a.sample)
-    cache, ok, miss, skip = {}, 0, [], []
+    cache, browser_cache, ok, miss, skip = {}, {}, 0, [], []
     for e in rows:
         u = e["source_url"]
         if u not in cache:
-            try:
-                req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0 (wtdb quote check)"})
-                with urllib.request.urlopen(req, timeout=a.timeout) as resp:
-                    ctype = resp.headers.get("Content-Type", "")
-                    cache[u] = None if "pdf" in ctype.lower() else _plain(resp.read().decode("utf-8", "ignore"))
-            except Exception as ex:
-                cache[u] = None
+            cache[u] = _fetch_for_check(u, a.timeout)
         page = cache[u]
         if page is None:
             skip.append(e["evidence_id"]); continue
         parts = [p for p in re.split(r"…|\.\.\.", _plain(e["quote_original"])) if len(p.split()) >= 3]
-        if parts and all(p.strip(" .") in page for p in parts):
+
+        def found(pg):
+            return bool(parts) and all(any(p.strip(" .") in v for v in (pg, _dehyphenate(pg))) for p in parts)
+
+        if not found(page):
+            # some sites serve a consent or shortened variant to plain clients: try the headless browser before calling it a miss
+            if u not in browser_cache:
+                bt = _browser_text(u)
+                browser_cache[u] = _plain(bt) if bt else None
+            page = browser_cache[u] or page
+        if found(page):
             ok += 1
         else:
             miss.append(e["evidence_id"])
-    print(f"Checked {len(rows)} rows: {ok} found on the page, {len(miss)} NOT found, {len(skip)} skipped (PDF, blocked or error)")
+    print(f"Checked {len(rows)} rows: {ok} found on the page, {len(miss)} NOT found, {len(skip)} skipped (unreadable: no pdftotext, blocked or error)")
     if miss:
         print("Not found:", ", ".join(miss))
     if skip:
