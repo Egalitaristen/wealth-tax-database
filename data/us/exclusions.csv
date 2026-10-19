@@ -1,0 +1,5 @@
+exclusion_id,name,reason,detail,source_url,run_id
+X0001,LABOR TODAY INTERNATIONAL (WFTU),insufficient_evidence,Listed on the Prop 40 roster but identity and role unclear (appears to be the WFTU-affiliated publication); not added,https://yeson40.com/endorsements/,R001
+X0002,Raúl Grijalva,deceased,Wikidata Q946606 records death on 2025-03-13; he cosponsored the Ultra-Millionaire Tax Act in 2021 and 2024,https://www.wikidata.org/wiki/Q946606,R003
+X0003,Bill Pascrell,deceased,Wikidata Q529090 records death on 2024-08-21; cosponsored a billionaire-tax bill while in office,https://www.wikidata.org/wiki/Q529090,R003
+X0004,Sheila Jackson Lee,deceased,Wikidata Q461734 records death on 2024-07-19; cosponsored a billionaire-tax bill while in office,https://www.wikidata.org/wiki/Q461734,R003
