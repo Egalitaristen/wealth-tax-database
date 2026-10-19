@@ -168,11 +168,12 @@ def build_country(folder):
     verified = sum(1 for e in ev if e["verified"] == "y")
     last = max([r.get("date", "") for r in runs] or [""])
     done = sum(1 for g in geo if g["sweep_status"] == "done")
+    with_sup = len(sup_by_geo)
     grades = collections.Counter(p[8] for p in P)
     summary = dict(slug=slug, iso2=meta.get("iso2", slug.split("-")[0].upper()), name=meta["name"],
                    status=meta.get("status", ""), lead=meta.get("lead", ""), notes=meta.get("notes", ""),
                    supporters=len(P), evidence=len(E), verified=verified, A=grades["A"], B=grades["B"], C=grades["C"],
-                   units=len(geo), units_done=done, updated=last, excluded=len(excl))
+                   units=len(geo), units_done=done, units_with_supporters=with_sup, updated=last, excluded=len(excl))
     country = dict(meta=summary, P=P, E=E, C=C, vb=vb, O=O, L=L)
     return summary, country
 

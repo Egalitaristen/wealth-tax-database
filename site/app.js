@@ -131,7 +131,7 @@ function worldHome() {
 function worldSide(c) {
   $('#wside').innerHTML = `<h2>${esc(c.name)}</h2><p><span class="pill">${esc(c.status)}</span> <span class="pill">${c.iso2}</span></p>
    <p style="font-size:14px">${c.supporters} supporters (${c.A} explicit, ${c.B} named, ${c.C} implied) from ${c.evidence} sourced rows. ${c.verified} of ${c.evidence} rows checked by a person.</p>
-   ${c.units ? `<p class="note">${c.units_done} of ${c.units} local areas read.</p>` : ''}
+   ${c.units ? `<p class="note">Supporters recorded in ${c.units_with_supporters} of ${c.units} areas; ${c.units_done} fully read.</p>` : ''}
    ${c.notes ? `<p class="note">${esc(c.notes)}</p>` : ''}
    <p><a href="#${esc(c.slug)}"><b>Open the ${esc(c.name)} database</b></a></p>
    <a class="report" href="${esc(issueUrl('[' + c.iso2 + '] Report: country data', {country: c.slug}))}" target="_blank" rel="noopener">Report a problem with this country</a>`;
@@ -288,7 +288,7 @@ function renderCountry() {
       <p><span class="g gA">A</span> explicit: a formal act or a stated design, such as a vote, signed motion, party policy or a named rate. <span class="g gB">B</span> named: backs a wealth tax without a design. <span class="g gC">C</span> implied: wording that suggests support without naming a wealth tax.</p>
       <h3 style="margin-top:20px">Gaps and caveats</h3><ul>
       <li>${unver} of ${m.evidence} sourced rows are not yet checked by a person against the original page.</li>
-      ${m.units ? `<li>${m.units_done} of ${m.units} local areas have been fully read. A blank area means unread, not opposed.</li>` : ''}
+      ${m.units ? `<li>Supporters are recorded in ${m.units_with_supporters} of ${m.units} areas, and ${m.units_done} have been fully read. A blank area means unread, not opposed.</li>` : ''}
       <li>${m.excluded} people and organisations were looked at and excluded, for example opponents, sceptics and people who have died.</li>
       <li>People are assumed alive unless a death record was found; those people are removed.</li>
       <li>${esc(m.notes || '')}</li></ul>
