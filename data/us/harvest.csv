@@ -1,0 +1,8 @@
+harvest_id,title,list_type,url,date,est_size,status,actors_added,notes
+H0001,"Ultra-Millionaire Tax Act (Warren/Jayapal/Boyle, 2021) sponsors and cosponsors",cosponsors,https://www.warren.senate.gov/newsroom/press-releases/warren-jayapal-boyle-introduce-ultra-millionaire-tax-on-fortunes-over-50-million,2021-03-01,10,done,10,Names from the sponsor's press release; Congress.gov cosponsor list for later Congresses not yet harvested.
+H0002,"Ultra-Millionaire Tax Act: Congress.gov cosponsor lists, 117th-119th Congress",cosponsors,https://www.congress.gov,,,queued,,
+H0003,"Billionaires Income Tax (Wyden, unrealised gains) cosponsors",cosponsors,https://www.finance.senate.gov,,,queued,,
+H0004,"California 2026 Billionaire Tax Act (Prop 40): endorsers, coalition members, labor and party endorsements",coalition_members,https://abc7news.com/post/despite-gov-gavin-newsoms-opposition-california-democrats-endorse-prop-40-billionaire-tax-measure/19621890/,,,queued,,Opened ABC7 (2026-08-04) for design and one quote only; find the official campaign endorser list
+H0005,Patriotic Millionaires members and letters (US),open_letter,https://patrioticmillionaires.org,,,queued,,
+H0006,Economists' letters supporting wealth tax / G20 billionaire minimum tax (US signatories),open_letter,,,,queued,,
+H0007,"State wealth tax bills (e.g. Washington SB 5486 / HB 1473, 2023) sponsors",cosponsors,,,,queued,,Deloitte summary lists several states; open each legislature's bill page

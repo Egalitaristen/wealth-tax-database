@@ -1,0 +1,11 @@
+actor_id,name,kind,actor_type,other_types,role,affiliation,party,affiliation_actor_id,country,level,geo_unit_id,wikidata_qid,website,status,alive_checked,prominence,notes,added_run,updated
+A0001,Elizabeth Warren,person,politician,,US Senator (D-MA),,Democratic Party,,US,national,,Q434706,,active,y,national,,R001,2026-10-19
+A0002,Bernie Sanders,person,politician,,US Senator (I-VT),,Independent,,US,national,,Q359442,,active,y,national,,R001,2026-10-19
+A0003,Sheldon Whitehouse,person,politician,,US Senator (D-RI),,Democratic Party,,US,national,,Q652066,,active,y,national,,R001,2026-10-19
+A0004,Jeff Merkley,person,politician,,US Senator (D-OR),,Democratic Party,,US,national,,Q1368405,,active,y,national,,R001,2026-10-19
+A0005,Kirsten Gillibrand,person,politician,,US Senator (D-NY),,Democratic Party,,US,national,,Q22222,,active,y,national,,R001,2026-10-19
+A0006,Brian Schatz,person,politician,,US Senator (D-HI),,Democratic Party,,US,national,,Q1827902,,active,y,national,,R001,2026-10-19
+A0007,Ed Markey,person,politician,,US Senator (D-MA),,Democratic Party,,US,national,,Q1282411,,active,y,national,,R001,2026-10-19
+A0008,Mazie Hirono,person,politician,,US Senator (D-HI),,Democratic Party,,US,national,,Q16476,,active,y,national,,R001,2026-10-19
+A0009,Pramila Jayapal,person,politician,,US Representative (D-WA-07),,Democratic Party,,US,national,,Q18978140,,active,y,national,,R001,2026-10-19
+A0010,Brendan Boyle,person,politician,,US Representative (D-PA-02),,Democratic Party,,US,national,,Q4960876,,active,y,national,,R001,2026-10-19
