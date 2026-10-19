@@ -58,3 +58,6 @@ A0056,SSU (Socialdemokratiska Ungdomsförbundet),organisation,party,,Youth wing 
 A0057,S-studenter (Socialdemokratiska studentförbundet),organisation,party,,Student federation of the Social Democrats,,Social Democrats,,SE,national,Sweden,,,active,na,national,Student wing; not the position of the Social Democratic party.,R003,2026-10-19
 A0058,Elfva Barrio,person,campaigner,,Chair of S-studenter (since 2024),S-studenter (Socialdemokratiska studentförbundet),Social Democrats,A0057,SE,national,Sweden,Q124098027,,active,y,national,,R003,2026-10-19
 A0059,LO (Landsorganisationen),organisation,union,,Swedish Trade Union Confederation,,,,SE,national,Sweden,,https://www.lo.se,active,na,national,Position reported by the press from 2019; LO's own policy page not yet reachable (404). Re-check in the next run.,R003,2026-10-19
+A0060,Ung Vänster,organisation,party,,Youth wing of the Left Party,Vänsterpartiet,Left Party,A0001,SE,national,Sweden,,https://ungvanster.se,active,na,national,,R003,2026-10-19
+A0061,Grön Ungdom,organisation,party,,Youth wing of the Green Party,Miljöpartiet de gröna,Green Party,A0002,SE,national,Sweden,,https://gronungdom.se,active,na,national,,R003,2026-10-19
+A0062,Feministiskt initiativ,organisation,party,,Political party (outside the Riksdag),,Feminist Initiative,,SE,national,Sweden,,https://feministerna.se,active,na,national,,R003,2026-10-19
