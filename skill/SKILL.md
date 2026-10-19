@@ -14,6 +14,7 @@ Files in this skill (use them if present; the rules in this file are sufficient 
 - `references/area-profile-template.md` — what to establish about an area before searching
 - `references/countries/gb.md` — UK levels of government, sources, and the local sweep list (worked example for other countries)
 - `references/countries/us.md` — a federal system (states, ballot measures, coalition letters), and what worked there
+- `references/countries/se.md` — a unitary state with open parliamentary data, 21 regions and 290 municipalities
 - `scripts/wtdb.py` — Python helper (stdlib; `openpyxl` only for xlsx export): `init`, `add`, `set`, `validate`, `dedupe`, `merge`, `checkquotes`, `status`, `export`
 - `scripts/profiles_wikidata.py` — fills `profiles.csv` (websites, socials, Wikipedia) from Wikidata IDs
 - `scripts/topo_to_boundaries.py` — turns a TopoJSON of areas into `boundaries.json`, so the country gets a local map on the site

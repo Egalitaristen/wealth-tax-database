@@ -1,0 +1,8 @@
+{
+  "name": "Sweden",
+  "iso2": "SE",
+  "lead": "Egalitaristen",
+  "status": "in progress",
+  "boundaries": "boundaries.json",
+  "notes": "Scope: national (Riksdag, government), European Parliament, regional (21 län) and local (290 kommuner) level. First pass R001 (2026-10-19) covered the Riksdag motion archive only; the regional and local sweep has not started."
+}
