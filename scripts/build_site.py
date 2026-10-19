@@ -7,7 +7,7 @@ Reads every folder in data/ that has a meta.json, writes one JSON file per count
 world.json (country summary and projected world map paths), and copies the site files.
 Needs only the standard library, plus pycountry for ISO codes (pip install pycountry).
 """
-import argparse, csv, hashlib, json, math, shutil, sys, collections, datetime
+import argparse, csv, hashlib, json, math, re, shutil, sys, collections, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -110,6 +110,44 @@ def numeric_for(iso2):
     return ""
 
 
+# ---------- locations: "Country > Region > Place" paths resolved against geo_units.csv ----------
+def _bare(n):
+    return re.sub(r"\s*\(.*$", "", n or "").strip().lower()
+
+
+def geo_index(geo):
+    by_id = {g["geo_unit_id"]: g for g in geo}
+    kids, roots = collections.defaultdict(dict), {}
+    for g in geo:
+        if g.get("parent_id") and g["parent_id"] in by_id:
+            kids[g["parent_id"]].setdefault(_bare(g["name"]), g["geo_unit_id"])
+        elif g.get("unit_type") == "country":
+            roots[_bare(g["name"])] = g["geo_unit_id"]
+    return by_id, kids, roots
+
+
+def resolve_location(location, idx):
+    by_id, kids, roots = idx
+    parts = [p.strip() for p in (location or "").split(">") if p.strip()]
+    uid = roots.get(_bare(parts[0])) if parts else None
+    if not uid:
+        return "", 0, parts
+    depth = 1
+    for seg in parts[1:]:
+        nxt = kids.get(uid, {}).get(_bare(seg))
+        if not nxt:
+            break
+        uid, depth = nxt, depth + 1
+    return uid, depth, parts[depth:]
+
+
+def unit_path(uid, by_id):
+    names, seen = [], set()
+    while uid and uid in by_id and uid not in seen:
+        seen.add(uid); names.append(re.sub(r"\s*\(.*$", "", by_id[uid]["name"]).strip()); uid = by_id[uid]["parent_id"]
+    return " > ".join(reversed(names))
+
+
 # ---------- per-country data ----------
 def build_country(folder):
     meta = json.load(open(folder / "meta.json", encoding="utf-8"))
@@ -120,7 +158,8 @@ def build_country(folder):
         if p["url"].startswith("https://"):
             prof[p["actor_id"]].append([p["platform"], p["url"]])
     links, runs, excl = rd(folder / "links.csv"), rd(folder / "runs.csv"), rd(folder / "exclusions.csv")
-    gname = {g["geo_unit_id"]: g["name"] for g in geo}
+    gidx = geo_index(geo)
+    by_id = gidx[0]
     by = collections.defaultdict(list)
     for e in ev:
         by[e["actor_id"]].append(e)
@@ -137,7 +176,7 @@ def build_country(folder):
         dates = sorted(x["date"] for x in es if x["date"])
         designs = sorted({x["wt_design"] for x in es if x["wt_design"]})
         P.append([a["actor_id"], a["name"], a["kind"], a["actor_type"], a["role"], a["affiliation"], a["level"],
-                  gname.get(a["geo_unit_id"], ""), "ABC"[best], len(es), dates[0] if dates else "",
+                  a.get("location", ""), "ABC"[best], len(es), dates[0] if dates else "",
                   dates[-1] if dates else "", designs, a["notes"], a["website"], a.get("party", ""),
                   [x.strip() for x in a.get("other_types", "").split(";") if x.strip()], prof.get(a["actor_id"], [])])
 
@@ -145,35 +184,47 @@ def build_country(folder):
     bfile = meta.get("boundaries")
     if bfile and (folder / bfile).exists():
         bounds = json.load(open(folder / bfile, encoding="utf-8"))
-    units = {g["name"]: g for g in geo}
-    sup_by_geo = collections.defaultdict(list)
+    units = {_bare(g["name"]): g for g in geo}
+    here, inside = collections.defaultdict(list), collections.defaultdict(list)
     for a in actors:
-        if a["geo_unit_id"] in gname:
-            sup_by_geo[gname[a["geo_unit_id"]]].append(a["actor_id"])
+        if a["actor_id"] not in by:
+            continue
+        uid = resolve_location(a.get("location", ""), gidx)[0]
+        if uid:
+            here[uid].append(a["actor_id"])
+        seen = set()
+        while uid and uid in by_id and uid not in seen:  # an actor counts for its unit and every unit above it
+            seen.add(uid); inside[uid].append(a["actor_id"]); uid = by_id[uid]["parent_id"]
+    roots = set(gidx[2].values())
     C, vb, mapped = [], None, set()
     if bounds:
         vb = bounds["viewBox"]
         for u in bounds["units"]:
-            # exact name, or the boundary name followed by " (" (e.g. "Alabama" matches "Alabama (state legislature ...)")
-            g = units.get(u["name"]) or next((v for k, v in units.items() if k.startswith(u["name"] + " (")), None)
+            g = units.get(_bare(u["name"]))
             if not g:
                 continue
-            mapped.add(g["name"])
-            ids = sup_by_geo.get(g["name"], [])
+            mapped.add(g["geo_unit_id"])
+            ids = inside.get(g["geo_unit_id"], [])
             state = "support" if ids else ("clear" if g["sweep_status"] == "done" else "open")
-            C.append([u["name"], u.get("code", ""), state, g["sweep_status"], g["hits"], g["notes"][:600], ids, u["path"]])
-    O = [[g["name"], g["level"], g["sweep_status"], g["notes"][:500], sup_by_geo[g["name"]]]
-         for g in geo if g["name"] not in mapped and sup_by_geo.get(g["name"])]
+            C.append([u["name"], u.get("code", ""), state, g["sweep_status"], g["hits"], g["notes"][:600], ids, u["path"],
+                      unit_path(g["geo_unit_id"], by_id)])
+    O = []
+    for g in geo:
+        uid = g["geo_unit_id"]
+        if uid in mapped or not here.get(uid):
+            continue
+        name = g["name"] + (" (country level)" if uid in roots else "")
+        O.append([name, g["level"], g["sweep_status"], g["notes"][:500], here[uid], unit_path(uid, by_id)])
     L = [[l["from_actor_id"], l["to_actor_id"], l["link_type"], l["note"]] for l in links]
     verified = sum(1 for e in ev if e["verified"] == "y")
     last = max([r.get("date", "") for r in runs] or [""])
     done = sum(1 for g in geo if g["sweep_status"] == "done")
-    with_sup = len(sup_by_geo)
+    with_sup = sum(1 for u, ids in inside.items() if ids and u not in roots)
     grades = collections.Counter(p[8] for p in P)
     summary = dict(slug=slug, iso2=meta.get("iso2", slug.split("-")[0].upper()), name=meta["name"],
                    status=meta.get("status", ""), lead=meta.get("lead", ""), notes=meta.get("notes", ""),
                    supporters=len(P), evidence=len(E), verified=verified, A=grades["A"], B=grades["B"], C=grades["C"],
-                   units=len(geo), units_done=done, units_with_supporters=with_sup, updated=last, excluded=len(excl))
+                   units=len(geo) - len(roots), units_done=done, units_with_supporters=with_sup, updated=last, excluded=len(excl))
     country = dict(meta=summary, P=P, E=E, C=C, vb=vb, O=O, L=L)
     return summary, country
 

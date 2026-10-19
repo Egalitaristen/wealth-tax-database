@@ -51,6 +51,10 @@ Anyone can open a [data report](../../issues/new?template=data-report.yml). Main
 
 For politicians, fill the `party` column with the party's common English name (`Labour`, `Green Party`, `Independent` if none), one name per party, so the site can filter on it. `validate` warns when a politician has no party.
 
+## Location
+
+Every actor has a `location` path from the country down, for example `United States > California > Camarillo` or `United Kingdom > London > Hackney`. Give the finest place you can prove and stop there: a state if you only know the state, just the country for a national group. A legislator's location is the place they represent, not the institution. The country root and the register units are in `geo_units.csv`; places not in the register stay as text and resolve when that layer is added. `validate` checks that the path starts at the country root.
+
 ## More than one type
 
 Pick the main role for `actor_type` and list any others in `other_types`, separated by `;` (for example `journalist` with `economist`). The site filters and counts a person under every type they hold.

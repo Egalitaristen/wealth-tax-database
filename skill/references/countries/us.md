@@ -8,7 +8,7 @@ A second worked example, next to the UK. It shows what changes in a federal coun
 |---|---|---|
 | national | US Congress; the federal executive and agencies | Bills, cosponsors and roll calls |
 | region | The 50 states and DC | Name each unit like `Alabama (state legislature and state government)` so the boundary file can match on `Alabama` |
-| local | Counties, cities, school boards | Out of scope in the first run. Actors found here (a mayor, a city council, a county party) are still recorded, with `level=local` and the state as `geo_unit_id` |
+| local | Counties, cities, school boards | Out of scope in the first run. Actors found here (a mayor, a city council, a county party) are still recorded, with `level=local` and a `location` such as `United States > California > Camarillo`; the city stays as place text until that layer is loaded |
 
 The first run chose **national plus state level** and said so in `meta.json` and the area profile. That is a good pattern: pick a depth, write it down, and load only that depth into `geo_units.csv`.
 
