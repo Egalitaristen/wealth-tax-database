@@ -1,6 +1,6 @@
-# Wealth Tax Map
+# Wealth Tax Database
 
-An open, sourced database of who publicly backs an actual wealth tax, built country by country. Each country is a folder of CSV files; a GitHub Action turns them into a [world map and browsable site](https://egalitaristen.github.io/wealth-tax-map/).
+An open, sourced database of who publicly backs an actual wealth tax, built country by country. Each country is a folder of CSV files; a GitHub Action turns them into a [world map and browsable site](https://egalitaristen.github.io/wealth-tax-database/).
 
 > **The data is AI-generated and may be wrong.** Every entry links to a source, and many rows have not yet been checked by a person. If you spot a mistake or want an entry removed, use the **Report** link on the site, or [open an issue](../../issues/new?template=data-report.yml).
 

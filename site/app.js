@@ -1,5 +1,5 @@
 'use strict';
-const REPO = 'Egalitaristen/wealth-tax-map';
+const REPO = 'Egalitaristen/wealth-tax-database';
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const enc = encodeURIComponent;
