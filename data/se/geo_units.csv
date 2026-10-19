@@ -74,7 +74,7 @@ G0072,Boxholm,council,municipality,G0008,,pending,,,,,
 G0073,Åtvidaberg,council,municipality,G0008,,pending,,,,,
 G0074,Finspång,council,municipality,G0008,,pending,,,,,
 G0075,Valdemarsvik,council,municipality,G0008,,pending,,,,,
-G0076,Linköping,council,municipality,G0008,,pending,,,,,
+G0076,Linköping,council,municipality,G0008,,in_progress,R007,2026-10-19,,2,Found via a local-paper debate article (Corren 2026-05-27); council protocols not searched.
 G0077,Norrköping,council,municipality,G0008,,pending,,,,,
 G0078,Söderköping,council,municipality,G0008,,pending,,,,,
 G0079,Motala,council,municipality,G0008,,pending,,,,,
@@ -171,19 +171,19 @@ G0169,Dals-Ed,council,municipality,G0016,,pending,,,,,
 G0170,Färgelanda,council,municipality,G0016,,pending,,,,,
 G0171,Ale,council,municipality,G0016,,pending,,,,,
 G0172,Lerum,council,municipality,G0016,,pending,,,,,
-G0173,Vårgårda,council,municipality,G0016,,pending,,,,,
-G0174,Bollebygd,council,municipality,G0016,,pending,,,,,
+G0173,Vårgårda,council,municipality,G0016,,in_progress,R007,2026-10-19,,1,Found via the Sjuhärad V op-ed (Borås Tidning 2026-07-12); council protocols not searched.
+G0174,Bollebygd,council,municipality,G0016,,in_progress,R007,2026-10-19,,1,Found via the Sjuhärad V op-ed (Borås Tidning 2026-07-12); council protocols not searched.
 G0175,Grästorp,council,municipality,G0016,,pending,,,,,
 G0176,Essunga,council,municipality,G0016,,pending,,,,,
 G0177,Karlsborg,council,municipality,G0016,,pending,,,,,
 G0178,Gullspång,council,municipality,G0016,,pending,,,,,
-G0179,Tranemo,council,municipality,G0016,,pending,,,,,
+G0179,Tranemo,council,municipality,G0016,,in_progress,R007,2026-10-19,,1,Found via the Sjuhärad V op-ed (Borås Tidning 2026-07-12); council protocols not searched.
 G0180,Bengtsfors,council,municipality,G0016,,pending,,,,,
 G0181,Mellerud,council,municipality,G0016,,pending,,,,,
 G0182,Lilla Edet,council,municipality,G0016,,pending,,,,,
-G0183,Mark,council,municipality,G0016,,pending,,,,,
-G0184,Svenljunga,council,municipality,G0016,,pending,,,,,
-G0185,Herrljunga,council,municipality,G0016,,pending,,,,,
+G0183,Mark,council,municipality,G0016,,in_progress,R007,2026-10-19,,1,Found via the Sjuhärad V op-ed (Borås Tidning 2026-07-12); council protocols not searched.
+G0184,Svenljunga,council,municipality,G0016,,in_progress,R007,2026-10-19,,1,Found via the Sjuhärad V op-ed (Borås Tidning 2026-07-12); council protocols not searched.
+G0185,Herrljunga,council,municipality,G0016,,in_progress,R007,2026-10-19,,1,Found via the Sjuhärad V op-ed (Borås Tidning 2026-07-12); council protocols not searched.
 G0186,Vara,council,municipality,G0016,,pending,,,,,
 G0187,Götene,council,municipality,G0016,,pending,,,,,
 G0188,Tibro,council,municipality,G0016,,pending,,,,,
@@ -197,8 +197,8 @@ G0195,Strömstad,council,municipality,G0016,,pending,,,,,
 G0196,Vänersborg,council,municipality,G0016,,pending,,,,,
 G0197,Trollhättan,council,municipality,G0016,,pending,,,,,
 G0198,Alingsås,council,municipality,G0016,,pending,,,,,
-G0199,Borås,council,municipality,G0016,,pending,,,,,
-G0200,Ulricehamn,council,municipality,G0016,,pending,,,,,
+G0199,Borås,council,municipality,G0016,,in_progress,R007,2026-10-19,,1,Found via the Sjuhärad V op-ed (Borås Tidning 2026-07-12); council protocols not searched.
+G0200,Ulricehamn,council,municipality,G0016,,in_progress,R007,2026-10-19,,1,Found via the Sjuhärad V op-ed (Borås Tidning 2026-07-12); council protocols not searched.
 G0201,Åmål,council,municipality,G0016,,pending,,,,,
 G0202,Mariestad,council,municipality,G0016,,pending,,,,,
 G0203,Lidköping,council,municipality,G0016,,pending,,,,,
