@@ -19,6 +19,27 @@ body:
         - Both
     validations:
       required: true
+  - type: dropdown
+    id: depth
+    attributes:
+      label: Depth
+      description: A seed finds the most prominent supporters in every layer and plans the next runs. It is the right start.
+      options:
+        - Seed (recommended)
+        - Standard
+        - Exhaustive
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - National only
+        - National and regional
+        - National, regional and local
+    validations:
+      required: true
   - type: textarea
     id: notes
     attributes:

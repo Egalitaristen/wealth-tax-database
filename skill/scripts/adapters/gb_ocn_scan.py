@@ -1,5 +1,5 @@
 """Scan full-council meetings on opencouncil.network for wealth tax terms.
-Usage: python scripts/ocn_scan.py OUT.json slug [slug:committee1,committee2 ...]
+Usage: python skill/scripts/adapters/gb_ocn_scan.py OUT.json slug [slug:committee1,committee2 ...]
 Env: OCN_OUT (output and cache dir, default data/ocn), OCN_MIN_YEAR (default 2022).
 Rate-limited to one request per 0.9 s; retries on 429. Text on that site is AI-generated from council records and
 many councils have no summaries (only document titles and attendees), so hits are leads and silence is weak evidence."""

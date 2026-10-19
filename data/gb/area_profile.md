@@ -81,7 +81,7 @@ Candidates only, not assumed supporters: Tax Justice UK, Patriotic Millionaires 
 ## 14. Local sweep notes (run 8, 2026-10-18)
 - **English councils:** 206 scanned on Open Council Network from 2022, no new wealth tax motion found beyond Hackney, Lambeth, Islington, Newham, Calderdale and Leeds. Detection is weak where the site has no meeting summaries (180 of 264 councils): only attendee lists and document titles are searchable. Those units are in_progress, not done.
 - **Councils not on Open Council Network (about 37 English ones):** a handful were checked with one web search each (Norwich, Warrington, Colchester, Chelmsford, Luton, Warwick, Derby, Hartlepool, Stockton-on-Tees and five counties) with nothing found; the rest have not been searched.
-- **Scanner:** `scripts/ocn_scan.py` now filters to meetings from 2022 (set OCN_MIN_YEAR) and lists councils' full-council committees by name pattern; councils with unusual committee names need `slug:committee` arguments.
+- **Scanner:** `skill/scripts/adapters/gb_ocn_scan.py` (was `scripts/ocn_scan.py`) now filters to meetings from 2022 (set OCN_MIN_YEAR) and lists councils' full-council committees by name pattern; councils with unusual committee names need `slug:committee` arguments.
 
 ## 15. Layer pass notes (run 9, 2026-10-18)
 - **Civil society:** the Bond letter of 27 Feb 2025 (146 INGO leaders) is the largest single source of civil-society supporters; its wealth tax paragraph is a side argument in a letter about aid cuts. Tax Justice UK, Oxfam GB, Christian Aid, Save the Children and others signed through their leaders.

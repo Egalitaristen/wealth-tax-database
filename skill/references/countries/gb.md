@@ -1,10 +1,10 @@
 # United Kingdom — levels, sources and the local sweep
 
-A worked example. Other countries' notes can follow the same shape (add `references/countries/<country>.md`). Check every URL still works and every structural fact is current before relying on it; government structures change.
+A worked example of an **Exhaustive** run. The UK sweep went through every council because UK councils pass wealth-tax motions and publish searchable minutes. That is not typical: in most countries, start with a sample (SKILL.md 6.5). Other countries' notes can follow the same shape (add `references/countries/<country>.md`). Check every URL still works and every structural fact is current before relying on it; government structures change.
 
 ## Levels of government and the geography register
 
-Load every unit into `geo_units.csv`, from the official current lists, with `parent_id` so the sweep can be finished region by region:
+For an Exhaustive run, load every unit into `geo_units.csv`, from the official current lists, with `parent_id` so the sweep can be finished region by region. For a Seed or Standard run, load only the depth you will use:
 
 | Level (`level`) | Units | Notes |
 |---|---|---|
@@ -65,4 +65,4 @@ Official lists: the ONS Open Geography Portal (Local Authority Districts and Cou
 
 - **Parliament Members API** (`members-api.parliament.uk`): look up a current MP by name and constituency; the `/Contact` endpoint publishes the MP's official website and social accounts, which is a safe source for `profiles.csv`. Match on constituency, never on name alone.
 - **Boundaries:** ONS Local Authority Districts (BUC, simplified) in British National Grid coordinates gave `data/gb/boundaries.json`.
-- **Council meetings:** `scripts/ocn_scan.py` flags wealth-tax terms in Open Council Network summaries. Treat hits as leads only; the summaries are AI-generated.
+- **Council meetings:** `skill/scripts/adapters/gb_ocn_scan.py` flags wealth-tax terms in Open Council Network summaries. Treat hits as leads only; the summaries are AI-generated.
