@@ -44,3 +44,11 @@ Other `doktyp` values worth the same search: `ip` (interpellation), `fr` (writte
 - Chamber speeches are the best source for individual V and MP members; quote one sentence of the speech and cite the protocol page with the speech number.
 - Party websites (vansterpartiet.se) return 403 to plain HTTP clients; use a browser for party documents.
 - Web search: use `allowed_domains` per outlet group instead of one broad query. DN, SvD, Aftonbladet and Expressen are rejected by the search tool (crawler-blocked), but Dagens Arena, Arbetet, Flamman, mp.se, arenaide.se and most think-tank sites work. `blocked_domains` removes the same recycled EFN/Realtid/Dagens PS pages.
+
+## Municipal and regional portals (local sweep)
+
+- **MeetingPlus** (Formpipe): `<base>/search?text=<word>*&psize=100&pindex=1`, server-rendered, searches agenda items and attached documents, whole-word so use the trailing `*`. Used by Stockholm (meetingspublic.stockholm.se), Huddinge (sammantraden.huddinge.se), Danderyd (meetingsplus.danderyd.se) and Region Gotland (sammantraden.gotland.se). Adapter: `skill/scripts/meetingplus_scan.py`.
+- **Nacka** has its own protocol search: `https://www.nacka.se/sok?q=<word>*`, documents under `handlingar.nacka.se`.
+- Most others publish protocols as PDF links on Sitevision pages (Botkyrka, Solna, Täby, Vallentuna, Katrineholm, Oxelösund ...). Their site search often covers pages only (Solna, Järfälla, Tyresö, Haninge, Södertälje, Uppsala return nothing for the word) so it does not prove absence. Search-engine queries limited to a municipality's domain return unrelated protocols.
+- A hit in an attachment (SOU, PM, report) is a mention. The useful hits are reservations, motions, interpellations and debate protocols by named councillors.
+- Local actors are placed at the municipality: `location = Sweden > Stockholms län > Stockholm`.

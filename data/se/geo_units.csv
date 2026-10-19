@@ -3,14 +3,14 @@ G0001,Sweden,national,country,,,pending,,,,,
 G0002,Riksdag,national,legislature,G0001,https://www.riksdagen.se,in_progress,R002,2026-10-19,40,51,"R001-R002: motions 2010- (H0001), interpellations, questions, committee reports and 196 plenary protocols (H0003) read for hits. Votes (H0002) only partly checked; EU Parliament, committee hearings and the new 2026/27 term (motions due early October) still to do. Unit stays in_progress until H0002 and the 2026/27 motions are done."
 G0003,Regeringen (Government of Sweden),national,executive,G0001,https://www.regeringen.se,pending,,,,,Tidö government opposes new wealth taxes (to source). Check post-election government (September 2026) in R002.
 G0004,European Parliament (Swedish MEPs),supranational,legislature,G0001,,pending,,,,,Jonas Sjöstedt (V) is a Member of the European Parliament; check his and other Swedish MEPs' statements and votes.
-G0005,Stockholms län,region,county,G0001,,pending,,,,,
+G0005,Stockholms län,region,county,G0001,,in_progress,R005,2026-10-19,4,3,"R005: Region Stockholm (regionfullmäktige) not searched in its own portal; Left Party budget proposals for 2026 (regionstockholm.se) mention no wealth tax. Municipalities done so far: Stockholm, Huddinge, Danderyd, Nacka."
 G0006,Uppsala län,region,county,G0001,,pending,,,,,
 G0007,Södermanlands län,region,county,G0001,,pending,,,,,
 G0008,Östergötlands län,region,county,G0001,,pending,,,,,
 G0009,Jönköpings län,region,county,G0001,,pending,,,,,
 G0010,Kronobergs län,region,county,G0001,,pending,,,,,
 G0011,Kalmar län,region,county,G0001,,pending,,,,,
-G0012,Gotlands län,region,county,G0001,,pending,,,,,
+G0012,Gotlands län,region,county,G0001,,done,R005,2026-10-19,8,0,"R005: same as the municipality: Region Gotland is one body. Portal sammantraden.gotland.se searched; 2 attachment hits, no call."
 G0013,Blekinge län,region,county,G0001,,pending,,,,,
 G0014,Skåne län,region,county,G0001,,pending,,,,,
 G0015,Hallands län,region,county,G0001,,pending,,,,,
@@ -30,7 +30,7 @@ G0028,Österåker,council,municipality,G0005,,pending,,,,,
 G0029,Värmdö,council,municipality,G0005,,pending,,,,,
 G0030,Järfälla,council,municipality,G0005,,pending,,,,,
 G0031,Ekerö,council,municipality,G0005,,pending,,,,,
-G0032,Huddinge,council,municipality,G0005,,pending,,,,,
+G0032,Huddinge,council,municipality,G0005,,done,R005,2026-10-19,8,0,"R005: meeting portal sammantraden.huddinge.se searched (förmögenhetsskatt*, miljardärsskatt*, miljardärskatt*, förmögenhetsbeskattning*): 0 hits in an index of 1000+ documents."
 G0033,Botkyrka,council,municipality,G0005,,pending,,,,,
 G0034,Salem,council,municipality,G0005,,pending,,,,,
 G0035,Haninge,council,municipality,G0005,,pending,,,,,
@@ -38,11 +38,11 @@ G0036,Tyresö,council,municipality,G0005,,pending,,,,,
 G0037,Upplands-Bro,council,municipality,G0005,,pending,,,,,
 G0038,Nykvarn,council,municipality,G0005,,pending,,,,,
 G0039,Täby,council,municipality,G0005,,pending,,,,,
-G0040,Danderyd,council,municipality,G0005,,pending,,,,,
+G0040,Danderyd,council,municipality,G0005,,done,R005,2026-10-19,8,0,R005: meeting portal meetingsplus.danderyd.se searched with the same terms: 0 hits.
 G0041,Sollentuna,council,municipality,G0005,,pending,,,,,
-G0042,Stockholm,council,municipality,G0005,,pending,,,,,
+G0042,Stockholm,council,municipality,G0005,,done,R005,2026-10-19,8,3,"R005: Stockholm city meeting portal full-text search (meetingspublic.stockholm.se, whole-word with wildcard): 21 documents, 18 are attachments (SOU, PM). One support: V reservation in the executive board 2020-09-02 (Lindblom, Mohammed). Others: 2021-04-14 Fi note describing the abolition (no call); 2025-11-18 council protocol, a Moderate attack on V and MP national proposals. Search finds indexed documents only; miljardärsskatt: 0 hits."
 G0043,Södertälje,council,municipality,G0005,,pending,,,,,
-G0044,Nacka,council,municipality,G0005,,pending,,,,,
+G0044,Nacka,council,municipality,G0005,,done,R005,2026-10-19,4,0,"R005: Nacka protocol search (nacka.se/sok, handlingar.nacka.se): 9 protocol hits, none a call for the tax: 2023 consultation answer on household wealth statistics, a Centre Party note in 2018 describing V national policy, and 2000-2004 protocols about the old tax. miljardärsskatt: 0."
 G0045,Sundbyberg,council,municipality,G0005,,pending,,,,,
 G0046,Solna,council,municipality,G0005,,pending,,,,,
 G0047,Lidingö,council,municipality,G0005,,pending,,,,,
@@ -113,7 +113,7 @@ G0111,Oskarshamn,council,municipality,G0011,,pending,,,,,
 G0112,Västervik,council,municipality,G0011,,pending,,,,,
 G0113,Vimmerby,council,municipality,G0011,,pending,,,,,
 G0114,Borgholm,council,municipality,G0011,,pending,,,,,
-G0115,Gotland,council,municipality,G0012,,pending,,,,,
+G0115,Gotland,council,municipality,G0012,,done,R005,2026-10-19,8,0,"R005: Region Gotland portal sammantraden.gotland.se: 2 hits, both attachments (reports), no call for the tax."
 G0116,Olofström,council,municipality,G0013,,pending,,,,,
 G0117,Karlskrona,council,municipality,G0013,,pending,,,,,
 G0118,Ronneby,council,municipality,G0013,,pending,,,,,
