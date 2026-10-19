@@ -87,3 +87,9 @@ One search per state (50 states plus DC) for wealth tax, billionaire tax or net 
 - **Coalition letters:** Americans for Tax Fairness letters for the Billionaires Income Tax (Wyden): Nov 29, 2023 (about 106 signers) and Sept 17, 2025 (about 100 signers, including state groups in AZ, NV, NC, OK, IA, MO, NE, GA, WI, FL, PA, VA, ME, MI). These supply the first records in states that had none.
 - **Still thin:** state fiscal-policy groups' own pages (searches found no wealth-tax statements from Policy Matters Ohio, GBPI, NC BTC, Oklahoma Policy Institute), state Democratic party platforms (none found outside California), journalists and columnists (only Meyerson, Case, Hiltzik).
 
+## Sweeps of R021 (2026-10-19)
+- **Added:** Abdul El-Sayed (MI Senate candidate, own tax agenda), Hamilton Nolan (own newsletter), Bob Lord (IPS paper).
+- **Searched, nothing qualifying:** Michigan, Ohio, Texas, North Carolina, Minnesota Senate candidates other than El-Sayed (no wealth-tax statement found for McMorrow, Stevens, Flanagan, Cooper, Brown); columnists Aleem (critic of Newsom's plan, no own wealth-tax call found), Levitz, Klein, Yglesias; state fiscal-policy groups (Policy Matters Ohio, GBPI, NC BTC, Oklahoma Policy Institute, Wisconsin Budget Project); Indivisible chapters beyond the Sept 2025 letter and the Prop 40 roster; county Democratic parties.
+- **Excluded by scope:** the January 2026 Davos "Time to Win" letter (about 400 millionaires; asks generically to "tax the super rich", not a wealth tax); Booker and Van Hollen tax bills (income tax).
+- **Blocked (403), not retried:** Axios, Bloomberg Opinion, The Hill, dsausa.org.
+
