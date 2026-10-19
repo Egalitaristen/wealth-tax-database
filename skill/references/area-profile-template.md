@@ -1,10 +1,11 @@
 # Area profile — {AREA}
 
-Save as `data/<slug>/area_profile.md`. Every factual line gets a source link. Update it when you learn something new; note the date.
+Save as `data/<slug>/area_profile.md`. Keep it short at first (an hour of work), then grow it. Every factual line gets a source link; mark anything from a search summary only as `[verify]`. Update it when you learn something new, and note the date. This file decides the plan: spend effort where the evidence says support lives.
 
 ## 1. Scope
 - Area: {name}; type: country / sub-national (state, nation, region) / supranational (EU, UN process)
-- Levels of government in scope: e.g. national, devolved, regional, county, council (sub-council: yes / no)
+- Depth: Seed / Standard / Exhaustive (see SKILL.md 6.1)
+- Levels of government in scope: e.g. national, devolved, regional, county, council (sub-council: yes / no), and anything deliberately left out
 - Languages to search in:
 - Date of first run:
 
@@ -29,7 +30,8 @@ For each legislature (national, devolved, regional, supranational members from t
 - Structure (e.g. nations → regions → counties → councils)
 - What each level can tax (this explains why local actors call on national government rather than acting themselves)
 - Official source for the current list of units (to load into `geo_units.csv`)
-- Where council minutes are published (common platforms)
+- Where council minutes are published (common platforms), and whether they are searchable
+- **Local decision** (after a sample of 5 to 10 units): continue / aggregators only / skip, with the yield you saw
 
 ## 6. Search terms
 - Terms per language (start from the playbook table; add local proposal names)
@@ -44,4 +46,6 @@ For each legislature (national, devolved, regional, supranational members from t
 ## 9. Known networks
 - Coalitions, campaigns, union confederations, tax-justice organisations active in the area (candidates to check)
 
-## 10. Notes for future runs
+## 10. Plan for the next runs
+- Layers and lists still to do, ordered by expected yield per hour, with what is blocked. Copy it into `notes_next` of the last run row.
+- Decisions that changed the default workflow, and why.
