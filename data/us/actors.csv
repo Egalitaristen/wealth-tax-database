@@ -727,3 +727,20 @@ A0725,Gavin Newsom,person,politician,,Governor of California,,Democratic Party,,
 A0726,Tony Thurmond,person,politician,,California State Superintendent of Public Instruction; 2026 candidate for governor,,Democratic Party,,US,regional,,,,active,y,regional,,R020,2026-10-19
 A0727,Graham Platner,person,politician,,2026 Democratic nominee for US Senate (Maine),,Democratic Party,,US,national,,,,active,y,national,,R020,2026-10-19
 A0728,Angie Nixon,person,politician,,Florida state representative; 2026 Democratic nominee for US Senate (Florida),,Democratic Party,,US,national,,,,active,y,national,,R020,2026-10-19
+A0729,ACLU of Southern California,organisation,ngo_campaign,,"Civil liberties organisation, Southern California",,,,US,regional,G0007,,,active,na,regional,,R020,2026-10-19
+A0730,Asian Pacific Environmental Network (APEN Action),organisation,ngo_campaign,,"Environmental justice organisation, Bay Area",,,,US,regional,G0007,,,active,na,regional,,R020,2026-10-19
+A0731,Consumer Watchdog,organisation,ngo_campaign,,"Consumer advocacy organisation, California",,,,US,regional,G0007,,,active,na,regional,,R020,2026-10-19
+A0732,Environmental Health Coalition,organisation,ngo_campaign,,"Environmental justice organisation, San Diego",,,,US,regional,G0007,,,active,na,regional,,R020,2026-10-19
+A0733,TransForm,organisation,ngo_campaign,,"Transportation and land-use advocacy organisation, California",,,,US,regional,G0007,,,active,na,regional,,R020,2026-10-19
+A0734,California Communist Party USA,organisation,party,,"State organising committee, Communist Party USA",,,,US,regional,G0007,,,active,na,regional,,R020,2026-10-19
+A0735,Los Angeles County Democratic Party,organisation,party,,"County Democratic party organisation, Los Angeles",,,,US,local,G0007,,,active,na,regional,,R020,2026-10-19
+A0736,50501 Los Angeles,organisation,ngo_campaign,,Los Angeles chapter of the 50501 protest network,,,,US,local,G0007,,,active,na,regional,,R020,2026-10-19
+A0737,Monterey County Weekly editorial board,organisation,media_outlet,,"Alt-weekly newspaper, Monterey County",,,,US,local,G0007,,,active,na,regional,,R020,2026-10-19
+A0738,Press Democrat editorial board,organisation,media_outlet,,"Daily newspaper, Santa Rosa (Sonoma County)",,,,US,local,G0007,,,active,na,regional,,R020,2026-10-19
+A0739,Robert Reich,person,academic,,"Professor emeritus of public policy, UC Berkeley; former US Secretary of Labor",,,,US,national,,,,active,y,national,Alive per October 2026 public events.,R020,2026-10-19
+A0740,Aisha Wahab,person,politician,,US Representative (D-CA-14),,Democratic Party,,US,national,,,,active,y,national,,R020,2026-10-19
+A0741,Celeste Rodriguez,person,politician,,California State Assemblymember (AD-43),,Democratic Party,,US,regional,,,,active,y,regional,,R020,2026-10-19
+A0742,Chris Ward,person,politician,,California State Assemblymember (AD-78),,Democratic Party,,US,regional,,,,active,y,regional,,R020,2026-10-19
+A0743,Michael Hiltzik,person,journalist,,"Business columnist, Los Angeles Times",,,,US,national,,,,active,y,national,Alive on the basis of a 2026 column.,R020,2026-10-19
+A0744,John O'Farrell,person,business_leader,,"Former partner, Andreessen Horowitz",,,,US,national,,,,active,y,regional,Alive on the basis of a 2026 post.,R020,2026-10-19
+A0745,Mistah F.A.B.,person,cultural_figure,,"Rapper, Oakland",,,,US,national,,,,active,y,regional,Alive on the basis of an October 2026 rally.,R020,2026-10-19
