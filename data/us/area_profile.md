@@ -41,3 +41,7 @@ First drafted 2026-10-19 (run R001). Lines marked **[verify]** come from a searc
 ## 10. Notes for future runs
 - Order: H0004 (Prop 40 endorsers, time-sensitive before November), H0002/H0003 (Congress.gov), H0005 (Patriotic Millionaires), H0006 (economists' letters), H0007 (state bills).
 - Quotes are checked by fetching the raw page; the WebFetch tool summarises and can paraphrase.
+
+## Leads to investigate (added R002)
+- The project lead believes unions and DSA chapters have run or backed similar wealth-tax ballot measures in other states. Not yet checked: search state ballot-measure databases (Ballotpedia, state election offices) and DSA chapter and union campaign pages, then queue each as a harvest list.
+- DSA chapters on the Prop 40 roster (California, Los Angeles, Sacramento County, Foothills, Sebastopol, Ventura) are recorded as `party` actors.

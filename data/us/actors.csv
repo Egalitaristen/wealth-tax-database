@@ -9,3 +9,262 @@ A0007,Ed Markey,person,politician,,US Senator (D-MA),,Democratic Party,,US,natio
 A0008,Mazie Hirono,person,politician,,US Senator (D-HI),,Democratic Party,,US,national,,Q16476,,active,y,national,,R001,2026-10-19
 A0009,Pramila Jayapal,person,politician,,US Representative (D-WA-07),,Democratic Party,,US,national,,Q18978140,,active,y,national,,R001,2026-10-19
 A0010,Brendan Boyle,person,politician,,US Representative (D-PA-02),,Democratic Party,,US,national,,Q4960876,,active,y,national,,R001,2026-10-19
+A0011,AFSCME California PEOPLE Committee,organisation,union,,Statewide public-employee political committee,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0012,"California Federation of Labor Unions, AFL-CIO",organisation,union,,California’s AFL-CIO labor federation,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0013,California Nurses Association,organisation,union,,Nurses’ union,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0014,Committee of Interns and Residents / SEIU,organisation,union,,Resident physicians and fellows,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0015,SF Bay Area Federal Unionists Network Hub,organisation,union,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0016,Garment Worker Center,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0017,Inland Empire Black Worker Center,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0018,Los Angeles Black Worker Center,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0019,"Los Angeles College Faculty Guild, AFT Local 1521",organisation,union,,Community-college faculty union,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0020,Pilipino Workers Center,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0021,San Diego County Building and Construction Trades Council,organisation,union,,Coalition of 22 affiliated construction and trade unions,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0022,National Union of Healthcare Workers,organisation,union,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0023,SEIU-UHW,organisation,union,,Healthcare workers union,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0024,Sheet Metal Workers’ (SMART) Local 104,organisation,union,,Sheet metal workers’ union,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0025,Teamsters California,organisation,union,,California Teamsters organization,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0026,United Teachers Los Angeles,organisation,union,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0027,UNITE HERE Local 11,organisation,union,,Southern California local union,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0028,UNITE HERE Local 30,organisation,union,,San Diego local union,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0029,ACCE (Alliance of Californians for Community Empowerment),organisation,ngo_campaign,,,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0030,Clergy and Laity United for Economic Justice,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0031,Esperanza Community Housing,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0032,Los Angeles Alliance for a New Economy (LAANE),organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0033,SAJE,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0034,Middle Class Taxpayers Association,organisation,ngo_campaign,,Taxpayer advocacy organization focused on strengthening the middle class,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0035,United for a Fair Economy,organisation,ngo_campaign,,,,,,US,national,,,,active,na,national,,R001,2026-10-19
+A0036,Responsible Wealth,organisation,ngo_campaign,,,,,,US,national,,,,active,na,national,,R001,2026-10-19
+A0037,California State PTA,organisation,ngo_campaign,,Statewide parent-teacher association,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0038,Voters of Tomorrow,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0039,350 Bay Area,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0040,Art of Living Los Angeles,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0041,Assyrian Democrats of the Bay Area,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0042,California Democratic Party,organisation,party,,California political party,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0043,Democratic Socialists of America – CA,organisation,party,,,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0044,California Green New Deal Coalition,organisation,ngo_campaign,,,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0045,Working Families Party,organisation,party,,Political organization,,,,US,national,,,,active,na,national,,R001,2026-10-19
+A0046,Foothills DSA,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0047,Sacremento State College Democrats,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0048,Contra Costa Defenders Association,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0049,UC Davis College Democrats,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0050,DSA Sebastopol,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0051,Democratic Women of South Orange County,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0052,Disability Voices United,organisation,ngo_campaign,,Community organization,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0053,East County Victory PAC,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0054,Fallbrook Democratic Club,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0055,Feminist Democrats of Sacramento County,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0056,Graduate Social Work Association at San Diego State University,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0057,Green Party of California,organisation,party,,California political party,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0058,Income Movement,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0059,LA County Democratic Party,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0060,Laguna Woods Democratic Club,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0061,Long Beach Latino Democratic Club,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0062,DSA – Los Angeles Chapter,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0063,Our Revolution California,organisation,ngo_campaign,,California progressive organization,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0064,Patriotic Millionaires,organisation,ngo_campaign,,,,,,US,national,,,,active,na,national,,R001,2026-10-19
+A0065,Riverside County Young Democrats,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0066,RootsAction,organisation,ngo_campaign,,,,,,US,national,,,,active,na,national,,R001,2026-10-19
+A0067,Democratic Socialists of America – Sacramento County,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0068,San Diego County Young Democrats,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0069,San Francisco Women’s Political Committee,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0070,San Francisco Young Democrats,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0071,Santa Barbara County Democratic Party,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0072,Solano County Democratic Central Committee,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0073,Sunrise Movement Bay Area,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0074,Sunrise Movement Orange County,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0075,Tehama County Democratic Central Committee,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0076,The Villages Democratic Club,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0077,The Wolves,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0078,Ventura County Democrats,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0079,DSA Ventura,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0080,Ventura County Young Democrats,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0081,Wellstone Democratic Renewal Club,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0082,Wellstone Progressive Democrats of Sacramento,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0083,Young Democrats of America,organisation,party,,Political organization,,,,US,national,,,,active,na,national,,R001,2026-10-19
+A0084,Black Women Organized for Political Action,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0085,Black Women Revolt,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0086,California Black Health Network,organisation,ngo_campaign,,,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0087,California League of United Latin American Citizens,organisation,ngo_campaign,,,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0088,Chinese for Affirmative Action,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0089,Chispa,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0090,Color Of Change,organisation,ngo_campaign,,Community organization,,,,US,national,,,,active,na,national,,R001,2026-10-19
+A0091,Eden Area Indivisble,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0092,Forever Oakland,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0093,Fridays for Future Palo Alto,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0094,Inland Coalition for Immigrant Justice,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0095,Irvine Neighbors,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0096,Long Beach Indivisible,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0097,"LOS AMIGOS DE LA COMUNIDAD, Inc.",organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0098,Mi Familia en Accion,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0099,Organize Sacramento,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0100,"Organizing Rooted in Abolition, Liberation, and Empowerment (ORALE)",organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0101,Oxfam America,organisation,ngo_campaign,,U.S. organization,,,,US,national,,,,active,na,national,,R001,2026-10-19
+A0102,Peace & Justice Center of Sonoma County,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0103,Registered Neighbors Professional Association,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0104,San Leandro United for Democracy,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0105,Siren Immigrant Rights,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0106,Students for Justice in Palestine @ San Diego City College,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0107,Tesla Takedown Sunnyvale,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0108,UNIDOS EN LYNWOOD,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0109,United for Respect,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0110,United Native Americans,organisation,ngo_campaign,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0111,Wilmington CA Indivisible,organisation,ngo_campaign,,,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
+A0112,Alice B. Toklas LGBTQ Dems,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
+A0113,Chris Murphy,person,politician,,"US Senator, Connecticut",,Democratic Party,,US,national,,Q1077594,,active,y,national,,R001,2026-10-19
+A0114,Judy Chu,person,politician,,"U.S. Representative, CA-28",,Democratic Party,,US,national,G0007,,,active,y,national,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0115,Ro Khanna,person,politician,,"US Representative, CA -17",,Democratic Party,,US,national,G0007,,,active,y,national,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0116,Alex Lee,person,politician,,"State Assembly, 24",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0117,Ash Kalra,person,politician,,"State Assembly, 27",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0118,Bob Archuleta,person,politician,,"State Senate, 30",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0119,Chris Rogers,person,politician,,"State Assembly, 2",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0120,Joaquin Arambula,person,politician,,"CA Assembly, 31st District",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0121,Jose Solache,person,politician,,State Assembly District 62,,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0122,Juan Carrillo,person,politician,,"Assembly Member, District 39",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0123,Lena Gonzalez,person,politician,,"State Senate, 33",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0124,Robert Garcia,person,politician,,"State Assembly, 50",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0125,Sally Lieber,person,politician,,California State Board of Equalization,,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0126,Dr. Martita Martinez-Bravo,person,politician,,"Vice Mayor, City of Camarillo",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0127,Eduardo Martinez,person,politician,,Richmond Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0128,Eric Joyce,person,politician,,Oceanside Deputy Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0129,Freddy Puza,person,politician,,Mayor of Culver City,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0130,Gabe Teran,person,politician,,Oxnard Mayor Pro Tem,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0131,Heber Marquez,person,politician,,Maywood Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0132,Jackie Elward,person,politician,,Rohnert Park Vice Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0133,Karina Talamantes,person,politician,,Vice Mayor of City of Sacramento,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0134,Lauren Cazares,person,politician,,La Mesa Vice Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0135,Malia Vella,person,politician,,"Vice Mayor, Alameda (ret.)",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0136,Marisol Rubio,person,politician,,San Ramon Vice Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0137,Michael Luellen,person,politician,,Mayor of Calipatria,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0138,Michele Pryor,person,politician,,Alameda Vice Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0139,Rebecca Saltzman,person,politician,,El Cerrito Mayor Pro Tem,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0140,Sal Solorio-Ruiz,person,politician,,Delano Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0141,Sbeydeh Viveros-Walton,person,politician,,San Leandro Vice Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0142,Sukhdeep Kaur,person,politician,,Mayor of Emeryville,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0143,Tamala Takahashi,person,politician,,Burbank Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0144,Addison Winslow,person,politician,,"Chico City Council, 4",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0145,Alan Wong,person,politician,,San Francisco Board of Supervisors,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0146,Alex Walker-Griffin,person,politician,,Hercules City Councilmember/Vice Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0147,Alexander Matias,person,politician,,Vallego City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0148,Ari Parker,person,politician,,Watsonville City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0149,Brandon Vang,person,politician,,Fresno City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0150,Bryan “Bubba” Fish,person,politician,,Culver City City Council Vice Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0151,C. Tie Gutierrez,person,politician,,"Thousand Oaks City Council, 5",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0152,Caity Maple,person,politician,,Sacramento City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0153,Cameron Sasai,person,politician,,Pinole City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0154,Carolina Chavez,person,politician,,"Chula Vista City Council, 1",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0155,Carolyn Wysinger,person,politician,,El Cerrito City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0156,Cecilia Lunaparra,person,politician,,Berkeley City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0157,Cesar Fernandez,person,politician,,"Chula Vista City Counil, Vice Mayor",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0158,Cesar Zepeda,person,politician,,RIchmond City counil,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0159,Charlene Wange,person,politician,,"Oakland City Council, 2",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0160,Chelsea Byers,person,politician,,Councilmember – City of West Hollywood,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0161,Clarissa Cervantes,person,politician,,Riverside City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0162,Claudia Jimenez,person,politician,,Richmond city council District 6,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0163,Courtney Welch,person,politician,,Emeryville CIty Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0164,Devin Murphy,person,politician,,Pinole City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0165,Doria Robinson,person,politician,,Richmond City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0166,Dotty Nygard,person,politician,,Tracy City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0167,Dr. Tonia Lediju,person,politician,,"Vallego City Council, 3",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0168,Dylan Boldt,person,politician,,San Leandro City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0169,Eddie De La Riva,person,politician,,Maywood City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0170,Elizabeth Alcantar,person,politician,,Cudahy City Council Member,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0171,Fransico Zermeño,person,politician,,Hayward City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0172,Genevieve Suzuki,person,politician,,La Mesa City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0173,George Syrop,person,politician,,Hayward City Council Member,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0174,Gilberto Hurtado,person,politician,,South Gate City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0175,Gloria Partida,person,politician,,Davis City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0176,Henry Lo,person,politician,,Monterey City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0177,Hugo Soto-Martinez,person,politician,,Los Angeles City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0178,Janani Ramachandran,person,politician,,Oakland City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0179,Jane Kim,person,politician,,Former San Francisco County Supervisor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0180,Jay Howard,person,politician,,Vice Mayor Martinez City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0181,Jess Lopez,person,politician,,Port Hueneme City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0182,John Erickson,person,politician,,West Hollywood City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0183,Joni Ricks-Oddie,person,politician,,"Councilmember, City of Long Beach",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0184,Jose Preciado,person,politician,,"Chula Vista City Council, 2",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0185,Jose Rodriguez,person,politician,,National City City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0186,Jose Sanchez,person,politician,,Monterrey Park City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0187,Juan Muñoz-Guevara,person,politician,,Lynwood City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0188,Julie Y,person,politician,,Hayward City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0189,Kalimah Priforce,person,politician,,Councilmember for the City of Emeryville,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0190,Kathleen Treseder,person,politician,,"City Councilmember, Irvine",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0191,Katie Hawley,person,politician,,"Chico City Council, 5",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0192,Konstantine Anthony,person,politician,,Burbank City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0193,Latika Malkani,person,politician,,Orinda City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0194,Laura Hoffmeister,person,politician,,Concord City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0195,Lisa Motoyama,person,politician,,"El Cerrito Councilmember, former Mayor",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0196,Mai Vang,person,politician,,"Sacramento City Council, 8",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0197,Marcus Bush,person,politician,,National City City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0198,Mario Enriquez,person,politician,,"Stockton City Council, 4",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0199,Matthew Soloman,person,politician,,City of Emeryville Council Member,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0200,Mayra Aguiluz,person,politician,,Maywood City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0201,Michael Inzunza,person,politician,,Chula Vista City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0202,Michael Silva,person,politician,,"Vacaville City Council, 3",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0203,Michaela Perez,person,politician,,Oxnard City Council District 6,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0204,Nikki Perez,person,politician,,Burbank City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0205,Norma Alcala,person,politician,,West Sacramento City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0206,Patricia Dillard,person,politician,,La Mesa City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0207,Peter Ortiz,person,politician,,San Jose City Council District 5,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0208,Porsche Middleton,person,politician,,Citrust Heights City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0209,Princess Washington,person,politician,,Suisin City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0210,Roberto Uranga,person,politician,,Long Beach City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0211,Ryyn Schumacher,person,politician,,"Ventura City Council, 3",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0212,Scott Sakikihara,person,politician,,"Union City City Council, 4",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0213,Shoshana O’Keefe,person,politician,,Berkeley City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0214,Stephen Whitburn,person,politician,,"San Diego City Council, 3",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0215,Sue Wilson,person,politician,,Richmond City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0216,Suely Saro,person,politician,,"Long Beach City Council, 6",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0217,Terry Taplin,person,politician,,Berkley City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0218,Xouhoa Bowen,person,politician,,San Leandro City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0219,Yasmine-Imani McMorrin,person,politician,,Culver City City Council,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0220,Ysabel Jurado,person,politician,,LA City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0221,Zac Unger,person,politician,,Oakland City Councilmember,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0222,Adam Spickler,person,politician,,"Trustee, Cabrillo Community College",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0223,Anne Kepner,person,politician,,West Valley-Mission Community College Board,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0224,Austin Bruckner Carrillo,person,politician,,"Trustee, Hayward Unified School District",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0225,Cipriano Vargas,person,politician,,Vista Unified School District Board Vice Chair,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0226,Cody Petterson,person,politician,,"Trustee, San Diego Unified Board of Education, Subdistrict C",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0227,Diana Prola,person,politician,,"San Leandro Unified School District, 5",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0228,Dr. Alma Castro,person,politician,,Lynwood Unified School District Board Member,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0229,Jack Flynn,person,politician,,Fairfield-Suisun USD Board Vice President,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0230,Kai Eusebio,person,politician,,"Trustee, Fairfield Suisun Unified School District",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0231,Karen Sher,person,politician,,"Oxnard Union High School District Board member, President",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0232,Margaret Bonetti,person,politician,,"Salinas Union High School District Trustee, former",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0233,Nichelle Henderson,person,politician,,Trustee LA Community College District,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0234,Paul Fong,person,politician,,Trustee West Valley Mission CCD,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0235,Rebecca Barrett,person,politician,,"Trustee, Contra Costa Community College District",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0236,Regina Chagolla,person,politician,,Emery Unified School Board Trustee,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0237,Richard Barrera,person,politician,,San Diego Unified School District Board Member,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0238,Tara Sreekrishnan,person,politician,,"Trustee, Santa Clara County Board of Education",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0239,Valerie Magdaleno,person,politician,,"Trustee, Santa Ana Unified School District",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0240,Ed Hernandez,person,politician,,"Eden Health District Vice Chair, 5",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0241,Mariellen Faria,person,politician,,Director Eden Township Healthcare District,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0242,Mark Friedman,person,politician,,Eden Health District CEl,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0243,Roxann Lewis,person,politician,,"Eden Health District Board Member, 3",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0244,Sabrina Aranda,person,politician,,"Director, Eden Health District",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0245,Aaron Peskin,person,politician,,Former President San Francisco Board of Supervisors,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0246,Cassandra James,person,politician,,Solano County Board of Supervisors,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0247,Chyanne Chen,person,politician,,Board of Supervisors San Francisco,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0248,Connie Chan,person,politician,,"Supervisor, City & County of San Francisco",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0249,Elisa Márquez,person,politician,,"Alameda County Board of Supervisors, 2",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0250,Felipe Hernandez,person,politician,,"Santa Cruz County Board of Supervisors, 4",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0251,Hilda Solis,person,politician,,Los Angeles County Supervisor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0252,Justin Cummings,person,politician,,Third District Supervisor Santa Cruz County,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0253,Kate Daniels,person,politician,,Monterey County Supervisor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0254,Ken Carlson,person,politician,,"Contra Costa County Board of Supervisors, 4",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0255,Lena Tam,person,politician,,"Alameda County Board of Supervisors, 3",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0256,Nathan Miley,person,politician,,"Alameda County Board of Supervisors, 4",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0257,Nikki Fortunato Bas,person,politician,,Alameda County Board of Supervisors,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0258,Otto Lee,person,politician,,Santa Clara County Board of Supervisors,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0259,Shanelle Scales-Preston,person,politician,,Pittsburg County Board of Supervisors,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0260,Terra Lawson-Remer,person,politician,,San Diego County Board of Supervisors,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0261,Wanda Williams,person,politician,,"Solano County Board of Supervisors, 3",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0262,Wendy Root Askew,person,politician,,"Monterey County Supervisor, District 4",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0263,Andy Katz,person,politician,,"Director, East Bay Municipal Utility District",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0264,Aziz Akbari,person,politician,,"President, Board of Directors at Alameda County Water District",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0265,Elizabeth Echols,person,politician,,"Board Member, East Bay Regional Park District",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0266,Harris Mojadedi,person,politician,,Chabot-Las Positas Community College District,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0267,Nassim Nouri,person,politician,,"County Council member, Green Party of Santa Clara County",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0268,Ruscal Cayangyang,person,politician,,"Vallejo School Board President (ret.), CA Assembly Dist. 14 Delegate (Ret.)",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0269,Sara Lamnin,person,politician,,"Director, Hayward Area Recreation and Park District",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
