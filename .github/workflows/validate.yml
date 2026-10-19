@@ -27,3 +27,19 @@ jobs:
           exit $status
       - name: Build the site
         run: python scripts/build_site.py
+
+  quote-sample:
+    # Advisory: fetches a sample of cited pages and reports quotes it cannot find. Never blocks a merge.
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Spot-check quotes
+        run: |
+          for d in data/*/; do
+            echo "== $d"
+            python skill/scripts/wtdb.py checkquotes "$d" --sample 25 --seed "${{ github.run_number }}" || true
+          done

@@ -37,11 +37,10 @@ button:focus-visible,input:focus-visible,select:focus-visible,tr:focus-visible,a
 .panel{background:var(--surface);border:1px solid var(--line);padding:16px;min-width:0}
 .mapbox{position:relative;background:var(--surface);border:1px solid var(--line);height:min(78vh,820px);min-height:380px;overflow:hidden}
 svg.map{width:100%;height:100%;display:block;cursor:grab;touch-action:none}
-svg.map path{stroke:var(--surface);stroke-linejoin:round;cursor:pointer}
-svg.map.local path{stroke-width:260} svg.map.world path{stroke-width:.5}
+svg.map path{stroke:var(--surface);stroke-linejoin:round;cursor:pointer;vector-effect:non-scaling-stroke;stroke-width:.8px}
 path.support{fill:var(--support)} path.clear{fill:var(--clear)} path.open{fill:var(--open)}
 path.none{fill:var(--none)} path.has{fill:var(--support)}
-svg.map path.sel{stroke:var(--sel)} svg.map.local path.sel{stroke-width:900} svg.map.world path.sel{stroke-width:2.2}
+svg.map path.sel{stroke:var(--sel);stroke-width:2.6px}
 .zoom{position:absolute;right:10px;top:10px;display:flex;flex-direction:column;gap:4px}
 .zoom button{width:34px;height:34px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 18px var(--body);cursor:pointer;border-radius:3px}
 .legend{position:absolute;left:10px;bottom:10px;background:var(--surface);border:1px solid var(--line);padding:8px 10px;font-size:12px;display:grid;gap:4px}

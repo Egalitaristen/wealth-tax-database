@@ -6,7 +6,7 @@ Thanks for helping. This project records, with sources, who publicly supports a 
 
 1. **Supporters only.** If someone opposes or doubts a wealth tax, do not add them. If a supporter later retracts, add an evidence row with `stance=retracted`.
 2. **Every row needs a source.** A dated, working URL and a short word-for-word quote (keep quotes under about 25 words). Add an archive link in `archive_url` where you can.
-3. **Quote what you read.** Do not quote from memory or from a search snippet. Check the quote appears on the page.
+3. **Quote what you read.** Do not quote from memory, from a search snippet or from a summary tool's paraphrase, and never write a sentence of your own into the quote column. Use the page's own text and run `python skill/scripts/wtdb.py checkquotes data/<iso2> --run <run>`.
 4. **Public figures and organisations only.** Never add petition signers or private individuals. Self-declared signers of a public open letter are fine.
 5. **Grade honestly.** A: formal act or a stated design. B: names a wealth tax. C: implied. When unsure, use the lower grade.
 6. **People are assumed alive.** Check for a death record (Wikidata is a good start). If dead, add them to `exclusions.csv` with reason `deceased`, not to `actors.csv`.
@@ -20,14 +20,14 @@ python skill/scripts/wtdb.py init data/<iso2> --area "<Name>"
 
 Use the lowercase ISO 3166-1 alpha-2 code (`de`, `fr`), or `<iso2>-<region>` for a sub-national area (`us-ca`). Then follow `skill/SKILL.md`. In `data/<iso2>/meta.json` set `name`, `iso2`, `lead` (your GitHub username) and `status`.
 
-For a local map, add a `boundaries.json` and name it in `meta.json`:
+For a local map, add a `boundaries.json` and name it in `meta.json`. If you have a TopoJSON of your areas, `python skill/scripts/topo_to_boundaries.py` writes it for you (the US map was made that way). Format:
 
 ```json
 {"viewBox": [x, y, width, height],
  "units": [{"name": "Area name", "code": "optional", "path": "M0 0L10 0L10 10Z"}]}
 ```
 
-Unit names must match the `name` column of `geo_units.csv`. Paths use any flat coordinate system; the viewBox is in the same units.
+Unit names must match the `name` column of `geo_units.csv`, or match it up to the opening bracket (`Alabama` matches `Alabama (state legislature and state government)`). Paths use any flat coordinate system; the viewBox is in the same units.
 
 ## Using an AI assistant
 
@@ -36,10 +36,12 @@ Allowed and encouraged, with these conditions:
 - State in the pull request that an assistant did the research.
 - Check a sample of its rows yourself against the sources. Assistants invent quotes and misread dates.
 - Do not let an assistant mark rows `verified=y` on its own.
+- Assistants and agents work on a branch and open a pull request. They never push to `main`.
+- Record what you chose to leave out (levels, years, sources that blocked you) in `meta.json` `notes` and the area profile, so the next person can continue.
 
 ## Pull request checks
 
-CI runs `python skill/scripts/wtdb.py validate` on every changed country and builds the site. Errors must be fixed before merge.
+CI runs `python skill/scripts/wtdb.py validate` on every country and builds the site; errors must be fixed before merge. It also spot-checks a sample of quotes against their pages. That check is advisory, because some sites block automated fetches, so a miss is a prompt to look, not a failure.
 
 ## Corrections and removals
 

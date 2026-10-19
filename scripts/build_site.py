@@ -154,13 +154,14 @@ def build_country(folder):
     if bounds:
         vb = bounds["viewBox"]
         for u in bounds["units"]:
-            g = units.get(u["name"])
+            # exact name, or the boundary name followed by " (" (e.g. "Alabama" matches "Alabama (state legislature ...)")
+            g = units.get(u["name"]) or next((v for k, v in units.items() if k.startswith(u["name"] + " (")), None)
             if not g:
                 continue
-            mapped.add(u["name"])
-            state = "support" if sup_by_geo.get(u["name"]) else ("clear" if g["sweep_status"] == "done" else "open")
-            C.append([u["name"], u.get("code", ""), state, g["sweep_status"], g["hits"], g["notes"][:600],
-                      sup_by_geo.get(u["name"], []), u["path"]])
+            mapped.add(g["name"])
+            ids = sup_by_geo.get(g["name"], [])
+            state = "support" if ids else ("clear" if g["sweep_status"] == "done" else "open")
+            C.append([u["name"], u.get("code", ""), state, g["sweep_status"], g["hits"], g["notes"][:600], ids, u["path"]])
     O = [[g["name"], g["level"], g["sweep_status"], g["notes"][:500], sup_by_geo[g["name"]]]
          for g in geo if g["name"] not in mapped and sup_by_geo.get(g["name"])]
     L = [[l["from_actor_id"], l["to_actor_id"], l["link_type"], l["note"]] for l in links]

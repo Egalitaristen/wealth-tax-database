@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""wtdb.py — helper for the Wealth Tax Supporter Map skill.
+"""wtdb.py — helper for the Wealth Tax Database skill.
 
 Standard library only, except `export`, which needs openpyxl (pip install openpyxl).
 
@@ -9,6 +9,9 @@ Commands
   set      DIR TABLE ID k=v ...     update fields on one row
   validate DIR                      check rules; exit code 1 if there are errors
   dedupe   DIR                      list likely duplicate actors
+  merge    DIR KEEP_ID DROP_ID      merge a duplicate actor into another (moves evidence, links, profiles)
+  checkquotes DIR [--run R] [--ids E1,E2] [--sample N] [--strict]
+                                    fetch source pages and check each quote appears on the page
   status   DIR                      counts, coverage grid, sweep progress, next targets
   export   DIR [--out FILE]         write the xlsx report
 """
@@ -307,8 +310,9 @@ def validate(db):
         for ot in type_list(r)[1:]:
             if ot not in ENUMS[("actors", "actor_type")]:
                 errs.append(f"{where}: other_types has unknown type '{ot}'")
-        if "politician" in type_list(r) and not r.get("party"):
-            warns.append(f"{where}: politician without party (use the party's common name, or Independent)")
+        if "politician" in type_list(r) and not r.get("party") and r.get("level") != "local":
+            warns.append(f"{where}: politician without party (use the party's common name, or Independent; "
+                         f"local officials may leave it blank when it is not known)")
         if r.get("affiliation_actor_id") and r["affiliation_actor_id"] not in actors:
             errs.append(f"{where}: affiliation_actor_id {r['affiliation_actor_id']} does not exist")
         if r.get("wikidata_qid") and not re.match(r"^Q\d+$", r["wikidata_qid"]):
@@ -434,21 +438,22 @@ def coverage(db, derived):
 
 
 def sweep_progress(db):
+    """Count leaf units (areas nothing else sits under) by sweep status, grouped by their region."""
     geo = db["geo_units"]
     by_id = {g["geo_unit_id"]: g for g in geo}
+    parents = {g["parent_id"] for g in geo if g.get("parent_id")}
     prog = defaultdict(Counter)
     for g in geo:
-        if g["level"] in ("council", "sub_council", "county", "combined_authority"):
-            # find top-level parent below national
-            p, seen = g, set()
-            while p.get("parent_id") and p["parent_id"] in by_id and p["parent_id"] not in seen:
-                seen.add(p["parent_id"])
-                parent = by_id[p["parent_id"]]
-                if parent["level"] in ("region", "devolved", "national", "supranational"):
-                    p = parent
-                    break
-                p = parent
-            prog[p["name"] if p is not g else "(no parent)"][g["sweep_status"]] += 1
+        if g["level"] in ("national", "supranational") or g["geo_unit_id"] in parents:
+            continue
+        p, seen, group = g, set(), "(top level)"
+        while p.get("parent_id") and p["parent_id"] in by_id and p["parent_id"] not in seen:
+            seen.add(p["parent_id"])
+            p = by_id[p["parent_id"]]
+            if p["level"] in ("region", "devolved"):
+                group = p["name"]
+                break
+        prog[group][g["sweep_status"]] += 1
     return prog
 
 
@@ -646,6 +651,95 @@ def cmd_export(a):
     print(f"Wrote {out}")
 
 
+def cmd_merge(a):
+    """Merge duplicate actor DROP into KEEP: move evidence, links and profiles, fill blanks, delete DROP."""
+    need_dir(a.dir)
+    db = load_all(a.dir)
+    by = {r["actor_id"]: r for r in db["actors"]}
+    if a.keep not in by or a.drop not in by or a.keep == a.drop:
+        sys.exit("keep and drop must be two different existing actor IDs")
+    keep, drop = by[a.keep], by[a.drop]
+    for col in SCHEMA["actors"]:
+        if col in ("actor_id", "notes", "updated") or keep.get(col):
+            continue
+        if drop.get(col):
+            keep[col] = drop[col]
+    extra = [x for x in (drop.get("other_types") or "").split(";") if x and x != keep["actor_type"]]
+    if drop["actor_type"] != keep["actor_type"]:
+        extra.append(drop["actor_type"])
+    mine = [x for x in (keep.get("other_types") or "").split(";") if x]
+    keep["other_types"] = ";".join(dict.fromkeys(mine + extra))
+    if norm_name(drop["name"]) != norm_name(keep["name"]):
+        keep["notes"] = (keep.get("notes", "") + f" Also listed as '{drop['name']}'.").strip()
+    n = 0
+    for e in db["evidence"]:
+        if e["actor_id"] == a.drop:
+            e["actor_id"] = a.keep; n += 1
+    for l in db["links"]:
+        for c in ("from_actor_id", "to_actor_id"):
+            if l.get(c) == a.drop:
+                l[c] = a.keep
+    for p in db["profiles"]:
+        if p["actor_id"] == a.drop:
+            p["actor_id"] = a.keep
+    for r in db["actors"]:
+        if r.get("affiliation_actor_id") == a.drop:
+            r["affiliation_actor_id"] = a.keep
+    db["actors"] = [r for r in db["actors"] if r["actor_id"] != a.drop]
+    for t_ in ("actors", "evidence", "links", "profiles"):
+        save(a.dir, t_, db[t_])
+    print(f"Merged {a.drop} ({drop['name']}) into {a.keep} ({keep['name']}); moved {n} evidence rows")
+
+
+def _plain(s):
+    import html as _html
+    s = _html.unescape(re.sub(r"<[^>]+>", " ", s))
+    s = unicodedata.normalize("NFKC", s).lower()
+    for a_, b_ in (("‘", "'"), ("’", "'"), ("“", '"'), ("”", '"'), ("–", "-"), ("—", "-")):
+        s = s.replace(a_, b_)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def cmd_checkquotes(a):
+    """Fetch each source page and check that the quote really appears on it (raw page text, not a summary)."""
+    import random, urllib.request
+    need_dir(a.dir)
+    rows = [e for e in load(a.dir, "evidence") if e.get("source_url")]
+    if a.run:
+        rows = [e for e in rows if e.get("run_id") == a.run]
+    if a.ids:
+        rows = [e for e in rows if e["evidence_id"] in a.ids.split(",")]
+    if a.sample and len(rows) > a.sample:
+        random.seed(a.seed)
+        rows = random.sample(rows, a.sample)
+    cache, ok, miss, skip = {}, 0, [], []
+    for e in rows:
+        u = e["source_url"]
+        if u not in cache:
+            try:
+                req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0 (wtdb quote check)"})
+                with urllib.request.urlopen(req, timeout=a.timeout) as resp:
+                    ctype = resp.headers.get("Content-Type", "")
+                    cache[u] = None if "pdf" in ctype.lower() else _plain(resp.read().decode("utf-8", "ignore"))
+            except Exception as ex:
+                cache[u] = None
+        page = cache[u]
+        if page is None:
+            skip.append(e["evidence_id"]); continue
+        parts = [p for p in re.split(r"…|\.\.\.", _plain(e["quote_original"])) if len(p.split()) >= 3]
+        if parts and all(p.strip(" .") in page for p in parts):
+            ok += 1
+        else:
+            miss.append(e["evidence_id"])
+    print(f"Checked {len(rows)} rows: {ok} found on the page, {len(miss)} NOT found, {len(skip)} skipped (PDF, blocked or error)")
+    if miss:
+        print("Not found:", ", ".join(miss))
+    if skip:
+        print("Skipped:", ", ".join(skip[:40]) + (" ..." if len(skip) > 40 else ""))
+    if miss and a.strict:
+        sys.exit(1)
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -656,6 +750,11 @@ def main():
     x.add_argument("pairs", nargs="+"); x.set_defaults(f=cmd_set)
     for name, fn in (("validate", cmd_validate), ("dedupe", cmd_dedupe), ("status", cmd_status)):
         x = s.add_parser(name); x.add_argument("dir"); x.set_defaults(f=fn)
+    x = s.add_parser("merge"); x.add_argument("dir"); x.add_argument("keep"); x.add_argument("drop"); x.set_defaults(f=cmd_merge)
+    x = s.add_parser("checkquotes"); x.add_argument("dir"); x.add_argument("--run"); x.add_argument("--ids")
+    x.add_argument("--sample", type=int, default=0); x.add_argument("--seed", type=int, default=1)
+    x.add_argument("--timeout", type=int, default=25); x.add_argument("--strict", action="store_true")
+    x.set_defaults(f=cmd_checkquotes)
     x = s.add_parser("export"); x.add_argument("dir"); x.add_argument("--out"); x.set_defaults(f=cmd_export)
     a = p.parse_args()
     a.f(a)

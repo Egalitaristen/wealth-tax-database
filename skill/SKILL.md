@@ -1,26 +1,32 @@
 ---
-name: wealth-tax-supporter-map
+name: wealth-tax-database
 description: Systematically build or extend a sourced database of people, organisations and institutions in a country, region or supranational area that support (or appear to support) actual wealth taxation since 2010, down to local-government level. Use when asked to map, find, update or export wealth tax supporters for any area.
 ---
 
-# Wealth Tax Supporter Map
+# Wealth Tax Database
 
 Build a comprehensive, verifiable overview of everyone in an area who supports — or appears to support — **actual wealth taxation**: politicians who voted for or sponsored it, academics who argued for it, journalists who advocate it, organisations campaigning for it, councils that passed motions for it, and so on.
 
-This is a map, not a ranking. Every entry rests on dated, sourced, quoted evidence. The work is done in repeatable **runs**; each run reads the current state from disk, works the biggest gaps, writes results as it goes, and logs what it did, so any assistant in any session can pick up where the last one stopped.
+This is a database, not a ranking. Every entry rests on dated, sourced, quoted evidence. The work is done in repeatable **runs**; each run reads the current state from disk, works the biggest gaps, writes results as it goes, and logs what it did, so any assistant in any session can pick up where the last one stopped.
 
 Files in this skill (use them if present; the rules in this file are sufficient on their own):
 - `references/source-playbook.md` — layers, bulk-list sources, query templates, search terms in many languages
 - `references/area-profile-template.md` — what to establish about an area before searching
 - `references/countries/gb.md` — UK levels of government, sources, and the local sweep list (worked example for other countries)
-- `scripts/wtdb.py` — Python helper (stdlib; `openpyxl` only for xlsx export): `init`, `add`, `set`, `validate`, `dedupe`, `status`, `export`
+- `references/countries/us.md` — a federal system (states, ballot measures, coalition letters), and what worked there
+- `scripts/wtdb.py` — Python helper (stdlib; `openpyxl` only for xlsx export): `init`, `add`, `set`, `validate`, `dedupe`, `merge`, `checkquotes`, `status`, `export`
+- `scripts/profiles_wikidata.py` — fills `profiles.csv` (websites, socials, Wikipedia) from Wikidata IDs
+- `scripts/topo_to_boundaries.py` — turns a TopoJSON of areas into `boundaries.json`, so the country gets a local map on the site
+- `scripts/ocn_scan.py` — UK-only council meeting scanner (an example of a per-country source adapter)
 
 ---
 
 ## 1. Ground rules
 
 1. **Apply the definition (section 2) to every piece of evidence.** Support for a mansion tax, capital gains reform or inheritance tax is not support for wealth taxation.
-2. **No source, no row.** Every claim is an evidence row with a URL you actually opened and a verbatim quote found on that page. Never add an actor or evidence from memory or from a search-result snippet alone.
+2. **No source, no row.** Every claim is an evidence row with a URL you actually opened and a **verbatim** quote found on that page. Never add an actor or evidence from memory or from a search-result snippet alone.
+   - Fetch tools that return a summary can paraphrase. Quote from the raw page text (download it, or use a browser) and run `wtdb.py checkquotes` on the rows you add.
+   - Never compose a sentence of your own and put it in `quote_original`. For list or roster pages where the only text is a name, use the text the page itself prints for that entry: a claim sentence in the page's structured data (JSON-LD), an official bill-status field such as `Rep. Lee, Barbara [D-CA-13]`, or the name and role as listed. Keep quotes short (about 25 words or fewer).
 3. **Time window and the living.** Only evidence dated 2010-01-01 or later counts. Individuals must be alive; check before adding (Wikidata or an obituary search when in doubt). Dissolved organisations may stay, marked `dissolved`.
 4. **Supporters only.** Opponents are not recorded as actors. If an existing supporter later retracts or votes against, add evidence with `stance=retracted`; they then show as a former supporter.
 5. **Public role, public record.** Only people acting in a public capacity (elected officials, officials, published authors, journalists, organisation leaders, people who publicly declared themselves, e.g. signed a published letter). Never record private individuals (ordinary petition signers, private social-media users), and never record home addresses, personal phone numbers or personal emails. Organisation websites and official pages are fine.
@@ -52,6 +58,8 @@ A tax on the **stock of wealth** (net assets) of the wealthy, rather than on inc
 
 **Ambiguous phrases.** "Tax wealth like work" or "tax wealth not work" often means aligning capital gains with income tax (common UK usage). Treat it as grade C at most, and only when nothing in the speaker's own platform shows they mean capital gains. If it clearly means capital gains or dividends, it does not qualify. Watch local terms that also cover excluded taxes (e.g. Italian *patrimoniale* can mean property taxes; Dutch *vermogensbelasting* often refers to the savings box) and read the context.
 
+**Not enough on their own:** "tax the wealthy", "tax billionaires more", "make the rich pay their fair share", and support for bills that change income or capital-gains tax (a millionaires' surtax, a minimum income tax on realised income). Count them only when the person's own words or the named bill refer to wealth, net worth or unrealised gains, as in the table above. Record the near-misses in `exclusions.csv` (`out_of_definition` or `insufficient_evidence`) so nobody re-checks them.
+
 Someone who supports both an included design and an excluded one qualifies on the included evidence; record only that evidence.
 
 ---
@@ -63,6 +71,8 @@ Someone who supports both an included design and an excluded one qualifies on th
 | **A** | Explicit | Endorses an included design **with specifics** (rate, threshold, named bill or proposal), **or** a formal act: voted for, sponsored or co-sponsored, signed a motion or letter that calls for an included design, organisational policy adoption, authored a publication recommending one, gave supportive testimony. |
 | **B** | Named | Supports "a wealth tax", "wealth levy", "billionaire tax" or an equivalent local term by name, without specifics. |
 | **C** | Implied | Language that probably means wealth taxation but is ambiguous ("make the super-rich pay on their wealth"). Included and flagged as *appears to support*; a target for upgrade. |
+
+**Roster and endorsement lists.** When a campaign's own page lists someone as an endorser, that is a claim by the campaign, not a statement by the endorser. Grade it **B** and say so in `grading_note`; upgrade to A when you find the endorser's own statement, vote or signature. Sponsors and cosponsors in official bill data are a formal act (A).
 
 An actor's grade is the best grade among its support evidence. Grade each piece of evidence on its own, and write one line in `grading_note` explaining why.
 
@@ -90,7 +100,7 @@ An actor's grade is the best grade among its support evidence. Grade each piece 
 | `business_leader` | person / organisation | A business figure or business association publicly in favour. |
 | `faith` | person / organisation | Faith leader or faith organisation. |
 | `cultural_figure` | person | Artist, writer, athlete or celebrity with a public statement. |
-| `campaigner` | person | Individual activist with a public profile (spokesperson, founder, author). |
+| `campaigner` | person | Individual activist or NGO leader with a public profile (spokesperson, founder, author, charity chief executive). |
 | `international_body` | institution / organisation | International or supranational body, or intergovernmental group (UN, IMF, OECD, G20 track, EU institutions, EU Tax Observatory). |
 | `funder` | organisation | Foundation that **funds wealth-tax advocacy or research specifically**; evidence is a grant record or a programme page. |
 
@@ -100,12 +110,12 @@ International actors (Zucman, Oxfam International) are included in a country dat
 
 ## 5. Data files
 
-In this repository, `<area-slug>` is the lowercase ISO 3166-1 alpha-2 code (`gb`, `de`) or `<iso2>-<region>` (`us-ca`). Each folder also needs a `meta.json` (`name`, `iso2`, `lead`, `status`, optional `boundaries`); `init` creates it. Everything lives in `data/<area-slug>/` (e.g. `data/gb/`, `data/us-california/`, `data/eu/`). Create it with `python skill/scripts/wtdb.py init data/<slug> --area "<Area name>"`, or by hand with exactly these headers. IDs are prefix + zero-padded number (A0001, E00001, G0001, L0001, H0001, X0001, R001).
+In this repository, `<area-slug>` is the lowercase ISO 3166-1 alpha-2 code (`gb`, `de`) or `<iso2>-<region>` (`us-ca`). Each folder also needs a `meta.json` (`name`, `iso2`, `lead`, `status`, `boundaries`, `notes`; `init` creates it). Put the scope you chose (levels covered, anything left out) in `notes` and in section 1 of `area_profile.md`. Everything lives in `data/<area-slug>/` (e.g. `data/gb/`, `data/us-california/`, `data/eu/`). Create it with `python skill/scripts/wtdb.py init data/<slug> --area "<Area name>"`, or by hand with exactly these headers. IDs are prefix + zero-padded number (A0001, E00001, G0001, L0001, H0001, X0001, R001).
 
 **actors.csv** — one row per actor
 `actor_id, name, kind, actor_type, other_types, role, affiliation, party, affiliation_actor_id, country, level, geo_unit_id, wikidata_qid, website, status, alive_checked, prominence, notes, added_run, updated`
 - `other_types`: extra `actor_type` values separated by `;`, for people who fit more than one (for example `journalist` primary with `economist` here). `actor_type` is the main role; the site and the coverage grid count a person under every type they hold.
-- `party`: for politicians, the party's common name in English (for example `Labour`, `Green Party`, `Scottish National Party`; `Independent` if none). Use one name per party so the site can filter on it; for a regional branch use the national party's name. Blank for non-politicians.
+- `party`: for politicians, the party's common name in English (for example `Labour`, `Green Party`, `Democratic Party`; `Independent` if none). Use one name per party so the site can filter on it; a regional or state branch uses the national party's name (the Minnesota DFL is `Democratic Party`). Blank for non-politicians, and for local officials in non-partisan offices when the party is not known. `validate` warns about a missing party above local level.
 - `level`: supranational · national · regional · local
 - `status`: active · former_role · dissolved
 - `alive_checked`: y · na (organisations and institutions)
@@ -124,8 +134,10 @@ In this repository, `<area-slug>` is the lowercase ISO 3166-1 alpha-2 code (`gb`
 
 **geo_units.csv** — the geography checklist for the local sweep
 `geo_unit_id, name, level, unit_type, parent_id, website, sweep_status, swept_run, swept_date, queries_run, hits, notes`
-- `level`: supranational · national · devolved · region · county · combined_authority · council · sub_council
+- `level`: supranational · national · devolved · region · county · combined_authority · council · sub_council. In a federal country, states are `region`. Load only the depth you are sweeping; a unit with children is a parent, and `status` counts the lowest units.
 - `sweep_status`: pending · in_progress · done · skipped
+
+**boundaries.json** (optional, in the country folder, named in `meta.json`) draws the local map on the site: `{"viewBox": [x, y, w, h], "units": [{"name", "code", "path"}]}`. A unit's `name` must equal a `geo_units.csv` name, or be that name up to the opening bracket (`Alabama` matches `Alabama (state legislature and state government)`). Make it from a TopoJSON with `scripts/topo_to_boundaries.py`. Check the licence of the shapes and say where they came from in the file's `source`.
 
 **links.csv** — relationships, used for snowballing
 `link_id, from_actor_id, to_actor_id, link_type, evidence_id, source_url, note`
@@ -157,6 +169,10 @@ python skill/scripts/wtdb.py add data/gb evidence @new_evidence.jsonl           
 python skill/scripts/wtdb.py set data/gb geo_units G0042 sweep_status=done hits=2 queries_run=6
 python skill/scripts/wtdb.py validate data/gb     # errors must be fixed before a run ends
 python skill/scripts/wtdb.py dedupe data/gb       # likely duplicate actors
+python skill/scripts/wtdb.py merge data/gb A0012 A0345   # merge a duplicate (second) into the first: moves evidence, links, profiles
+python skill/scripts/wtdb.py checkquotes data/gb --run R004   # fetch sources and check the quotes are on the pages
+python skill/scripts/profiles_wikidata.py data/gb  # websites, socials and Wikipedia from Wikidata IDs
+python skill/scripts/topo_to_boundaries.py states.json --object states --out data/us/boundaries.json
 python skill/scripts/wtdb.py status data/gb       # counts, coverage grid, sweep progress, suggested next targets
 python skill/scripts/wtdb.py export data/gb       # writes data/gb/<slug>_wealth_tax_supporters.xlsx
 ```
@@ -167,6 +183,7 @@ Writing CSVs directly is fine too, but quote fields properly (quotes often conta
 ## 6. Workflow
 
 ### 6.0 Start or resume
+- **In this repository, never push to `main`.** Work on a branch, open one pull request per run (or per country), and let the checks run (`validate` on every country, the site build). A person merges.
 - If `data/<slug>/` exists: read `area_profile.md`, the last 3 rows of `runs.csv` (especially `notes_next`), and the `status` output. Continue from there; do not redo finished work.
 - If not: confirm the area and its scope (which levels of government; whether to go below council level), then `init`. Start the run log entry in your head now and write it at the end.
 
@@ -176,6 +193,8 @@ Fill in `area_profile.md` from `references/area-profile-template.md`: wealth-tax
 ### 6.2 Geography register (first run)
 Fetch the **official current list** of every sub-national unit down to the lowest level in scope (for the UK: nations → regions/counties → combined authorities → every principal council; see `references/countries/gb.md`). Load all of them into `geo_units.csv` with `sweep_status=pending`, with `parent_id` set so progress can be reported region by region. Do not work from memory; councils merge and change.
 
+For a country with a local map, also build `boundaries.json` from an official or open boundary source (see `scripts/topo_to_boundaries.py`) and set `boundaries` in `meta.json`. Do it in the first run; it costs little and makes coverage visible on the site.
+
 ### 6.3 Bulk harvest (highest yield; always first priority)
 Lists produce many actors at once with uniform, strong evidence. Find them and queue them in `harvest.csv`, then process each list entry by entry:
 - roll-call votes on wealth-tax bills or amendments, and bill co-sponsors
@@ -184,6 +203,8 @@ Lists produce many actors at once with uniform, strong evidence. Find them and q
 - coalition and campaign member lists
 - authors of wealth-tax reports and commissions; witnesses and written evidence to commissions and committees
 - union and party conference motions (mover, seconder, supporting bodies)
+
+Rosters can be large (a ballot campaign's endorsement page listed about 250 names). Parse the page's structured data instead of retyping names, check each name against the database (name variants such as "Coalition for Human Needs" and "Coalition on Human Needs" are the same body: `merge`), and keep the list's own entry text as the quote. Wikipedia and other secondary lists are good for finding names, never as the source; re-read each name at its own cited page.
 
 For each person or organisation on a list: check for duplicates, check the definition applies to what the list actually calls for, check they are alive or still exist, then add the actor and an evidence row whose `harvest_id` points to the list. Mark the list `done` with `actors_added`.
 
@@ -210,9 +231,11 @@ Order within a region: larger cities and units with known signals first, but eve
 ### 6.7 QA, export and report (end of every run)
 1. `validate` → fix every error. Warnings: fix or justify in `notes`.
 2. `dedupe` → merge true duplicates: keep the older ID, move evidence across, and record the other in `exclusions.csv` with `reason=duplicate`.
-3. **Spot-check:** re-open the source for at least 10% of this run's evidence rows (minimum 5) and confirm the quote is there and the grade holds. Set `verified=y` or `failed`; fix or remove failed rows. If you can delegate to a separate agent that has not seen the work, have it do this.
+3. **Quote check:** run `checkquotes --run <this run>`. Fix or remove every row it reports as not found. Rows it skips (PDFs, blocked pages) need a manual look: open the page, find the quote.
+   Then spot-check at least 10% of the run's rows (minimum 5) by hand for grade and meaning, not just wording.
+   **`verified=y` is set only by someone other than the row's author**: a person, or a separate agent that has not seen the work. Authors leave rows at `n`. A row whose quote cannot be found is set to `failed` and then fixed or removed.
 4. Append the run row to `runs.csv`, including `saturation` (see 6.8) and `notes_next` (concrete next targets).
-5. `export`, and report to the user: new actors and evidence by type and level, geography units completed versus remaining, grade upgrades, verification results, notable findings, and next targets. Use numbers from `status`, not from memory.
+5. Open or update the pull request (6.0). `export` if the user wants a spreadsheet, and report to the user: new actors and evidence by type and level, geography units completed versus remaining, grade upgrades, verification results, notable findings, and next targets. Use numbers from `status`, not from memory.
 
 ### 6.8 Choosing what to do in a run, and when to stop
 Priority order for each run:
@@ -236,7 +259,7 @@ Follow the same steps by hand: keep the CSVs in exactly the format above, check 
 
 ## 7. Export
 
-The xlsx export contains: **Overview** (counts, grade mix, coverage and sweep progress, definitions); **Supporters** (one row per actor: grade, *explicit / named / appears to support*, designs, evidence count, first and latest evidence date, strongest source); **Evidence**; **Local coverage** (each geography unit with sweep status and supporter count); **Links**; **Harvest lists**; **Run log**; **Former supporters** (latest stance retracted). There is no points score. Users filter by grade, type, level, prominence and date.
+The xlsx export contains: **Overview** (counts, grade mix, coverage and sweep progress, definitions); **Supporters** (one row per actor: grade, *explicit / named / appears to support*, designs, evidence count, first and latest evidence date, strongest source); **Evidence**; **Local coverage** (each geography unit with sweep status and supporter count); **Links**; **Profiles** (websites and socials); **Harvest lists**; **Run log**; **Former supporters** (latest stance retracted, shown only when there are some). There is no points score. Users filter by grade, type, level, prominence and date.
 
 ---
 
@@ -248,3 +271,10 @@ The xlsx export contains: **Overview** (counts, grade mix, coverage and sweep pr
 - Related tables existed only in the assistant's memory and never reached the file; earlier turns "compressed" in the log → write to disk continuously; log every run.
 - Theme-by-theme, name-by-name searching gave few new actors per turn → bulk lists first, then the geography sweep, then snowballing.
 - Reporters counted as supporters because they quoted one → journalists need opinion pieces.
+- Paraphrased "quotes": a roster import wrote its own sentence ("Campaign lists X as an endorser…") into 252 rows, because the fetch tool summarises pages → quote the page's own text, and run `checkquotes`.
+- One bucket hid a group: all university economists were typed `academic`, so the Economist filter showed four people → type by discipline (`economist` for any economist) and use `other_types` for people who fit two.
+- Near-duplicate organisations from different letters and rosters ("Coalition for Human Needs" and "Coalition on Human Needs") → `dedupe` after every large import, then `merge`.
+- Party names written several ways ("Labour Party", "Labour", "Welsh Labour"; "Democratic-Farmer-Labor") → one common name per party, branches use the national name.
+- Pages that said "tax the wealthy" but not wealth tax were nearly counted → apply section 2 to the speaker's own words.
+- Progress reports that ignored higher-level units ("no geography units loaded") → `status` counts the lowest units of whatever depth you loaded.
+- Pushing straight to `main`, or setting `verified=y` on one's own rows → branch, pull request, and a different checker for `verified=y`.
