@@ -1,5 +1,5 @@
 geo_unit_id,name,level,unit_type,parent_id,website,sweep_status,swept_run,swept_date,queries_run,hits,notes
-G0001,US Congress (Senate and House of Representatives),national,legislature,,https://www.congress.gov,in_progress,R001,2026-10-19,,,"R001: Ultra-Millionaire Tax Act 2021 sponsors from the Warren press release (H0001). NOT done: Congress.gov lists, votes, Wyden bill, later Congresses, hearings."
+G0001,US Congress (Senate and House of Representatives),national,legislature,,https://www.congress.gov,in_progress,R003,2026-10-19,,,"R001/R003: Ultra-Millionaire Tax Act 2021, 2024 and 2026 sponsors and cosponsors (H0001, H0002). NOT done: Billionaires Income Tax (Wyden), Billionaire Minimum Income Tax (Cohen/Beyer), floor votes, hearings, executive branch."
 G0002,US federal executive and agencies,national,government,,https://www.whitehouse.gov,pending,,,,,
 G0003,Alabama (state legislature and state government),region,state,,,pending,,,,,
 G0004,Alaska (state legislature and state government),region,state,,,pending,,,,,

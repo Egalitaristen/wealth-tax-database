@@ -112,8 +112,8 @@ A0110,United Native Americans,organisation,ngo_campaign,,,,,,US,local,G0007,,,ac
 A0111,Wilmington CA Indivisible,organisation,ngo_campaign,,,,,,US,regional,G0007,,,active,na,regional,,R001,2026-10-19
 A0112,Alice B. Toklas LGBTQ Dems,organisation,party,,,,,,US,local,G0007,,,active,na,local,,R001,2026-10-19
 A0113,Chris Murphy,person,politician,,"US Senator, Connecticut",,Democratic Party,,US,national,,Q1077594,,active,y,national,,R001,2026-10-19
-A0114,Judy Chu,person,politician,,"U.S. Representative, CA-28",,Democratic Party,,US,national,G0007,,,active,y,national,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
-A0115,Ro Khanna,person,politician,,"US Representative, CA -17",,Democratic Party,,US,national,G0007,,,active,y,national,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0114,Judy Chu,person,politician,,"U.S. Representative, CA-28",,Democratic Party,,US,national,G0007,Q460035,,active,y,national,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0115,Ro Khanna,person,politician,,"US Representative, CA -17",,Democratic Party,,US,national,G0007,Q7339221,,active,y,national,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
 A0116,Alex Lee,person,politician,,"State Assembly, 24",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
 A0117,Ash Kalra,person,politician,,"State Assembly, 27",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
 A0118,Bob Archuleta,person,politician,,"State Senate, 30",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
@@ -122,7 +122,7 @@ A0120,Joaquin Arambula,person,politician,,"CA Assembly, 31st District",,,,US,reg
 A0121,Jose Solache,person,politician,,State Assembly District 62,,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
 A0122,Juan Carrillo,person,politician,,"Assembly Member, District 39",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
 A0123,Lena Gonzalez,person,politician,,"State Senate, 33",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
-A0124,Robert Garcia,person,politician,,"State Assembly, 50",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0124,Robert Garcia,person,politician,,"State Assembly, 50",,,,US,regional,G0007,Q16204904,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
 A0125,Sally Lieber,person,politician,,California State Board of Equalization,,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
 A0126,Dr. Martita Martinez-Bravo,person,politician,,"Vice Mayor, City of Camarillo",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
 A0127,Eduardo Martinez,person,politician,,Richmond Mayor,,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
@@ -268,3 +268,107 @@ A0266,Harris Mojadedi,person,politician,,Chabot-Las Positas Community College Di
 A0267,Nassim Nouri,person,politician,,"County Council member, Green Party of Santa Clara County",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
 A0268,Ruscal Cayangyang,person,politician,,"Vallejo School Board President (ret.), CA Assembly Dist. 14 Delegate (Ret.)",,,,US,regional,G0007,,,active,y,regional,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
 A0269,Sara Lamnin,person,politician,,"Director, Hayward Area Recreation and Park District",,,,US,local,G0007,,,active,y,local,No Wikidata match; alive on the basis of a September 2026 endorsement.,R001,2026-10-19
+A0270,Eleanor Holmes Norton,person,politician,,US Delegate (D-DC-At Large),,Democratic Party,,US,national,,Q461649,,active,y,national,,R003,2026-10-19
+A0271,Barbara Lee,person,politician,,US Representative (D-CA-13),,Democratic Party,,US,national,,Q289317,,active,y,national,,R003,2026-10-19
+A0272,Ilhan Omar,person,politician,,US Representative (D-MN-5),,Democratic Party,,US,national,,Q26436159,,active,y,national,,R003,2026-10-19
+A0273,Alexandria Ocasio-Cortez,person,politician,,US Representative (D-NY-14),,Democratic Party,,US,national,,Q55223040,,active,y,national,,R003,2026-10-19
+A0274,Cori Bush,person,politician,,US Representative (D-MO-1),,Democratic Party,,US,national,,Q98084800,,active,y,national,,R003,2026-10-19
+A0275,Mark Takano,person,politician,,US Representative (D-CA-41),,Democratic Party,,US,national,,Q399593,,active,y,national,,R003,2026-10-19
+A0276,Jamaal Bowman,person,politician,,US Representative (D-NY-16),,Democratic Party,,US,national,,Q96419280,,active,y,national,,R003,2026-10-19
+A0277,Jan Schakowsky,person,politician,,US Representative (D-IL-9),,Democratic Party,,US,national,,Q440885,,active,y,national,,R003,2026-10-19
+A0278,Bonnie Watson Coleman,person,politician,,US Representative (D-NJ-12),,Democratic Party,,US,national,,Q4942457,,active,y,national,,R003,2026-10-19
+A0279,Mondaire Jones,person,politician,,US Representative (D-NY-17),,Democratic Party,,US,national,,Q96781248,,active,y,national,,R003,2026-10-19
+A0280,Ayanna Pressley,person,politician,,US Representative (D-MA-7),,Democratic Party,,US,national,,Q13562359,,active,y,national,,R003,2026-10-19
+A0281,Jim McGovern,person,politician,,US Representative (D-MA-2),,Democratic Party,,US,national,,Q1337459,,active,y,national,,R003,2026-10-19
+A0282,Dwight E. Evans,person,politician,,US Representative (D-PA-3),,Democratic Party,,US,national,,Q5318148,,active,y,national,,R003,2026-10-19
+A0283,Chuy García,person,politician,,US Representative (D-IL-4),,Democratic Party,,US,national,,Q18631698,,active,y,national,,R003,2026-10-19
+A0284,Adam Smith,person,politician,,US Representative (D-WA-9),,Democratic Party,,US,national,,Q350916,,active,y,national,,R003,2026-10-19
+A0285,Rashida Tlaib,person,politician,,US Representative (D-MI-13),,Democratic Party,,US,national,,Q7294939,,active,y,national,,R003,2026-10-19
+A0286,Susan Wild,person,politician,,US Representative (D-PA-7),,Democratic Party,,US,national,,Q58323072,,active,y,national,,R003,2026-10-19
+A0287,Peter DeFazio,person,politician,,US Representative (D-OR-4),,Democratic Party,,US,national,,Q1758507,,active,y,national,,R003,2026-10-19
+A0288,Peter Welch,person,politician,,US Representative (D-VT-At Large),,Democratic Party,,US,national,,Q1112656,,active,y,national,,R003,2026-10-19
+A0289,Steve Cohen,person,politician,,US Representative (D-TN-9),,Democratic Party,,US,national,,Q512330,,active,y,national,,R003,2026-10-19
+A0290,Alan Lowenthal,person,politician,,US Representative (D-CA-47),,Democratic Party,,US,national,,Q3740782,,active,y,national,,R003,2026-10-19
+A0291,Grace Meng,person,politician,,US Representative (D-NY-6),,Democratic Party,,US,national,,Q5591303,,active,y,national,,R003,2026-10-19
+A0292,Mark DeSaulnier,person,politician,,US Representative (D-CA-11),,Democratic Party,,US,national,,Q6767311,,active,y,national,,R003,2026-10-19
+A0293,Kaiali‘i Kahele,person,politician,,US Representative (D-HI-2),,Democratic Party,,US,national,,Q28861508,,active,y,national,,R003,2026-10-19
+A0294,Andy Levin,person,politician,,US Representative (D-MI-9),,Democratic Party,,US,national,,Q4760938,,active,y,national,,R003,2026-10-19
+A0295,Don Beyer,person,politician,,US Representative (D-VA-8),,Democratic Party,,US,national,,Q3036086,,active,y,national,,R003,2026-10-19
+A0296,Matt Cartwright,person,politician,,US Representative (D-PA-8),,Democratic Party,,US,national,,Q4111531,,active,y,national,,R003,2026-10-19
+A0297,Frank Pallone,person,politician,,US Representative (D-NJ-6),,Democratic Party,,US,national,,Q965289,,active,y,national,,R003,2026-10-19
+A0298,Alex Padilla,person,politician,,US Senator (D-CA),,Democratic Party,,US,national,,Q4717593,,active,y,national,,R003,2026-10-19
+A0299,Danny K. Davis,person,politician,,US Representative (D-IL-7),,Democratic Party,,US,national,,Q1164657,,active,y,national,,R003,2026-10-19
+A0300,Dan Goldman,person,politician,,US Representative (D-NY-10),,Democratic Party,,US,national,,Q74849175,,active,y,national,,R003,2026-10-19
+A0301,Glenn Ivey,person,politician,,US Representative (D-MD-4),,Democratic Party,,US,national,,Q22004572,,active,y,national,,R003,2026-10-19
+A0302,Jonathan Jackson,person,politician,,US Representative (D-IL-1),,Democratic Party,,US,national,,Q6273473,,active,y,national,,R003,2026-10-19
+A0303,Hank Johnson,person,politician,,US Representative (D-GA-4),,Democratic Party,,US,national,,Q983537,,active,y,national,,R003,2026-10-19
+A0304,Summer Lee,person,politician,,US Representative (D-PA-12),,Democratic Party,,US,national,,Q56222614,,active,y,national,,R003,2026-10-19
+A0305,Jerrold Nadler,person,politician,,US Representative (D-NY-12),,Democratic Party,,US,national,,Q505598,,active,y,national,,R003,2026-10-19
+A0306,Katie Porter,person,politician,,US Representative (D-CA-47),,Democratic Party,,US,national,,Q58754391,,active,y,national,,R003,2026-10-19
+A0307,Q58416610,person,politician,,US Representative (D-IL-3),,Democratic Party,,US,national,,Q58416610,,active,y,national,,R003,2026-10-19
+A0308,Adam Schiff,person,politician,,US Representative (D-CA-30),,Democratic Party,,US,national,,Q350843,,active,y,national,,R003,2026-10-19
+A0309,Jill N. Tokuda,person,politician,,US Representative (D-HI-2),,Democratic Party,,US,national,,Q13562293,,active,y,national,,R003,2026-10-19
+A0310,David Trone,person,politician,,US Representative (D-MD-6),,Democratic Party,,US,national,,Q29446408,,active,y,national,,R003,2026-10-19
+A0311,Maxine Waters,person,politician,,US Representative (D-CA-43),,Democratic Party,,US,national,,Q461727,,active,y,national,,R003,2026-10-19
+A0312,Chris Deluzio,person,politician,,US Representative (D-PA-17),,Democratic Party,,US,national,,Q115181700,,active,y,national,,R003,2026-10-19
+A0313,Yassamin Ansari,person,politician,,US Representative (D-AZ-3),,Democratic Party,,US,national,,Q122226202,,active,y,national,,R003,2026-10-19
+A0314,Madeleine Dean,person,politician,,US Representative (D-PA-4),,Democratic Party,,US,national,,Q6726900,,active,y,national,,R003,2026-10-19
+A0315,Valerie Foushee,person,politician,,US Representative (D-NC-4),,Democratic Party,,US,national,,Q16729064,,active,y,national,,R003,2026-10-19
+A0316,Laura Friedman,person,politician,,US Representative (D-CA-30),,Democratic Party,,US,national,,Q6498920,,active,y,national,,R003,2026-10-19
+A0317,Maxwell Frost,person,politician,,US Representative (D-FL-10),,Democratic Party,,US,national,,Q113587724,,active,y,national,,R003,2026-10-19
+A0318,Adelita Grijalva,person,politician,,US Representative (D-AZ-7),,Democratic Party,,US,national,,Q134612342,,active,y,national,,R003,2026-10-19
+A0319,Robin Kelly,person,politician,,US Representative (D-IL-2),,Democratic Party,,US,national,,Q3437091,,active,y,national,,R003,2026-10-19
+A0320,Linda Sánchez,person,politician,,US Representative (D-CA-38),,Democratic Party,,US,national,,Q291143,,active,y,national,,R003,2026-10-19
+A0321,Lateefah Simon,person,politician,,US Representative (D-CA-12),,Democratic Party,,US,national,,Q6495426,,active,y,national,,R003,2026-10-19
+A0322,Melanie Stansbury,person,politician,,US Representative (D-NM-1),,Democratic Party,,US,national,,Q96184996,,active,y,national,,R003,2026-10-19
+A0323,Shri Thanedar,person,politician,,US Representative (D-MI-13),,Democratic Party,,US,national,,Q7503912,,active,y,national,,R003,2026-10-19
+A0324,Nydia M. Velázquez,person,politician,,US Representative (D-NY-7),,Democratic Party,,US,national,,Q434890,,active,y,national,,R003,2026-10-19
+A0325,Greg Casar,person,politician,,US Representative (D-TX-35),,Democratic Party,,US,national,,Q104148369,,active,y,national,,R003,2026-10-19
+A0326,Chellie Pingree,person,politician,,US Representative (D-ME-1),,Democratic Party,,US,national,,Q457243,,active,y,national,,R003,2026-10-19
+A0327,Analilia Mejia,person,politician,,US Representative (D-NJ-11),,Democratic Party,,US,national,,Q138142530,,active,y,national,,R003,2026-10-19
+A0328,Teresa Leger Fernandez,person,politician,,US Representative (D-NM-3),,Democratic Party,,US,national,,Q96054905,,active,y,national,,R003,2026-10-19
+A0329,Adriano Espaillat,person,politician,,US Representative (D-NY-13),,Democratic Party,,US,national,,Q4685569,,active,y,national,,R003,2026-10-19
+A0330,Q96777172,person,politician,,US Representative (D-OR-3),,Democratic Party,,US,national,,Q96777172,,active,y,national,,R003,2026-10-19
+A0331,Tammy Duckworth,person,politician,,US Senator (D-IL),,Democratic Party,,US,national,,Q3036410,,active,y,national,,R003,2026-10-19
+A0332,Tina Smith,person,politician,,US Senator (D-MN),,Democratic Party,,US,national,,Q18631509,,active,y,national,,R003,2026-10-19
+A0333,Chris Van Hollen,person,politician,,US Senator (D-MD),,Democratic Party,,US,national,,Q1077819,,active,y,national,,R003,2026-10-19
+A0334,Ron Wyden,person,politician,,US Senator (D-OR),,Democratic Party,,US,national,,Q529344,,active,y,national,,R003,2026-10-19
+A0335,Ben Ray Luján,person,politician,,US Senator (D-NM),,Democratic Party,,US,national,,Q324256,,active,y,national,,R003,2026-10-19
+A0336,Angela Alsobrooks,person,politician,,US Senator (D-MD),,Democratic Party,,US,national,,Q58755148,,active,y,national,,R003,2026-10-19
+A0337,Tammy Baldwin,person,politician,,US Senator (D-WI),,Democratic Party,,US,national,,Q40628,,active,y,national,,R003,2026-10-19
+A0338,Richard Blumenthal,person,politician,,US Senator (D-CT),,Democratic Party,,US,national,,Q2023708,,active,y,national,,R003,2026-10-19
+A0339,John Fetterman,person,politician,,US Senator (D-PA),,Democratic Party,,US,national,,Q3181500,,active,y,national,,R003,2026-10-19
+A0340,Martin Heinrich,person,politician,,US Senator (D-NM),,Democratic Party,,US,national,,Q565374,,active,y,national,,R003,2026-10-19
+A0341,Patty Murray,person,politician,,US Senator (D-WA),,Democratic Party,,US,national,,Q258825,,active,y,national,,R003,2026-10-19
+A0342,Jack Reed,person,politician,,US Senator (D-RI),,Democratic Party,,US,national,,Q528979,,active,y,national,,R003,2026-10-19
+A0343,Chris Coons,person,politician,,US Senator (D-DE),,Democratic Party,,US,national,,Q923242,,active,y,national,,R003,2026-10-19
+A0344,Rosa DeLauro,person,politician,,US Representative (D-CT-3),,Democratic Party,,US,national,,Q434952,,active,y,national,,R003,2026-10-19
+A0345,Betty McCollum,person,politician,,US Representative (D-MN-4),,Democratic Party,,US,national,,Q434893,,active,y,national,,R003,2026-10-19
+A0346,John Garamendi,person,politician,,US Representative (D-CA-8),,Democratic Party,,US,national,,Q1340268,,active,y,national,,R003,2026-10-19
+A0347,Kevin Mullin,person,politician,,US Representative (D-CA-15),,Democratic Party,,US,national,,Q6397046,,active,y,national,,R003,2026-10-19
+A0348,Greg Landsman,person,politician,,US Representative (D-OH-1),,Democratic Party,,US,national,,Q115180677,,active,y,national,,R003,2026-10-19
+A0349,Mary Gay Scanlon,person,politician,,US Representative (D-PA-5),,Democratic Party,,US,national,,Q54611716,,active,y,national,,R003,2026-10-19
+A0350,Yvette Clarke,person,politician,,US Representative (D-NY-9),,Democratic Party,,US,national,,Q461679,,active,y,national,,R003,2026-10-19
+A0351,Jared Huffman,person,politician,,US Representative (D-CA-2),,Democratic Party,,US,national,,Q3276717,,active,y,national,,R003,2026-10-19
+A0352,Donald Norcross,person,politician,,US Representative (D-NJ-1),,Democratic Party,,US,national,,Q5294942,,active,y,national,,R003,2026-10-19
+A0353,Zoe Lofgren,person,politician,,US Representative (D-CA-18),,Democratic Party,,US,national,,Q218217,,active,y,national,,R003,2026-10-19
+A0354,Nikki Budzinski,person,politician,,US Representative (D-IL-13),,Democratic Party,,US,national,,Q111342337,,active,y,national,,R003,2026-10-19
+A0355,John B. Larson,person,politician,,US Representative (D-CT-1),,Democratic Party,,US,national,,Q357832,,active,y,national,,R003,2026-10-19
+A0356,Nanette Barragán,person,politician,,US Representative (D-CA-44),,Democratic Party,,US,national,,Q21662745,,active,y,national,,R003,2026-10-19
+A0357,Jamie Raskin,person,politician,,US Representative (D-MD-8),,Democratic Party,,US,national,,Q640835,,active,y,national,,R003,2026-10-19
+A0358,Jimmy Gomez,person,politician,,US Representative (D-CA-34),,Democratic Party,,US,national,,Q6200205,,active,y,national,,R003,2026-10-19
+A0359,Mark Pocan,person,politician,,US Representative (D-WI-2),,Democratic Party,,US,national,,Q1900355,,active,y,national,,R003,2026-10-19
+A0360,Bill Foster,person,politician,,US Representative (D-IL-11),,Democratic Party,,US,national,,Q2903389,,active,y,national,,R003,2026-10-19
+A0361,Seth Moulton,person,politician,,US Representative (D-MA-6),,Democratic Party,,US,national,,Q18045052,,active,y,national,,R003,2026-10-19
+A0362,Grace Napolitano,person,politician,,US Representative (D-CA-31),,Democratic Party,,US,national,,Q469139,,active,y,national,,R003,2026-10-19
+A0363,Nikema Williams,person,politician,,US Representative (D-GA-5),,Democratic Party,,US,national,,Q56486570,,active,y,national,,R003,2026-10-19
+A0364,Val Hoyle,person,politician,,US Representative (D-OR-4),,Democratic Party,,US,national,,Q7909103,,active,y,national,,R003,2026-10-19
+A0365,Emanuel Cleaver,person,politician,,US Representative (D-MO-5),,Democratic Party,,US,national,,Q1334654,,active,y,national,,R003,2026-10-19
+A0366,André Carson,person,politician,,US Representative (D-IN-7),,Democratic Party,,US,national,,Q517649,,active,y,national,,R003,2026-10-19
+A0367,Troy Carter,person,politician,,US Representative (D-LA-2),,Democratic Party,,US,national,,Q7846787,,active,y,national,,R003,2026-10-19
+A0368,Lori Trahan,person,politician,,US Representative (D-MA-3),,Democratic Party,,US,national,,Q56486676,,active,y,national,,R003,2026-10-19
+A0369,Marcy Kaptur,person,politician,,US Representative (D-OH-9),,Democratic Party,,US,national,,Q436537,,active,y,national,,R003,2026-10-19
+A0370,Ted Lieu,person,politician,,US Representative (D-CA-36),,Democratic Party,,US,national,,Q7693450,,active,y,national,,R003,2026-10-19
+A0371,Dina Titus,person,politician,,US Representative (D-NV-1),,Democratic Party,,US,national,,Q524440,,active,y,national,,R003,2026-10-19
+A0372,Bill Keating,person,politician,,US Representative (D-MA-9),,Democratic Party,,US,national,,Q775412,,active,y,national,,R003,2026-10-19
+A0373,Seth Magaziner,person,politician,,US Representative (D-RI-2),,Democratic Party,,US,national,,Q16222460,,active,y,national,,R003,2026-10-19
