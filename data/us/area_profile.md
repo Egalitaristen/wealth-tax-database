@@ -43,7 +43,7 @@ First drafted 2026-10-19 (run R001). Lines marked **[verify]** come from a searc
 - Quotes are checked by fetching the raw page; the WebFetch tool summarises and can paraphrase.
 
 ## State-by-state sweep (R005, 2026-10-19)
-One search per state (50 states plus DC) for wealth tax, billionaire tax or net worth tax proposals. This replaces the earlier note that no other state had a measure: the Oregon initiative below was missed by the first searches. Results come from search summaries, so each item is a lead and is queued in `harvest.csv` (H0011 onward) to be opened and sourced.
+One search per state (50 states plus DC) for wealth tax, billionaire tax or net worth tax proposals. This replaces the earlier note that no other state had a measure: the Oregon initiative below was missed by the first searches. Results come from search summaries, so each item is a lead and is queued in `harvest.csv` (H0014 to H0025) to be opened and sourced.
 
 **Net-wealth or unrealised-gains designs (qualify):**
 - **Oregon:** IP 70, the Very Rich Pay Their Fair Share Act (Jonathan Tasini): 2% a year on assets of residents worth $30m or more. Stalled in 2026 and not on the ballot ([Northwest Labor Press](https://nwlaborpress.org/2026/08/oregon-wealth-tax-initiative-campaign-stalls/)); initiative text at [Tax the Very Wealthy](https://taxtheverywealthy.com/the-initiative/). A coalition of progressive groups and unions plans a 2028 measure ([States Newsroom](https://washingtonstatestandard.com/?p=17425)); its design is unconfirmed.
