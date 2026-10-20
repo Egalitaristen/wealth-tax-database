@@ -19,7 +19,7 @@ Run R001, 2026-10-20. Seed pass. Facts marked [verify] come from a search summar
 - Polls: the only India figure found is a 2021 Fight Inequality Alliance India survey (3,231 people, 24 states) that more than 80% support taxing the rich and pandemic profiteers. That is a tax on "the rich", not a wealth tax, so it is not in `meta.json` `polls`.
 
 ## 3. Legislatures and where their records are
-- Lok Sabha and Rajya Sabha: debates at `sansad.in` (redirects and certificate errors from the sandbox) and `rsdebate.nic.in`. Not searched.
+- Lok Sabha and Rajya Sabha: swept in R002 for every sitting day since 2010 (see `skill/references/countries/in.md` for the APIs). Result: no motion or bill with named sponsors since 2015, but 24 speeches by 22 MPs from the CPI(M), CPI, Congress, TMC, BJD, NCP(SP) and DMK (grades A to C), mostly in Budget and Finance Bill debates. Written questions were not read. Hindi-language speeches are not searchable.
 - No wealth-tax private member's bill was found in a first search; the Parliament private-members' lists were not read.
 
 ## 4. Parties
