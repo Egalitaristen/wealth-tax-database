@@ -85,9 +85,21 @@ def read_topojson(a):
         yield name, code, [ring_points(arcs, r) for poly in polys for r in poly]
 
 
+def read_geojson(a):
+    gj = json.load(open(a.source_file, encoding="utf-8"))
+    key, _, val = a.where.partition("=")
+    for f in gj.get("features", []):
+        props, g = f.get("properties") or {}, f.get("geometry") or {}
+        if key and str(props.get(key)) != val:
+            continue
+        polys = g.get("coordinates") or []
+        polys = polys if g.get("type") == "MultiPolygon" else [polys]
+        yield props.get(a.name_prop, ""), props.get(a.code_prop, "") if a.code_prop else "", [r for poly in polys for r in poly]
+
+
 def read_shapefile(a):
     import shapefile  # pyshp
-    sf = shapefile.Reader(a.source_file, encoding="utf-8")
+    sf = shapefile.Reader(a.source_file, encoding=a.encoding)
     fields = [f[0] for f in sf.fields[1:]]
     key, _, val = a.where.partition("=")
     for sr in sf.iterShapeRecords():
@@ -101,7 +113,8 @@ def read_shapefile(a):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("source_file", help="a TopoJSON (.json) or a shapefile (.shp)")
+    ap.add_argument("source_file", help="a TopoJSON (.json), a GeoJSON (.geojson) or a shapefile (.shp)")
+    ap.add_argument("--encoding", default="utf-8", help="shapefile text encoding (default utf-8; SCB files are latin-1)")
     ap.add_argument("--object", help="TopoJSON only: name of the object inside the file (for example counties)")
     ap.add_argument("--name-prop", default="name", help="property or field holding the area name (default: name)")
     ap.add_argument("--code-prop", default="", help="property or field (or 'id') holding the official code")
@@ -115,10 +128,10 @@ def main():
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
 
-    shp = a.source_file.lower().endswith(".shp")
-    if not shp and not a.object:
+    ext = a.source_file.lower().rsplit(".", 1)[-1]
+    if ext == "json" and not a.object:
         ap.error("--object is needed for TopoJSON")
-    shapes = list(read_shapefile(a) if shp else read_topojson(a))
+    shapes = list(read_shapefile(a) if ext == "shp" else read_geojson(a) if ext == "geojson" else read_topojson(a))
     lats = [p[1] for _, _, rings in shapes for r in rings for p in r]
     k = math.cos(math.radians((min(lats) + max(lats)) / 2)) if a.project == "lonlat" else 1.0
     flip = a.project == "lonlat" or a.flip_y

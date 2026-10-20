@@ -837,12 +837,12 @@ function countryMap(D, slug, onShowAll) {
   const svgNS = 'http://www.w3.org/2000/svg';
   const svg = document.createElementNS(svgNS, 'svg');
   svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `Map of ${D.meta.name} by area`);
-  // Areas with their own supporters are shaded; areas whose region has supporters known only at region level
-  // (a state or Land, say) get a light tint, so the map still shows them; region outlines go on top.
-  const pmx = Math.max(1, ...D.C.map(c => c[9] || 0));
+  // Areas with their own supporters are shaded from a clearly visible start; areas whose region has supporters
+  // known only at region level (a state, Land or län) get one fixed faint tint, always lighter than a real
+  // supporter, so the two never look alike; region outlines go on top.
   svg.innerHTML = `<g>${D.C.map((c, i) => { const n = c[6].length, up = c[9] || 0;
-      if (n) return `<path data-i="${i}" class="u-sup" style="--t:${(.22 + .78 * Math.log(n + 1) / Math.log(mx + 1)).toFixed(3)}" d="${c[7]}"/>`;
-      if (up) return `<path data-i="${i}" class="u-up" style="--t:${(.1 + .22 * Math.log(up + 1) / Math.log(pmx + 1)).toFixed(3)}" d="${c[7]}"/>`;
+      if (n) return `<path data-i="${i}" class="u-sup" style="--t:${(.42 + .58 * Math.log(n + 1) / Math.log(mx + 1)).toFixed(3)}" d="${c[7]}"/>`;
+      if (up) return `<path data-i="${i}" class="u-up" style="--t:.13" d="${c[7]}"/>`;
       return `<path data-i="${i}" class="u-none" d="${c[7]}"/>`; }).join('')}</g>
     ${(D.R || []).length ? `<g class="regions">${D.R.map(d => `<path d="${d}"/>`).join('')}</g>` : ''}`;
   const frame = document.createElement('div'); frame.className = 'mapframe'; frame.appendChild(svg);
