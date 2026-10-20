@@ -171,7 +171,7 @@ function resultsHtml(S, res, q) {
   if (!res) return '';
   const groups = [];
   if (res.countries.length) groups.push(`<div class="rgroup">Countries</div>` + res.countries.map(c =>
-    `<a class="ritem" href="/${c.slug}"><span class="rm"><span class="rn">${mark(c.name, q)}</span><span class="rs">${fmt(c.n)} supporters</span></span><span class="rc">Country</span></a>`).join(''));
+    `<a class="ritem" href="/${c.slug}"><span class="rm"><span class="rn">${mark(c.name, q)}</span><span class="rs">${fmt(c.n)} on record so far</span></span><span class="rc">Country</span></a>`).join(''));
   if (res.places.length) groups.push(`<div class="rgroup">Places</div>` + res.places.map(p =>
     `<a class="ritem" href="/${p.slug}?place=${enc(p.path)}"><span class="rm"><span class="rn">${mark(p.name, q)}</span><span class="rs">${esc(p.path)}</span></span><span class="rc">${fmt(p.n)}</span></a>`).join(''));
   if (res.people.length) groups.push(`<div class="rgroup">People and organisations${res.total > res.people.length ? ` · top ${res.people.length} of ${fmt(res.total)}` : ''}</div>` + res.people.map(p =>
@@ -257,7 +257,7 @@ async function home(W) {
     <div class="hero-grid">
       <div>
         <h1>Who backs a wealth tax <em>near you?</em></h1>
-        <p class="lede">${fmt(tot('supporters'))} politicians, economists, unions, campaigners and millionaires who have said so in public. Every name links to the source.</p>
+        <p class="lede">${fmt(tot('supporters'))} public figures and organisations on the record, found so far: politicians, economists, unions, campaigners and millionaires. A register of who has said it in public, not a poll. Every name links to the source.</p>
         <div class="big-search">
           <div class="box">
             <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg>
@@ -270,7 +270,7 @@ async function home(W) {
       </div>
       <div class="hero-side">
         <div class="ledger">
-          <div><b>${fmt(tot('supporters'))}</b><span>people and organisations</span></div>
+          <div><b>${fmt(tot('supporters'))}</b><span>public figures and organisations found so far</span></div>
           <div><b>${fmt(tot('evidence'))}</b><span>sourced statements</span></div>
           <div><b>${fmt(tot('A'))}</b><span>with explicit support</span></div>
           <div><b>${cs.length}</b><span>${cs.length === 1 ? 'country' : 'countries'}, and counting</span></div>
@@ -291,7 +291,7 @@ async function home(W) {
       <a class="crow" href="/${c.slug}">
         <span class="iso">${esc(c.iso2)}</span>
         <span class="nm">${esc(c.name)}</span>
-        <span class="st"><b>${fmt(c.supporters)}</b><span>supporters</span></span>
+        <span class="st"><b>${fmt(c.supporters)}</b><span>on record so far</span></span>
         <span class="st hide-s"><b>${fmt(c.evidence)}</b><span>statements</span></span>
         <span class="st hide-s"><b>${c.units ? fmt(c.units_with_supporters) + '<span style="color:var(--ink-3);font-weight:400"> / ' + fmt(c.units) + '</span>' : '·'}</b><span>areas with a supporter</span></span>
         <span class="arrow">→</span>
@@ -445,7 +445,7 @@ function worldMap(box, W) {
       const id = countryAt(e);
       if (!id) return hideTip();
       const c = byNum[id];
-      showTip(c ? `<b>${esc(c.name)}</b><span>${fmt(c.supporters)} supporters →</span>` : `<b>${esc(W.paths[id].name)}</b><span>no register yet</span>`, e.clientX, e.clientY);
+      showTip(c ? `<b>${esc(c.name)}</b><span>${fmt(c.supporters)} on record so far →</span>` : `<b>${esc(W.paths[id].name)}</b><span>no register yet</span>`, e.clientX, e.clientY);
     },
     onTap: e => {
       const id = countryAt(e); if (!id) return;
@@ -490,10 +490,10 @@ async function countryPage(slug, params, section = 'map') {
     <div class="c-top">
       <div class="c-title">
         <h1>${esc(m.name)}</h1>
-        <p>${fmt(m.supporters)} people and organisations have backed a wealth tax in public, in ${fmt(m.evidence)} sourced statements.</p>
+        <p>${fmt(m.supporters)} public figures and organisations on the record found so far, in ${fmt(m.evidence)} sourced statements. A register of who has said it in public, not a poll.</p>
       </div>
       <div class="c-stats">
-        <div><b>${fmt(m.supporters)}</b><span>supporters</span></div>
+        <div><b>${fmt(m.supporters)}</b><span>on record so far</span></div>
         <div><b>${fmt(m.A)}</b><span>explicit support</span></div>
         <div><b>${fmt(m.evidence)}</b><span>statements</span></div>
         <div><b>${fmt(m.units_with_supporters)}</b><span>areas with a supporter</span></div>
@@ -944,7 +944,7 @@ function aboutPage(W) {
   <div class="wrap page-head fade"><div class="kicker">Method</div><h1>How the register <em>is built</em></h1></div>
   <div class="wrap two" style="margin-top:36px">
     <div class="prose">
-      <p class="lede" style="max-width:none">Wealth Tax Supporters lists people and organisations that have backed a wealth tax in public. It exists so that supporters can find each other, from national parliaments down to a single town.</p>
+      <p class="lede" style="max-width:none">Wealth Tax Supporters lists public figures and organisations that have backed a wealth tax in public. It is a register of who has said it on the record, not a poll, and it grows with every research run. It exists so that supporters can find each other, from national parliaments down to a single town.</p>
       <h2>What counts as support</h2>
       <p>Only an actual tax on wealth: a tax on the stock of what people own rather than on what they earn. That covers</p>
       <ul>${Object.entries(DES).map(([k, v]) => `<li><b>${esc(v)}</b></li>`).join('')}</ul>
