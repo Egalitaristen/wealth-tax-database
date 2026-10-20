@@ -1,303 +1,915 @@
 'use strict';
+/* Wealth Tax Supporters: a static, single-page front end over data/*.json built by scripts/build_site.py. */
 const REPO = 'Egalitaristen/wealth-tax-supporters';
-const $ = s => document.querySelector(s);
-const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 const enc = encodeURIComponent;
-const safeUrl = u => /^https?:\/\//.test(u) ? u : '';
+const safeUrl = u => /^https?:\/\//i.test(u || '') ? u : '';
+const fmt = n => Number(n || 0).toLocaleString('en');
+const norm = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const year = d => (d || '').slice(0, 4);
 const issueUrl = (title, fields = {}) =>
   `https://github.com/${REPO}/issues/new?template=data-report.yml&title=${enc(title)}` +
   Object.entries(fields).map(([k, v]) => `&${k}=${enc(v)}`).join('');
-$('#report-top').href = issueUrl('Report: ');
-$('#repo-link').href = `https://github.com/${REPO}`;
+const ext = (href, text, cls = '') => `<a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener noreferrer nofollow">${text}</a>`;
 
-const TYPE = {politician:'Politician',party:'Party',government_body:'Council or body',academic:'Academic',economist:'Economist',think_tank:'Think tank',ngo_campaign:'Campaign group',union:'Union',union_official:'Union official',journalist:'Commentator',media_outlet:'Media outlet',legal_tax_professional:'Legal or tax',wealthy_individual:'Wealthy individual',business_leader:'Business leader',faith:'Faith',cultural_figure:'Cultural figure',campaigner:'Campaigner or NGO leader',international_body:'International body',funder:'Funder'};
-const DES = {annual_net_wealth:'Annual net wealth tax',one_off_levy:'One-off levy',billionaire_minimum:'Billionaire minimum',partial_wealth:'Partial (e.g. property)',wealth_tax_unspecified:'Unspecified wealth tax',unrealised_gains:'Unrealised gains',exit_tax:'Exit tax'};
-const EVT = {open_letter:'Open letter',motion_signature:'Signed motion',motion:'Motion',vote:'Vote',campaign:'Campaign',op_ed:'Op-ed',editorial:'Editorial',speech:'Speech',statement:'Statement',policy_adoption:'Policy adopted',publication:'Publication',report:'Report',funding:'Funding',coalition_membership:'Coalition member',interview:'Interview',manifesto:'Manifesto',bill_sponsorship:'Bill sponsor',testimony:'Testimony',social_post:'Social post',other:'Other'};
-const PLAT = {official_page:'Official page',website:'Website',x:'X',bluesky:'Bluesky',mastodon:'Mastodon',instagram:'Instagram',facebook:'Facebook',youtube:'YouTube',tiktok:'TikTok',linkedin:'LinkedIn',substack:'Substack',wikipedia:'Wikipedia'};
-const PLAT_ORDER = Object.keys(PLAT);
-const STATE = {support:'Supporters recorded',clear:'Read, nothing found',open:'Not fully read yet'};
+const TYPE = {politician: 'Politician', party: 'Party', government_body: 'Council or public body', academic: 'Academic', economist: 'Economist', think_tank: 'Think tank', ngo_campaign: 'Campaign group', union: 'Union', union_official: 'Union official', journalist: 'Commentator', media_outlet: 'Media outlet', legal_tax_professional: 'Legal or tax expert', wealthy_individual: 'Wealthy individual', business_leader: 'Business leader', faith: 'Faith leader or body', cultural_figure: 'Cultural figure', campaigner: 'Campaigner', international_body: 'International body', funder: 'Funder'};
+const TYPES_PL = {politician: 'Politicians', party: 'Parties', government_body: 'Councils and bodies', academic: 'Academics', economist: 'Economists', think_tank: 'Think tanks', ngo_campaign: 'Campaign groups', union: 'Unions', union_official: 'Union officials', journalist: 'Commentators', media_outlet: 'Media outlets', legal_tax_professional: 'Legal and tax experts', wealthy_individual: 'Wealthy individuals', business_leader: 'Business leaders', faith: 'Faith', cultural_figure: 'Cultural figures', campaigner: 'Campaigners', international_body: 'International bodies', funder: 'Funders'};
+const DES = {annual_net_wealth: 'Annual net wealth tax', one_off_levy: 'One-off wealth levy', billionaire_minimum: 'Billionaire minimum tax', unrealised_gains: 'Tax on unrealised gains', exit_tax: 'Exit tax', partial_wealth: 'Partial wealth tax', defend_existing: 'Keep an existing wealth tax', wealth_tax_unspecified: 'A wealth tax, design open'};
+const EVT = {open_letter: 'Open letter', motion_signature: 'Signed a motion', motion: 'Motion', vote: 'Vote', campaign: 'Campaign', op_ed: 'Op-ed', editorial: 'Editorial', speech: 'Speech', statement: 'Statement', policy_adoption: 'Adopted policy', publication: 'Publication', report: 'Report', funding: 'Funding', coalition_membership: 'Coalition member', interview: 'Interview', manifesto: 'Manifesto', bill_sponsorship: 'Bill sponsor', testimony: 'Testimony', social_post: 'Social post', petition: 'Petition', other: 'Other'};
+const PLAT = {official_page: 'Official page', website: 'Website', x: 'X', bluesky: 'Bluesky', mastodon: 'Mastodon', instagram: 'Instagram', facebook: 'Facebook', youtube: 'YouTube', tiktok: 'TikTok', linkedin: 'LinkedIn', substack: 'Substack', wikipedia: 'Wikipedia'};
+const GRADE = {A: 'Explicit', B: 'Named', C: 'Implied'};
+const GRADE_LONG = {A: 'Explicit support: a formal act or a specific proposal', B: 'Named support for a wealth tax', C: 'Implied support, read from context'};
+const LEVEL = {national: 'National', regional: 'Regional', local: 'Local', supranational: 'International'};
+const glyph = g => `<i class="g ${esc(g)}" title="${esc(GRADE_LONG[g] || '')}"></i>`;
+const label = (map, k) => map[k] || String(k || '').replace(/_/g, ' ').replace(/^./, c => c.toUpperCase());
+// People rows from build_site.py
+const P_ = {id: 0, name: 1, kind: 2, type: 3, role: 4, aff: 5, level: 6, loc: 7, grade: 8, n: 9, first: 10, last: 11, des: 12, notes: 13, web: 14, party: 15, other: 16, prof: 17};
+const E_ = {actor: 0, date: 1, grade: 2, type: 3, des: 4, detail: 5, quote: 6, url: 7, title: 8, pub: 9, verified: 10, id: 11};
 
-// ---------- pan and zoom for any SVG map ----------
-function makeMap(svg, box, tip, vb, nameOf, onPick) {
-  const [vx, vy, vw, vh] = vb;
-  let x = vx, y = vy, w = vw, h = vh, drag = null, moved = false, selKey = null;
-  const set = () => svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`);
-  function fit() {
-    const r = svg.getBoundingClientRect();
-    if (r.width < 2 || r.height < 2) return; // hidden or collapsed: keep the last view
-    const asp = r.width / r.height;
-    let nw = vw, nh = vh;
-    if (nw / nh > asp) nh = nw / asp; else nw = nh * asp;
-    w = nw; h = nh; x = vx - (nw - vw) / 2; y = vy - (nh - vh) / 2; set();
+// ---------- data ----------
+const cache = {};
+const getJSON = url => cache[url] || (cache[url] = fetch(url).then(r => { if (!r.ok) throw new Error(r.status + ' ' + url); return r.json(); }));
+const WORLD = () => getJSON('/data/world.json');
+const INDEX = () => getJSON('/data/index.json');
+const prepared = {};
+function loadCountry(slug) {
+  return prepared[slug] || (prepared[slug] = getJSON(`/data/${slug}.json`).then(D => {
+    D.byId = Object.fromEntries(D.P.map(p => [p[P_.id], p]));
+    D.evBy = {};
+    D.E.forEach(e => (D.evBy[e[E_.actor]] = D.evBy[e[E_.actor]] || []).push(e));
+    // Every place that can be selected: map units (C) and unmapped units with people (O).
+    D.places = [
+      ...D.C.map(c => ({name: c[0], path: c[8], ids: c[6], state: c[2], sweep: c[3], notes: c[5], mapped: true})),
+      ...D.O.map(o => ({name: o[0], path: o[5], ids: o[4], state: 'support', sweep: o[2], notes: o[3], mapped: false}))];
+    // The list of places to browse: every area and every region above it, counting everyone inside.
+    const paths = new Set();
+    D.places.forEach(pl => { const parts = pl.path.split(' > '); parts.forEach((_, i) => { if (i) paths.add(parts.slice(0, i + 1).join(' > ')); }); });
+    D.placeList = [...paths].map(path => {
+      const own = D.places.find(pl => pl.path === path);
+      const ids = idsForPlace(D, path);
+      return {path, name: path.split(' > ').pop(), n: ids.size, state: own ? own.state : 'support', notes: own ? own.notes : '',
+        mapped: D.places.some(pl => pl.mapped && (pl.path === path || pl.path.startsWith(path + ' > ')))};
+    });
+    const root = D.places.find(pl => !pl.path.includes(' > '));
+    D.nationalOnly = root ? root.ids.length : 0;
+    return D;
+  }));
+}
+function idsForPlace(D, path) {
+  const out = new Set();
+  D.places.forEach(pl => { if (pl.path === path || pl.path.startsWith(path + ' > ')) pl.ids.forEach(i => out.add(i)); });
+  return out;
+}
+const rank = p => ({A: 0, B: 1, C: 2}[p[P_.grade]] ?? 3);
+const byStrength = (a, b) => rank(a) - rank(b) || b[P_.n] - a[P_.n] || (b[P_.last] || '').localeCompare(a[P_.last] || '') || a[P_.name].localeCompare(b[P_.name]);
+const placeShort = loc => { const p = (loc || '').split('>').map(s => s.trim()).filter(Boolean); return p.length > 1 ? p.slice(-2).join(', ') : (p[0] || ''); };
+
+// ---------- routing ----------
+const main = $('#main');
+let leaving = () => {};
+function go(url, {replace = false} = {}) {
+  history[replace ? 'replaceState' : 'pushState'](null, '', url);
+  render(true);
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href]');
+  if (!a || a.target || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const u = new URL(a.href, location.href);
+  if (u.origin !== location.origin || /^\/(data|download)\//.test(u.pathname) || a.hasAttribute('download')) return;
+  e.preventDefault();
+  closePalette();
+  if (u.pathname === location.pathname && u.search === location.search) {
+    if (u.hash) { history.replaceState(null, '', u.hash); scrollToHash(); } else window.scrollTo({top: 0});
+    return;
   }
-  function zoom(f) {
-    const nw = Math.min(vw * 1.6, Math.max(vw / 60, w * f)), nh = h * (nw / w);
-    x += (w - nw) / 2; y += (h - nh) / 2; w = nw; h = nh; set();
+  go(u.pathname + u.search + u.hash);
+});
+window.addEventListener('popstate', () => render(false));
+function scrollToHash() {
+  const el = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (el) el.scrollIntoView({block: 'start'});
+}
+async function render(fresh) {
+  leaving(); leaving = () => {};
+  const parts = location.pathname.split('/').filter(Boolean).map(decodeURIComponent);
+  const params = new URLSearchParams(location.search);
+  $$('.nav a').forEach(a => a.removeAttribute('aria-current'));
+  try {
+    const W = await WORLD();
+    $('#built').textContent = `Data built ${W.built} · ${W.countries.length} countries · ${fmt(W.countries.reduce((n, c) => n + c.supporters, 0))} supporters`;
+    const country = W.countries.find(c => c.slug === (parts[0] || '').toLowerCase());
+    if (!parts.length) await home(W);
+    else if (parts[0] === 'about' && parts.length === 1) aboutPage(W);
+    else if (parts[0] === 'contribute' && parts.length === 1) contributePage(W);
+    else if (country && parts.length === 1) await countryPage(country.slug, params);
+    else if (country && parts.length === 2) await personPage(country.slug, parts[1]);
+    else notFound();
+    const navKey = parts[0] === 'about' ? '/about' : parts[0] === 'contribute' ? '/contribute' : null;
+    if (navKey) $$('.nav a').forEach(a => { if (a.getAttribute('href') === navKey) a.setAttribute('aria-current', 'page'); });
+  } catch (err) {
+    console.error(err);
+    main.innerHTML = `<div class="wrap page-head"><div class="kicker">Something went wrong</div><h1>Could not load the data.</h1>
+      <p class="lede" style="margin-top:20px">Try reloading the page. If you opened the file directly, serve the built site instead: <code>python scripts/serve.py</code>.</p></div>`;
   }
-  svg.addEventListener('pointerdown', e => { drag = {x: e.clientX, y: e.clientY}; moved = false; svg.setPointerCapture(e.pointerId); });
+  if (location.hash) requestAnimationFrame(scrollToHash);
+  else if (fresh) window.scrollTo({top: 0});
+}
+function setTitle(t) { document.title = t ? `${t} · Wealth Tax Supporters` : 'Wealth Tax Supporters: who backs a wealth tax near you?'; }
+function notFound() {
+  setTitle('Not found');
+  main.innerHTML = `<div class="wrap page-head fade"><div class="kicker">404</div><h1>Nothing <em>here.</em></h1>
+    <p class="lede" style="margin:22px 0 28px">This page does not exist, or the entry has moved. Try searching for the person, organisation or place.</p>
+    <p><a class="btn" href="/">Back to the start</a></p></div><div style="height:80px"></div>`;
+}
+
+// ---------- search ----------
+let SEARCH = null;
+async function searchData() {
+  if (SEARCH) return SEARCH;
+  const [I, W] = await Promise.all([INDEX(), WORLD()]);
+  const cname = Object.fromEntries(W.countries.map(c => [c.slug, c.name])), ciso = Object.fromEntries(W.countries.map(c => [c.slug, c.iso2]));
+  SEARCH = {
+    people: I.people.map(r => ({slug: r[0], id: r[1], name: r[2], type: r[3], role: r[4], place: r[5], grade: r[6], n: r[7],
+      nkey: norm(r[2]), key: norm([r[2], r[4], r[5], TYPE[r[3]] || '', TYPES_PL[r[3]] || '', cname[r[0]]].join(' '))})),
+    places: I.places.map(r => ({slug: r[0], path: r[1], n: r[2], name: r[1].split(' > ').pop(), key: norm(r[1])})),
+    countries: W.countries.map(c => ({slug: c.slug, name: c.name, n: c.supporters, key: norm(c.name + ' ' + c.iso2)})),
+    cname, ciso};
+  return SEARCH;
+}
+function runSearch(S, q) {
+  const toks = norm(q).trim().split(/\s+/).filter(Boolean);
+  if (!toks.length) return null;
+  const hit = k => toks.every(t => k.includes(t));
+  const countries = S.countries.filter(c => hit(c.key));
+  const places = S.places.filter(p => hit(norm(p.name)) || (toks.length > 1 && hit(p.key)))
+    .sort((a, b) => (norm(b.name).startsWith(toks[0]) - norm(a.name).startsWith(toks[0])) || b.n - a.n).slice(0, 6);
+  const people = S.people.filter(p => hit(p.key)).map(p => {
+    let s = 0;
+    if (p.nkey.startsWith(toks[0])) s += 4; else if (p.nkey.split(/\s+/).some(w => w.startsWith(toks[0]))) s += 3; else if (hit(p.nkey)) s += 2;
+    s += {A: .6, B: .3, C: 0}[p.grade] || 0;
+    return [s + Math.min(p.n, 10) / 40, p];
+  }).sort((a, b) => b[0] - a[0]).map(x => x[1]);
+  return {countries, places, people: people.slice(0, 14), total: people.length};
+}
+function mark(text, q) {
+  const toks = norm(q).trim().split(/\s+/).filter(t => t.length > 1);
+  let out = esc(text);
+  if (!toks.length) return out;
+  const n = norm(text);
+  // Highlight the first match of the first token only when lengths line up (no accents changed lengths).
+  if (n.length !== text.length) return out;
+  const i = n.indexOf(toks[0]);
+  if (i < 0) return out;
+  return esc(text.slice(0, i)) + '<mark>' + esc(text.slice(i, i + toks[0].length)) + '</mark>' + esc(text.slice(i + toks[0].length));
+}
+function resultsHtml(S, res, q) {
+  if (!res) return '';
+  const groups = [];
+  if (res.countries.length) groups.push(`<div class="rgroup">Countries</div>` + res.countries.map(c =>
+    `<a class="ritem" href="/${c.slug}"><span class="rm"><span class="rn">${mark(c.name, q)}</span><span class="rs">${fmt(c.n)} supporters</span></span><span class="rc">Country</span></a>`).join(''));
+  if (res.places.length) groups.push(`<div class="rgroup">Places</div>` + res.places.map(p =>
+    `<a class="ritem" href="/${p.slug}?place=${enc(p.path)}#map"><span class="rm"><span class="rn">${mark(p.name, q)}</span><span class="rs">${esc(p.path)}</span></span><span class="rc">${fmt(p.n)}</span></a>`).join(''));
+  if (res.people.length) groups.push(`<div class="rgroup">People and organisations${res.total > res.people.length ? ` · top ${res.people.length} of ${fmt(res.total)}` : ''}</div>` + res.people.map(p =>
+    `<a class="ritem" href="/${p.slug}/${enc(p.id)}">${glyph(p.grade)}<span class="rm"><span class="rn">${mark(p.name, q)}</span><span class="rs">${esc([TYPE[p.type], p.role, p.place].filter(Boolean).join(' · '))}</span></span><span class="rc" title="${esc(S.cname[p.slug])}">${esc(S.ciso[p.slug])}</span></a>`).join(''));
+  return groups.join('') || `<div class="rempty">No match for “${esc(q)}”. Try a surname, a town, or a type such as “economists”.</div>`;
+}
+function attachSearch(input, box, {onOpen = () => {}, onClose = () => {}} = {}) {
+  let act = -1;
+  const items = () => $$('.ritem', box);
+  const setAct = i => { const it = items(); act = Math.max(-1, Math.min(it.length - 1, i)); it.forEach((el, j) => el.classList.toggle('act', j === act)); if (it[act]) it[act].scrollIntoView({block: 'nearest'}); };
+  const update = async () => {
+    const S = await searchData(), q = input.value;
+    const res = runSearch(S, q);
+    box.innerHTML = resultsHtml(S, res, q);
+    box.hidden = !res; act = -1;
+    if (res) { setAct(0); onOpen(); } else onClose();
+  };
+  input.addEventListener('input', update);
+  input.addEventListener('focus', () => { if (input.value.trim()) update(); });
+  input.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setAct(act + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setAct(act - 1); }
+    else if (e.key === 'Enter') { const it = items()[act] || items()[0]; if (it) { e.preventDefault(); it.click(); } }
+  });
+  return update;
+}
+// The palette opens from the header button or the "/" key.
+const pal = $('#palette'), palQ = $('#pal-q'), palRes = $('#pal-res');
+function openPalette(q = '') {
+  pal.hidden = false; palQ.value = q; palQ.focus();
+  if (q) palUpdate(); else palRes.innerHTML = `<div class="rempty">Search ${'people, organisations, places and countries'}. Use ↑ ↓ and Enter.</div>`;
+  searchData();
+}
+function closePalette() { if (!pal.hidden) pal.hidden = true; }
+const palUpdate = attachSearch(palQ, palRes, {onClose: () => { palRes.hidden = false; palRes.innerHTML = ''; }});
+$('#open-search').addEventListener('click', () => openPalette());
+$('#pal-close').addEventListener('click', closePalette);
+pal.addEventListener('click', e => { if (e.target === pal) closePalette(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePalette();
+  const typing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if (!typing && (e.key === '/' || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'))) { e.preventDefault(); openPalette(); }
+});
+
+// ---------- theme ----------
+const dark = () => document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+$('#theme').addEventListener('click', () => {
+  const t = dark() ? 'light' : 'dark';
+  document.documentElement.dataset.theme = t;
+  try { localStorage.setItem('theme', t); } catch (e) { /* storage blocked: the choice lasts for this page only */ }
+  window.dispatchEvent(new Event('themechange'));
+});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => window.dispatchEvent(new Event('themechange')));
+const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+// ---------- tooltip ----------
+const tip = $('#tip');
+function showTip(html, x, y) { tip.innerHTML = html; tip.hidden = false; tip.style.left = x + 'px'; tip.style.top = y + 'px'; }
+function hideTip() { tip.hidden = true; }
+window.addEventListener('scroll', hideTip, {passive: true});
+
+// ---------- home ----------
+async function home(W) {
+  setTitle('');
+  const cs = W.countries;
+  const tot = k => cs.reduce((n, c) => n + (c[k] || 0), 0);
+  const latest = cs.map(c => c.updated).sort().pop() || W.built;
+  const types = {}, designs = {};
+  cs.forEach(c => { Object.entries(c.types || {}).forEach(([k, v]) => types[k] = (types[k] || 0) + v); Object.entries(c.designs || {}).forEach(([k, v]) => designs[k] = (designs[k] || 0) + v); });
+  // Interleave featured quotes across countries, one per person.
+  const feats = [], used = new Set(), lists = cs.map(c => (c.featured || []).map(f => [c, f]));
+  for (let i = 0; feats.length < 6 && lists.some(l => l[i]); i++) lists.forEach(l => {
+    if (l[i] && feats.length < 6 && !used.has(norm(l[i][1][1])) && !used.has(norm(l[i][1][4]))) { used.add(norm(l[i][1][1])); used.add(norm(l[i][1][4])); feats.push(l[i]); }
+  });
+  const bars = (obj, labels, link) => {
+    const rows = Object.entries(obj).sort((a, b) => b[1] - a[1]).slice(0, 9), mx = rows[0] ? rows[0][1] : 1;
+    return rows.map(([k, v]) => `<div class="hb"><span>${esc(label(labels, k))}</span><span class="hb-bar"><i style="width:${(v / mx * 100).toFixed(1)}%"></i></span><span class="n">${fmt(v)}</span></div>`).join('');
+  };
+  const tries = ['Leeds', 'California', 'Stockholm', 'economists', 'unions'];
+  main.innerHTML = `
+  <section class="wrap hero fade">
+    <div class="kicker">An open, sourced register · <b>${cs.length} ${cs.length === 1 ? 'country' : 'countries'} so far</b> · updated ${esc(latest)}</div>
+    <div class="hero-grid">
+      <div>
+        <h1>Who backs a wealth tax <em>near you?</em></h1>
+        <p class="lede">${fmt(tot('supporters'))} politicians, economists, unions, campaigners and millionaires who have said so in public. Every name links to the source.</p>
+        <div class="big-search">
+          <div class="box">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg>
+            <input id="hq" type="search" placeholder="Search a name, a town, a party…" autocomplete="off" spellcheck="false" aria-label="Search supporters and places">
+            <button class="btn" id="hgo" type="button">Search</button>
+          </div>
+          <div class="drop results" id="hres" hidden></div>
+        </div>
+        <div class="try">Try ${tries.map(t => `<button class="chip" type="button" data-try="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+      </div>
+      <div class="hero-side">
+        <div class="ledger">
+          <div><b>${fmt(tot('supporters'))}</b><span>people and organisations</span></div>
+          <div><b>${fmt(tot('evidence'))}</b><span>sourced statements</span></div>
+          <div><b>${fmt(tot('A'))}</b><span>with explicit support</span></div>
+          <div><b>${cs.length}</b><span>${cs.length === 1 ? 'country' : 'countries'}, and counting</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="countries"><div class="wrap">
+    <div class="sec-head"><div><div class="kicker">The map so far</div><h2>Country <em>by</em> country</h2></div>
+      <p>Each country is researched separately, from parliaments and councils down to unions and open letters. Pick one to see who is on record there.</p></div>
+    <div class="dotmap"><canvas id="dots" role="img" aria-label="World map. Countries with a register are highlighted."></canvas></div>
+    <div class="countries">
+      ${cs.slice().sort((a, b) => b.supporters - a.supporters).map(c => `
+      <a class="crow" href="/${c.slug}">
+        <span class="iso">${esc(c.iso2)}</span>
+        <span class="nm">${esc(c.name)}</span>
+        <span class="st"><b>${fmt(c.supporters)}</b><span>supporters</span></span>
+        <span class="st hide-s"><b>${fmt(c.evidence)}</b><span>statements</span></span>
+        <span class="st hide-s"><b>${c.units ? fmt(c.units_with_supporters) + '<span style="color:var(--ink-3);font-weight:400"> / ' + fmt(c.units) + '</span>' : '·'}</b><span>areas with a supporter</span></span>
+        <span class="st hide-s"><span class="tag">${esc(c.status || 'draft')}</span></span>
+        <span class="arrow">→</span>
+      </a>`).join('')}
+      <a class="crow add" href="/contribute"><span class="iso">+</span><span class="nm">Your country next?</span><span class="st hide-s"></span><span class="st hide-s"></span><span class="st hide-s"></span><span class="st"><span class="muted" style="font-size:14px">Start a register</span></span><span class="arrow">→</span></a>
+    </div>
+  </div></section>
+
+  ${feats.length ? `<section class="sec"><div class="wrap">
+    <div class="sec-head"><div><div class="kicker">On the record</div><h2>In their <em>own words</em></h2></div>
+      <p>Short extracts from speeches, letters, articles and parliamentary records. Follow the link to read the full source.</p></div>
+    <div class="quotes">${feats.map(([c, f]) => `
+      <figure class="quote" style="margin:0">
+        <blockquote>${esc(f[4])}</blockquote>
+        <figcaption class="who"><div><a class="name" href="/${c.slug}/${enc(f[0])}">${esc(f[1])}</a><span>${esc(label(TYPE, f[2]))} · ${esc(c.name)}${f[7] ? ' · ' + esc(year(f[7])) : ''}</span></div>
+          ${safeUrl(f[5]) ? ext(f[5], 'Source ↗', 'src') : ''}</figcaption>
+      </figure>`).join('')}</div>
+  </div></section>` : ''}
+
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><div><div class="kicker">Across every country</div><h2>Who they are, <em>what they back</em></h2></div>
+      <p>Supporters by type, and the kinds of wealth tax they have backed. One supporter can back more than one design.</p></div>
+    <div class="split">
+      <div><div class="kicker" style="margin-bottom:10px">Supporters by type</div><div class="hbars">${bars(types, TYPES_PL)}</div></div>
+      <div><div class="kicker" style="margin-bottom:10px">Designs backed</div><div class="hbars">${bars(designs, DES)}</div></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><div><div class="kicker">How it works</div><h2>Sourced, graded, <em>open</em></h2></div></div>
+    <div class="principles">
+      <div><div class="kicker">01</div><h3>Sourced</h3><p>Nobody is listed on opinion or rumour. Each entry rests on a public statement, vote, motion or letter, quoted word for word and linked to where it was said.</p></div>
+      <div><div class="kicker">02</div><h3>Graded</h3>
+        <div class="grades">${['A', 'B', 'C'].map(g => `<div>${glyph(g)}<span><b>${GRADE[g]}</b> · ${esc(GRADE_LONG[g].split(': ').pop().replace(/^./, c => c.toLowerCase()))}</span></div>`).join('')}</div>
+        <p>Only an actual tax on wealth counts. Higher income or capital gains taxes alone do not.</p></div>
+      <div><div class="kicker">03</div><h3>Open</h3><p>The data is free to reuse under CC BY 4.0, with CSV downloads for every country. Errors are reported in public on GitHub and fixed in the open.</p><p><a href="/about">Read the method →</a></p></div>
+    </div>
+  </div></section>
+
+  <section class="wrap" style="padding:8px var(--gut) 40px"><div class="cta">
+    <div><div class="kicker" style="color:inherit;opacity:.6">Contribute</div><h2 style="margin-top:12px">Your country isn't <em>on the map</em> yet?</h2>
+      <p>Registers are built country by country with an open research workflow. Start one for your country, or help check the entries that are already here.</p></div>
+    <div class="acts"><a class="btn" href="/contribute">Start a country</a><a class="btn ghost" href="/about">How it's checked</a></div>
+  </div></section>`;
+
+  const hq = $('#hq'), hres = $('#hres');
+  attachSearch(hq, hres);
+  $('#hgo').addEventListener('click', () => { if (hq.value.trim()) { const first = $('.ritem', hres); if (first) first.click(); else hq.focus(); } else hq.focus(); });
+  $$('[data-try]').forEach(b => b.addEventListener('click', () => { hq.value = b.dataset.try; hq.dispatchEvent(new Event('input')); hq.focus(); }));
+  const outside = e => { if (!e.target.closest('.big-search')) hres.hidden = true; };
+  document.addEventListener('click', outside);
+  const stopDots = dotMap($('#dots'), W);
+  leaving = () => { document.removeEventListener('click', outside); stopDots(); };
+}
+
+// A world map drawn as a grid of dots. Countries are rasterised once to an offscreen canvas in
+// unique colours, then each grid cell reads which country lies under its centre.
+const DOTGRIDS = {};
+function dotGrid(W, cols) {
+  if (DOTGRIDS[cols]) return DOTGRIDS[cols];
+  const ids = Object.keys(W.paths);
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  const boxes = {};
+  ids.forEach(id => {
+    const nums = W.paths[id].path.match(/-?\d+(\.\d+)?/g) || [];
+    let a = Infinity, b = Infinity, c = -Infinity, d = -Infinity;
+    for (let i = 0; i + 1 < nums.length; i += 2) { const x = +nums[i], y = +nums[i + 1]; if (x < a) a = x; if (x > c) c = x; if (y < b) b = y; if (y > d) d = y; }
+    boxes[id] = [a, b, c, d];
+    x0 = Math.min(x0, a); y0 = Math.min(y0, b); x1 = Math.max(x1, c); y1 = Math.max(y1, d);
+  });
+  y1 = Math.min(y1, y0 + (y1 - y0) * .93); // trim the empty far south
+  const dx = (x1 - x0) / cols, dy = dx * .866, rows = Math.floor((y1 - y0) / dy);
+  const S = 3, cw = Math.ceil(cols * S), ch = Math.ceil(rows * S * .866) + S;
+  const off = document.createElement('canvas'); off.width = cw; off.height = ch;
+  const ctx = off.getContext('2d', {willReadFrequently: true});
+  const k = cw / (x1 - x0);
+  ctx.setTransform(k, 0, 0, k, -x0 * k, -y0 * k);
+  ids.forEach((id, i) => { const n = i + 1; ctx.fillStyle = `rgb(${n >> 8 & 255},${n & 255},${(n * 37) & 255})`; ctx.fill(new Path2D(W.paths[id].path)); });
+  const img = ctx.getImageData(0, 0, cw, ch).data;
+  const cells = new Map();
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+    const x = x0 + (c + (r % 2 ? .5 : 0) + .5) * dx, y = y0 + (r + .5) * dy;
+    const px = Math.floor((x - x0) * k), py = Math.floor((y - y0) * k);
+    if (px >= cw || py >= ch) continue;
+    const o = (py * cw + px) * 4;
+    if (img[o + 3] < 250) continue;
+    const n = (img[o] << 8) + img[o + 1];
+    if (n < 1 || n > ids.length || ((n * 37) & 255) !== img[o + 2]) continue; // skip blended edge pixels
+    cells.set(r * cols + c, {r, c, x, y, id: ids[n - 1]});
+  }
+  DOTGRIDS[cols] = {cells, cols, rows, dx, dy, x0, y0, w: x1 - x0, h: y1 - y0, boxes};
+  return DOTGRIDS[cols];
+}
+function dotMap(canvas, W) {
+  const byNum = {}; W.countries.forEach(c => { if (c.numeric) byNum[c.numeric] = c; });
+  let G = null;
+  // Dots stay about five pixels apart whatever the screen width.
+  const grid = () => {
+    const cols = Math.max(80, Math.min(190, Math.round(canvas.clientWidth / 5.5 / 10) * 10));
+    if (G && G.cols === cols) return;
+    G = dotGrid(W, cols);
+    // A country with a register always shows at least one dot, however small it is.
+    Object.keys(byNum).forEach(id => {
+    if ([...G.cells.values()].some(c => c.id === id) || !G.boxes[id]) return;
+    const [a, b, c2, d] = G.boxes[id], r = Math.round(((b + d) / 2 - G.y0) / G.dy - .5), col = Math.round(((a + c2) / 2 - G.x0) / G.dx - .5 - (r % 2 ? .5 : 0));
+    G.cells.set(r * G.cols + col, {r, c: col, x: G.x0 + (col + (r % 2 ? .5 : 0) + .5) * G.dx, y: G.y0 + (r + .5) * G.dy, id});
+    });
+  };
+  const mx = Math.max(1, ...W.countries.map(c => c.supporters));
+  let hover = null, scale = 1;
+  function draw() {
+    const w = canvas.clientWidth, h = canvas.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+    if (w < 2) return;
+    grid();
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    const ctx = canvas.getContext('2d');
+    scale = Math.min(w / G.w, h / G.h);
+    const ox = (w - G.w * scale) / 2, oy = (h - G.h * scale) / 2;
+    canvas._t = {ox, oy};
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    const land = css('--land'), sig = css('--signal'), ink = css('--ink');
+    const r0 = G.dx * scale * .36;
+    for (const cell of G.cells.values()) {
+      const c = byNum[cell.id], x = ox + (cell.x - G.x0) * scale, y = oy + (cell.y - G.y0) * scale;
+      let r = r0;
+      if (cell.id === hover) { ctx.fillStyle = c ? ink : css('--ink-3'); r = r0 * 1.15; ctx.globalAlpha = 1; }
+      else if (c) { ctx.fillStyle = sig; ctx.globalAlpha = .55 + .45 * Math.log(c.supporters + 1) / Math.log(mx + 1); r = r0 * 1.12; }
+      else { ctx.fillStyle = land; ctx.globalAlpha = 1; }
+      ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  function cellAt(e) {
+    if (!G) return null;
+    const b = canvas.getBoundingClientRect(), t = canvas._t || {ox: 0, oy: 0};
+    const gx = (e.clientX - b.left - t.ox) / scale + G.x0, gy = (e.clientY - b.top - t.oy) / scale + G.y0;
+    const r = Math.round((gy - G.y0) / G.dy - .5);
+    for (const rr of [r, r - 1, r + 1]) {
+      const c = Math.round((gx - G.x0) / G.dx - .5 - (rr % 2 ? .5 : 0));
+      for (const cc of [c, c - 1, c + 1]) { const cell = G.cells.get(rr * G.cols + cc); if (cell && Math.hypot(cell.x - gx, cell.y - gy) < G.dx * .9) return cell; }
+    }
+    return null;
+  }
+  const move = e => {
+    const cell = cellAt(e), id = cell ? cell.id : null;
+    if (id !== hover) { hover = id; draw(); }
+    canvas.classList.toggle('pointer', !!id);
+    if (id) {
+      const c = byNum[id];
+      showTip(c ? `<b>${esc(c.name)}</b><span>${fmt(c.supporters)} supporters →</span>` : `<b>${esc(W.paths[id].name)}</b><span>no register yet</span>`, e.clientX, e.clientY);
+    } else hideTip();
+  };
+  const leave = () => { hover = null; hideTip(); draw(); };
+  const click = e => { const cell = cellAt(e); if (!cell) return; const c = byNum[cell.id]; hideTip(); go(c ? `/${c.slug}` : '/contribute'); };
+  canvas.addEventListener('pointermove', move);
+  canvas.addEventListener('pointerleave', leave);
+  canvas.addEventListener('click', click);
+  const ro = new ResizeObserver(draw); ro.observe(canvas);
+  window.addEventListener('themechange', draw);
+  draw();
+  return () => { ro.disconnect(); window.removeEventListener('themechange', draw); hideTip(); };
+}
+
+// ---------- country ----------
+async function countryPage(slug, params) {
+  main.innerHTML = '<div class="loading">Loading</div>';
+  const D = await loadCountry(slug), m = D.meta;
+  setTitle(m.name);
+  const sup = D.places.filter(p => p.mapped && p.ids.length).length;
+  main.innerHTML = `
+  <div class="wrap fade">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/#countries">All countries</a><span>/</span><span>${esc(m.name)}</span></nav>
+    <div class="c-head">
+      <div>
+        <h1>${esc(m.name)}</h1>
+        <p class="lede">${fmt(m.supporters)} people and organisations in ${esc(m.name)} have backed a wealth tax in public, across ${fmt(m.evidence)} sourced statements.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="tag signal">${esc(m.status || 'draft')}</span>${m.lead ? `<span class="tag">Lead: ${esc(m.lead)}</span>` : ''}</div>
+    </div>
+    <div class="statline">
+      <div><b>${fmt(m.supporters)}</b><span>supporters</span></div>
+      <div><b>${fmt(m.A)}</b><span>with explicit support</span></div>
+      <div><b>${fmt(m.verified)}</b><span>of ${fmt(m.evidence)} statements checked by a person</span></div>
+      <div><b>${fmt(m.units_with_supporters)}</b><span>of ${fmt(m.units)} areas with a supporter</span></div>
+    </div>
+  </div>
+  <div class="subnav"><div class="wrap">
+    ${D.C.length ? '<a href="#map">Map</a>' : ''}<a href="#directory">Directory</a><a href="#time">Over time</a><a href="#method">Method and gaps</a>
+  </div></div>
+  <div class="wrap">
+    ${D.C.length ? `<section class="c-sec" id="map">
+      <div class="sec-head" style="margin-bottom:0"><div><div class="kicker">Explore by place</div><h2>Where they are</h2></div>
+        <p>Darker areas have more supporters. Hatched areas have not been fully searched yet, so an empty area may just mean unread.</p></div>
+      <div class="atlas">
+        <div class="mapbox" id="mapbox">
+          <div class="zoomer"><button type="button" data-z="in" aria-label="Zoom in">+</button><button type="button" data-z="out" aria-label="Zoom out">−</button><button type="button" data-z="fit" aria-label="Show the whole country">⤢</button></div>
+          <div class="legend"><span><span class="ramp" style="display:inline-block;vertical-align:-1px;margin-right:6px"></span>Supporters</span><span><i class="sw none"></i>Searched, none found</span><span><i class="sw open"></i>Not fully searched</span></div>
+        </div>
+        <div class="panel" id="panel"></div>
+      </div>
+    </section>` : ''}
+    <section class="c-sec" id="directory">
+      <div class="sec-head" style="margin-bottom:0"><div><div class="kicker">Directory</div><h2>Everyone on record</h2></div>
+        <p>Sorted by the strength of the evidence. Open any entry to read what they said and where.</p></div>
+      <div id="dir-controls"></div>
+      <div class="count-line" id="count"></div>
+      <ul class="dir" id="dir"></ul>
+      <div class="more" id="more"></div>
+    </section>
+    <section class="c-sec" id="time">
+      <div class="sec-head" style="margin-bottom:0"><div><div class="kicker">Over time</div><h2>When they said it</h2></div>
+        <p>Statements per year, by strength of evidence. A person who spoke out several times counts each time.</p></div>
+      <div class="charts" id="charts"></div>
+    </section>
+    <section class="c-sec" id="method">
+      <div class="sec-head" style="margin-bottom:0"><div><div class="kicker">Method and gaps</div><h2>What has been checked</h2></div></div>
+      <div class="method" id="methodbody"></div>
+    </section>
+  </div>`;
+
+  // ----- directory state, kept in the URL so filtered views can be shared -----
+  const ST = {q: params.get('q') || '', type: params.get('type') || '', party: params.get('party') || '', level: params.get('level') || '',
+    grade: params.get('grade') || '', place: params.get('place') || '', sort: params.get('sort') || 'strength', limit: 50};
+  const syncUrl = () => {
+    const u = new URLSearchParams();
+    ['q', 'type', 'party', 'level', 'grade', 'place'].forEach(k => { if (ST[k]) u.set(k, ST[k]); });
+    if (ST.sort !== 'strength') u.set('sort', ST.sort);
+    const s = u.toString();
+    history.replaceState(null, '', location.pathname + (s ? '?' + s : '') + location.hash);
+  };
+  const count = (f) => { const o = {}; D.P.forEach(p => f(p).forEach(k => { if (k) o[k] = (o[k] || 0) + 1; })); return Object.entries(o).sort((a, b) => b[1] - a[1]); };
+  const typeCounts = count(p => [p[P_.type], ...p[P_.other]]), partyCounts = count(p => [p[P_.party]]), levelCounts = count(p => [p[P_.level]]);
+  $('#dir-controls').innerHTML = `
+    <div class="filters">
+      <input class="field q" id="f-q" type="search" placeholder="Filter by name, role or place" value="${esc(ST.q)}" aria-label="Filter the directory">
+      <select class="field" id="f-type" aria-label="Type"><option value="">All types</option>${typeCounts.map(([k, n]) => `<option value="${esc(k)}">${esc(label(TYPES_PL, k))} (${n})</option>`).join('')}</select>
+      <select class="field" id="f-party" aria-label="Party" ${partyCounts.length ? '' : 'disabled'}><option value="">${partyCounts.length ? 'All parties' : 'No party data'}</option>${partyCounts.map(([k, n]) => `<option value="${esc(k)}">${esc(k)} (${n})</option>`).join('')}</select>
+      <select class="field" id="f-grade" aria-label="Evidence"><option value="">Any evidence</option><option value="A">Explicit only</option><option value="AB">Explicit or named</option></select>
+      <select class="field" id="f-sort" aria-label="Sort"><option value="strength">Strongest evidence</option><option value="recent">Most recent</option><option value="count">Most statements</option><option value="az">A to Z</option></select>
+    </div>
+    <div class="filter-row">
+      <div class="seg" id="f-level" role="group" aria-label="Level"><button type="button" data-v="">All levels</button>${levelCounts.map(([k]) => `<button type="button" data-v="${esc(k)}">${esc(label(LEVEL, k))}</button>`).join('')}</div>
+      <span id="f-place"></span>
+    </div>`;
+  const setSel = () => {
+    $('#f-type').value = ST.type; $('#f-party').value = ST.party; $('#f-grade').value = ST.grade; $('#f-sort').value = ST.sort;
+    $$('#f-level button').forEach(b => b.classList.toggle('on', b.dataset.v === ST.level));
+    $('#f-place').innerHTML = ST.place ? `<button class="chip on" type="button" id="clear-place">${esc(ST.place.split(' > ').pop())} <span class="x" aria-label="Remove place filter">×</span></button>` : '';
+    const cp = $('#clear-place'); if (cp) cp.onclick = () => { ST.place = ''; changed(); if (mapApi) mapApi.select(null); };
+  };
+  const filtered = () => {
+    const toks = norm(ST.q).trim().split(/\s+/).filter(Boolean);
+    const inPlace = ST.place ? idsForPlace(D, ST.place) : null;
+    const list = D.P.filter(p =>
+      (!ST.type || p[P_.type] === ST.type || p[P_.other].includes(ST.type)) &&
+      (!ST.party || p[P_.party] === ST.party) &&
+      (!ST.level || p[P_.level] === ST.level) &&
+      (!ST.grade || ST.grade.includes(p[P_.grade])) &&
+      (!inPlace || inPlace.has(p[P_.id])) &&
+      (!toks.length || toks.every(t => norm([p[P_.name], p[P_.role], p[P_.aff], p[P_.loc], p[P_.party]].join(' ')).includes(t))));
+    const sorts = {strength: byStrength, recent: (a, b) => (b[P_.last] || '').localeCompare(a[P_.last] || '') || byStrength(a, b),
+      count: (a, b) => b[P_.n] - a[P_.n] || byStrength(a, b), az: (a, b) => a[P_.name].localeCompare(b[P_.name])};
+    return list.sort(sorts[ST.sort] || byStrength);
+  };
+  const row = p => {
+    const tags = [p[P_.type], ...p[P_.other]].slice(0, 2).map(t => `<span class="tag">${esc(label(TYPE, t))}</span>`).join('');
+    return `<li><a class="drow" href="/${slug}/${enc(p[P_.id])}">
+      ${glyph(p[P_.grade])}
+      <span><span class="dn">${esc(p[P_.name])}</span><span class="dr" style="display:block">${esc([p[P_.role], p[P_.aff]].filter(Boolean).join(' · ').slice(0, 140))}</span></span>
+      <span class="dt">${tags}${p[P_.party] ? `<span class="tag signal">${esc(p[P_.party])}</span>` : ''}</span>
+      <span class="dp">${esc(placeShort(p[P_.loc]))}</span>
+      <span class="dd"><b>${esc(year(p[P_.last]))}</b>${p[P_.n]} statement${p[P_.n] === 1 ? '' : 's'}</span>
+    </a></li>`;
+  };
+  function drawList() {
+    const list = filtered(), shown = list.slice(0, ST.limit);
+    const active = ['q', 'type', 'party', 'level', 'grade', 'place'].some(k => ST[k]);
+    $('#count').innerHTML = `<span>Showing <b>${fmt(shown.length)}</b> of <b>${fmt(list.length)}</b>${list.length !== D.P.length ? ` (${fmt(D.P.length)} in total)` : ''}</span>
+      <span style="display:flex;gap:16px">${active ? '<a href="#" id="clear-all">Clear filters</a>' : ''}<span class="grade-key">${glyph('A')} explicit ${glyph('B')} named ${glyph('C')} implied</span></span>`;
+    $('#dir').innerHTML = shown.map(row).join('') || `<li class="empty">Nobody matches these filters yet. That may mean the area has not been searched, not that nobody there supports a wealth tax.</li>`;
+    $('#more').innerHTML = list.length > shown.length ? `<button class="btn ghost" type="button" id="more-btn">Show ${Math.min(50, list.length - shown.length)} more</button>` : '';
+    const mb = $('#more-btn'); if (mb) mb.onclick = () => { ST.limit += 50; drawList(); };
+    const ca = $('#clear-all'); if (ca) ca.onclick = e => { e.preventDefault(); Object.assign(ST, {q: '', type: '', party: '', level: '', grade: '', place: ''}); $('#f-q').value = ''; changed(); if (mapApi) mapApi.select(null); };
+  }
+  function changed() { ST.limit = 50; syncUrl(); setSel(); drawList(); }
+  let qt;
+  $('#f-q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { ST.q = e.target.value; changed(); }, 120); });
+  [['#f-type', 'type'], ['#f-party', 'party'], ['#f-grade', 'grade'], ['#f-sort', 'sort']].forEach(([s, k]) => $(s).addEventListener('change', e => { ST[k] = e.target.value; changed(); }));
+  $('#f-level').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { ST.level = b.dataset.v; changed(); } });
+  const filterBy = (k, v) => { ST[k] = v; changed(); $('#directory').scrollIntoView({block: 'start'}); };
+
+  // ----- map -----
+  let mapApi = null;
+  if (D.C.length) mapApi = countryMap(D, slug, path => filterBy('place', path));
+  setSel(); drawList();
+  if (mapApi && ST.place) mapApi.select(ST.place, false);
+
+  // ----- charts -----
+  $('#charts').innerHTML = `<div><div class="kicker" style="margin-bottom:12px">Statements per year</div>${yearChart(D.E)}
+      <div class="chart-key"><span><i style="background:var(--ink)"></i>Explicit</span><span><i style="background:var(--signal)"></i>Named</span><span><i style="background:var(--rule-2)"></i>Implied</span></div></div>
+    <div><div class="kicker" style="margin-bottom:10px">What they back</div><div class="hbars" id="desbars"></div>
+      <div class="kicker" style="margin:28px 0 10px">Who they are · click to filter</div><div class="hbars" id="typebars"></div></div>`;
+  const hbars = (rows, labels, onClick) => { const mx = rows[0] ? rows[0][1] : 1; return rows.slice(0, 10).map(([k, v]) =>
+    `<${onClick ? `a href="#directory" data-f="${esc(k)}"` : 'div'} class="hb"><span>${esc(label(labels, k))}</span><span class="hb-bar"><i style="width:${(v / mx * 100).toFixed(1)}%"></i></span><span class="n">${fmt(v)}</span></${onClick ? 'a' : 'div'}>`).join(''); };
+  $('#desbars').innerHTML = hbars(count(p => p[P_.des]), DES);
+  $('#typebars').innerHTML = hbars(typeCounts, TYPES_PL, true);
+  $$('#typebars a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); filterBy('type', a.dataset.f); }));
+
+  // ----- method -----
+  const pct = m.units ? Math.round(m.units_done / m.units * 100) : 0;
+  $('#methodbody').innerHTML = `
+    <div class="prose">
+      ${m.notes ? `<p>${esc(m.notes)}</p>` : ''}
+      <p>Researchers search parliaments, councils, parties, unions, campaigns, open letters and the press, and record only statements that back an actual wealth tax. Each statement is quoted word for word, linked to its source and graded by how explicit it is.</p>
+      <p>Coverage is uneven. ${fmt(m.units_with_supporters)} of ${fmt(m.units)} areas have at least one recorded supporter, and ${m.units_done ? fmt(m.units_done) + ' (' + pct + '%)' : 'none so far'} ${m.units_done === 1 ? 'has' : 'have'} been searched in full. Elsewhere an empty area means <em>not read yet</em>, not <em>no supporters</em>. ${m.excluded ? `${fmt(m.excluded)} candidates were looked at and left out, for example because they backed other taxes on the rich but not a wealth tax.` : ''}</p>
+      <p>See something wrong, or want an entry removed? Every entry has a report link, and reports are handled in public.</p>
+      <p><a class="btn sm" href="${esc(issueUrl(`[${m.iso2}] Report: country data`, {country: slug}))}" target="_blank" rel="noopener">Report a problem with ${esc(m.name)} ↗</a></p>
+    </div>
+    <div>
+      <dl class="kv" style="margin:0">
+        <div><span>Status</span><b>${esc(m.status || 'draft')}</b></div>
+        <div><span>Last research run</span><b>${esc(m.updated || '·')}</b></div>
+        <div><span>Explicit, named, implied</span><b>${fmt(m.A)} · ${fmt(m.B)} · ${fmt(m.C)}</b></div>
+        <div><span>Statements checked by a person</span><b>${fmt(m.verified)} of ${fmt(m.evidence)}</b></div>
+        <div><span>Areas fully searched</span><b>${fmt(m.units_done)} of ${fmt(m.units)}</b></div>
+        <div><span>Areas shown on the map with a supporter</span><b>${fmt(sup)}</b></div>
+        <div><span>Candidates left out</span><b>${fmt(m.excluded)}</b></div>
+      </dl>
+      <div class="kicker" style="margin-top:28px">Download (CSV, CC BY 4.0)</div>
+      <div class="downloads">${['actors', 'evidence', 'profiles', 'geo_units'].map(f => `<a class="chip" href="/download/${slug}/${f}.csv" download>${f}.csv</a>`).join('')}
+        ${ext(`https://github.com/${REPO}/tree/main/data/${slug}`, 'All files on GitHub ↗', 'chip')}</div>
+    </div>`;
+
+  // Highlight the sub-nav item for the section in view.
+  const links = $$('.subnav a');
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + en.target.id)); }), {rootMargin: '-40% 0px -55% 0px'});
+  $$('.c-sec').forEach(s => io.observe(s));
+  const prev = leaving;
+  leaving = () => { prev(); io.disconnect(); };
+}
+
+function yearChart(E) {
+  const by = {};
+  E.forEach(e => { const y = +year(e[E_.date]); if (y) { by[y] = by[y] || {A: 0, B: 0, C: 0}; by[y][e[E_.grade]] = (by[y][e[E_.grade]] || 0) + 1; } });
+  const ys = Object.keys(by).map(Number);
+  if (!ys.length) return '<p class="empty">No dated statements yet.</p>';
+  const y0 = Math.min(...ys), y1 = Math.max(...ys), n = y1 - y0 + 1;
+  const tot = y => by[y] ? by[y].A + by[y].B + by[y].C : 0;
+  const mx = Math.max(...ys.map(tot)), W = 720, H = 260, L = 34, B = 24, bw = (W - L) / n;
+  const step = mx > 200 ? 100 : mx > 100 ? 50 : mx > 40 ? 20 : mx > 16 ? 10 : 5;
+  let s = '';
+  for (let v = 0; v <= mx; v += step) { const y = H - B - (v / mx) * (H - B - 10); s += `<line class="gl" x1="${L}" x2="${W}" y1="${y}" y2="${y}"/><text x="${L - 6}" y="${y + 3}" text-anchor="end">${v}</text>`; }
+  const every = n > 24 ? 5 : n > 12 ? 2 : 1;
+  for (let i = 0; i < n; i++) {
+    const y = y0 + i, x = L + i * bw, d = by[y] || {A: 0, B: 0, C: 0};
+    let top = H - B, g = `<g><title>${y}: ${tot(y)} statements (${d.A} explicit, ${d.B} named, ${d.C} implied)</title><rect class="hit" x="${x}" y="0" width="${bw}" height="${H - B}"/>`;
+    ['A', 'B', 'C'].forEach(k => { const h = (d[k] / mx) * (H - B - 10); if (h > 0) { top -= h; g += `<rect class="${k}" x="${(x + bw * .14).toFixed(1)}" y="${top.toFixed(1)}" width="${(bw * .72).toFixed(1)}" height="${h.toFixed(1)}"/>`; } });
+    s += g + '</g>';
+    if ((y % every === 0) || n <= 12) s += `<text x="${x + bw / 2}" y="${H - 6}" text-anchor="middle">${n > 12 ? "'" + String(y).slice(2) : y}</text>`;
+  }
+  return `<svg class="yearchart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Statements per year from ${y0} to ${y1}">${s}</svg>`;
+}
+
+// The country map: pan by dragging, zoom with the buttons or a double click; a click selects an area.
+function countryMap(D, slug, onShowAll) {
+  const box = $('#mapbox'), panel = $('#panel');
+  const [vx, vy, vw, vh] = D.vb;
+  const mx = Math.max(1, ...D.C.map(c => c[6].length));
+  const hs = vw / 170;
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `Map of ${D.meta.name} by area`);
+  svg.innerHTML = `<defs><pattern id="hatch" width="${hs}" height="${hs}" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <rect class="hatch-bg" width="${hs}" height="${hs}"/><line class="hatch-line" x1="0" y1="0" x2="0" y2="${hs}" style="stroke-width:${hs * .28}"/></pattern></defs>
+    <g>${D.C.map((c, i) => { const n = c[6].length, t = n ? (.22 + .78 * Math.log(n + 1) / Math.log(mx + 1)).toFixed(3) : 0;
+      return `<path data-i="${i}" class="${n ? 'u-sup' : c[2] === 'clear' ? 'u-none' : 'u-open'}"${n ? ` style="--t:${t}"` : ''} d="${c[7]}"/>`; }).join('')}</g>`;
+  const frame = document.createElement('div'); frame.className = 'mapframe'; frame.appendChild(svg);
+  box.prepend(frame);
+  box.style.setProperty('--ar', Math.max(.75, Math.min(1.6, vw / vh)).toFixed(3));
+  let x = vx, y = vy, w = vw, h = vh, anim = 0;
+  const pat = svg.querySelector('pattern'), patRect = pat.querySelector('rect'), patLine = pat.querySelector('line');
+  // The view box changes with every zoom step; the hatching is resized so it keeps the same width on screen.
+  const set = () => {
+    svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`);
+    const s = (w / 170).toFixed(4);
+    pat.setAttribute('width', s); pat.setAttribute('height', s); patRect.setAttribute('width', s); patRect.setAttribute('height', s);
+    patLine.setAttribute('y2', s); patLine.style.strokeWidth = (w / 170 * .28).toFixed(4);
+  };
+  const aspect = () => { const r = svg.getBoundingClientRect(); return r.width > 2 && r.height > 2 ? r.width / r.height : vw / vh; };
+  // The view box that shows a bounding box with padding at the map's current aspect ratio.
+  function target(bx, by, bw, bh, pad = .08) {
+    const a = aspect();
+    let nw = bw * (1 + pad * 2), nh = bh * (1 + pad * 2);
+    if (nw / nh > a) nh = nw / a; else nw = nh * a;
+    return [bx + (bw - nw) / 2, by + (bh - nh) / 2, nw, nh];
+  }
+  function animate(to) {
+    cancelAnimationFrame(anim);
+    const from = [x, y, w, h], t0 = performance.now(), dur = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 420;
+    const step = now => {
+      const k = dur ? Math.min(1, (now - t0) / dur) : 1, e = 1 - Math.pow(1 - k, 3);
+      [x, y, w, h] = from.map((v, i) => v + (to[i] - v) * e); set();
+      if (k < 1) anim = requestAnimationFrame(step);
+    };
+    anim = requestAnimationFrame(step);
+  }
+  const fit = (smooth = true) => { const t = target(vx, vy, vw, vh, .03); if (smooth) animate(t); else { [x, y, w, h] = t; set(); } };
+  const zoom = f => { const nw = Math.min(vw * 2, Math.max(vw / 80, w * f)), nh = h * nw / w; animate([x + (w - nw) / 2, y + (h - nh) / 2, nw, nh]); };
+  // dragging
+  let drag = null, moved = false;
+  svg.addEventListener('pointerdown', e => { if (e.button) return; drag = {x: e.clientX, y: e.clientY}; moved = false; });
   svg.addEventListener('pointermove', e => {
     if (drag) {
       const r = svg.getBoundingClientRect(), dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-      if (Math.abs(dx) + Math.abs(dy) > 3) moved = true;
-      if (moved) { x -= dx * w / r.width; y -= dy * h / r.height; drag = {x: e.clientX, y: e.clientY}; set(); }
+      if (!moved && Math.abs(dx) + Math.abs(dy) > 4) { moved = true; svg.setPointerCapture(e.pointerId); }
+      if (moved) { cancelAnimationFrame(anim); x -= dx * w / r.width; y -= dy * h / r.height; drag = {x: e.clientX, y: e.clientY}; set(); hideTip(); return; }
     }
-    const t = e.target.closest && e.target.closest('path');
-    if (t && !drag) {
-      const b = box.getBoundingClientRect();
-      tip.hidden = false; tip.textContent = nameOf(t.dataset.k);
-      tip.style.left = (e.clientX - b.left) + 'px'; tip.style.top = (e.clientY - b.top) + 'px';
-    } else tip.hidden = true;
+    const p = e.target.closest('path[data-i]');
+    if (p) { const c = D.C[+p.dataset.i], n = c[6].length; showTip(`<b>${esc(c[0])}</b><span>${n ? fmt(n) + ' supporter' + (n === 1 ? '' : 's') : c[2] === 'clear' ? 'none found' : 'not fully searched'}</span>`, e.clientX, e.clientY); }
+    else hideTip();
   });
   svg.addEventListener('pointerup', e => {
-    const was = moved; drag = null;
-    if (!was) { const t = document.elementFromPoint(e.clientX, e.clientY); if (t && t.dataset && t.dataset.k !== undefined) onPick(t.dataset.k); }
+    const wasMoved = moved; drag = null; moved = false;
+    if (wasMoved) return;
+    const p = e.target.closest('path[data-i]');
+    if (p) select(D.C[+p.dataset.i][8]);
   });
-  svg.addEventListener('pointerleave', () => { tip.hidden = true; });
-  new ResizeObserver(() => { if (selKey === null && !drag) fit(); }).observe(svg);
-  fit();
-  return {
-    fit, zoom,
-    select(k) {
-      svg.querySelectorAll('path.sel').forEach(p => p.classList.remove('sel'));
-      selKey = k;
-      const p = svg.querySelector(`path[data-k="${CSS.escape(k)}"]`);
-      if (p) { p.classList.add('sel'); p.parentNode.appendChild(p); }
+  svg.addEventListener('pointerleave', () => { hideTip(); });
+  svg.addEventListener('pointercancel', () => { drag = null; moved = false; });
+  svg.addEventListener('dblclick', e => {
+    e.preventDefault();
+    const r = svg.getBoundingClientRect(), px = x + (e.clientX - r.left) / r.width * w, py = y + (e.clientY - r.top) / r.height * h;
+    const nw = Math.max(vw / 80, w * .5), nh = h * nw / w;
+    animate([px - nw / 2, py - nh / 2, nw, nh]);
+  });
+  box.querySelector('.zoomer').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.z === 'in') zoom(.6); else if (b.dataset.z === 'out') zoom(1 / .6); else { select(null); fit(); } });
+  let selPath = null;
+  const ro = new ResizeObserver(() => { if (!selPath) fit(false); });
+  ro.observe(svg);
+
+  function select(path, smooth = true) {
+    selPath = path;
+    $$('path.sel', svg).forEach(p => p.classList.remove('sel'));
+    if (!path) { home(); fit(smooth); return; }
+    const idx = D.C.map((c, i) => [c, i]).filter(([c]) => c[8] === path || c[8].startsWith(path + ' > ')).map(([, i]) => i);
+    const els = idx.map(i => svg.querySelector(`path[data-i="${i}"]`)).filter(Boolean);
+    els.forEach(p => { p.classList.add('sel'); p.parentNode.appendChild(p); });
+    if (els.length) {
+      let a = Infinity, b = Infinity, c = -Infinity, d = -Infinity;
+      els.forEach(p => { const bb = p.getBBox(); a = Math.min(a, bb.x); b = Math.min(b, bb.y); c = Math.max(c, bb.x + bb.width); d = Math.max(d, bb.y + bb.height); });
+      const minW = vw / 6, cw = Math.max(c - a, minW), chh = Math.max(d - b, minW / aspect());
+      const t = target((a + c) / 2 - cw / 2, (b + d) / 2 - chh / 2, cw, chh, .35);
+      if (smooth) animate(t); else { [x, y, w, h] = t; set(); }
     }
-  };
-}
-
-// ---------- tabs and routing ----------
-let WORLD = null, CUR = null; // CUR = {slug, data, sub}
-const cache = {};
-const TABS = ['world', 'country', 'contribute'];
-function showTab(t) {
-  document.querySelectorAll('#tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.t === t)));
-  TABS.forEach(s => $('#' + s).hidden = s !== t);
-}
-function route(replace) {
-  const h = (location.hash || '#world').slice(1), [a, b] = h.split('.');
-  if (a === 'contribute') showTab('contribute');
-  else if (WORLD && WORLD.countries.some(c => c.slug === a)) openCountry(a, b, replace);
-  else showTab('world');
-}
-function go(h) { if (location.hash === '#' + h) route(); else location.hash = h; }
-window.addEventListener('hashchange', () => route());
-$('#tabs').addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  if (b.dataset.t === 'country') go(CUR ? CUR.slug + (CUR.sub ? '.' + CUR.sub : '') : WORLD.countries[0].slug);
-  else go(b.dataset.t);
-});
-
-// ---------- world ----------
-async function boot() {
-  try { WORLD = await (await fetch('data/world.json')).json(); }
-  catch (e) { $('#wside').innerHTML = '<p class="empty">Could not load the data. Open this page through a web server, not from a file.</p>'; return; }
-  const cs = WORLD.countries;
-  $('#stats').innerHTML = [[cs.length, 'countries'], [cs.reduce((n, c) => n + c.supporters, 0), 'supporters'], [cs.reduce((n, c) => n + c.evidence, 0), 'sourced rows']]
-    .map(x => `<div class="stat"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
-  $('#csel').innerHTML = cs.map(c => `<option value="${esc(c.slug)}">${esc(c.name)}</option>`).join('');
-  $('#csel').addEventListener('change', () => go($('#csel').value));
-  drawWorld();
-  route(true);
-}
-function drawWorld() {
-  const byNum = {}; WORLD.countries.forEach(c => { if (c.numeric) byNum[c.numeric] = c; });
-  const mx = Math.max(1, ...WORLD.countries.map(c => c.supporters));
-  const svg = $('#wsvg'); svg.classList.add('world');
-  const paths = WORLD.paths;
-  svg.innerHTML = Object.entries(paths).map(([id, p]) => {
-    const c = byNum[id];
-    const op = c ? (.35 + .65 * Math.log(c.supporters + 1) / Math.log(mx + 1)).toFixed(2) : 1;
-    return `<path data-k="${id}" class="${c ? 'has' : 'none'}" style="${c ? `fill-opacity:${op}` : ''}" d="${p.path}"></path>`;
-  }).join('');
-  let xs = [], ys = [];
-  Object.values(paths).forEach(p => { (p.path.match(/-?\d+\.?\d*/g) || []).forEach((n, i) => (i % 2 ? ys : xs).push(+n)); });
-  const vb = [Math.min(...xs), Math.min(...ys), Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys)];
-  const m = makeMap(svg, $('#wmapbox'), $('#wtip'), vb, k => (byNum[k] ? byNum[k].name : (paths[k] || {}).name) || '', k => {
-    m.select(k);
-    const c = byNum[k];
-    if (c) { worldSide(c); } else noData((paths[k] || {}).name);
-  });
-  $('#wmapbox').insertAdjacentHTML('beforeend', '<div class="zoom"><button id="wzi" aria-label="Zoom in">+</button><button id="wzo" aria-label="Zoom out">&minus;</button><button id="wzr" aria-label="Reset view" style="font-size:13px">&#8634;</button></div>');
-  $('#wzi').onclick = () => m.zoom(.6); $('#wzo').onclick = () => m.zoom(1 / .6); $('#wzr').onclick = m.fit;
-  worldHome();
-}
-function worldHome() {
-  $('#wside').innerHTML = `<h2>Countries so far</h2><p class="note">Click a country on the map, or pick one here.</p>` +
-    WORLD.countries.map(c => `<div class="ev" data-open="${esc(c.slug)}" style="cursor:pointer"><b>${esc(c.name)}</b>
-      <div class="note">${c.supporters} supporters · ${c.evidence} sourced rows · ${esc(c.status)}</div></div>`).join('') +
-    `<p style="margin-top:14px"><a href="#contribute">Add your country</a></p>`;
-}
-function worldSide(c) {
-  $('#wside').innerHTML = `<h2>${esc(c.name)}</h2><p><span class="pill">${esc(c.status)}</span> <span class="pill">${c.iso2}</span></p>
-   <p style="font-size:14px">${c.supporters} supporters (${c.A} explicit, ${c.B} named, ${c.C} implied) from ${c.evidence} sourced rows. ${c.verified} of ${c.evidence} rows checked by a person.</p>
-   ${c.units ? `<p class="note">Supporters recorded in ${c.units_with_supporters} of ${c.units} areas; ${c.units_done} fully read.</p>` : ''}
-   ${c.notes ? `<p class="note">${esc(c.notes)}</p>` : ''}
-   <p><a href="#${esc(c.slug)}"><b>Open the ${esc(c.name)} database</b></a></p>
-   <a class="report" href="${esc(issueUrl('[' + c.iso2 + '] Report: country data', {country: c.slug}))}" target="_blank" rel="noopener">Report a problem with this country</a>`;
-}
-function noData(name) {
-  $('#wside').innerHTML = `<h2>${esc(name || 'Unknown')}</h2><p class="note">No database for this country yet.</p><p><a href="#contribute">Find out how to start one</a></p>`;
-}
-$('#wside').addEventListener('click', e => { const r = e.target.closest('[data-open]'); if (r) go(r.dataset.open); });
-
-// ---------- country ----------
-async function openCountry(slug, sub, replace) {
-  showTab('country');
-  $('#csel').value = slug;
-  if (!cache[slug]) { $('#cbody').innerHTML = '<p class="empty">Loading…</p>'; cache[slug] = await (await fetch(`data/${slug}.json`)).json(); }
-  const data = cache[slug];
-  const subs = data.C.length ? ['map', 'people', 'timeline', 'method'] : ['people', 'timeline', 'method'];
-  if (!subs.includes(sub)) sub = subs[0];
-  CUR = {slug, data, sub};
-  document.querySelectorAll('#subtabs button').forEach(b => { b.hidden = !subs.includes(b.dataset.s); b.setAttribute('aria-selected', String(b.dataset.s === sub)); });
-  renderCountry();
-}
-$('#subtabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b && CUR) go(CUR.slug + '.' + b.dataset.s); });
-
-function linksBlock(p) {
-  const ls = (p[17] || []).filter(l => safeUrl(l[1])).sort((a, b) => PLAT_ORDER.indexOf(a[0]) - PLAT_ORDER.indexOf(b[0]));
-  if (!ls.length) return '<p class="note" style="margin:6px 0">No links recorded yet.</p>';
-  const show = u => { try { const x = new URL(u); return x.hostname.replace(/^www\./, '') + (x.pathname.length > 1 ? x.pathname.replace(/\/$/, '') : ''); } catch (e) { return u; } };
-  return `<details class="links"><summary>Links and socials (${ls.length})</summary><ul>` +
-    ls.map(l => `<li><a href="${esc(l[1])}" target="_blank" rel="noopener noreferrer nofollow"><b>${esc(PLAT[l[0]] || l[0])}</b></a> <span class="m">${esc(show(l[1]).slice(0, 48))}</span></li>`).join('') +
-    '</ul><p class="note" style="margin:4px 0 0">Official or professional pages as published by the person or their organisation, or by Wikidata or Parliament.</p></details>';
-}
-function evCard(e, cc) {
-  const u = safeUrl(e[7]);
-  return `<div class="ev"><div><span class="g g${e[2]}">${e[2]}</span> <b>${esc(EVT[e[3]] || e[3])}</b> <span class="m">${esc(e[1])}${e[10] === 'y' ? '' : ' · not yet verified'}</span></div>
-  ${e[5] ? `<div style="font-size:13px">${esc(e[5])}</div>` : ''}${e[6] ? `<q>&ldquo;${esc(e[6])}&rdquo;</q>` : ''}
-  <div class="m">${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(e[8] || e[9] || 'Source')}</a>` : esc(e[8])}${e[9] ? ' · ' + esc(e[9]) : ''}
-  · <a href="${esc(issueUrl('[' + cc + '] Report: ' + e[11], {country: CUR.slug, entry: e[11]}))}" target="_blank" rel="noopener">Report</a></div></div>`;
-}
-
-function renderCountry() {
-  const {data, sub, slug} = CUR, cc = data.meta.iso2;
-  const P = data.P, E = data.E, pid = {}; P.forEach((p, i) => pid[p[0]] = i);
-  const evBy = {}; E.forEach(e => { (evBy[e[0]] ??= []).push(e); });
-  const card = i => {
-    const p = P[i];
-    const es = (evBy[p[0]] || []).slice().sort((a, b) => 'ABC'.indexOf(a[2]) - 'ABC'.indexOf(b[2]) || b[1].localeCompare(a[1]));
-    return `<h2>${esc(p[1])}</h2>${linksBlock(p)}<div style="margin:8px 0"><span class="g g${p[8]}">${p[8]}</span> ${[p[3], ...p[16]].map(x => `<span class="pill">${esc(TYPE[x] || x)}</span>`).join(' ')} <span class="pill">${esc(p[6])}</span>${p[15] ? ` <span class="pill">${esc(p[15])}</span>` : ''}${p[7] ? ` <span class="pill">${esc(p[7].split(' > ').join(' \u203a '))}</span>` : ''}</div>
-      <div style="font-size:14px">${esc(p[4])}</div>${p[5] && p[5] !== p[4] ? `<div class="note">${esc(p[5])}</div>` : ''}
-      ${p[13] ? `<p class="note">${esc(p[13])}</p>` : ''}<h3 style="margin-top:14px">Evidence (${es.length})</h3>${es.map(e => evCard(e, cc)).join('')}
-      <a class="report" href="${esc(issueUrl('[' + cc + '] Report: ' + p[1], {country: slug, entry: p[0]}))}" target="_blank" rel="noopener">Report a problem with this entry</a>`;
-  };
-  const body = $('#cbody');
-
-  if (sub === 'map') {
-    body.innerHTML = `<div class="grid"><div class="mapbox" id="mapbox"><svg class="map local" id="svg" role="img" aria-label="Local map coloured by findings"></svg>
-      <div class="zoom"><button id="zi" aria-label="Zoom in">+</button><button id="zo" aria-label="Zoom out">&minus;</button><button id="zr" aria-label="Reset view" style="font-size:13px">&#8634;</button></div>
-      <div class="legend"><span><i style="background:var(--support)"></i>Supporters recorded (darker = more)</span><span><i style="background:var(--clear)"></i>Read, nothing found</span><span><i style="background:var(--open)"></i>Not fully read yet</span></div>
-      <div class="tip" id="tip" hidden></div></div><aside class="panel" id="mapside"></aside></div>
-      <p class="note" style="margin-top:10px">Unshaded areas are not evidence of opposition: most are only partly read, and some sources block automated reading.</p>`;
-    const C = data.C, svg = $('#svg');
-    const maxN = Math.max(1, ...C.map(c => c[6].length));
-    svg.innerHTML = C.map((c, i) => `<path data-k="${i}" class="${c[2]}" ${c[2] === 'support' ? `style="fill-opacity:${(.45 + .55 * Math.log(c[6].length + 1) / Math.log(maxN + 1)).toFixed(2)}"` : ''} d="${c[7]}"></path>`).join('');
-    const m = makeMap(svg, $('#mapbox'), $('#tip'), data.vb, k => C[k][0], k => { m.select(k); side(+k); });
-    $('#zi').onclick = () => m.zoom(.6); $('#zo').onclick = () => m.zoom(1 / .6); $('#zr').onclick = m.fit;
-    const home = () => { $('#mapside').innerHTML = `<h2>Click an area</h2><p class="note">Drag to pan, use the buttons to zoom.</p>` +
-      (data.O.length ? '<h3 style="margin-top:14px">Not on the map</h3>' + data.O.map(o => `<div class="ev"><b>${esc(o[0])}</b><div class="note">${o[4].length} supporters located exactly here</div></div>`).join('') : ''); };
-    const side = i => {
-      const c = C[i];
-      $('#mapside').innerHTML = `<h2>${esc(c[0])}</h2><p><span class="pill">${esc(STATE[c[2]])}</span> ${c[1] ? `<span class="pill">${esc(c[1])}</span>` : ''}</p>
-        ${c[6].length ? `<h3>Supporters in this area (${c[6].length})</h3><p class="note" style="margin:0 0 6px">Counts everyone located here or somewhere inside.</p>${c[6].length > 12 ? `<p style="margin:0 0 6px"><a href="#" data-area="${esc(c[8] || '')}">Open all ${c[6].length} in the People list</a></p>` : ''}` + c[6].slice(0, 12).map(id => { const p = P[pid[id]]; return p ? `<div class="ev" data-p="${pid[id]}" style="cursor:pointer"><span class="g g${p[8]}">${p[8]}</span> <b>${esc(p[1])}</b><div class="note">${esc(p[4])}</div></div>` : ''; }).join('') : '<p class="note">No supporter recorded for this area yet.</p>'}
-        ${c[5] ? `<h3 style="margin-top:14px">Sweep notes</h3><p class="note">${esc(c[5])}</p>` : ''}
-        <a class="report" href="${esc(issueUrl('[' + cc + '] Report: ' + c[0], {country: slug}))}" target="_blank" rel="noopener">Report a problem with this area</a>`;
+    detail(path);
+  }
+  function home() {
+    const withSup = D.placeList.filter(p => p.n).sort((a, b) => b.n - a.n);
+    panel.innerHTML = `<div class="kicker">All places</div><h3 style="margin-top:8px">${esc(D.meta.name)}</h3>
+      <input class="field" id="pl-q" type="search" placeholder="Find a place" style="margin-top:14px;width:100%" aria-label="Find a place">
+      <div class="scroll" id="pl-list"></div>
+      <p class="note" style="margin-bottom:0">${fmt(D.meta.units_with_supporters)} of ${fmt(D.meta.units)} areas have a recorded supporter${D.nationalOnly ? `, and ${fmt(D.nationalOnly)} supporters work at national level with no local area` : ''}. Click an area on the map, or pick one here.</p>`;
+    const list = $('#pl-list', panel);
+    const draw = q => {
+      const t = norm(q);
+      const rows = (t ? D.placeList.filter(p => norm(p.name).includes(t)).sort((a, b) => b.n - a.n) : withSup).slice(0, 200);
+      list.innerHTML = rows.map(p => `<button type="button" class="prow" data-p="${esc(p.path)}"><span>${esc(p.name)}<span class="sub">${esc(p.path.split(' > ').slice(1, -1).join(' › ') || D.meta.name)}</span></span><span class="n">${p.n || (p.state === 'clear' ? 'none' : '·')}</span></button>`).join('')
+        || '<p class="empty" style="padding:16px 0">No place by that name.</p>';
     };
-    $('#mapside').addEventListener('click', e => {
-      const ar = e.target.closest('[data-area]'); if (ar) { e.preventDefault(); PEOPLE_AREA = ar.dataset.area; go(slug + '.people'); return; }
-      const r = e.target.closest('[data-p]'); if (r) { PEOPLE_SEL = +r.dataset.p; go(slug + '.people'); } });
-    home();
+    draw('');
+    $('#pl-q', panel).addEventListener('input', e => draw(e.target.value));
+    list.addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (b) select(b.dataset.p); });
   }
-
-  if (sub === 'people') {
-    body.innerHTML = `<div class="ctl"><input type="search" id="q" placeholder="Search names, roles, parties" aria-label="Search"><select id="ft" aria-label="Type"></select>
-      <select id="fl" aria-label="Level"><option value="">Any level</option><option value="national">National</option><option value="regional">Regional</option><option value="local">Local</option><option value="supranational">Supranational</option></select>
-      <select id="fg" aria-label="Grade"><option value="">Any grade</option><option value="A">A explicit</option><option value="B">B named</option><option value="C">C implied</option></select>
-      <select id="fp" aria-label="Party"></select><select id="fa" aria-label="Area"></select><select id="fk" aria-label="Kind"><option value="">People and organisations</option><option value="person">People</option><option value="organisation">Organisations</option></select>
-      <select id="fv" aria-label="Verification"><option value="">Verified or not</option><option value="y">Has a verified row</option></select></div>
-      <p class="note" id="count" style="margin:0 0 8px" aria-live="polite"></p>
-      <div class="grid"><div><div class="tw" style="max-height:74vh;overflow:auto"><table id="tbl"><thead><tr><th data-k="1">Name</th><th data-k="3">Type</th><th data-k="15">Party</th><th data-k="8">Grade</th><th data-k="9">Rows</th><th data-k="11">Latest</th></tr></thead><tbody></tbody></table></div>
-      </div><aside class="panel" id="pside"><p class="empty">Select a row to see the evidence behind it.</p></aside></div>`;
-    const ft = $('#ft'), fp = $('#fp'), fa = $('#fa');
-    const areaOf = p => (p[7] || '').split(' > ').slice(0, 2).join(' > ');
-    const inArea = (p, x) => p[7] === x || (p[7] || '').startsWith(x + ' > ');
-    const areas = [...new Set(P.map(areaOf).filter(x => x.includes(' > ')))].sort((a, b) => P.filter(p => inArea(p, b)).length - P.filter(p => inArea(p, a)).length);
-    if (PEOPLE_AREA && !areas.includes(PEOPLE_AREA)) areas.unshift(PEOPLE_AREA);
-    fa.innerHTML = areas.length ? '<option value="">Any area</option>' + areas.map(x => `<option value="${esc(x)}">${esc(x.split(' > ').slice(1).join(' \u203a '))} (${P.filter(p => inArea(p, x)).length})</option>`).join('') : '';
-    fa.hidden = !areas.length;
-    if (PEOPLE_AREA) fa.value = PEOPLE_AREA;
-    PEOPLE_AREA = '';
-    const parties = [...new Set(P.map(p => p[15]).filter(Boolean))].sort((a, b) => P.filter(p => p[15] === b).length - P.filter(p => p[15] === a).length);
-    fp.innerHTML = '<option value="">Any party</option>' + parties.map(x => `<option value="${esc(x)}">${esc(x)} (${P.filter(p => p[15] === x).length})</option>`).join('');
-    ft.innerHTML = '<option value="">Any type</option>' + [...new Set(P.flatMap(p => [p[3], ...p[16]]))].sort((a, b) => (TYPE[a] || a).localeCompare(TYPE[b] || b)).map(t => `<option value="${t}">${esc(TYPE[t] || t)}</option>`).join('');
-    let sortK = 1, sortD = 1, cur = PEOPLE_SEL;
-    const rows = () => {
-      const q = $('#q').value.toLowerCase(), t = ft.value, l = $('#fl').value, g = $('#fg').value, k = $('#fk').value, v = $('#fv').value, pa = fp.value, ar = fa.value;
-      const r = P.map((p, i) => i).filter(i => {
-        const p = P[i];
-        return (!t || p[3] === t || p[16].includes(t)) && (!l || p[6] === l) && (!g || p[8] === g) && (!k || p[2] === k) && (!pa || p[15] === pa) && (!ar || inArea(p, ar)) &&
-          (!v || (evBy[p[0]] || []).some(e => e[10] === 'y')) && (!q || (p[1] + ' ' + p[4] + ' ' + p[5] + ' ' + p[7] + ' ' + p[15]).toLowerCase().includes(q));
-      });
-      r.sort((a, b) => { const x = P[a][sortK], y = P[b][sortK]; return (typeof x === 'number' ? x - y : String(x).localeCompare(String(y))) * sortD; });
-      return r;
-    };
-    const draw = () => {
-      const r = rows();
-      $('#tbl tbody').innerHTML = r.slice(0, 400).map(i => { const p = P[i];
-        return `<tr tabindex="0" data-p="${i}" aria-selected="${i === cur}"><td><b>${esc(p[1])}</b><div class="role">${esc(p[4].slice(0, 90))}</div></td><td>${esc([p[3], ...p[16]].map(x => TYPE[x] || x).join(', '))}</td><td>${esc(p[15])}</td><td><span class="g g${p[8]}">${p[8]}</span></td><td class="n">${p[9]}</td><td class="n">${esc(p[11].slice(0, 7))}</td></tr>`; }).join('');
-      $('#count').textContent = `${r.length} of ${P.length} shown` + (r.length > 400 ? ' (first 400; narrow the filters to see the rest)' : '');
-    };
-    const pick = i => { cur = i; $('#pside').innerHTML = card(i); draw(); };
-    ['#q', '#ft', '#fp', '#fa', '#fl', '#fg', '#fk', '#fv'].forEach(s => $(s).addEventListener('input', draw));
-    $('#tbl thead').addEventListener('click', e => { const th = e.target.closest('th'); if (!th) return; const k = +th.dataset.k; if (sortK === k) sortD *= -1; else { sortK = k; sortD = (k === 11 || k === 9) ? -1 : 1; } draw(); });
-    $('#tbl tbody').addEventListener('click', e => { const tr = e.target.closest('tr'); if (tr) pick(+tr.dataset.p); });
-    $('#tbl tbody').addEventListener('keydown', e => { if (e.key === 'Enter') { const tr = e.target.closest('tr'); if (tr) pick(+tr.dataset.p); } });
-    draw();
-    if (cur != null) { $('#pside').innerHTML = card(cur); const row = $(`#tbl tr[data-p="${cur}"]`); if (row) row.scrollIntoView({block: 'nearest'}); }
-    PEOPLE_SEL = null;
+  function detail(path) {
+    const pl = D.placeList.find(p => p.path === path);
+    const ids = [...idsForPlace(D, path)];
+    const people = ids.map(i => D.byId[i]).filter(Boolean).sort(byStrength);
+    const name = pl ? pl.name : path.split(' > ').pop();
+    const state = people.length ? `${fmt(people.length)} supporter${people.length === 1 ? '' : 's'}` : pl && pl.state === 'clear' ? 'Searched; nobody found yet' : 'Not fully searched yet';
+    panel.innerHTML = `<div><button class="chip" type="button" id="pl-back">← All places</button></div>
+      <h3 style="margin-top:16px">${esc(name)}</h3>
+      <div class="path">${esc(path)}</div>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><span class="tag ${people.length ? 'signal' : ''}">${esc(state)}</span></div>
+      <div class="scroll">${people.slice(0, 40).map(p => `<a class="prow" href="/${slug}/${enc(p[P_.id])}"><span>${glyph(p[P_.grade])}&nbsp; ${esc(p[P_.name])}<span class="sub">${esc([label(TYPE, p[P_.type]), p[P_.role]].filter(Boolean).join(' · ').slice(0, 80))}</span></span><span class="n">→</span></a>`).join('')}
+        ${pl && pl.notes ? `<p class="note">${esc(pl.notes)}</p>` : ''}</div>
+      ${people.length ? `<button class="btn sm" type="button" id="pl-all" style="margin-top:14px;justify-content:center">Show ${people.length > 40 ? 'all ' + fmt(people.length) : 'them'} in the directory ↓</button>` : `<a class="report" href="${esc(issueUrl(`[${D.meta.iso2}] Supporter in ${name}`, {country: slug}))}" target="_blank" rel="noopener">Know a public supporter here? Tell us ↗</a>`}`;
+    $('#pl-back', panel).onclick = () => select(null);
+    const all = $('#pl-all', panel); if (all) all.onclick = () => onShowAll(path);
   }
-
-  if (sub === 'timeline') {
-    body.innerHTML = `<div class="panel"><h2>Evidence by year</h2><p class="note">Dated evidence rows by grade. Years with few rows reflect where the harvest started, so earlier support is under-counted.</p><div id="tl"></div></div>
-      <div class="charts"><div class="panel"><h3>Supporters by type</h3><p class="note" style="margin:0 0 8px">A person counts under each of their types.</p><div class="bars" id="btype"></div></div><div class="panel"><h3>Designs backed (supporters)</h3><div class="bars" id="bdes"></div></div><div class="panel" id="pparty"><h3>Politicians by party</h3><div class="bars" id="bparty"></div></div><div class="panel"><h3>Evidence by kind</h3><div class="bars" id="bev"></div></div></div>`;
-    const yrs = {}; let y0 = 9999, y1 = 0;
-    E.forEach(e => { const y = +String(e[1]).slice(0, 4); if (y >= 2000 && y <= 2100) { (yrs[y] ??= {A: 0, B: 0, C: 0})[e[2]]++; y0 = Math.min(y0, y); y1 = Math.max(y1, y); } });
-    y0 = Math.min(y0, 2010); y1 = Math.max(y1, new Date().getFullYear());
-    const ys = []; for (let y = y0; y <= y1; y++) ys.push(y);
-    const tot = y => yrs[y] ? yrs[y].A + yrs[y].B + yrs[y].C : 0, max = Math.max(1, ...ys.map(tot));
-    const W = 860, H = 300, L = 34, B = 28, T = 24, bw = (W - L) / ys.length, sc = v => (H - B - T) * v / max;
-    let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Evidence rows per year by grade">`;
-    [0, .5, 1].forEach(f => { const v = Math.round(max * f), yy = H - B - sc(v); s += `<line x1="${L}" x2="${W}" y1="${yy}" y2="${yy}" stroke="var(--line)"/><text x="${L - 6}" y="${yy + 4}" text-anchor="end">${v}</text>`; });
-    ys.forEach((y, i) => { const d = yrs[y] || {A: 0, B: 0, C: 0}; let acc = 0; const x = L + i * bw + 4, w = bw - 8;
-      ['A', 'B', 'C'].forEach(g => { const h = sc(d[g]); if (h > 0) s += `<rect x="${x}" y="${H - B - acc - h}" width="${w}" height="${h}" fill="var(--${g.toLowerCase()})"><title>${y} grade ${g}: ${d[g]}</title></rect>`; acc += h; });
-      s += `<text x="${x + w / 2}" y="${H - 10}" text-anchor="middle">${String(y).slice(2)}</text>`; });
-    s += `</svg><p class="note"><span class="dot" style="background:var(--a)"></span>A explicit <span class="dot" style="background:var(--b);margin-left:12px"></span>B named <span class="dot" style="background:var(--c);margin-left:12px"></span>C implied</p>`;
-    $('#tl').innerHTML = s;
-    const cnt = (arr, f) => { const o = {}; arr.forEach(x => { const k = f(x); if (k) o[k] = (o[k] || 0) + 1; }); return Object.entries(o).sort((a, b) => b[1] - a[1]); };
-    const bars = (el, pairs, lab) => { const m = Math.max(1, ...pairs.map(p => p[1])); $(el).innerHTML = pairs.map(p => `<div class="bar"><span>${esc(lab(p[0]))}</span><div class="t"><i style="width:${p[1] / m * 100}%"></i></div><span class="v">${p[1]}</span></div>`).join(''); };
-    (() => { const o = {}; P.forEach(p => [p[3], ...p[16]].forEach(x => { o[x] = (o[x] || 0) + 1; })); bars('#btype', Object.entries(o).sort((a, b) => b[1] - a[1]), k => TYPE[k] || k); })();
-    bars('#bdes', cnt(P, p => p[12][0] && (['annual_net_wealth', 'one_off_levy', 'billionaire_minimum', 'partial_wealth'].find(d => p[12].includes(d)) || 'wealth_tax_unspecified')), k => DES[k] || k);
-    bars('#bparty', cnt(P, p => p[3] === 'politician' && p[15]), k => k);
-    if (!P.some(p => p[3] === 'politician' && p[15])) $('#pparty').hidden = true;
-    bars('#bev', cnt(E, e => e[3]).slice(0, 10), k => EVT[k] || k);
-  }
-
-  if (sub === 'method') {
-    const m = data.meta, unver = m.evidence - m.verified;
-    body.innerHTML = `<div class="panel method"><h2>How to read ${esc(m.name)}</h2>
-      <p><b>What counts.</b> A person or organisation is listed only if a dated, linked source shows them supporting an actual wealth tax: a recurring tax on net wealth, a one-off levy, or a minimum tax on billionaires. Income, property and capital gains reforms alone do not count. Opponents are not listed.</p>
-      <p><span class="g gA">A</span> explicit: a formal act or a stated design, such as a vote, signed motion, party policy or a named rate. <span class="g gB">B</span> named: backs a wealth tax without a design. <span class="g gC">C</span> implied: wording that suggests support without naming a wealth tax.</p>
-      <h3 style="margin-top:20px">Gaps and caveats</h3><ul>
-      <li>${unver} of ${m.evidence} sourced rows are not yet checked by a person against the original page.</li>
-      ${m.units ? `<li>Supporters are recorded in ${m.units_with_supporters} of ${m.units} areas, and ${m.units_done} have been fully read. A blank area means unread, not opposed.</li>` : ''}
-      <li>${m.excluded} people and organisations were looked at and excluded, for example opponents, sceptics and people who have died.</li>
-      <li>People are assumed alive unless a death record was found; those people are removed.</li>
-      <li>${esc(m.notes || '')}</li></ul>
-      <p class="note">Last run ${esc(m.updated)}. Country lead: ${esc(m.lead)}.</p>
-      <a class="report" href="${esc(issueUrl('[' + cc + '] Report: ' + m.name, {country: slug}))}" target="_blank" rel="noopener">Report a problem with this country</a></div>`;
-  }
+  fit(false); home();
+  return {select};
 }
-let PEOPLE_SEL = null, PEOPLE_AREA = '';
-boot();
+
+// ---------- person ----------
+async function personPage(slug, id) {
+  main.innerHTML = '<div class="loading">Loading</div>';
+  const D = await loadCountry(slug), m = D.meta, p = D.byId[id];
+  if (!p) return notFound();
+  setTitle(`${p[P_.name]} (${m.name})`);
+  const ev = (D.evBy[id] || []).slice().sort((a, b) => (b[E_.date] || '').localeCompare(a[E_.date] || '') || (a[E_.grade] || '').localeCompare(b[E_.grade] || ''));
+  const locParts = (p[P_.loc] || '').split('>').map(s => s.trim()).filter(Boolean);
+  // Place breadcrumb: each part links to the country map when it is a known area.
+  const reg = D.places.map(pl => pl.path);
+  const crumbs = locParts.map((part, i) => {
+    const path = locParts.slice(0, i + 1).join(' > ');
+    const known = i > 0 && reg.some(r => norm(r) === norm(path) || norm(r).startsWith(norm(path) + ' > '));
+    const real = known ? reg.find(r => norm(r) === norm(path)) || path : null;
+    return known ? `<a href="/${slug}?place=${enc(real)}#map">${esc(part)}</a>` : `<span>${esc(part)}</span>`;
+  }).join('<span class="sep">›</span>');
+  const prof = p[P_.prof].slice().sort((a, b) => Object.keys(PLAT).indexOf(a[0]) - Object.keys(PLAT).indexOf(b[0]));
+  const web = safeUrl(p[P_.web]);
+  const linkBtns = [web && !prof.some(x => x[1] === web) ? ext(web, 'Website ↗', 'primary') : '',
+    ...prof.filter(x => safeUrl(x[1])).map((x, i) => ext(x[1], esc(label(PLAT, x[0])) + ' ↗', !web && i === 0 ? 'primary' : ''))].filter(Boolean).join('');
+  // Others in the same, most specific area.
+  const mine = D.places.filter(pl => pl.ids.includes(id) && pl.path.includes(' > ')).sort((a, b) => b.path.length - a.path.length)[0];
+  const near = mine ? [...idsForPlace(D, mine.path)].filter(i => i !== id).map(i => D.byId[i]).filter(Boolean).sort(byStrength).slice(0, 8) : [];
+  const links = D.L.filter(l => l[0] === id || l[1] === id).map(l => [D.byId[l[0] === id ? l[1] : l[0]], l]).filter(x => x[0]);
+  const firstY = year(p[P_.first]), lastY = year(p[P_.last]);
+  main.innerHTML = `
+  <div class="wrap fade">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/#countries">All countries</a><span>/</span><a href="/${slug}">${esc(m.name)}</a><span>/</span><a href="/${slug}#directory">Directory</a></nav>
+    <div class="person">
+      <aside class="p-side">
+        <div class="kicker">${esc(label(TYPE, p[P_.type]))}${p[P_.level] ? ' · ' + esc(label(LEVEL, p[P_.level])) : ''}</div>
+        <h1>${esc(p[P_.name])}</h1>
+        <div class="p-role">${esc([p[P_.role], p[P_.aff]].filter(Boolean).join(' · '))}</div>
+        <div class="p-tags">${p[P_.party] ? `<a class="tag signal" style="text-decoration:none" href="/${slug}?party=${enc(p[P_.party])}#directory">${esc(p[P_.party])}</a>` : ''}${p[P_.other].map(t => `<span class="tag">${esc(label(TYPE, t))}</span>`).join('')}</div>
+        ${crumbs ? `<div class="p-place"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.6"><path d="M10 18s6-5.3 6-10a6 6 0 0 0-12 0c0 4.7 6 10 6 10z"/><circle cx="10" cy="8" r="2"/></svg>${crumbs}</div>` : ''}
+        ${linkBtns ? `<div class="p-links">${linkBtns}</div>` : ''}
+        <dl class="kv p-summary" style="margin-top:28px">
+          <div><span>Strongest evidence</span><b>${glyph(p[P_.grade])}&nbsp; ${esc(GRADE[p[P_.grade]] || '')}</b></div>
+          <div><span>Statements on record</span><b>${p[P_.n]}${firstY ? ` · ${firstY === lastY ? firstY : firstY + '–' + lastY}` : ''}</b></div>
+          ${p[P_.des].length ? `<div><span>Backs</span><b>${p[P_.des].map(d => esc(label(DES, d))).join('<br>')}</b></div>` : ''}
+        </dl>
+        ${p[P_.notes] ? `<p class="p-note">${esc(p[P_.notes])}</p>` : ''}
+        <a class="report" href="${esc(issueUrl(`[${m.iso2}] Report: ${p[P_.name]}`, {country: slug, entry: id}))}" target="_blank" rel="noopener">Something wrong, or want this removed? Report it ↗</a>
+      </aside>
+      <div class="statements">
+        <h2>On the record <span class="n">${ev.length} statement${ev.length === 1 ? '' : 's'}</span></h2>
+        <div style="margin-top:18px">${ev.map(e => evCard(e, m, slug)).join('')}</div>
+        ${near.length ? `<div class="nearby"><div class="kicker">Nearby</div><h3>Also in ${esc(mine.name)}</h3>
+          <div class="mini">${near.map(q => `<a href="/${slug}/${enc(q[P_.id])}">${glyph(q[P_.grade])}&nbsp; ${esc(q[P_.name])}<span>${esc([label(TYPE, q[P_.type]), q[P_.role]].filter(Boolean).join(' · '))}</span></a>`).join('')}</div>
+          <p style="margin-top:14px;font-size:14px"><a href="/${slug}?place=${enc(mine.path)}#map">See everyone in ${esc(mine.name)} →</a></p></div>` : ''}
+        ${links.length ? `<div class="nearby"><div class="kicker">Connections</div><h3>Linked entries</h3>
+          <div class="mini">${links.map(([q, l]) => `<a href="/${slug}/${enc(q[P_.id])}">${esc(q[P_.name])}<span>${esc(label({}, l[2]))}${l[3] ? ' · ' + esc(l[3]) : ''}</span></a>`).join('')}</div></div>` : ''}
+      </div>
+    </div>
+  </div>`;
+}
+function evCard(e, m, slug) {
+  const url = safeUrl(e[E_.url]);
+  const ver = e[E_.verified] === 'y' ? '<span class="verified">Checked by a person</span>' : e[E_.verified] === 'failed' ? '<span>Check failed</span>' : '<span>Not yet checked by a person</span>';
+  return `<article class="ev">
+    <div class="ev-meta"><span class="d">${esc(e[E_.date] || 'Undated')}</span><span>${esc(label(EVT, e[E_.type]))}</span><span>${glyph(e[E_.grade])}&nbsp; ${esc(GRADE[e[E_.grade]] || '')}</span>${e[E_.des] ? `<span>${esc(label(DES, e[E_.des]))}</span>` : ''}</div>
+    ${e[E_.quote] ? `<blockquote>${/^[a-z]/.test(e[E_.quote]) ? '…' : ''}${esc(e[E_.quote])}</blockquote>` : ''}
+    ${e[E_.detail] ? `<p class="muted" style="font-size:14px;margin-top:-4px">${esc(e[E_.detail])}</p>` : ''}
+    <div class="ev-src">
+      <div>${url ? ext(url, esc(e[E_.title] || e[E_.pub] || url) + ' ↗', 's') : esc(e[E_.title])}<span class="pub">${esc(e[E_.pub])}</span></div>
+      <div class="ev-foot">${ver}<a href="${esc(issueUrl(`[${m.iso2}] Report: ${e[E_.id]}`, {country: slug, entry: e[E_.id]}))}" target="_blank" rel="noopener">Report</a></div>
+    </div>
+  </article>`;
+}
+
+// ---------- static pages ----------
+function aboutPage(W) {
+  setTitle('Method');
+  main.innerHTML = `
+  <div class="wrap page-head fade"><div class="kicker">Method</div><h1>How the register <em>is built</em></h1></div>
+  <div class="wrap two" style="margin-top:36px">
+    <div class="prose">
+      <p class="lede" style="max-width:none">Wealth Tax Supporters lists people and organisations that have backed a wealth tax in public. It exists so that supporters can find each other, from national parliaments down to a single town.</p>
+      <h2>What counts as support</h2>
+      <p>Only an actual tax on wealth: a tax on the stock of what people own rather than on what they earn. That covers</p>
+      <ul>${Object.entries(DES).map(([k, v]) => `<li><b>${esc(v)}</b></li>`).join('')}</ul>
+      <p>Backing higher income tax, higher capital gains tax or "making the rich pay more" is not enough on its own. People who argue for those instead of a wealth tax are left out, and the reasons are logged.</p>
+      <h2>Grades</h2>
+      <div class="grades">${['A', 'B', 'C'].map(g => `<div>${glyph(g)}<span><b>${GRADE[g]}.</b> ${esc(GRADE_LONG[g].split(': ').pop())}.</span></div>`).join('')}</div>
+      <p>A supporter's grade is their strongest piece of evidence. A formal act such as a vote, a motion, a bill or a signed letter counts as explicit.</p>
+      <h2>Sources and checking</h2>
+      <p>Every statement is quoted word for word from its source and linked to it. Quotes are checked against the page automatically, and a statement is marked <em>checked by a person</em> only when someone other than its author has read the source.</p>
+      <h2>Made with AI, checked in public</h2>
+      <p>The research is done with an AI research workflow that searches parliaments, councils, parties, unions, campaigns and the press, and follows written rules for what counts. AI makes mistakes. That is why every claim carries its source, why unchecked rows say so, and why anyone can report an error.</p>
+      <h2>Coverage</h2>
+      <p>Countries are researched layer by layer, national first. Regional and local areas are sampled first and searched fully only where they turn up supporters. On the maps, hatched areas have not been fully searched: an empty area there means <em>not read yet</em>, not <em>no supporters</em>.</p>
+      <h2>Removal and corrections</h2>
+      <p>Anyone listed can ask to be removed or corrected. Use the report link on the entry, or open a report on GitHub. People who have died are removed.</p>
+      <h2>Reuse</h2>
+      <p>The data is free to reuse under the Creative Commons Attribution 4.0 licence. Quotes stay the copyright of their publishers. Each country page has CSV downloads.</p>
+      <h2>What comes next</h2>
+      <p>Today the register lists public figures and organisations only. A way for ordinary supporters to find each other in their own area is planned, with privacy and consent built in first. It is not open yet.</p>
+    </div>
+    <aside class="aside-card"><h3>Spotted a mistake?</h3><p>Reports are public GitHub issues. Say which entry is wrong and, if you can, link a source.</p>
+      <p><a class="btn sm" href="${esc(issueUrl('Report: '))}" target="_blank" rel="noopener">Report a mistake ↗</a></p>
+      <p style="margin:18px 0 0"><a href="https://github.com/${REPO}" target="_blank" rel="noopener">Read the full method on GitHub ↗</a></p></aside>
+  </div>`;
+}
+function contributePage(W) {
+  setTitle('Contribute');
+  main.innerHTML = `
+  <div class="wrap page-head fade"><div class="kicker">Contribute</div><h1>Put your country <em>on the map</em></h1></div>
+  <div class="wrap two" style="margin-top:36px">
+    <div class="prose">
+      <p class="lede" style="max-width:none">Registers are built one country at a time, in the open. ${W.countries.length} ${W.countries.length === 1 ? 'country is' : 'countries are'} underway: ${W.countries.map(c => esc(c.name)).join(', ')}.</p>
+      <h2>Start a country</h2>
+      <ol>
+        <li><b>Open a "new country" issue</b> on GitHub, so nobody else starts the same one. Pick a depth: a seed run finds the most prominent supporters in every layer and plans the next runs.</li>
+        <li><b>Run the research workflow.</b> The repository has a written workflow (a Claude skill) with the rules for what counts, how to grade evidence and how to record sources. It sets up the country folder and the geography for the map.</li>
+        <li><b>Open a pull request</b> with the new <code>data/&lt;country&gt;/</code> folder. Checks run automatically, and the site rebuilds once it is merged.</li>
+      </ol>
+      <h2>Help check what is here</h2>
+      <p>Many statements have not been checked by a person yet. Open an entry, follow the source, and report anything that does not match. Confirmations help too.</p>
+      <h2>Suggest a supporter</h2>
+      <p>Know someone who has backed a wealth tax in public? Report it with a link to where they said it.</p>
+    </div>
+    <aside class="aside-card"><h3>Get started</h3>
+      <p><a class="btn sm" href="https://github.com/${REPO}/issues/new?template=new-country.yml" target="_blank" rel="noopener">Start a new country ↗</a></p>
+      <p><a class="btn sm ghost" href="${esc(issueUrl('Suggest: '))}" target="_blank" rel="noopener">Suggest a supporter ↗</a></p>
+      <p style="margin:18px 0 0"><a href="https://github.com/${REPO}/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing guide ↗</a><br><a href="https://github.com/${REPO}/blob/main/skill/SKILL.md" target="_blank" rel="noopener">The research workflow ↗</a></p></aside>
+  </div>`;
+}
+
+// ---------- start ----------
+$('#report-top').href = $('#report-foot').href = issueUrl('Report: ');
+$('#repo-link').href = `https://github.com/${REPO}`;
+render(false);

@@ -1,6 +1,6 @@
 # Wealth Tax Supporters
 
-An open, sourced database of who publicly backs an actual wealth tax, built country by country. Each country is a folder of CSV files; a GitHub Action turns them into a [world map and browsable site](https://egalitaristen.github.io/wealth-tax-supporters/).
+An open, sourced database of who publicly backs an actual wealth tax, built country by country. Each country is a folder of CSV files; Cloudflare Pages turns them into the site at [wealthtaxsupporters.com](https://wealthtaxsupporters.com).
 
 > **The data is AI-generated and may be wrong.** Every entry links to a source, and many rows have not yet been checked by a person. If you spot a mistake or want an entry removed, use the **Report** link on the site, or [open an issue](../../issues/new?template=data-report.yml).
 
@@ -14,8 +14,9 @@ The aim is to make it easy for people who share the view that wealth should be t
 |---|---|
 | `data/<iso2>/` | One database per country or region, for example `data/gb/`. Plain CSV files plus a `meta.json`. |
 | `skill/` | The research workflow (`SKILL.md`), source playbook, country examples and helper scripts (`wtdb.py`, `profiles_wikidata.py`, `topo_to_boundaries.py`). Works for people and for AI assistants. |
-| `site/` | The static front end (world map, country views). |
-| `scripts/build_site.py` | Turns `data/` into the site data. No framework, standard library only. |
+| `site/` | The static front end: one page and one script, no framework. Home with search and a dot world map, country pages (area map, directory, timeline, method), a page per supporter, method and contribute pages. |
+| `scripts/build_site.py` | Turns `data/` into the site data, a search index and CSV downloads. Standard library plus `pycountry`. |
+| `scripts/serve.py` | Serves the built site locally the way Cloudflare Pages does (unknown paths fall back to `index.html`). |
 | `docs/`, `infra/` | The community plan, and the Cloudflare setup and draft database schema. Nothing deployed yet. |
 
 Three countries so far, all built with Claude and all work in progress: the United Kingdom (`data/gb/`, with a council-level map), the United States (`data/us/`, federal and state level, with a state map) and Sweden (`data/se/`, national first pass done; regional and local sweep planned, with a municipality map). Most rows are still marked `verified=n`.
@@ -55,8 +56,10 @@ The goal is a trustworthy list of who publicly backs an actual wealth tax, with 
 ```bash
 pip install pycountry
 python scripts/build_site.py          # writes _site/
-python -m http.server --directory _site
+python scripts/serve.py               # http://localhost:8000
 ```
+
+The site uses clean URLs (`/gb`, `/gb/A0001`, `/about`), so it needs a host that falls back to `index.html` for unknown paths. Cloudflare Pages does this when the build has no `404.html`, and `scripts/serve.py` does the same locally. Filtered views are shareable: `/gb?place=United Kingdom > Wales&type=economist`.
 
 ## Licences
 

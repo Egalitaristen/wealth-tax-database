@@ -20,7 +20,7 @@ The domain is registered at GoDaddy. A new registration cannot be transferred to
    - Environment variable: `PYTHON_VERSION` = `3.12`
 3. Deploy. Check the `*.pages.dev` address works.
 4. **Custom domains** → add `wealthtaxsupporters.com` and `www.wealthtaxsupporters.com`. Cloudflare creates the DNS records and the certificate.
-5. Once the new address works, switch off the GitHub Pages deployment (delete `.github/workflows/pages.yml`, and turn Pages off in the repository settings) so there is one live site.
+5. The GitHub Pages workflow has been removed, because the site now uses clean URLs at the domain root. Turn Pages off in the repository settings so the old address stops serving a stale copy.
 
 Every push to `main` then rebuilds the site on Cloudflare. The `validate` workflow on GitHub still checks pull requests.
 

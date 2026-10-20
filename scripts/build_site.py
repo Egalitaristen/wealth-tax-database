@@ -226,7 +226,50 @@ def build_country(folder):
                    supporters=len(P), evidence=len(E), verified=verified, A=grades["A"], B=grades["B"], C=grades["C"],
                    units=len(geo) - len(roots), units_done=done, units_with_supporters=with_sup, updated=last, excluded=len(excl))
     country = dict(meta=summary, P=P, E=E, C=C, vb=vb, O=O, L=L)
-    return summary, country
+
+    # Search index rows: [slug, id, name, type, role, place, grade, statements]
+    index = [[slug, p[0], p[1], p[3], p[4][:80], [x.strip() for x in p[7].split(">")][-1] if p[7] else "", p[8], p[9]]
+             for p in P]
+    # Place rows: [slug, unit path, supporters inside]
+    places = [[slug, unit_path(u, by_id), len(ids)] for u, ids in inside.items() if ids and u not in roots]
+    summary["featured"] = featured(P, ev)
+    summary["types"] = dict(collections.Counter(p[3] for p in P).most_common())
+    summary["designs"] = dict(collections.Counter(d for p in P for d in p[12]).most_common())
+    return summary, country, index, places
+
+
+FEATURE_TYPES = ["economist", "wealthy_individual", "campaigner", "journalist", "politician", "union_official",
+                 "academic", "business_leader", "cultural_figure", "legal_tax_professional", "faith"]
+
+
+def featured(P, ev):
+    """A few short, explicit quotes from named people for the home page, spread across types."""
+    people = {p[0]: p for p in P if p[2] == "person"}
+    spoken = {"speech", "op_ed", "statement", "interview", "social_post", "testimony", "publication", "editorial", "campaign"}
+    best = {}
+    for e in ev:
+        p = people.get(e["actor_id"])
+        q = re.sub(r"\s+", " ", e["quote_original"]).strip()
+        if not p or e["grade"] != "A" or not (70 <= len(q) <= 230) or not e["source_url"].startswith("http"):
+            continue
+        # Whole sentences in the person's own voice: starts with a capital, ends with punctuation,
+        # and does not describe them in the third person.
+        surname = p[1].split()[-1].lower()
+        if (e["evidence_type"] not in spoken or not q[0].isupper() or q[-1] not in '.!?"”'
+                or surname in q.lower() or re.match(r"(He|She|They|His|Her|Their)\s", q)):
+            continue
+        score = (len(p[17]) > 0, p[3] != "politician" or p[6] == "national", e["date"])
+        if e["actor_id"] not in best or score > best[e["actor_id"]][0]:
+            best[e["actor_id"]] = (score, [p[0], p[1], p[3], p[4][:90], q, e["source_url"], e["publisher"], e["date"]])
+    by_type = collections.defaultdict(list)
+    for score, row in sorted(best.values(), key=lambda x: x[0], reverse=True):
+        by_type[row[2]].append(row)
+    out = []
+    while len(out) < 8 and any(by_type.values()):
+        for t in FEATURE_TYPES + sorted(by_type):
+            if by_type.get(t) and len(out) < 8:
+                out.append(by_type[t].pop(0))
+    return out
 
 
 def main():
@@ -236,26 +279,37 @@ def main():
     if out.exists():
         shutil.rmtree(out)
     (out / "data").mkdir(parents=True)
-    for f in ("app.js", "style.css"):
-        shutil.copy(SITE / f, out / f)
-    # Pages caches files for 10 minutes; a content hash in the URL makes updates show at once.
+    # Every file in site/ except the page and the vendored map source is copied as is.
+    assets = [f for f in SITE.iterdir() if f.is_file() and f.name != "index.html"]
+    for f in assets:
+        shutil.copy(f, out / f.name)
+    # A content hash in each asset URL makes updates show at once despite caching.
     html = (SITE / "index.html").read_text(encoding="utf-8")
-    for f in ("app.js", "style.css"):
-        h = hashlib.md5((SITE / f).read_bytes()).hexdigest()[:8]
-        html = html.replace(f'"{f}"', f'"{f}?v={h}"')
+    for f in assets:
+        if f.suffix in (".js", ".css", ".svg"):
+            h = hashlib.md5(f.read_bytes()).hexdigest()[:8]
+            html = html.replace(f'"/{f.name}"', f'"/{f.name}?v={h}"')
     (out / "index.html").write_text(html, encoding="utf-8")
-    countries = []
+    countries, index, places = [], [], []
     for folder in sorted(DATA.iterdir()):
         if folder.is_dir() and (folder / "meta.json").exists():
-            summary, country = build_country(folder)
+            summary, country, idx, pl = build_country(folder)
             summary["numeric"] = numeric_for(summary["iso2"].split("-")[0])
             countries.append(summary)
+            index += idx
+            places += pl
             json.dump(country, open(out / "data" / f"{folder.name}.json", "w", encoding="utf-8"),
                       separators=(",", ":"), ensure_ascii=False)
+            dl = out / "download" / folder.name
+            dl.mkdir(parents=True)
+            for name in ("actors.csv", "evidence.csv", "profiles.csv", "geo_units.csv"):
+                if (folder / name).exists():
+                    shutil.copy(folder / name, dl / name)
             print(f"  {folder.name}: {summary['supporters']} supporters, {summary['evidence']} evidence rows")
     world = dict(paths=world_paths(), countries=countries, built=datetime.date.today().isoformat())
     json.dump(world, open(out / "data" / "world.json", "w", encoding="utf-8"), separators=(",", ":"), ensure_ascii=False)
-    (out / ".nojekyll").write_text("")
+    json.dump(dict(people=index, places=places), open(out / "data" / "index.json", "w", encoding="utf-8"),
+              separators=(",", ":"), ensure_ascii=False)
     print(f"Built {len(countries)} countr{'y' if len(countries) == 1 else 'ies'} into {out}")
 
 
