@@ -64,5 +64,11 @@ Official lists: the ONS Open Geography Portal (Local Authority Districts and Cou
 ## Helpers that worked in the UK run
 
 - **Parliament Members API** (`members-api.parliament.uk`): look up a current MP by name and constituency; the `/Contact` endpoint publishes the MP's official website and social accounts, which is a safe source for `profiles.csv`. Match on constituency, never on name alone.
-- **Boundaries:** ONS Local Authority Districts (BUC, simplified) in British National Grid coordinates gave `data/gb/boundaries.json`.
+- **Boundaries:** ONS Local Authority Districts (BUC, simplified) in British National Grid coordinates gave the council units of `data/gb/boundaries.json`, with their GSS codes also in `geo_units.csv` `code`. The region and nation outlines come from the ONS Regions (EN) and Countries (UK) BUC layers, fetched from the ONS feature service with `outSR=27700` so they share the councils' coordinates:
+
+```bash
+curl -o regions.geojson "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/Regions_December_2024_Boundaries_EN_BUC/FeatureServer/0/query?where=1%3D1&outFields=RGN24CD,RGN24NM&outSR=27700&f=geojson"
+python skill/scripts/topo_to_boundaries.py regions.geojson --name-prop RGN24NM --code-prop RGN24CD --scale 1 --flip-y --simplify 250 --out regions.json
+# the same for Countries_December_2024_Boundaries_UK_BUC (Scotland, Wales, Northern Ireland); put both into "regions"
+```
 - **Council meetings:** `skill/scripts/adapters/gb_ocn_scan.py` flags wealth-tax terms in Open Council Network summaries. Treat hits as leads only; the summaries are AI-generated.

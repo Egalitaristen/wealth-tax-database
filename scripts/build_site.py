@@ -355,9 +355,9 @@ def share_pages(out, base, countries, full):
     for c in countries:
         D, slug, name = full[c["slug"]], c["slug"], c["name"]
         mx = max([len(u[6]) for u in D["C"]] or [1]) or 1
-        pmx = max([u[9] for u in D["C"]] or [1]) or 1
-        units = [(u[7], (0.22 + 0.78 * math.log(len(u[6]) + 1) / math.log(mx + 1)) if u[6] else
-                  (0.1 + 0.22 * math.log(u[9] + 1) / math.log(pmx + 1)) if u[9] else 0) for u in D["C"]]
+        # The same shading as the site map: real supporters from 0.42 up, region-only areas a fixed faint 0.13.
+        units = [(u[7], (0.42 + 0.58 * math.log(len(u[6]) + 1) / math.log(mx + 1)) if u[6] else 0.13 if u[9] else 0)
+                 for u in D["C"]]
         found = f"public figures and organisations in {the(name)} on the record so far"
         years = sorted({e[1][:4] for e in D["E"] if e[1]})
         sections = {

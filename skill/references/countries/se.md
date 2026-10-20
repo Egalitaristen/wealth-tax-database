@@ -13,7 +13,14 @@ A third worked example. It shows a country whose national records are open data,
 
 The official list is SCB's region code table (`api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningNy`, variable `Region`): a two-digit code is a county, a four-digit code a municipality whose first two digits are its county.
 
-**Map:** `data/se/boundaries.json` is a municipality map built from the okfse/sweden-geojson file (290 shapes), simplified with a Douglas-Peucker pass and drawn from longitude/latitude with a mid-latitude correction. The shape licence still has to be confirmed.
+**Map:** `data/se/boundaries.json` uses Statistics Sweden's (SCB) digital boundaries for thematic maps (CC0, "Källa: SCB"): the 290 kommuner as units and the 21 län as region outlines, both in SWEREF 99 TM. The kommunkod and länskod are in `geo_units.csv` `code`. The files are on SCB's page "Digitala gränser" (the shapefile zip); their text is Latin-1:
+
+```bash
+python skill/scripts/topo_to_boundaries.py Kommun_Sweref99TM.shp --name-prop KnNamn --code-prop KnKod --encoding latin-1 \
+  --scale 0.002 --flip-y --simplify 0.8 --source "SCB, CC0" --out kommuner.json
+python skill/scripts/topo_to_boundaries.py Lan_Sweref99TM_region.shp --name-prop LnNamn --code-prop LnKod --encoding latin-1 \
+  --scale 0.002 --flip-y --simplify 1.2 --out lan.json   # then put lan.json's units into "regions"
+```
 
 ## Where the national record is
 

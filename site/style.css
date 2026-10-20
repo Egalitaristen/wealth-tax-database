@@ -92,6 +92,9 @@ main { outline: none; min-height: 70vh; }
 .icon-btn:hover { border-color: var(--ink); }
 .icon-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .icon-btn .half { fill: currentColor; stroke: none; }
+a.icon-btn { color: var(--ink-2); text-decoration: none; }
+a.icon-btn:hover { color: var(--ink); }
+.icon-btn .brand-ico { width: 17px; height: 17px; fill: currentColor; stroke: none; }
 
 /* ---------- buttons, chips, fields ---------- */
 .btn { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 500; font-size: 15px; cursor: pointer; white-space: nowrap; }
@@ -285,7 +288,7 @@ a.ov:hover .spark rect.pk { fill: var(--signal); }
 .mapbox path.u-up { fill: color-mix(in oklab, var(--signal) calc(var(--t) * 100%), var(--land)); }
 .mapbox .regions path { fill: none; stroke: var(--ink-3); stroke-width: 1.1px; pointer-events: none; }
 .mapbox .regions path:hover { stroke: var(--ink-3); stroke-width: 1.1px; }
-.legend .sw.up { background: color-mix(in oklab, var(--signal) 22%, var(--land)); }
+.legend .sw.up { background: color-mix(in oklab, var(--signal) 13%, var(--land)); }
 .map-source { font-size: 12.5px; color: var(--ink-3); margin-top: 18px; }
 .mapbox path.u-sup { fill: color-mix(in oklab, var(--signal) calc(var(--t) * 100%), var(--land)); }
 .mapbox path:hover { stroke: var(--ink); stroke-width: 1.2px; }
@@ -295,7 +298,7 @@ a.ov:hover .spark rect.pk { fill: var(--signal); }
 .zoomer button + button { border-top: 1px solid var(--rule-2); }
 .zoomer button:hover { background: var(--paper-2); }
 .legend { position: absolute; left: 12px; bottom: 12px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; background: color-mix(in srgb, var(--card) 92%, transparent); border: 1px solid var(--rule-2); padding: 8px 12px; font-size: 12px; color: var(--ink-2); max-width: calc(100% - 24px); }
-.legend .ramp { width: 72px; height: 9px; background: linear-gradient(to right, color-mix(in oklab, var(--signal) 15%, var(--land)), var(--signal)); }
+.legend .ramp { width: 72px; height: 9px; background: linear-gradient(to right, color-mix(in oklab, var(--signal) 42%, var(--land)), var(--signal)); }
 .legend .sw { width: 12px; height: 12px; display: inline-block; vertical-align: -2px; margin-right: 6px; }
 .legend .sw.none { background: var(--land); }
 .panel { padding: 22px; display: flex; flex-direction: column; min-height: 0; max-height: 640px; }
@@ -498,6 +501,7 @@ a.ov:hover .spark rect.pk { fill: var(--signal); }
   .search-btn span, .search-btn kbd { display: none; }
 }
 @media (max-width: 720px) {
+  .icon-btn.social.gh { display: none; }
   .worldmap { aspect-ratio: 1.15 / 1; }
   .crumb .muted { display: none; }
   .legend { position: static; max-width: none; border: 0; border-top: 1px solid var(--rule-2); }
