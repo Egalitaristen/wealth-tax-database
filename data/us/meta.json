@@ -4,5 +4,32 @@
   "lead": "Egalitaristen",
   "status": "in progress",
   "boundaries": "boundaries.json",
-  "notes": "Scope: federal and state level. Local (city, county) sweep not in scope for now."
+  "notes": "Scope: federal and state level. Local (city, county) sweep not in scope for now.",
+  "polls": [
+    {
+      "support": 80,
+      "support_text": "About 8 in 10",
+      "oppose": null,
+      "scope": "United States, adults (national survey)",
+      "question": "An annual federal tax of 2% on wealth over $50 million and 3% on wealth over $1 billion, shown with its estimated revenue",
+      "pollster": "Program for Public Consultation, University of Maryland",
+      "commissioned_by": "",
+      "fieldwork": "2026-02-11 to 2026-02-26",
+      "sample": "2,509 adults",
+      "published": "2026-10-01",
+      "url": "https://publicconsultation.org/common-ground/raise-federal-taxes-on-the-super-wealthy-and-high-incomes-say-bipartisan-majorities-in-the-battlegrounds/"
+    },
+    {
+      "support": 48,
+      "oppose": 41,
+      "scope": "California, likely voters",
+      "question": "Proposition 40: a one-time 5% tax on the assets of billionaires living in California (11% undecided)",
+      "pollster": "Berkeley IGS",
+      "commissioned_by": "Los Angeles Times",
+      "fieldwork": "2026-08-03 to 2026-08-09",
+      "sample": "2,310 likely voters",
+      "published": "2026-08-14",
+      "url": "https://www.cpapracticeadvisor.com/2026/08/14/californians-split-on-proposed-tax-on-billionaires-poll-shows/188531/"
+    }
+  ]
 }

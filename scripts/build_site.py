@@ -224,7 +224,8 @@ def build_country(folder):
     summary = dict(slug=slug, iso2=meta.get("iso2", slug.split("-")[0].upper()), name=meta["name"],
                    status=meta.get("status", ""), lead=meta.get("lead", ""), notes=meta.get("notes", ""),
                    supporters=len(P), evidence=len(E), verified=verified, A=grades["A"], B=grades["B"], C=grades["C"],
-                   units=len(geo) - len(roots), units_done=done, units_with_supporters=with_sup, updated=last, excluded=len(excl))
+                   units=len(geo) - len(roots), units_done=done, units_with_supporters=with_sup, updated=last, excluded=len(excl),
+                   polls=[p for p in meta.get("polls", []) if str(p.get("url", "")).startswith("https://")])
     country = dict(meta=summary, P=P, E=E, C=C, vb=vb, O=O, L=L)
 
     # Search index rows: [slug, id, name, type, role, place, grade, statements]

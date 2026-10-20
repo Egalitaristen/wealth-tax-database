@@ -1,1 +1,34 @@
-{"name":"United Kingdom","iso2":"GB","lead":"Egalitaristen","status":"in progress","boundaries":"boundaries.json","notes":"Built with Claude in 20 runs; many rows are not yet verified."}
+{
+  "name": "United Kingdom",
+  "iso2": "GB",
+  "lead": "Egalitaristen",
+  "status": "in progress",
+  "boundaries": "boundaries.json",
+  "notes": "Built with Claude in 20 runs; many rows are not yet verified.",
+  "polls": [
+    {
+      "support": 75,
+      "oppose": 12,
+      "scope": "Britain, adults",
+      "question": "A wealth tax of 1% on assets above £10m and 2% on assets above £1bn (the Green Party policy)",
+      "pollster": "YouGov",
+      "commissioned_by": "",
+      "fieldwork": "",
+      "sample": "",
+      "published": "2025-10-23",
+      "url": "https://yougov.com/en-gb/articles/53245-what-tax-reforms-would-britons-support"
+    },
+    {
+      "support": 74,
+      "oppose": null,
+      "scope": "Britain, adults",
+      "question": "A 2% annual tax on people with more than £10 million in personal wealth (77% backed a 1% rate)",
+      "pollster": "YouGov",
+      "commissioned_by": "Tax Justice UK",
+      "fieldwork": "",
+      "sample": "",
+      "published": "2023-03-13",
+      "url": "https://taxjustice.uk/blog/brits-back-an-annual-tax-on-the-super-rich-to-help-rebuild-the-nhs-and-public-services"
+    }
+  ]
+}

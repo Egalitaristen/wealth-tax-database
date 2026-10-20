@@ -24,6 +24,10 @@ const PLAT = {official_page: 'Official page', website: 'Website', x: 'X', bluesk
 const GRADE = {A: 'Explicit', B: 'Named', C: 'Implied'};
 const GRADE_LONG = {A: 'Explicit support: a formal act or a specific proposal', B: 'Named support for a wealth tax', C: 'Implied support, read from context'};
 const LEVEL = {national: 'National', regional: 'Regional', local: 'Local', supranational: 'International'};
+// Public opinion polls from meta.json: [{support, support_text, oppose, scope, question, pollster, commissioned_by, published, url, ...}]
+const pollFig = p => p.support_text || `${p.support}%`;
+const pollDate = d => { const [y, m] = String(d || '').split('-'); return m ? new Date(+y, +m - 1, 1).toLocaleString('en', {month: 'short', year: 'numeric'}) : (y || ''); };
+const pollSource = p => [p.pollster, p.commissioned_by ? `for ${p.commissioned_by}` : '', pollDate(p.published)].filter(Boolean).join(', ');
 const glyph = g => `<i class="g ${esc(g)}" title="${esc(GRADE_LONG[g] || '')}"></i>`;
 const label = (map, k) => map[k] || String(k || '').replace(/_/g, ' ').replace(/^./, c => c.toUpperCase());
 // People rows from build_site.py
@@ -279,6 +283,16 @@ async function home(W) {
     </div>
   </section>
 
+  ${cs.some(c => (c.polls || []).length) ? `<section class="sec opinion"><div class="wrap">
+    <div class="sec-head"><div><div class="kicker">Public opinion</div><h2>Most people <em>already agree</em></h2></div>
+      <p>The register counts who has said it in public. Polls show how many more agree. Each figure is for the design the poll asked about.</p></div>
+    <div class="polls home">${cs.filter(c => (c.polls || []).length).map(c => { const p = c.polls[0]; return `<div class="poll">
+      <div class="poll-fig"><b>${esc(pollFig(p))}</b><span>${esc(c.name)}</span></div>
+      <div class="poll-body"><p>back ${esc(p.question.replace(/^./, x => x.toLowerCase()))}${p.oppose != null ? `; ${p.oppose}% oppose` : ''}.</p>
+        <div class="poll-meta">${ext(p.url, esc(pollSource(p)) + ' ↗')} · <a href="/${c.slug}/method#polls">all polls</a></div></div>
+    </div>`; }).join('')}</div>
+  </div></section>` : ''}
+
   <section class="sec" id="countries"><div class="wrap">
     <div class="sec-head"><div><div class="kicker">The map so far</div><h2>Country <em>by</em> country</h2></div>
       <p>Each country is researched separately, from parliaments and councils down to unions and open letters. Pick one to see who is on record there.</p></div>
@@ -491,6 +505,7 @@ async function countryPage(slug, params, section = 'map') {
       <div class="c-title">
         <h1>${esc(m.name)}</h1>
         <p>${fmt(m.supporters)} public figures and organisations on the record found so far, in ${fmt(m.evidence)} sourced statements. A register of who has said it in public, not a poll.</p>
+        ${(m.polls || []).length ? (p => `<div class="c-poll"><b>${esc(pollFig(p))}</b><span><span class="kicker">In polls</span> back ${esc(p.question.replace(/^./, c => c.toLowerCase()))}${p.oppose != null ? `; ${p.oppose}% oppose` : ''}. ${ext(p.url, esc(pollSource(p)) + ' ↗')}${m.polls.length > 1 ? ` · <a href="/${slug}/method#polls">${m.polls.length - 1} more poll${m.polls.length > 2 ? 's' : ''}</a>` : ''}</span></div>`)(m.polls[0]) : ''}
       </div>
       <div class="c-stats">
         <div><b>${fmt(m.supporters)}</b><span>on record so far</span></div>
@@ -574,6 +589,16 @@ function timeSection(box, D, slug, S) {
 function methodSection(box, D, slug) {
   const m = D.meta, sup = D.places.filter(p => p.mapped && p.ids.length).length;
   box.innerHTML = `<section class="c-sec">
+    ${(m.polls || []).length ? `<div id="polls" style="margin-bottom:48px">
+      <div class="sec-head"><div><div class="kicker">Public opinion</div><h2>What polls say</h2></div>
+        <p>The register lists who has said it in public. Polls show how many people agree. Support depends on the design asked about, so each poll is shown with its question.</p></div>
+      <div class="polls">${m.polls.map(p => `<div class="poll">
+        <div class="poll-fig"><b>${esc(pollFig(p))}</b><span>support</span>${p.oppose != null ? `<b class="opp">${p.oppose}%</b><span>oppose</span>` : ''}</div>
+        <div class="poll-body"><p>${esc(p.question)}.</p>
+          ${p.question_original ? `<p class="poll-orig">“${esc(p.question_original)}”</p>` : ''}
+          <div class="poll-meta">${esc([p.scope, p.sample, p.fieldwork ? 'fieldwork ' + p.fieldwork : ''].filter(Boolean).join(' · '))}</div>
+          <div class="poll-meta">${ext(p.url, esc(pollSource(p)) + ' ↗')}</div></div>
+      </div>`).join('')}</div></div>` : ''}
     <div class="sec-head"><div><div class="kicker">Method and gaps</div><h2>How this was built</h2></div></div>
     <div class="method">
     <div class="prose">
