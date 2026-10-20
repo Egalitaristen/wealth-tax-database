@@ -13,7 +13,7 @@
   --signal-soft: #f6dccf;
   --on-signal: #fff;
   --land: #cfc7b5;
-  --hatch: #b9b09c;
+
   --shadow: 0 1px 0 rgba(23, 21, 15, .04), 0 12px 40px -12px rgba(23, 21, 15, .18);
   --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
   --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -26,14 +26,14 @@
   :root:not([data-theme="light"]) {
     --paper: #12110e; --paper-2: #1c1b17; --card: #191814; --ink: #f1ece1; --ink-2: #bab3a4; --ink-3: #857e71;
     --rule: #2d2a24; --rule-2: #3d3a32; --signal: #ff6a3d; --signal-2: #ff8a63; --signal-soft: #3a1d13; --on-signal: #12110e;
-    --land: #2f2c26; --hatch: #5a5448; --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 16px 40px -12px rgba(0, 0, 0, .6);
+    --land: #2f2c26; --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 16px 40px -12px rgba(0, 0, 0, .6);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #12110e; --paper-2: #1c1b17; --card: #191814; --ink: #f1ece1; --ink-2: #bab3a4; --ink-3: #857e71;
   --rule: #2d2a24; --rule-2: #3d3a32; --signal: #ff6a3d; --signal-2: #ff8a63; --signal-soft: #3a1d13; --on-signal: #12110e;
-  --land: #2f2c26; --hatch: #5a5448; --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 16px 40px -12px rgba(0, 0, 0, .6);
+  --land: #2f2c26; --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 16px 40px -12px rgba(0, 0, 0, .6);
   color-scheme: dark;
 }
 
@@ -225,12 +225,9 @@ a.hb:hover .hb-bar i { background: var(--signal); }
 .mapbox svg:active { cursor: grabbing; }
 .mapbox path { stroke: var(--card); stroke-width: .6px; vector-effect: non-scaling-stroke; stroke-linejoin: round; transition: fill .15s; }
 .mapbox path.u-none { fill: var(--land); }
-.mapbox path.u-open { fill: url(#hatch); }
 .mapbox path.u-sup { fill: color-mix(in oklab, var(--signal) calc(var(--t) * 100%), var(--land)); }
 .mapbox path:hover { stroke: var(--ink); stroke-width: 1.2px; }
 .mapbox path.sel { stroke: var(--ink); stroke-width: 2.2px; }
-.mapbox .hatch-bg { fill: var(--land); }
-.mapbox .hatch-line { stroke: var(--hatch); stroke-width: 1.2; }
 .zoomer { position: absolute; right: 12px; top: 12px; display: flex; flex-direction: column; border: 1px solid var(--rule-2); background: var(--card); }
 .zoomer button { width: 34px; height: 34px; border: 0; background: none; cursor: pointer; font-size: 17px; }
 .zoomer button + button { border-top: 1px solid var(--rule-2); }
@@ -239,7 +236,6 @@ a.hb:hover .hb-bar i { background: var(--signal); }
 .legend .ramp { width: 72px; height: 9px; background: linear-gradient(to right, color-mix(in oklab, var(--signal) 15%, var(--land)), var(--signal)); }
 .legend .sw { width: 12px; height: 12px; display: inline-block; vertical-align: -2px; margin-right: 6px; }
 .legend .sw.none { background: var(--land); }
-.legend .sw.open { background: repeating-linear-gradient(45deg, var(--hatch) 0 1.5px, var(--land) 1.5px 4px); }
 .panel { padding: 22px; display: flex; flex-direction: column; min-height: 0; max-height: 640px; }
 .panel h3 { font: 400 30px/1.05 var(--serif); letter-spacing: -.01em; }
 .panel .path { font-size: 12.5px; color: var(--ink-3); margin-top: 6px; }
@@ -339,8 +335,6 @@ a.hb:hover .hb-bar i { background: var(--signal); }
 .ev-src .pub { color: var(--ink-3); font-size: 13px; display: block; }
 .ev-foot { display: flex; gap: 14px; align-items: center; font-size: 12.5px; color: var(--ink-3); }
 .ev-foot a { color: var(--ink-3); }
-.verified { color: var(--ink-2); }
-.verified::before { content: "\2713\00a0"; color: var(--signal); }
 .nearby { margin-top: 48px; }
 .nearby h3 { font: 400 28px/1.1 var(--serif); margin-bottom: 4px; }
 .mini { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; border-top: 1.5px solid var(--ink); margin-top: 12px; }

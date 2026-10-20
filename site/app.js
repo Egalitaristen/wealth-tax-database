@@ -288,10 +288,9 @@ async function home(W) {
         <span class="st"><b>${fmt(c.supporters)}</b><span>supporters</span></span>
         <span class="st hide-s"><b>${fmt(c.evidence)}</b><span>statements</span></span>
         <span class="st hide-s"><b>${c.units ? fmt(c.units_with_supporters) + '<span style="color:var(--ink-3);font-weight:400"> / ' + fmt(c.units) + '</span>' : '·'}</b><span>areas with a supporter</span></span>
-        <span class="st hide-s"><span class="tag">${esc(c.status || 'draft')}</span></span>
         <span class="arrow">→</span>
       </a>`).join('')}
-      <a class="crow add" href="/contribute"><span class="iso">+</span><span class="nm">Your country next?</span><span class="st hide-s"></span><span class="st hide-s"></span><span class="st hide-s"></span><span class="st"><span class="muted" style="font-size:14px">Start a register</span></span><span class="arrow">→</span></a>
+      <a class="crow add" href="/contribute"><span class="iso">+</span><span class="nm">Your country next?</span><span class="st hide-s"></span><span class="st hide-s"></span><span class="st"><span class="muted" style="font-size:14px">Start a register</span></span><span class="arrow">→</span></a>
     </div>
   </div></section>
 
@@ -329,7 +328,7 @@ async function home(W) {
   <section class="wrap" style="padding:8px var(--gut) 40px"><div class="cta">
     <div><div class="kicker" style="color:inherit;opacity:.6">Contribute</div><h2 style="margin-top:12px">Your country isn't <em>on the map</em> yet?</h2>
       <p>Registers are built country by country with an open research workflow. Start one for your country, or help check the entries that are already here.</p></div>
-    <div class="acts"><a class="btn" href="/contribute">Start a country</a><a class="btn ghost" href="/about">How it's checked</a></div>
+    <div class="acts"><a class="btn" href="/contribute">Start a country</a><a class="btn ghost" href="/about">How it's built</a></div>
   </div></section>`;
 
   const hq = $('#hq'), hres = $('#hres');
@@ -465,12 +464,11 @@ async function countryPage(slug, params) {
         <h1>${esc(m.name)}</h1>
         <p class="lede">${fmt(m.supporters)} people and organisations in ${esc(m.name)} have backed a wealth tax in public, across ${fmt(m.evidence)} sourced statements.</p>
       </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="tag signal">${esc(m.status || 'draft')}</span>${m.lead ? `<span class="tag">Lead: ${esc(m.lead)}</span>` : ''}</div>
     </div>
     <div class="statline">
       <div><b>${fmt(m.supporters)}</b><span>supporters</span></div>
       <div><b>${fmt(m.A)}</b><span>with explicit support</span></div>
-      <div><b>${fmt(m.verified)}</b><span>of ${fmt(m.evidence)} statements checked by a person</span></div>
+      <div><b>${fmt(m.evidence)}</b><span>sourced statements</span></div>
       <div><b>${fmt(m.units_with_supporters)}</b><span>of ${fmt(m.units)} areas with a supporter</span></div>
     </div>
   </div>
@@ -480,11 +478,11 @@ async function countryPage(slug, params) {
   <div class="wrap">
     ${D.C.length ? `<section class="c-sec" id="map">
       <div class="sec-head" style="margin-bottom:0"><div><div class="kicker">Explore by place</div><h2>Where they are</h2></div>
-        <p>Darker areas have more supporters. Hatched areas have not been fully searched yet, so an empty area may just mean unread.</p></div>
+        <p>Darker areas have more supporters. The search is never finished, so an empty area means nobody recorded yet, not nobody there.</p></div>
       <div class="atlas">
         <div class="mapbox" id="mapbox">
           <div class="zoomer"><button type="button" data-z="in" aria-label="Zoom in">+</button><button type="button" data-z="out" aria-label="Zoom out">−</button><button type="button" data-z="fit" aria-label="Show the whole country">⤢</button></div>
-          <div class="legend"><span><span class="ramp" style="display:inline-block;vertical-align:-1px;margin-right:6px"></span>Supporters</span><span><i class="sw none"></i>Searched, none found</span><span><i class="sw open"></i>Not fully searched</span></div>
+          <div class="legend"><span><span class="ramp" style="display:inline-block;vertical-align:-1px;margin-right:6px"></span>Supporters</span><span><i class="sw none"></i>None recorded yet</span></div>
         </div>
         <div class="panel" id="panel"></div>
       </div>
@@ -503,7 +501,7 @@ async function countryPage(slug, params) {
       <div class="charts" id="charts"></div>
     </section>
     <section class="c-sec" id="method">
-      <div class="sec-head" style="margin-bottom:0"><div><div class="kicker">Method and gaps</div><h2>What has been checked</h2></div></div>
+      <div class="sec-head" style="margin-bottom:0"><div><div class="kicker">Method and gaps</div><h2>How this was built</h2></div></div>
       <div class="method" id="methodbody"></div>
     </section>
   </div>`;
@@ -567,7 +565,7 @@ async function countryPage(slug, params) {
     const active = ['q', 'type', 'party', 'level', 'grade', 'place'].some(k => ST[k]);
     $('#count').innerHTML = `<span>Showing <b>${fmt(shown.length)}</b> of <b>${fmt(list.length)}</b>${list.length !== D.P.length ? ` (${fmt(D.P.length)} in total)` : ''}</span>
       <span style="display:flex;gap:16px">${active ? '<a href="#" id="clear-all">Clear filters</a>' : ''}<span class="grade-key">${glyph('A')} explicit ${glyph('B')} named ${glyph('C')} implied</span></span>`;
-    $('#dir').innerHTML = shown.map(row).join('') || `<li class="empty">Nobody matches these filters yet. That may mean the area has not been searched, not that nobody there supports a wealth tax.</li>`;
+    $('#dir').innerHTML = shown.map(row).join('') || `<li class="empty">Nobody matches these filters yet. The register is never complete, so that does not mean nobody there supports a wealth tax.</li>`;
     $('#more').innerHTML = list.length > shown.length ? `<button class="btn ghost" type="button" id="more-btn">Show ${Math.min(50, list.length - shown.length)} more</button>` : '';
     const mb = $('#more-btn'); if (mb) mb.onclick = () => { ST.limit += 50; drawList(); };
     const ca = $('#clear-all'); if (ca) ca.onclick = e => { e.preventDefault(); Object.assign(ST, {q: '', type: '', party: '', level: '', grade: '', place: ''}); $('#f-q').value = ''; changed(); if (mapApi) mapApi.select(null); };
@@ -597,22 +595,19 @@ async function countryPage(slug, params) {
   $$('#typebars a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); filterBy('type', a.dataset.f); }));
 
   // ----- method -----
-  const pct = m.units ? Math.round(m.units_done / m.units * 100) : 0;
   $('#methodbody').innerHTML = `
     <div class="prose">
       ${m.notes ? `<p>${esc(m.notes)}</p>` : ''}
       <p>Researchers search parliaments, councils, parties, unions, campaigns, open letters and the press, and record only statements that back an actual wealth tax. Each statement is quoted word for word, linked to its source and graded by how explicit it is.</p>
-      <p>Coverage is uneven. ${fmt(m.units_with_supporters)} of ${fmt(m.units)} areas have at least one recorded supporter, and ${m.units_done ? fmt(m.units_done) + ' (' + pct + '%)' : 'none so far'} ${m.units_done === 1 ? 'has' : 'have'} been searched in full. Elsewhere an empty area means <em>not read yet</em>, not <em>no supporters</em>. ${m.excluded ? `${fmt(m.excluded)} candidates were looked at and left out, for example because they backed other taxes on the rich but not a wealth tax.` : ''}</p>
+      <p>The register grows with every research run and will never be complete. ${fmt(m.units_with_supporters)} of ${fmt(m.units)} areas have at least one recorded supporter so far; an empty area means <em>nobody recorded yet</em>, not <em>no supporters</em>. ${m.excluded ? `${fmt(m.excluded)} candidates were looked at and left out, for example because they backed other taxes on the rich but not a wealth tax.` : ''}</p>
       <p>See something wrong, or want an entry removed? Every entry has a report link, and reports are handled in public.</p>
       <p><a class="btn sm" href="${esc(issueUrl(`[${m.iso2}] Report: country data`, {country: slug}))}" target="_blank" rel="noopener">Report a problem with ${esc(m.name)} ↗</a></p>
     </div>
     <div>
       <dl class="kv" style="margin:0">
-        <div><span>Status</span><b>${esc(m.status || 'draft')}</b></div>
         <div><span>Last research run</span><b>${esc(m.updated || '·')}</b></div>
         <div><span>Explicit, named, implied</span><b>${fmt(m.A)} · ${fmt(m.B)} · ${fmt(m.C)}</b></div>
-        <div><span>Statements checked by a person</span><b>${fmt(m.verified)} of ${fmt(m.evidence)}</b></div>
-        <div><span>Areas fully searched</span><b>${fmt(m.units_done)} of ${fmt(m.units)}</b></div>
+        <div><span>Sourced statements</span><b>${fmt(m.evidence)}</b></div>
         <div><span>Areas shown on the map with a supporter</span><b>${fmt(sup)}</b></div>
         <div><span>Candidates left out</span><b>${fmt(m.excluded)}</b></div>
       </dl>
@@ -656,26 +651,16 @@ function countryMap(D, slug, onShowAll) {
   const box = $('#mapbox'), panel = $('#panel');
   const [vx, vy, vw, vh] = D.vb;
   const mx = Math.max(1, ...D.C.map(c => c[6].length));
-  const hs = vw / 170;
   const svgNS = 'http://www.w3.org/2000/svg';
   const svg = document.createElementNS(svgNS, 'svg');
   svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `Map of ${D.meta.name} by area`);
-  svg.innerHTML = `<defs><pattern id="hatch" width="${hs}" height="${hs}" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-    <rect class="hatch-bg" width="${hs}" height="${hs}"/><line class="hatch-line" x1="0" y1="0" x2="0" y2="${hs}" style="stroke-width:${hs * .28}"/></pattern></defs>
-    <g>${D.C.map((c, i) => { const n = c[6].length, t = n ? (.22 + .78 * Math.log(n + 1) / Math.log(mx + 1)).toFixed(3) : 0;
-      return `<path data-i="${i}" class="${n ? 'u-sup' : c[2] === 'clear' ? 'u-none' : 'u-open'}"${n ? ` style="--t:${t}"` : ''} d="${c[7]}"/>`; }).join('')}</g>`;
+  svg.innerHTML = `<g>${D.C.map((c, i) => { const n = c[6].length, t = n ? (.22 + .78 * Math.log(n + 1) / Math.log(mx + 1)).toFixed(3) : 0;
+      return `<path data-i="${i}" class="${n ? 'u-sup' : 'u-none'}"${n ? ` style="--t:${t}"` : ''} d="${c[7]}"/>`; }).join('')}</g>`;
   const frame = document.createElement('div'); frame.className = 'mapframe'; frame.appendChild(svg);
   box.prepend(frame);
   box.style.setProperty('--ar', Math.max(.75, Math.min(1.6, vw / vh)).toFixed(3));
   let x = vx, y = vy, w = vw, h = vh, anim = 0;
-  const pat = svg.querySelector('pattern'), patRect = pat.querySelector('rect'), patLine = pat.querySelector('line');
-  // The view box changes with every zoom step; the hatching is resized so it keeps the same width on screen.
-  const set = () => {
-    svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`);
-    const s = (w / 170).toFixed(4);
-    pat.setAttribute('width', s); pat.setAttribute('height', s); patRect.setAttribute('width', s); patRect.setAttribute('height', s);
-    patLine.setAttribute('y2', s); patLine.style.strokeWidth = (w / 170 * .28).toFixed(4);
-  };
+  const set = () => svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`);
   const aspect = () => { const r = svg.getBoundingClientRect(); return r.width > 2 && r.height > 2 ? r.width / r.height : vw / vh; };
   // The view box that shows a bounding box with padding at the map's current aspect ratio.
   function target(bx, by, bw, bh, pad = .08) {
@@ -706,7 +691,7 @@ function countryMap(D, slug, onShowAll) {
       if (moved) { cancelAnimationFrame(anim); x -= dx * w / r.width; y -= dy * h / r.height; drag = {x: e.clientX, y: e.clientY}; set(); hideTip(); return; }
     }
     const p = e.target.closest('path[data-i]');
-    if (p) { const c = D.C[+p.dataset.i], n = c[6].length; showTip(`<b>${esc(c[0])}</b><span>${n ? fmt(n) + ' supporter' + (n === 1 ? '' : 's') : c[2] === 'clear' ? 'none found' : 'not fully searched'}</span>`, e.clientX, e.clientY); }
+    if (p) { const c = D.C[+p.dataset.i], n = c[6].length; showTip(`<b>${esc(c[0])}</b><span>${n ? fmt(n) + ' supporter' + (n === 1 ? '' : 's') : 'none recorded yet'}</span>`, e.clientX, e.clientY); }
     else hideTip();
   });
   svg.addEventListener('pointerup', e => {
@@ -717,6 +702,14 @@ function countryMap(D, slug, onShowAll) {
   });
   svg.addEventListener('pointerleave', () => { hideTip(); });
   svg.addEventListener('pointercancel', () => { drag = null; moved = false; });
+  svg.addEventListener('wheel', e => {
+    e.preventDefault();
+    cancelAnimationFrame(anim);
+    const r = svg.getBoundingClientRect(), fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+    const f = Math.exp(Math.max(-1, Math.min(1, e.deltaY * (e.deltaMode ? 33 : 1) / 300)));
+    const nw = Math.min(vw * 2, Math.max(vw / 80, w * f)), nh = h * nw / w;
+    x += (w - nw) * fx; y += (h - nh) * fy; w = nw; h = nh; set(); hideTip();
+  }, {passive: false});
   svg.addEventListener('dblclick', e => {
     e.preventDefault();
     const r = svg.getBoundingClientRect(), px = x + (e.clientX - r.left) / r.width * w, py = y + (e.clientY - r.top) / r.height * h;
@@ -754,7 +747,7 @@ function countryMap(D, slug, onShowAll) {
     const draw = q => {
       const t = norm(q);
       const rows = (t ? D.placeList.filter(p => norm(p.name).includes(t)).sort((a, b) => b.n - a.n) : withSup).slice(0, 200);
-      list.innerHTML = rows.map(p => `<button type="button" class="prow" data-p="${esc(p.path)}"><span>${esc(p.name)}<span class="sub">${esc(p.path.split(' > ').slice(1, -1).join(' › ') || D.meta.name)}</span></span><span class="n">${p.n || (p.state === 'clear' ? 'none' : '·')}</span></button>`).join('')
+      list.innerHTML = rows.map(p => `<button type="button" class="prow" data-p="${esc(p.path)}"><span>${esc(p.name)}<span class="sub">${esc(p.path.split(' > ').slice(1, -1).join(' › ') || D.meta.name)}</span></span><span class="n">${p.n || '·'}</span></button>`).join('')
         || '<p class="empty" style="padding:16px 0">No place by that name.</p>';
     };
     draw('');
@@ -766,7 +759,7 @@ function countryMap(D, slug, onShowAll) {
     const ids = [...idsForPlace(D, path)];
     const people = ids.map(i => D.byId[i]).filter(Boolean).sort(byStrength);
     const name = pl ? pl.name : path.split(' > ').pop();
-    const state = people.length ? `${fmt(people.length)} supporter${people.length === 1 ? '' : 's'}` : pl && pl.state === 'clear' ? 'Searched; nobody found yet' : 'Not fully searched yet';
+    const state = people.length ? `${fmt(people.length)} supporter${people.length === 1 ? '' : 's'}` : 'Nobody recorded yet';
     panel.innerHTML = `<div><button class="chip" type="button" id="pl-back">← All places</button></div>
       <h3 style="margin-top:16px">${esc(name)}</h3>
       <div class="path">${esc(path)}</div>
@@ -839,14 +832,13 @@ async function personPage(slug, id) {
 }
 function evCard(e, m, slug) {
   const url = safeUrl(e[E_.url]);
-  const ver = e[E_.verified] === 'y' ? '<span class="verified">Checked by a person</span>' : e[E_.verified] === 'failed' ? '<span>Check failed</span>' : '<span>Not yet checked by a person</span>';
   return `<article class="ev">
     <div class="ev-meta"><span class="d">${esc(e[E_.date] || 'Undated')}</span><span>${esc(label(EVT, e[E_.type]))}</span><span>${glyph(e[E_.grade])}&nbsp; ${esc(GRADE[e[E_.grade]] || '')}</span>${e[E_.des] ? `<span>${esc(label(DES, e[E_.des]))}</span>` : ''}</div>
     ${e[E_.quote] ? `<blockquote>${/^[a-z]/.test(e[E_.quote]) ? '…' : ''}${esc(e[E_.quote])}</blockquote>` : ''}
     ${e[E_.detail] ? `<p class="muted" style="font-size:14px;margin-top:-4px">${esc(e[E_.detail])}</p>` : ''}
     <div class="ev-src">
       <div>${url ? ext(url, esc(e[E_.title] || e[E_.pub] || url) + ' ↗', 's') : esc(e[E_.title])}<span class="pub">${esc(e[E_.pub])}</span></div>
-      <div class="ev-foot">${ver}<a href="${esc(issueUrl(`[${m.iso2}] Report: ${e[E_.id]}`, {country: slug, entry: e[E_.id]}))}" target="_blank" rel="noopener">Report</a></div>
+      <div class="ev-foot"><a href="${esc(issueUrl(`[${m.iso2}] Report: ${e[E_.id]}`, {country: slug, entry: e[E_.id]}))}" target="_blank" rel="noopener">Report</a></div>
     </div>
   </article>`;
 }
@@ -867,11 +859,11 @@ function aboutPage(W) {
       <div class="grades">${['A', 'B', 'C'].map(g => `<div>${glyph(g)}<span><b>${GRADE[g]}.</b> ${esc(GRADE_LONG[g].split(': ').pop())}.</span></div>`).join('')}</div>
       <p>A supporter's grade is their strongest piece of evidence. A formal act such as a vote, a motion, a bill or a signed letter counts as explicit.</p>
       <h2>Sources and checking</h2>
-      <p>Every statement is quoted word for word from its source and linked to it. Quotes are checked against the page automatically, and a statement is marked <em>checked by a person</em> only when someone other than its author has read the source.</p>
-      <h2>Made with AI, checked in public</h2>
-      <p>The research is done with an AI research workflow that searches parliaments, councils, parties, unions, campaigns and the press, and follows written rules for what counts. AI makes mistakes. That is why every claim carries its source, why unchecked rows say so, and why anyone can report an error.</p>
+      <p>Every statement is quoted word for word from its source and linked to it. Quotes are checked against the page automatically, and anyone can follow the link to read the source.</p>
+      <h2>Made with AI, corrected in public</h2>
+      <p>The research is done with an AI research workflow that searches parliaments, councils, parties, unions, campaigns and the press, and follows written rules for what counts. AI makes mistakes. That is why every claim carries its source and why anyone can report an error, which is then fixed in the open.</p>
       <h2>Coverage</h2>
-      <p>Countries are researched layer by layer, national first. Regional and local areas are sampled first and searched fully only where they turn up supporters. On the maps, hatched areas have not been fully searched: an empty area there means <em>not read yet</em>, not <em>no supporters</em>.</p>
+      <p>Countries are researched layer by layer, national first. Regional and local areas are sampled first and searched further where they turn up supporters. The register is never finished: an empty area on a map means <em>nobody recorded yet</em>, not <em>no supporters</em>.</p>
       <h2>Removal and corrections</h2>
       <p>Anyone listed can ask to be removed or corrected. Use the report link on the entry, or open a report on GitHub. People who have died are removed.</p>
       <h2>Reuse</h2>
@@ -898,7 +890,7 @@ function contributePage(W) {
         <li><b>Open a pull request</b> with the new <code>data/&lt;country&gt;/</code> folder. Checks run automatically, and the site rebuilds once it is merged.</li>
       </ol>
       <h2>Help check what is here</h2>
-      <p>Many statements have not been checked by a person yet. Open an entry, follow the source, and report anything that does not match. Confirmations help too.</p>
+      <p>Open an entry, follow the source, and report anything that does not match.</p>
       <h2>Suggest a supporter</h2>
       <p>Know someone who has backed a wealth tax in public? Report it with a link to where they said it.</p>
     </div>
