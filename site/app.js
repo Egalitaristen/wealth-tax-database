@@ -288,7 +288,7 @@ async function home(W) {
       <p>The register counts who has said it in public. Polls show how many more agree. Each figure is for the design the poll asked about.</p></div>
     <div class="polls home">${cs.filter(c => (c.polls || []).length).map(c => { const p = c.polls[0]; return `<div class="poll">
       <div class="poll-fig"><b>${esc(pollFig(p))}</b><span>${esc(c.name)}</span></div>
-      <div class="poll-body"><p>back ${esc(p.question.replace(/^./, x => x.toLowerCase()))}${p.oppose != null ? `; ${p.oppose}% oppose` : ''}.</p>
+      <div class="poll-body"><p>back ${esc(p.question.replace(/^./, x => x.toLowerCase()))}.</p>
         <div class="poll-meta">${ext(p.url, esc(pollSource(p)) + ' ↗')} · <a href="/${c.slug}/method#polls">all polls</a></div></div>
     </div>`; }).join('')}</div>
   </div></section>` : ''}
@@ -505,7 +505,7 @@ async function countryPage(slug, params, section = 'map') {
       <div class="c-title">
         <h1>${esc(m.name)}</h1>
         <p>${fmt(m.supporters)} public figures and organisations on the record found so far, in ${fmt(m.evidence)} sourced statements. A register of who has said it in public, not a poll.</p>
-        ${(m.polls || []).length ? (p => `<div class="c-poll"><b>${esc(pollFig(p))}</b><span><span class="kicker">In polls</span> back ${esc(p.question.replace(/^./, c => c.toLowerCase()))}${p.oppose != null ? `; ${p.oppose}% oppose` : ''}. ${ext(p.url, esc(pollSource(p)) + ' ↗')}${m.polls.length > 1 ? ` · <a href="/${slug}/method#polls">${m.polls.length - 1} more poll${m.polls.length > 2 ? 's' : ''}</a>` : ''}</span></div>`)(m.polls[0]) : ''}
+        ${(m.polls || []).length ? (p => `<div class="c-poll"><b>${esc(pollFig(p))}</b><span><span class="kicker">In polls</span> back ${esc(p.question.replace(/^./, c => c.toLowerCase()))}. ${ext(p.url, esc(pollSource(p)) + ' ↗')}${m.polls.length > 1 ? ` · <a href="/${slug}/method#polls">${m.polls.length - 1} more poll${m.polls.length > 2 ? 's' : ''}</a>` : ''}</span></div>`)(m.polls[0]) : ''}
       </div>
       <div class="c-stats">
         <div><b>${fmt(m.supporters)}</b><span>on record so far</span></div>
@@ -593,7 +593,7 @@ function methodSection(box, D, slug) {
       <div class="sec-head"><div><div class="kicker">Public opinion</div><h2>What polls say</h2></div>
         <p>The register lists who has said it in public. Polls show how many people agree. Support depends on the design asked about, so each poll is shown with its question.</p></div>
       <div class="polls">${m.polls.map(p => `<div class="poll">
-        <div class="poll-fig"><b>${esc(pollFig(p))}</b><span>support</span>${p.oppose != null ? `<b class="opp">${p.oppose}%</b><span>oppose</span>` : ''}</div>
+        <div class="poll-fig"><b>${esc(pollFig(p))}</b><span>support</span></div>
         <div class="poll-body"><p>${esc(p.question)}.</p>
           ${p.question_original ? `<p class="poll-orig">“${esc(p.question_original)}”</p>` : ''}
           <div class="poll-meta">${esc([p.scope, p.sample, p.fieldwork ? 'fieldwork ' + p.fieldwork : ''].filter(Boolean).join(' · '))}</div>
