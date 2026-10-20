@@ -508,10 +508,10 @@ async function countryPage(slug, params, section = 'map') {
         ${(m.polls || []).length ? (p => `<div class="c-poll"><b>${esc(pollFig(p))}</b><span><span class="kicker">In polls</span> back ${esc(p.question.replace(/^./, c => c.toLowerCase()))}. ${ext(p.url, esc(pollSource(p)) + ' ↗')}${m.polls.length > 1 ? ` · <a href="/${slug}/method#polls">${m.polls.length - 1} more poll${m.polls.length > 2 ? 's' : ''}</a>` : ''}</span></div>`)(m.polls[0]) : ''}
       </div>
       <div class="c-stats">
-        <div><b>${fmt(m.supporters)}</b><span>on record so far</span></div>
-        <div><b>${fmt(m.A)}</b><span>explicit support</span></div>
-        <div><b>${fmt(m.evidence)}</b><span>statements</span></div>
-        <div><b>${fmt(m.units_with_supporters)}</b><span>areas with a supporter</span></div>
+        <div><b>${fmt(m.supporters)}</b><span>public figures and organisations found so far</span></div>
+        <div><b>${fmt(m.A)}</b><span>of them backed a specific tax or voted for one</span></div>
+        <div><b>${fmt(m.evidence)}</b><span>sourced statements, votes and letters</span></div>
+        <div><b>${fmt(m.units_with_supporters)}</b><span>local areas with a public supporter found</span></div>
       </div>
     </div>
     ${section === 'map' ? overviewHtml(D, S, base) : ''}
