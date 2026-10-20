@@ -141,25 +141,24 @@ select.field { appearance: none; padding-right: 30px; background-image: linear-g
 .sec-head p { max-width: 44ch; color: var(--ink-2); margin: 0; }
 
 /* ---------- dot world ---------- */
-.dotmap { position: relative; width: 100%; aspect-ratio: 2.05 / 1; overflow: hidden; touch-action: pan-y; user-select: none; }
-.dotmap canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; transition: opacity .3s; }
-.dotmap canvas.pointer { cursor: pointer; }
-.dotmap canvas.dragging, .dotmap svg.dragging, .mapbox svg.dragging { cursor: grabbing; }
-.dotmap canvas.off { opacity: 0; pointer-events: none; }
-.dotmap .area { opacity: 0; transition: opacity .3s; }
-.dotmap .area.on { opacity: 1; }
-.dotmap .area svg { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; }
-.dotmap .area path { stroke: var(--paper); stroke-width: .6px; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
-.dotmap .area path.u-none { fill: var(--land); }
-.dotmap .area path.u-sup { fill: color-mix(in oklab, var(--signal) calc(var(--t) * 100%), var(--land)); cursor: pointer; }
-.dotmap .area path:hover { stroke: var(--ink); stroke-width: 1.4px; }
+.worldmap { position: relative; width: 100%; aspect-ratio: 2.05 / 1; overflow: hidden; touch-action: pan-y; user-select: none; }
+.worldmap svg { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; }
+.worldmap svg.dragging, .mapbox svg.dragging { cursor: grabbing; }
+.world-svg { transition: opacity .3s; }
+.world-svg.off { opacity: 0; pointer-events: none; }
+.worldmap .area { opacity: 0; transition: opacity .3s; }
+.worldmap .area.on { opacity: 1; }
+.worldmap path { stroke: var(--paper); stroke-width: .6px; vector-effect: non-scaling-stroke; stroke-linejoin: round; transition: fill .15s; }
+.worldmap path.u-none { fill: var(--land); }
+.worldmap path.u-sup { fill: color-mix(in oklab, var(--signal) calc(var(--t) * 100%), var(--land)); cursor: pointer; }
+.worldmap path:hover { stroke: var(--ink); stroke-width: 1.4px; }
 .crumb { position: absolute; left: 0; top: 0; z-index: 2; background: color-mix(in srgb, var(--paper) 80%, transparent); padding-right: 10px !important; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; font-size: 13.5px; color: var(--ink-3); pointer-events: none; padding: 4px 0; }
 .crumb > * { pointer-events: auto; }
 .crumb b { color: var(--ink); font-weight: 600; }
 .crumb button { border: 0; background: none; padding: 0; color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font-size: inherit; }
 .crumb button:hover, .crumb a:hover { color: var(--signal); }
 .crumb a { color: var(--signal); text-decoration: none; font-weight: 500; }
-.dotmap .zoomer { top: 0; right: 0; }
+.worldmap .zoomer { top: 0; right: 0; }
 .countries { margin-top: 28px; border-top: 1.5px solid var(--ink); }
 .crow { display: grid; grid-template-columns: 56px minmax(0, 1.4fr) repeat(3, minmax(0, .7fr)) 120px 28px; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--rule); text-decoration: none; }
 .crow:hover { color: var(--ink); background: linear-gradient(to right, var(--paper-2), transparent); }
@@ -415,7 +414,7 @@ a.hb:hover .hb-bar i { background: var(--signal); }
   .search-btn span, .search-btn kbd { display: none; }
 }
 @media (max-width: 720px) {
-  .dotmap { aspect-ratio: 1.15 / 1; }
+  .worldmap { aspect-ratio: 1.15 / 1; }
   .crumb .muted { display: none; }
   .legend { position: static; max-width: none; border: 0; border-top: 1px solid var(--rule-2); }
   .mapbox { display: flex; flex-direction: column; }
