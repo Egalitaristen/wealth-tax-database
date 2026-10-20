@@ -7,16 +7,21 @@ A fifth worked example, from a seed pass made with English-language web search o
 | Level (`level`) | Units | Notes |
 |---|---|---|
 | national | Lok Sabha, Rajya Sabha, Government of India | The Union taxes capital value; the Wealth-Tax Act, 1957 was abolished from the 2015 Budget |
-| region | 36 states and union territories | Kerala, West Bengal and Tamil Nadu are the first to search |
-| local | 726 districts | The map tier; administrative units, not councils. Municipal and panchayat bodies are not loaded |
+| region | 36 states and union territories | ISO 3166-2:IN codes in `code` (2023 list: `IN-CG`, `IN-OD`, `IN-TS`, `IN-UK`), because LGD state codes 1–38 clash with LGD district codes. Kerala, West Bengal and Tamil Nadu are the first to search |
+| local | 734 districts | The map tier, with the Local Government Directory (LGD) district code in `code`; administrative units, not councils. Municipal and panchayat bodies are not loaded |
 
-**Map:** `data/in/boundaries.json` is built from the compilation `udit-001/india-maps-data` (`topojson/india.json`, via the jsDelivr CDN: `cdn.jsdelivr.net/gh/udit-001/india-maps-data@main/topojson/india.json`). It has the two objects `districts` and `states`. The compiler gives no licence and mixes boundary vintages, and its `dt_code` field repeats, so the district codes in the register are assigned here (state code plus a running number). Replace them with Local Government Directory codes and an official boundary source when one is found. GitHub's own API is blocked from the sandbox but the CDN works; `datameet/maps` raw paths changed and returned 404.
+**Map:** `data/in/boundaries.json` uses the Survey of India's district and state boundaries (Online Maps Portal, `onlinemaps.surveyofindia.gov.in`) as republished by the DataMeet community member ramSeraph: `github.com/ramSeraph/indian_admin_boundaries`, releases `districts` (`SOI_Districts.parquet`) and `states` (`SOI_States.parquet`). Licence: CC0 1.0, with a request to credit DataMeet and the government source; India's Geospatial Guidelines (2021) make SoI boundary data free to download, display and print. Districts and states come from the same SoI dataset, so the outlines fall on district borders. Each district has its LGD code (`DISTRICT_L`) and state LGD code (`State_LGD`).
+
+- The SoI vintage is about 2020: 731 districts with an LGD code. Left out of the map: nine disputed slivers (`State_LGD` 0) and Muzaffarabad and Mirpur, which have no LGD code; the Jammu and Kashmir outline still covers them.
+- The register also keeps three later districts with their LGD codes and no shape (Hnahthial 726, Khawzawl 728, Vav-Tharad 789; their area is drawn in the parent district), and three SoI districts whose LGD codes are no longer in the LGD list (Mahe 599, Yanam 601, Shahdara 671), each explained in `notes`. The LGD has more districts than the SoI map (784 in October 2026, for example Andhra Pradesh's 2022 split); add them when a newer open map has them.
+- Current LGD district lists, as dated CSV snapshots: `github.com/ramSeraph/opendata` releases `lgd-latest-extra1` (`districts.<date>.csv.7z`; read with `py7zr`).
+
+The parquet files store WKB geometry; convert them to GeoJSON with `pyarrow` and a small WKB reader, set `name` to the register name and `code` to `DISTRICT_L` (or the ISO code for states), drop rows without a code, then:
 
 ```bash
-python skill/scripts/topo_to_boundaries.py india_coded.json --object districts --name-prop district --code-prop code \
-  --project lonlat --scale 60 --simplify 0.5 --out units.json
-python skill/scripts/topo_to_boundaries.py india_coded.json --object states --name-prop st_nm --code-prop code \
-  --project lonlat --scale 60 --simplify 0.8 --out regions.json   # then copy its units into "regions"
+python skill/scripts/topo_to_boundaries.py units.geojson --code-prop code --project lonlat --scale 60 --simplify 1.5 --out units.json
+python skill/scripts/topo_to_boundaries.py regions.geojson --code-prop code --project lonlat --scale 60 --simplify 1.5 \
+  --out regions.json   # then copy its units into "regions"
 ```
 
 ## What worked and what to watch

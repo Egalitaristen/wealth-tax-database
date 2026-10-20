@@ -285,7 +285,7 @@ A tree of the places you will report on, in `geo_units.csv`, with a country root
 | United Kingdom | nations and English regions, counties | 361 local authority districts (GSS codes) |
 | Sweden | 21 län | 290 kommuner (kommunkod) |
 | Germany | 16 Länder | 400 Kreise and kreisfreie Städte (AGS) |
-| India | 36 states and union territories | 726 districts (Census 2011 shapes; codes assigned in this project) |
+| India | 36 states and union territories (ISO 3166-2:IN) | 734 districts (LGD codes; Survey of India shapes) |
 | United States | 50 states and DC | 3,143 counties and equivalents (FIPS) |
 
 For a new country, pick the tier that elects a council and runs local services (municipalities, districts or counties), not wards or parishes. Fetch the **official current list** with codes (a statistics office, mapping agency or interior ministry), not memory, and build `boundaries.json` from the same agency's shapes where possible, so codes match.
