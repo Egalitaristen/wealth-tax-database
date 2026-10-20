@@ -279,7 +279,12 @@ async function home(W) {
   <section class="sec" id="countries"><div class="wrap">
     <div class="sec-head"><div><div class="kicker">The map so far</div><h2>Country <em>by</em> country</h2></div>
       <p>Each country is researched separately, from parliaments and councils down to unions and open letters. Pick one to see who is on record there.</p></div>
-    <div class="dotmap"><canvas id="dots" role="img" aria-label="World map. Countries with a register are highlighted."></canvas></div>
+    <div class="dotmap" id="world">
+      <canvas role="img" aria-label="World map. Countries with a register are highlighted; zoom in to see their areas."></canvas>
+      <div class="mapframe area" hidden></div>
+      <div class="crumb"></div>
+      <div class="zoomer"><button type="button" data-z="in" aria-label="Zoom in">+</button><button type="button" data-z="out" aria-label="Zoom out">−</button><button type="button" data-z="fit" aria-label="Show the whole world">⤢</button></div>
+    </div>
     <div class="countries">
       ${cs.slice().sort((a, b) => b.supporters - a.supporters).map(c => `
       <a class="crow" href="/${c.slug}">
@@ -337,8 +342,63 @@ async function home(W) {
   $$('[data-try]').forEach(b => b.addEventListener('click', () => { hq.value = b.dataset.try; hq.dispatchEvent(new Event('input')); hq.focus(); }));
   const outside = e => { if (!e.target.closest('.big-search')) hres.hidden = true; };
   document.addEventListener('click', outside);
-  const stopDots = dotMap($('#dots'), W);
+  const stopDots = worldMap($('#world'), W);
   leaving = () => { document.removeEventListener('click', outside); stopDots(); };
+}
+
+// Pan and zoom for any map element. The view is a rectangle [x, y, w, h] in map units and onView draws it.
+// Drag pans, the wheel zooms toward the pointer, a double click zooms in; a click without a drag calls onTap.
+function panZoom(el, base, {onView, onTap = () => {}, onHover = () => {}, onWheel = () => {}, maxOut = 2, maxIn = 80} = {}) {
+  const [bx, by, bw, bh] = base;
+  let x = bx, y = by, w = bw, h = bh, anim = 0, drag = null, moved = false;
+  const set = () => onView(x, y, w, h);
+  const aspect = () => { const r = el.getBoundingClientRect(); return r.width > 2 && r.height > 2 ? r.width / r.height : bw / bh; };
+  // The view that shows a box with padding at the element's current aspect ratio.
+  function target(tx, ty, tw, th, pad = .08) {
+    const a = aspect();
+    let nw = tw * (1 + pad * 2), nh = th * (1 + pad * 2);
+    if (nw / nh > a) nh = nw / a; else nw = nh * a;
+    return [tx + (tw - nw) / 2, ty + (th - nh) / 2, nw, nh];
+  }
+  function animate(to, done) {
+    cancelAnimationFrame(anim);
+    const from = [x, y, w, h], t0 = performance.now(), dur = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 480;
+    const step = now => {
+      const k = dur ? Math.min(1, (now - t0) / dur) : 1, e = 1 - Math.pow(1 - k, 3);
+      [x, y, w, h] = from.map((v, i) => v + (to[i] - v) * e); set();
+      if (k < 1) anim = requestAnimationFrame(step); else if (done) done();
+    };
+    anim = requestAnimationFrame(step);
+  }
+  const fitView = () => target(bx, by, bw, bh, .02);
+  const fit = (smooth = true) => { const v = fitView(); if (smooth) animate(v); else { [x, y, w, h] = v; set(); } };
+  function zoomAt(f, fx = .5, fy = .5, smooth = true) {
+    const nw = Math.min(fitView()[2] * maxOut, Math.max(bw / maxIn, w * f)), nh = h * nw / w;
+    const v = [x + (w - nw) * fx, y + (h - nh) * fy, nw, nh];
+    if (smooth) animate(v); else { cancelAnimationFrame(anim); [x, y, w, h] = v; set(); }
+  }
+  const frac = e => { const r = el.getBoundingClientRect(); return [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height]; };
+  el.addEventListener('pointerdown', e => { if (e.button) return; drag = {x: e.clientX, y: e.clientY}; moved = false; });
+  el.addEventListener('pointermove', e => {
+    if (drag) {
+      const r = el.getBoundingClientRect(), dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (!moved && Math.abs(dx) + Math.abs(dy) > 4) { moved = true; el.setPointerCapture(e.pointerId); el.classList.add('dragging'); }
+      if (moved) { cancelAnimationFrame(anim); x -= dx * w / r.width; y -= dy * h / r.height; drag = {x: e.clientX, y: e.clientY}; set(); hideTip(); return; }
+    }
+    onHover(e);
+  });
+  el.addEventListener('pointerup', e => { const was = moved; drag = null; moved = false; el.classList.remove('dragging'); if (!was) onTap(e); });
+  el.addEventListener('pointercancel', () => { drag = null; moved = false; el.classList.remove('dragging'); });
+  el.addEventListener('wheel', e => {
+    e.preventDefault(); hideTip();
+    const f = Math.exp(Math.max(-1, Math.min(1, e.deltaY * (e.deltaMode ? 33 : 1) / 300)));
+    const [fx, fy] = frac(e);
+    zoomAt(f, fx, fy, false);
+    onWheel(f, e);
+  }, {passive: false});
+  el.addEventListener('dblclick', e => { e.preventDefault(); const [fx, fy] = frac(e); zoomAt(.5, fx, fy); });
+  return {fit, fitView, zoomAt, animate, target, aspect, view: () => [x, y, w, h], set: v => { cancelAnimationFrame(anim); [x, y, w, h] = v; set(); },
+    toWorld: e => { const [fx, fy] = frac(e); return [x + fx * w, y + fy * h]; }};
 }
 
 // A world map drawn as a grid of dots. Countries are rasterised once to an offscreen canvas in
@@ -348,12 +408,21 @@ function dotGrid(W, cols) {
   if (DOTGRIDS[cols]) return DOTGRIDS[cols];
   const ids = Object.keys(W.paths);
   let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
-  const boxes = {};
+  const boxes = {}, mains = {};
   ids.forEach(id => {
     const nums = W.paths[id].path.match(/-?\d+(\.\d+)?/g) || [];
     let a = Infinity, b = Infinity, c = -Infinity, d = -Infinity;
     for (let i = 0; i + 1 < nums.length; i += 2) { const x = +nums[i], y = +nums[i + 1]; if (x < a) a = x; if (x > c) c = x; if (y < b) b = y; if (y > d) d = y; }
     boxes[id] = [a, b, c, d];
+    // The box of the largest ring, used to zoom to a country.
+    let best = 0;
+    W.paths[id].path.split('Z').forEach(ring => {
+      const n = ring.match(/-?\d+(\.\d+)?/g) || [];
+      if (n.length < 6) return;
+      let p = Infinity, q = Infinity, r = -Infinity, s = -Infinity;
+      for (let i = 0; i + 1 < n.length; i += 2) { const x = +n[i], y = +n[i + 1]; if (x < p) p = x; if (x > r) r = x; if (y < q) q = y; if (y > s) s = y; }
+      if ((r - p) * (s - q) > best) { best = (r - p) * (s - q); mains[id] = [p, q, r - p, s - q]; }
+    });
     x0 = Math.min(x0, a); y0 = Math.min(y0, b); x1 = Math.max(x1, c); y1 = Math.max(y1, d);
   });
   y1 = Math.min(y1, y0 + (y1 - y0) * .93); // trim the empty far south
@@ -376,77 +445,176 @@ function dotGrid(W, cols) {
     if (n < 1 || n > ids.length || ((n * 37) & 255) !== img[o + 2]) continue; // skip blended edge pixels
     cells.set(r * cols + c, {r, c, x, y, id: ids[n - 1]});
   }
-  DOTGRIDS[cols] = {cells, cols, rows, dx, dy, x0, y0, w: x1 - x0, h: y1 - y0, boxes};
+  DOTGRIDS[cols] = {cells, cols, rows, dx, dy, x0, y0, w: x1 - x0, h: y1 - y0, boxes, mains};
   return DOTGRIDS[cols];
 }
-function dotMap(canvas, W) {
+// The home page map. At world level it is dots; zooming in fades them into country shapes, and zooming
+// into a country with a register (or clicking it) hands over to that country's own area map in the same
+// frame. Zooming back out returns to the world. Country maps use their own projections, hence the crossfade.
+function worldMap(box, W) {
+  const canvas = $('canvas', box), layer = $('.area', box), crumb = $('.crumb', box);
   const byNum = {}; W.countries.forEach(c => { if (c.numeric) byNum[c.numeric] = c; });
-  let G = null;
-  // Dots stay about five pixels apart whatever the screen width.
+  const ids = Object.keys(W.paths), shapes = {};
+  ids.forEach(id => { shapes[id] = new Path2D(W.paths[id].path); });
+  const hit = document.createElement('canvas').getContext('2d');
+  const mx = Math.max(1, ...W.countries.map(c => c.supporters));
+  let G = null, hover = null, area = null, busy = false;
+  // Dots stay about five pixels apart at world level whatever the screen width.
   const grid = () => {
     const cols = Math.max(80, Math.min(190, Math.round(canvas.clientWidth / 5.5 / 10) * 10));
     if (G && G.cols === cols) return;
     G = dotGrid(W, cols);
     // A country with a register always shows at least one dot, however small it is.
     Object.keys(byNum).forEach(id => {
-    if ([...G.cells.values()].some(c => c.id === id) || !G.boxes[id]) return;
-    const [a, b, c2, d] = G.boxes[id], r = Math.round(((b + d) / 2 - G.y0) / G.dy - .5), col = Math.round(((a + c2) / 2 - G.x0) / G.dx - .5 - (r % 2 ? .5 : 0));
-    G.cells.set(r * G.cols + col, {r, c: col, x: G.x0 + (col + (r % 2 ? .5 : 0) + .5) * G.dx, y: G.y0 + (r + .5) * G.dy, id});
+      if ([...G.cells.values()].some(c => c.id === id) || !G.boxes[id]) return;
+      const [a, b, c2, d] = G.boxes[id], r = Math.round(((b + d) / 2 - G.y0) / G.dy - .5), col = Math.round(((a + c2) / 2 - G.x0) / G.dx - .5 - (r % 2 ? .5 : 0));
+      G.cells.set(r * G.cols + col, {r, c: col, x: G.x0 + (col + (r % 2 ? .5 : 0) + .5) * G.dx, y: G.y0 + (r + .5) * G.dy, id});
     });
   };
-  const mx = Math.max(1, ...W.countries.map(c => c.supporters));
-  let hover = null, scale = 1;
+  grid();
+  const base = [G.x0, G.y0, G.w, G.h];
+  let V = base;
+  const zoomLevel = () => pz.fitView()[2] / V[2];
   function draw() {
-    const w = canvas.clientWidth, h = canvas.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
-    if (w < 2) return;
-    grid();
-    canvas.width = w * dpr; canvas.height = h * dpr;
-    const ctx = canvas.getContext('2d');
-    scale = Math.min(w / G.w, h / G.h);
-    const ox = (w - G.w * scale) / 2, oy = (h - G.h * scale) / 2;
-    canvas._t = {ox, oy};
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, w, h);
-    const land = css('--land'), sig = css('--signal'), ink = css('--ink');
-    const r0 = G.dx * scale * .36;
-    for (const cell of G.cells.values()) {
-      const c = byNum[cell.id], x = ox + (cell.x - G.x0) * scale, y = oy + (cell.y - G.y0) * scale;
-      let r = r0;
-      if (cell.id === hover) { ctx.fillStyle = c ? ink : css('--ink-3'); r = r0 * 1.15; ctx.globalAlpha = 1; }
-      else if (c) { ctx.fillStyle = sig; ctx.globalAlpha = .55 + .45 * Math.log(c.supporters + 1) / Math.log(mx + 1); r = r0 * 1.12; }
-      else { ctx.fillStyle = land; ctx.globalAlpha = 1; }
-      ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill();
+    const cw = canvas.clientWidth, ch = canvas.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+    if (cw < 2) return;
+    if (canvas.width !== Math.round(cw * dpr) || canvas.height !== Math.round(ch * dpr)) { canvas.width = Math.round(cw * dpr); canvas.height = Math.round(ch * dpr); }
+    const ctx = canvas.getContext('2d'), [x, y, w] = V, k = cw / w;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, cw, ch);
+    const land = css('--land'), sig = css('--signal'), ink = css('--ink'), ink3 = css('--ink-3'), paper = css('--paper');
+    const z = zoomLevel(), shapeA = Math.max(0, Math.min(1, (z - 1.8) / 1.6)), dotA = 1 - shapeA;
+    if (shapeA > 0) {
+      ctx.setTransform(dpr * k, 0, 0, dpr * k, -x * k * dpr, -V[1] * k * dpr);
+      ctx.lineWidth = .8 / k; ctx.lineJoin = 'round'; ctx.strokeStyle = paper;
+      for (const id of ids) {
+        const c = byNum[id];
+        ctx.globalAlpha = shapeA; ctx.fillStyle = land; ctx.fill(shapes[id]);
+        if (c || id === hover) { ctx.globalAlpha = shapeA * (id === hover ? 1 : .55 + .45 * Math.log(c.supporters + 1) / Math.log(mx + 1)); ctx.fillStyle = id === hover ? (c ? ink : ink3) : sig; ctx.fill(shapes[id]); }
+        ctx.globalAlpha = shapeA; ctx.stroke(shapes[id]);
+      }
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    if (dotA > 0) {
+      const r0 = G.dx * k * .36;
+      for (const cell of G.cells.values()) {
+        const px = (cell.x - x) * k, py = (cell.y - V[1]) * k;
+        if (px < -r0 || py < -r0 || px > cw + r0 || py > ch + r0) continue;
+        const c = byNum[cell.id];
+        let r = r0;
+        if (cell.id === hover) { ctx.fillStyle = c ? ink : ink3; r = r0 * 1.15; ctx.globalAlpha = dotA; }
+        else if (c) { ctx.fillStyle = sig; ctx.globalAlpha = dotA * (.55 + .45 * Math.log(c.supporters + 1) / Math.log(mx + 1)); r = r0 * 1.12; }
+        else { ctx.fillStyle = land; ctx.globalAlpha = dotA; }
+        ctx.beginPath(); ctx.arc(px, py, r, 0, 6.2832); ctx.fill();
+      }
     }
     ctx.globalAlpha = 1;
   }
-  function cellAt(e) {
-    if (!G) return null;
-    const b = canvas.getBoundingClientRect(), t = canvas._t || {ox: 0, oy: 0};
-    const gx = (e.clientX - b.left - t.ox) / scale + G.x0, gy = (e.clientY - b.top - t.oy) / scale + G.y0;
-    const r = Math.round((gy - G.y0) / G.dy - .5);
+  // Which country is under the pointer: the nearest dot at world level, the shape itself when zoomed in.
+  function countryAt(e) {
+    const [wx, wy] = pz.toWorld(e);
+    if (zoomLevel() > 2.6) {
+      for (const id of ids) { const b = G.boxes[id]; if (wx >= b[0] && wx <= b[2] && wy >= b[1] && wy <= b[3] && hit.isPointInPath(shapes[id], wx, wy)) return id; }
+      return null;
+    }
+    const r = Math.round((wy - G.y0) / G.dy - .5);
     for (const rr of [r, r - 1, r + 1]) {
-      const c = Math.round((gx - G.x0) / G.dx - .5 - (rr % 2 ? .5 : 0));
-      for (const cc of [c, c - 1, c + 1]) { const cell = G.cells.get(rr * G.cols + cc); if (cell && Math.hypot(cell.x - gx, cell.y - gy) < G.dx * .9) return cell; }
+      const c = Math.round((wx - G.x0) / G.dx - .5 - (rr % 2 ? .5 : 0));
+      for (const cc of [c, c - 1, c + 1]) { const cell = G.cells.get(rr * G.cols + cc); if (cell && Math.hypot(cell.x - wx, cell.y - wy) < G.dx * .9) return cell.id; }
     }
     return null;
   }
-  const move = e => {
-    const cell = cellAt(e), id = cell ? cell.id : null;
-    if (id !== hover) { hover = id; draw(); }
-    canvas.classList.toggle('pointer', !!id);
-    if (id) {
+  const pz = panZoom(canvas, base, {
+    maxOut: 1, maxIn: 60,
+    onView: (...v) => { V = v; draw(); },
+    onHover: e => {
+      const id = countryAt(e);
+      if (id !== hover) { hover = id; draw(); }
+      canvas.classList.toggle('pointer', !!id);
+      if (!id) return hideTip();
       const c = byNum[id];
-      showTip(c ? `<b>${esc(c.name)}</b><span>${fmt(c.supporters)} supporters →</span>` : `<b>${esc(W.paths[id].name)}</b><span>no register yet</span>`, e.clientX, e.clientY);
-    } else hideTip();
-  };
-  const leave = () => { hover = null; hideTip(); draw(); };
-  const click = e => { const cell = cellAt(e); if (!cell) return; const c = byNum[cell.id]; hideTip(); go(c ? `/${c.slug}` : '/contribute'); };
-  canvas.addEventListener('pointermove', move);
-  canvas.addEventListener('pointerleave', leave);
-  canvas.addEventListener('click', click);
-  const ro = new ResizeObserver(draw); ro.observe(canvas);
+      showTip(c ? `<b>${esc(c.name)}</b><span>${fmt(c.supporters)} supporters · click to explore</span>` : `<b>${esc(W.paths[id].name)}</b><span>no register yet</span>`, e.clientX, e.clientY);
+    },
+    onTap: e => {
+      const id = countryAt(e); if (!id) return;
+      hideTip();
+      if (byNum[id]) drill(byNum[id], id);
+      else { const m = G.mains[id]; pz.animate(pz.target(m[0], m[1], m[2], m[3], .6)); }
+    },
+    onWheel: (f, e) => {
+      // Zooming in over a country with a register, once it fills much of the frame, opens its area map.
+      if (f >= 1 || busy) return;
+      const id = countryAt(e), c = id && byNum[id];
+      if (!c) return;
+      const m = G.mains[id];
+      if (m[2] > V[2] * .45 || m[3] > V[3] * .45) drill(c, id);
+    }});
+  canvas.addEventListener('pointerleave', () => { hover = null; hideTip(); draw(); });
+
+  function setCrumb(c) {
+    crumb.innerHTML = c ? `<button type="button" data-world>World</button><span>›</span><b>${esc(c.name)}</b><a href="/${c.slug}">Open country page →</a>`
+      : `<b>World</b><span class="muted">Scroll to zoom · click a highlighted country</span>`;
+    const b = $('[data-world]', crumb); if (b) b.onclick = () => leave(true);
+  }
+  async function drill(c, id) {
+    if (busy) return;
+    busy = true;
+    const m = G.mains[id];
+    const D = loadCountry(c.slug);
+    pz.animate(pz.target(m[0], m[1], m[2], m[3], .08));
+    let data;
+    try { data = await D; } catch (err) { busy = false; return; }
+    if (!data.C.length) { busy = false; go(`/${c.slug}`); return; }
+    layer.hidden = false; // shown before it is sized, so the area map gets the frame's real shape
+    area = areaLayer(data, c);
+    canvas.classList.add('off');
+    requestAnimationFrame(() => layer.classList.add('on'));
+    setCrumb(c); hover = null; hideTip();
+    setTimeout(() => { busy = false; }, 350);
+  }
+  function leave(toWorld) {
+    if (!area) return;
+    layer.classList.remove('on'); canvas.classList.remove('off');
+    setTimeout(() => { if (!layer.classList.contains('on')) { layer.hidden = true; layer.innerHTML = ''; } }, 300);
+    area = null; setCrumb(null);
+    if (toWorld) pz.fit(); else pz.zoomAt(1.6);
+  }
+  // A country's area map inside the home map; zooming out past its full extent goes back to the world.
+  function areaLayer(D, c) {
+    const [vx, vy, vw, vh] = D.vb;
+    const amx = Math.max(1, ...D.C.map(u => u[6].length));
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `Map of ${D.meta.name} by area`);
+    svg.innerHTML = `<g>${D.C.map((u, i) => { const n = u[6].length, tt = n ? (.22 + .78 * Math.log(n + 1) / Math.log(amx + 1)).toFixed(3) : 0;
+      return `<path data-i="${i}" class="${n ? 'u-sup' : 'u-none'}"${n ? ` style="--t:${tt}"` : ''} d="${u[7]}"/>`; }).join('')}</g>`;
+    layer.innerHTML = ''; layer.appendChild(svg);
+    const apz = panZoom(svg, D.vb, {
+      maxOut: 1.6, maxIn: 80,
+      onView: (x, y, w, h) => svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`),
+      onHover: e => {
+        const p = e.target.closest('path[data-i]');
+        if (!p) return hideTip();
+        const u = D.C[+p.dataset.i], n = u[6].length;
+        showTip(`<b>${esc(u[0])}</b><span>${n ? fmt(n) + ' supporter' + (n === 1 ? '' : 's') + ' · click to see them' : 'none recorded yet'}</span>`, e.clientX, e.clientY);
+      },
+      onTap: e => { const p = e.target.closest('path[data-i]'); if (p) { hideTip(); go(`/${c.slug}?place=${enc(D.C[+p.dataset.i][8])}#map`); } },
+      onWheel: f => { if (f > 1 && apz.view()[2] >= apz.fitView()[2] * 1.25) leave(false); }});
+    svg.addEventListener('pointerleave', hideTip);
+    apz.fit(false);
+    return apz;
+  }
+  $('.zoomer', box).addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    const cur = area || pz;
+    if (b.dataset.z === 'in') cur.zoomAt(.6);
+    else if (b.dataset.z === 'out') { if (area && area.view()[2] >= area.fitView()[2] * 1.2) leave(false); else cur.zoomAt(1 / .6); }
+    else { if (area) leave(true); else pz.fit(); }
+  });
+  setCrumb(null);
+  pz.fit(false);
+  let lastW = canvas.clientWidth;
+  const ro = new ResizeObserver(() => { if (Math.abs(canvas.clientWidth - lastW) > 1) { lastW = canvas.clientWidth; if (zoomLevel() < 1.05) pz.fit(false); else draw(); } });
+  ro.observe(canvas);
   window.addEventListener('themechange', draw);
-  draw();
   return () => { ro.disconnect(); window.removeEventListener('themechange', draw); hideTip(); };
 }
 
@@ -659,64 +827,17 @@ function countryMap(D, slug, onShowAll) {
   const frame = document.createElement('div'); frame.className = 'mapframe'; frame.appendChild(svg);
   box.prepend(frame);
   box.style.setProperty('--ar', Math.max(.75, Math.min(1.6, vw / vh)).toFixed(3));
-  let x = vx, y = vy, w = vw, h = vh, anim = 0;
-  const set = () => svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`);
-  const aspect = () => { const r = svg.getBoundingClientRect(); return r.width > 2 && r.height > 2 ? r.width / r.height : vw / vh; };
-  // The view box that shows a bounding box with padding at the map's current aspect ratio.
-  function target(bx, by, bw, bh, pad = .08) {
-    const a = aspect();
-    let nw = bw * (1 + pad * 2), nh = bh * (1 + pad * 2);
-    if (nw / nh > a) nh = nw / a; else nw = nh * a;
-    return [bx + (bw - nw) / 2, by + (bh - nh) / 2, nw, nh];
-  }
-  function animate(to) {
-    cancelAnimationFrame(anim);
-    const from = [x, y, w, h], t0 = performance.now(), dur = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 420;
-    const step = now => {
-      const k = dur ? Math.min(1, (now - t0) / dur) : 1, e = 1 - Math.pow(1 - k, 3);
-      [x, y, w, h] = from.map((v, i) => v + (to[i] - v) * e); set();
-      if (k < 1) anim = requestAnimationFrame(step);
-    };
-    anim = requestAnimationFrame(step);
-  }
-  const fit = (smooth = true) => { const t = target(vx, vy, vw, vh, .03); if (smooth) animate(t); else { [x, y, w, h] = t; set(); } };
-  const zoom = f => { const nw = Math.min(vw * 2, Math.max(vw / 80, w * f)), nh = h * nw / w; animate([x + (w - nw) / 2, y + (h - nh) / 2, nw, nh]); };
-  // dragging
-  let drag = null, moved = false;
-  svg.addEventListener('pointerdown', e => { if (e.button) return; drag = {x: e.clientX, y: e.clientY}; moved = false; });
-  svg.addEventListener('pointermove', e => {
-    if (drag) {
-      const r = svg.getBoundingClientRect(), dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-      if (!moved && Math.abs(dx) + Math.abs(dy) > 4) { moved = true; svg.setPointerCapture(e.pointerId); }
-      if (moved) { cancelAnimationFrame(anim); x -= dx * w / r.width; y -= dy * h / r.height; drag = {x: e.clientX, y: e.clientY}; set(); hideTip(); return; }
-    }
-    const p = e.target.closest('path[data-i]');
-    if (p) { const c = D.C[+p.dataset.i], n = c[6].length; showTip(`<b>${esc(c[0])}</b><span>${n ? fmt(n) + ' supporter' + (n === 1 ? '' : 's') : 'none recorded yet'}</span>`, e.clientX, e.clientY); }
-    else hideTip();
-  });
-  svg.addEventListener('pointerup', e => {
-    const wasMoved = moved; drag = null; moved = false;
-    if (wasMoved) return;
-    const p = e.target.closest('path[data-i]');
-    if (p) select(D.C[+p.dataset.i][8]);
-  });
-  svg.addEventListener('pointerleave', () => { hideTip(); });
-  svg.addEventListener('pointercancel', () => { drag = null; moved = false; });
-  svg.addEventListener('wheel', e => {
-    e.preventDefault();
-    cancelAnimationFrame(anim);
-    const r = svg.getBoundingClientRect(), fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
-    const f = Math.exp(Math.max(-1, Math.min(1, e.deltaY * (e.deltaMode ? 33 : 1) / 300)));
-    const nw = Math.min(vw * 2, Math.max(vw / 80, w * f)), nh = h * nw / w;
-    x += (w - nw) * fx; y += (h - nh) * fy; w = nw; h = nh; set(); hideTip();
-  }, {passive: false});
-  svg.addEventListener('dblclick', e => {
-    e.preventDefault();
-    const r = svg.getBoundingClientRect(), px = x + (e.clientX - r.left) / r.width * w, py = y + (e.clientY - r.top) / r.height * h;
-    const nw = Math.max(vw / 80, w * .5), nh = h * nw / w;
-    animate([px - nw / 2, py - nh / 2, nw, nh]);
-  });
-  box.querySelector('.zoomer').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.z === 'in') zoom(.6); else if (b.dataset.z === 'out') zoom(1 / .6); else { select(null); fit(); } });
+  const pz = panZoom(svg, D.vb, {
+    onView: (x, y, w, h) => svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`),
+    onHover: e => {
+      const p = e.target.closest('path[data-i]');
+      if (p) { const c = D.C[+p.dataset.i], n = c[6].length; showTip(`<b>${esc(c[0])}</b><span>${n ? fmt(n) + ' supporter' + (n === 1 ? '' : 's') : 'none recorded yet'}</span>`, e.clientX, e.clientY); }
+      else hideTip();
+    },
+    onTap: e => { const p = e.target.closest('path[data-i]'); if (p) select(D.C[+p.dataset.i][8]); }});
+  svg.addEventListener('pointerleave', hideTip);
+  const fit = smooth => pz.fit(smooth);
+  box.querySelector('.zoomer').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.z === 'in') pz.zoomAt(.6); else if (b.dataset.z === 'out') pz.zoomAt(1 / .6); else { select(null); fit(); } });
   let selPath = null;
   const ro = new ResizeObserver(() => { if (!selPath) fit(false); });
   ro.observe(svg);
@@ -731,9 +852,9 @@ function countryMap(D, slug, onShowAll) {
     if (els.length) {
       let a = Infinity, b = Infinity, c = -Infinity, d = -Infinity;
       els.forEach(p => { const bb = p.getBBox(); a = Math.min(a, bb.x); b = Math.min(b, bb.y); c = Math.max(c, bb.x + bb.width); d = Math.max(d, bb.y + bb.height); });
-      const minW = vw / 6, cw = Math.max(c - a, minW), chh = Math.max(d - b, minW / aspect());
-      const t = target((a + c) / 2 - cw / 2, (b + d) / 2 - chh / 2, cw, chh, .35);
-      if (smooth) animate(t); else { [x, y, w, h] = t; set(); }
+      const minW = vw / 6, cw = Math.max(c - a, minW), chh = Math.max(d - b, minW / pz.aspect());
+      const v = pz.target((a + c) / 2 - cw / 2, (b + d) / 2 - chh / 2, cw, chh, .35);
+      if (smooth) pz.animate(v); else pz.set(v);
     }
     detail(path);
   }
