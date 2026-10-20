@@ -12,6 +12,8 @@ const year = d => (d || '').slice(0, 4);
 const issueUrl = (title, fields = {}) =>
   `https://github.com/${REPO}/issues/new?template=data-report.yml&title=${enc(title)}` +
   Object.entries(fields).map(([k, v]) => `&${k}=${enc(v)}`).join('');
+const suggestUrl = (fields = {}) =>
+  `https://github.com/${REPO}/issues/new?template=suggest-supporter.yml` + Object.entries(fields).map(([k, v]) => `&${k}=${enc(v)}`).join('');
 const ext = (href, text, cls = '') => `<a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener noreferrer nofollow">${text}</a>`;
 
 const TYPE = {politician: 'Politician', party: 'Party', government_body: 'Council or public body', academic: 'Academic', economist: 'Economist', think_tank: 'Think tank', ngo_campaign: 'Campaign group', union: 'Union', union_official: 'Union official', journalist: 'Commentator', media_outlet: 'Media outlet', legal_tax_professional: 'Legal or tax expert', wealthy_individual: 'Wealthy individual', business_leader: 'Business leader', faith: 'Faith leader or body', cultural_figure: 'Cultural figure', campaigner: 'Campaigner', international_body: 'International body', funder: 'Funder'};
@@ -626,14 +628,22 @@ function directorySection(box, D, slug, params) {
           <span id="f-place"></span>
         </div>
         <div class="count-line" id="count"></div>
+        <div class="dir-head" role="row">
+          <span></span>
+          <button type="button" data-sort="az">Name</button>
+          <span>Recorded location</span>
+          <button type="button" data-sort="recent">Latest statement</button>
+        </div>
         <ul class="dir" id="dir"></ul>
         <div class="more" id="more"></div>
+        <p class="dir-suggest">Someone missing? <a href="${esc(suggestUrl({country: D.meta.name}))}" target="_blank" rel="noopener">Suggest a supporter ↗</a></p>
       </div>
       <aside class="preview" id="preview" aria-live="polite"></aside>
     </div></section>`;
   const setSel = () => {
     $('#f-type').value = ST.type; $('#f-party').value = ST.party; $('#f-grade').value = ST.grade; $('#f-sort').value = ST.sort;
     $$('#f-level button').forEach(b => b.classList.toggle('on', b.dataset.v === ST.level));
+    $$('.dir-head [data-sort]').forEach(b => b.classList.toggle('on', b.dataset.sort === ST.sort));
     $('#f-place').innerHTML = ST.place ? `<button class="chip on" type="button" id="clear-place">${esc(ST.place.split(' > ').pop())} <span class="x" aria-label="Remove place filter">×</span></button>` : '';
     const cp = $('#clear-place'); if (cp) cp.onclick = () => { ST.place = ''; changed(); };
   };
@@ -659,7 +669,7 @@ function directorySection(box, D, slug, params) {
       <span class="dm"><span class="dn">${esc(p[P_.name])}</span><span class="dr">${esc([p[P_.role], p[P_.aff]].filter(Boolean).join(' · ').slice(0, 140))}</span>
         <span class="dt">${tags}${p[P_.party] ? `<span class="tag signal">${esc(p[P_.party])}</span>` : ''}</span></span>
       <span class="dp">${esc(placeShort(p[P_.loc]))}</span>
-      <span class="dd"><b>${esc(year(p[P_.last]))}</b>${p[P_.n]} statement${p[P_.n] === 1 ? '' : 's'}</span>
+      <span class="dd"><b>${esc(p[P_.last] ? p[P_.last].slice(0, 7) : '·')}</b>${p[P_.n]} statement${p[P_.n] === 1 ? '' : 's'}</span>
     </a></li>`;
   };
   const wide = () => matchMedia('(min-width: 1021px)').matches;
@@ -674,7 +684,7 @@ function directorySection(box, D, slug, params) {
     const mb = $('#more-btn'); if (mb) mb.onclick = () => { ST.limit += 50; drawList(); };
     const ca = $('#clear-all'); if (ca) ca.onclick = e => { e.preventDefault(); Object.assign(ST, {q: '', type: '', party: '', level: '', grade: '', place: ''}); $('#f-q').value = ''; changed(); };
     // On wide screens the preview always shows something: the selected entry, or the first one.
-    if (wide() && (!ST.sel || !list.some(p => p[P_.id] === ST.sel)) && list.length) preview(list[0][P_.id], false, true);
+    if (wide() && (!ST.sel || !shown.some(p => p[P_.id] === ST.sel)) && list.length) preview(list[0][P_.id], false, true);
     else if (!list.length) $('#preview').innerHTML = '';
   }
   function changed() { ST.limit = 50; syncUrl(); setSel(); drawList(); }
@@ -715,6 +725,8 @@ function directorySection(box, D, slug, params) {
   $('#f-q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { ST.q = e.target.value; changed(); }, 120); });
   [['#f-type', 'type'], ['#f-party', 'party'], ['#f-grade', 'grade'], ['#f-sort', 'sort']].forEach(([s, k]) => $(s).addEventListener('change', e => { ST[k] = e.target.value; changed(); }));
   $('#f-level').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { ST.level = b.dataset.v; changed(); } });
+  // A column header sorts by that column; a second click goes back to the strongest evidence first.
+  $('.dir-head').addEventListener('click', e => { const b = e.target.closest('[data-sort]'); if (b) { ST.sort = ST.sort === b.dataset.sort ? 'strength' : b.dataset.sort; changed(); } });
   setSel(); drawList();
   if (ST.sel && D.byId[ST.sel]) preview(ST.sel, false);
   const prev = leaving;
@@ -860,7 +872,7 @@ function countryMap(D, slug, onShowAll) {
       <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><span class="tag ${people.length ? 'signal' : ''}">${esc(state)}</span></div>
       <div class="scroll">${people.slice(0, 40).map(p => `<a class="prow" href="/${slug}/${enc(p[P_.id])}"><span>${glyph(p[P_.grade])}&nbsp; ${esc(p[P_.name])}<span class="sub">${esc([label(TYPE, p[P_.type]), p[P_.role]].filter(Boolean).join(' · ').slice(0, 80))}</span></span><span class="n">→</span></a>`).join('')}
         ${pl && pl.notes ? `<p class="note">${esc(pl.notes)}</p>` : ''}</div>
-      ${people.length ? `<button class="btn sm" type="button" id="pl-all" style="margin-top:14px;justify-content:center">Show ${people.length > 40 ? 'all ' + fmt(people.length) : 'them'} in the directory ↓</button>` : `<a class="report" href="${esc(issueUrl(`[${D.meta.iso2}] Supporter in ${name}`, {country: slug}))}" target="_blank" rel="noopener">Know a public supporter here? Tell us ↗</a>`}`;
+      ${people.length ? `<button class="btn sm" type="button" id="pl-all" style="margin-top:14px;justify-content:center">Show ${people.length > 40 ? 'all ' + fmt(people.length) : 'them'} in the directory ↓</button>` : `<a class="report" href="${esc(suggestUrl({country: D.meta.name, note: 'Place: ' + path}))}" target="_blank" rel="noopener">Know a public supporter here? Suggest them ↗</a>`}`;
     $('#pl-back', panel).onclick = () => select(null);
     const all = $('#pl-all', panel); if (all) all.onclick = () => onShowAll(path);
   }
@@ -974,11 +986,11 @@ function contributePage(W) {
       <h2>Help check what is here</h2>
       <p>Open an entry, follow the source, and report anything that does not match.</p>
       <h2>Suggest a supporter</h2>
-      <p>Know someone who has backed a wealth tax in public? Report it with a link to where they said it.</p>
+      <p>Know someone who has backed a wealth tax in public? <a href="${esc(suggestUrl())}" target="_blank" rel="noopener">Suggest them</a>: just their name, the country and a link to where they said it. You need a free GitHub account.</p>
     </div>
     <aside class="aside-card"><h3>Get started</h3>
       <p><a class="btn sm" href="https://github.com/${REPO}/issues/new?template=new-country.yml" target="_blank" rel="noopener">Start a new country ↗</a></p>
-      <p><a class="btn sm ghost" href="${esc(issueUrl('Suggest: '))}" target="_blank" rel="noopener">Suggest a supporter ↗</a></p>
+      <p><a class="btn sm ghost" href="${esc(suggestUrl())}" target="_blank" rel="noopener">Suggest a supporter ↗</a></p>
       <p style="margin:18px 0 0"><a href="https://github.com/${REPO}/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing guide ↗</a><br><a href="https://github.com/${REPO}/blob/main/skill/SKILL.md" target="_blank" rel="noopener">The research workflow ↗</a></p></aside>
   </div>`;
 }
