@@ -58,6 +58,10 @@ function loadCountry(slug) {
       return {path, name: path.split(' > ').pop(), n: ids.size, state: own ? own.state : 'support', notes: own ? own.notes : '',
         mapped: D.places.some(pl => pl.mapped && (pl.path === path || pl.path.startsWith(path + ' > ')))};
     });
+    // A city-state is both a region and its only area (Berlin in Berlin): list it once.
+    D.placeList = D.placeList.filter(pl => { const parts = pl.path.split(' > '), up = parts.slice(0, -1).join(' > ');
+      const parent = D.placeList.find(q => q.path === up);
+      return !(parent && parts.length > 2 && parts[parts.length - 1] === parts[parts.length - 2] && parent.n === pl.n) || !pl.mapped; });
     const root = D.places.find(pl => !pl.path.includes(' > '));
     D.nationalOnly = root ? root.ids.length : 0;
     return D;
@@ -561,7 +565,7 @@ function mapSection(box, D, slug, params) {
       <div class="atlas">
         <div class="mapbox" id="mapbox">
           <div class="zoomer"><button type="button" data-z="in" aria-label="Zoom in">+</button><button type="button" data-z="out" aria-label="Zoom out">−</button><button type="button" data-z="fit" aria-label="Show the whole country">⤢</button></div>
-          <div class="legend"><span><span class="ramp" style="display:inline-block;vertical-align:-1px;margin-right:6px"></span>Supporters</span><span><i class="sw none"></i>None recorded yet</span></div>
+          <div class="legend"><span><span class="ramp" style="display:inline-block;vertical-align:-1px;margin-right:6px"></span>Supporters</span>${D.C.some(c => c[9]) ? '<span><i class="sw up"></i>Supporters known by region only</span>' : ''}<span><i class="sw none"></i>None recorded yet</span></div>
         </div>
         <div class="panel" id="panel"></div>
       </div>
@@ -616,6 +620,7 @@ function methodSection(box, D, slug) {
         <div><span>Areas shown on the map with a supporter</span><b>${fmt(sup)}</b></div>
         <div><span>Candidates left out</span><b>${fmt(m.excluded)}</b></div>
       </dl>
+      ${m.map_source ? `<p class="map-source">Map: ${esc(m.map_source)}</p>` : ''}
       <div class="kicker" style="margin-top:28px">Download (CSV, CC BY 4.0)</div>
       <div class="downloads">${['actors', 'evidence', 'profiles', 'geo_units'].map(f => `<a class="chip" href="/download/${slug}/${f}.csv" download>${f}.csv</a>`).join('')}
         ${ext(`https://github.com/${REPO}/tree/main/data/${slug}`, 'All files on GitHub ↗', 'chip')}</div>
@@ -832,8 +837,14 @@ function countryMap(D, slug, onShowAll) {
   const svgNS = 'http://www.w3.org/2000/svg';
   const svg = document.createElementNS(svgNS, 'svg');
   svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `Map of ${D.meta.name} by area`);
-  svg.innerHTML = `<g>${D.C.map((c, i) => { const n = c[6].length, t = n ? (.22 + .78 * Math.log(n + 1) / Math.log(mx + 1)).toFixed(3) : 0;
-      return `<path data-i="${i}" class="${n ? 'u-sup' : 'u-none'}"${n ? ` style="--t:${t}"` : ''} d="${c[7]}"/>`; }).join('')}</g>`;
+  // Areas with their own supporters are shaded; areas whose region has supporters known only at region level
+  // (a state or Land, say) get a light tint, so the map still shows them; region outlines go on top.
+  const pmx = Math.max(1, ...D.C.map(c => c[9] || 0));
+  svg.innerHTML = `<g>${D.C.map((c, i) => { const n = c[6].length, up = c[9] || 0;
+      if (n) return `<path data-i="${i}" class="u-sup" style="--t:${(.22 + .78 * Math.log(n + 1) / Math.log(mx + 1)).toFixed(3)}" d="${c[7]}"/>`;
+      if (up) return `<path data-i="${i}" class="u-up" style="--t:${(.1 + .22 * Math.log(up + 1) / Math.log(pmx + 1)).toFixed(3)}" d="${c[7]}"/>`;
+      return `<path data-i="${i}" class="u-none" d="${c[7]}"/>`; }).join('')}</g>
+    ${(D.R || []).length ? `<g class="regions">${D.R.map(d => `<path d="${d}"/>`).join('')}</g>` : ''}`;
   const frame = document.createElement('div'); frame.className = 'mapframe'; frame.appendChild(svg);
   box.prepend(frame);
   box.style.setProperty('--ar', Math.max(.75, Math.min(1.6, vw / vh)).toFixed(3));
@@ -841,7 +852,8 @@ function countryMap(D, slug, onShowAll) {
     onView: (x, y, w, h) => svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`),
     onHover: e => {
       const p = e.target.closest('path[data-i]');
-      if (p) { const c = D.C[+p.dataset.i], n = c[6].length; showTip(`<b>${esc(c[0])}</b><span>${n ? fmt(n) + ' supporter' + (n === 1 ? '' : 's') : 'none recorded yet'}</span>`, e.clientX, e.clientY); }
+      if (p) { const c = D.C[+p.dataset.i], n = c[6].length;
+        showTip(`<b>${esc(c[0])}</b><span>${n ? fmt(n) + ' supporter' + (n === 1 ? '' : 's') : c[9] ? `${fmt(c[9])} in ${esc(c[10])} with no local area` : 'none recorded yet'}</span>`, e.clientX, e.clientY); }
       else hideTip();
     },
     onTap: e => { const p = e.target.closest('path[data-i]'); if (p) select(D.C[+p.dataset.i][8]); }});

@@ -9,9 +9,16 @@ A fourth worked example. It shows a country where the wealth tax was never repea
 | national | Bundestag, Bundesrat, Bundesregierung | The tax is federal law (*Vermögensteuergesetz*); the yield goes to the Länder |
 | supranational | German MEPs | Not yet searched |
 | region | 16 Länder (each with a Landtag) | Names written in English (Bavaria, Lower Saxony, …) so the site reads in English |
-| local | municipalities | Not loaded. They cannot levy the tax; sample the largest cities only if the Länder pass finds council motions |
+| local | 400 Kreise: 294 Landkreise and Kreise, 106 kreisfreie Städte and Stadtkreise | The map tier, with the 5-digit AGS in `code`. Named as Germans write them: `München` (the city) and `Landkreis München`, `Kreis Pinneberg`, `Region Hannover`. Berlin and Hamburg are each one Kreis inside their own Land. Municipalities below the Kreise are not loaded; they cannot levy the tax. Sample the largest cities only if the Länder pass finds council motions |
 
-**Map:** `data/de/boundaries.json` is the Länder map from the Federal Agency for Cartography and Geodesy (VG250/NUTS 1:250,000, Data licence Germany – Attribution – Version 2.0) via geoBoundaries gbOpen (CC BY 4.0), simplified with a Douglas-Peucker pass and drawn from longitude/latitude with a mid-latitude correction. Credit: © GeoBasis-DE / BKG.
+**Map:** `data/de/boundaries.json` uses the BKG's *Verwaltungsgebiete 1:2 500 000* (VG2500): Kreise as units and Länder as region outlines, both from the same shapefile set so codes and borders agree. Licence: Datenlizenz Deutschland – Namensnennung – Version 2.0; the credit `© GeoBasis-DE / BKG (year)` must appear wherever the map is shown, and the site prints the file's `source` on the Method page.
+
+```bash
+python skill/scripts/topo_to_boundaries.py VG2500_KRS.shp --name-prop GEN --code-prop AGS --scale 0.002 \
+  --flip-y --simplify 0.6 --source "© GeoBasis-DE / BKG (2025), VG2500, dl-de/by-2-0" --out kreise.json
+python skill/scripts/topo_to_boundaries.py VG2500_LAN.shp --name-prop GEN --code-prop AGS --scale 0.002 \
+  --flip-y --simplify 1 --where GF=9 --out laender.json   # GF=9 keeps land areas, not the sea
+```
 
 ## Where the national record is
 

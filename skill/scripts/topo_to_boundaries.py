@@ -1,18 +1,24 @@
 #!/usr/bin/env python3
-"""Turn a TopoJSON file of areas (states, regions, councils) into a boundaries.json for a country folder.
+"""Turn a TopoJSON file or a shapefile of areas (councils, municipalities, counties) into a boundaries.json.
 
-The site draws data/<iso2>/boundaries.json as the local map. Standard library only.
+The site draws data/<iso2>/boundaries.json as the local map. TopoJSON needs only the standard library; a
+shapefile (.shp) needs pyshp (pip install pyshp).
+
+Map units are matched to geo_units.csv by `code` when the register has codes (the safe choice: names repeat,
+for example 30 US counties are called Washington County), and otherwise by name. A name also matches when the
+geo_units name starts with the boundary name followed by " (".
 
 Examples
-  # US states, already projected to a flat 975 x 610 canvas (npm package us-atlas, file states-albers-10m.json)
-  python skill/scripts/topo_to_boundaries.py states-albers-10m.json --object states --name-prop name \\
-      --code-prop id --source "US Census cartographic boundaries via us-atlas" --out data/us/boundaries.json
+  # US counties, already projected to a flat 975 x 610 canvas (npm package us-atlas, counties-albers-10m.json)
+  python skill/scripts/topo_to_boundaries.py counties-albers-10m.json --object counties --code-prop id \\
+      --scale 4 --simplify 1.5 --source "US Census cartographic boundaries via us-atlas" --out data/us/boundaries.json
 
-  # Longitude/latitude shapes (for example world-atlas or an ONS/GADM export converted to TopoJSON)
+  # German Kreise from the BKG shapefile (planar UTM metres, so scale them down)
+  python skill/scripts/topo_to_boundaries.py VG2500_KRS.shp --name-prop GEN --code-prop ARS --scale 0.001 \\
+      --simplify 1 --source "(c) GeoBasis-DE / BKG" --out data/de/boundaries.json
+
+  # Longitude/latitude shapes (for example world-atlas or a GADM export converted to TopoJSON)
   python skill/scripts/topo_to_boundaries.py regions.json --object regions --project lonlat --out data/xx/boundaries.json
-
-Unit names must match the `name` column of geo_units.csv. A unit also matches when its geo_units name starts with
-the boundary name followed by " (" (so "Alabama" matches "Alabama (state legislature and state government)").
 """
 import argparse, json, math, sys
 from pathlib import Path
@@ -41,49 +47,107 @@ def ring_points(arcs, idx):
     return pts
 
 
+def simplify(pts, tol):
+    """Douglas-Peucker on a ring (in output units). Keeps at least four points so small areas stay visible."""
+    if tol <= 0 or len(pts) < 5:
+        return pts
+
+    def dp(a, b):
+        (x1, y1), (x2, y2) = pts[a], pts[b]
+        dx, dy = x2 - x1, y2 - y1
+        n = math.hypot(dx, dy) or 1e-9
+        best, at = 0.0, None
+        for i in range(a + 1, b):
+            d = abs(dy * pts[i][0] - dx * pts[i][1] + x2 * y1 - y2 * x1) / n
+            if d > best:
+                best, at = d, i
+        if best > tol and at is not None:
+            return dp(a, at)[:-1] + dp(at, b)
+        return [pts[a], pts[b]]
+
+    mid = len(pts) // 2
+    out = dp(0, mid)[:-1] + dp(mid, len(pts) - 1)
+    return out if len(out) >= 4 else pts
+
+
+def read_topojson(a):
+    topo = json.load(open(a.source_file, encoding="utf-8"))
+    arcs = decode(topo)
+    for g in topo["objects"][a.object]["geometries"]:
+        props = g.get("properties", {}) or {}
+        key, _, val = a.where.partition("=")
+        if key and str(g.get("id") if key == "id" else props.get(key)) != val:
+            continue
+        name = props.get(a.name_prop, "")
+        polys = g.get("arcs") or []
+        polys = polys if g["type"] == "MultiPolygon" else [polys]
+        code = g.get("id") if a.code_prop == "id" else props.get(a.code_prop, "") if a.code_prop else ""
+        yield name, code, [ring_points(arcs, r) for poly in polys for r in poly]
+
+
+def read_shapefile(a):
+    import shapefile  # pyshp
+    sf = shapefile.Reader(a.source_file, encoding="utf-8")
+    fields = [f[0] for f in sf.fields[1:]]
+    key, _, val = a.where.partition("=")
+    for sr in sf.iterShapeRecords():
+        rec = dict(zip(fields, sr.record))
+        if key and str(rec.get(key)) != val:
+            continue
+        pts, parts = sr.shape.points, list(sr.shape.parts) + [len(sr.shape.points)]
+        rings = [pts[parts[i]:parts[i + 1]] for i in range(len(parts) - 1)]
+        yield rec.get(a.name_prop, ""), rec.get(a.code_prop, "") if a.code_prop else "", rings
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("topojson", help="path to a .json TopoJSON file")
-    ap.add_argument("--object", required=True, help="name of the object inside the TopoJSON (for example states)")
-    ap.add_argument("--name-prop", default="name", help="property holding the area name (default: name)")
-    ap.add_argument("--code-prop", default="", help="property (or 'id') holding a code to store with each unit")
+    ap.add_argument("source_file", help="a TopoJSON (.json) or a shapefile (.shp)")
+    ap.add_argument("--object", help="TopoJSON only: name of the object inside the file (for example counties)")
+    ap.add_argument("--name-prop", default="name", help="property or field holding the area name (default: name)")
+    ap.add_argument("--code-prop", default="", help="property or field (or 'id') holding the official code")
     ap.add_argument("--project", choices=["planar", "lonlat"], default="planar",
                     help="planar: coordinates are already flat; lonlat: degrees, drawn with a mid-latitude correction")
     ap.add_argument("--scale", type=float, default=10, help="multiply coordinates before rounding to integers")
-    ap.add_argument("--source", default="", help="where the shapes come from, stored in the file")
+    ap.add_argument("--simplify", type=float, default=0, help="Douglas-Peucker tolerance in output units (0 = off)")
+    ap.add_argument("--flip-y", action="store_true", help="planar sources with y pointing up (most shapefiles)")
+    ap.add_argument("--where", default="", help="keep only shapes where FIELD=VALUE (for example GF=9 for land areas in BKG data)")
+    ap.add_argument("--source", default="", help="where the shapes come from and their licence, stored in the file")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
 
-    topo = json.load(open(a.topojson, encoding="utf-8"))
-    arcs = decode(topo)
-    geoms = topo["objects"][a.object]["geometries"]
-    lats = [p[1] for arc in arcs for p in arc]
+    shp = a.source_file.lower().endswith(".shp")
+    if not shp and not a.object:
+        ap.error("--object is needed for TopoJSON")
+    shapes = list(read_shapefile(a) if shp else read_topojson(a))
+    lats = [p[1] for _, _, rings in shapes for r in rings for p in r]
     k = math.cos(math.radians((min(lats) + max(lats)) / 2)) if a.project == "lonlat" else 1.0
+    flip = a.project == "lonlat" or a.flip_y
 
     def xy(p):
-        x = p[0] * k * a.scale
-        y = (-p[1] if a.project == "lonlat" else p[1]) * a.scale
-        return round(x), round(y)
+        return round(p[0] * k * a.scale), round((-p[1] if flip else p[1]) * a.scale)
 
-    units, xs, ys = [], [], []
-    for g in geoms:
-        props = g.get("properties", {})
-        name = props.get(a.name_prop)
-        if not name:
+    units, xs, ys, npts = [], [], [], 0
+    for name, code, rings in shapes:
+        if not name and not code:
             continue
-        polys = g["arcs"] if g["type"] == "MultiPolygon" else [g["arcs"]]
         d = ""
-        for poly in polys:
-            for r in poly:
-                pts = [xy(p) for p in ring_points(arcs, r)]
-                d += "M" + "L".join(f"{x} {y}" for x, y in pts) + "Z"
-                xs += [p[0] for p in pts]; ys += [p[1] for p in pts]
-        code = g.get("id") if a.code_prop == "id" else props.get(a.code_prop, "") if a.code_prop else ""
-        units.append({"name": name, "code": str(code or ""), "path": d})
+        for r in rings:
+            pts = []
+            for p in simplify([xy(p) for p in r], a.simplify):
+                if not pts or p != pts[-1]:  # rounding makes neighbouring points equal; drop the repeats
+                    pts.append(p)
+            if len(pts) < 3:
+                continue
+            d += "M" + "L".join(f"{x} {y}" for x, y in pts) + "Z"
+            xs += [p[0] for p in pts]; ys += [p[1] for p in pts]; npts += len(pts)
+        if d:
+            units.append({"name": str(name), "code": str(code or ""), "path": d})
+    if not units:
+        sys.exit("No shapes left: check --object, --name-prop, --code-prop and --where")
     out = {"viewBox": [min(xs), min(ys), max(xs) - min(xs), max(ys) - min(ys)], "source": a.source,
-           "match": "name", "units": units}
+           "match": "code" if a.code_prop else "name", "units": units}
     Path(a.out).write_text(json.dumps(out, separators=(",", ":"), ensure_ascii=False), encoding="utf-8")
-    print(f"Wrote {a.out}: {len(units)} units, {Path(a.out).stat().st_size // 1024} KB")
+    print(f"Wrote {a.out}: {len(units)} units, {npts} points, {Path(a.out).stat().st_size // 1024} KB")
 
 
 if __name__ == "__main__":

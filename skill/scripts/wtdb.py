@@ -27,7 +27,7 @@ SCHEMA = {
                  "quote_original", "quote_lang", "quote_en", "source_url", "source_title", "publisher", "archive_url",
                  "accessed", "harvest_id", "grading_note", "verified", "run_id"],
     "geo_units": ["geo_unit_id", "name", "level", "unit_type", "parent_id", "website", "sweep_status", "swept_run",
-                  "swept_date", "queries_run", "hits", "notes"],
+                  "swept_date", "queries_run", "hits", "notes", "code"],
     "links": ["link_id", "from_actor_id", "to_actor_id", "link_type", "evidence_id", "source_url", "note"],
     "harvest": ["harvest_id", "title", "list_type", "url", "date", "est_size", "status", "actors_added", "notes"],
     "exclusions": ["exclusion_id", "name", "reason", "detail", "source_url", "run_id"],
@@ -361,17 +361,45 @@ def validate(db):
         seen_profiles.add(key)
         if a and set(type_list(a)) == {"wealthy_individual"}:
             warns.append(f"{where}: {a.get('name')} is only a wealthy individual; link only official or professional pages of public figures")
+    codes = defaultdict(list)
     for i, g in enumerate(db["geo_units"], start=2):
+        if g.get("code"):
+            codes[g["code"]].append(g["geo_unit_id"])
         if g.get("parent_id") and g["parent_id"] not in geo:
             errs.append(f"geo_units.csv line {i}: parent_id {g['parent_id']} does not exist")
         if g.get("sweep_status") == "done" and not g.get("swept_date"):
             warns.append(f"geo_units.csv line {i} ({g.get('name')}): done without swept_date")
+    for c, v in codes.items():
+        if len(v) > 1:
+            errs.append(f"geo_units: code {c} used by {', '.join(v)}")
     return errs, warns
+
+
+def check_boundaries(d, db):
+    """Warnings for map shapes in boundaries.json that match no geo unit (by code, else by name)."""
+    try:
+        meta = json.load(open(os.path.join(d, "meta.json"), encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    bfile = meta.get("boundaries")
+    if not bfile or not os.path.exists(os.path.join(d, bfile)):
+        return []
+    b = json.load(open(os.path.join(d, bfile), encoding="utf-8"))
+    by_code = {g["code"] for g in db["geo_units"] if g.get("code")}
+    by_name = {_bare(g["name"]) for g in db["geo_units"]}
+    miss = [u["name"] for u in b.get("units", [])
+            if not ((u.get("code") and u["code"] in by_code) or (not by_code and _bare(u["name"]) in by_name))]
+    if not miss:
+        return []
+    return [f"boundaries: {len(miss)} map shapes match no geo unit (by code{'' if by_code else ' or name'}), "
+            f"for example {', '.join(miss[:5])}"]
 
 
 def cmd_validate(a):
     need_dir(a.dir)
-    errs, warns = validate(load_all(a.dir))
+    db = load_all(a.dir)
+    errs, warns = validate(db)
+    warns += check_boundaries(a.dir, db)
     for w in warns:
         print("WARN  " + w)
     for e in errs:

@@ -1,22 +1,422 @@
-geo_unit_id,name,level,unit_type,parent_id,website,sweep_status,swept_run,swept_date,queries_run,hits,notes
-G0001,Germany,national,country,,https://www.bundesregierung.de,pending,,,,,
-G0002,Bundestag,national,legislature,G0001,https://www.bundestag.de,in_progress,R001,2026-10-20,12,8,"R001: Bundestag motions and bills with a wealth tax or levy (17/2944, 17/8792, 17/10770, 17/10778, 19/94, 19/28908, 20/4307, 21/4029) read in full and their named sponsors recorded (H0001-H0008); first reading of 21/4029 (2026-03-06). Not done: roll-call lists (namentliche Abstimmungen), committee hearings, plenary debates 2010-2025, the 18th term (2013-2017), written questions, SPD and Green speeches."
-G0003,Bundesrat,national,legislature,G0001,https://www.bundesrat.de,pending,,,,,Bundesrat initiatives on the wealth tax not searched. Berlin Left motion 19/1952 asks the Senate for one.
-G0004,Bundesregierung (Federal Government),national,executive,G0001,https://www.bundesregierung.de,pending,,,,,Coalition agreement CDU/CSU-SPD 2025 and ministers not read. SPD finance minister Klingbeil did not name a wealth tax in the sources opened (exclusions X0004).
-G0005,European Parliament (German MEPs),supranational,legislature,G0001,https://www.europarl.europa.eu,in_progress,R003,2026-10-20,4,1,"R003: one German MEP found (Langensiepen, Greens). No Parliament plenary vote on a wealth tax found; the March 2023 letter of 130 MEPs has no published list of signatories (searches). Others, for example Schirdewan (Left), not found with a statement."
-G0006,Baden-Württemberg,region,state (Land),G0001,https://www.baden-wuerttemberg.de,in_progress,R003,2026-10-20,2,1,"2012 Länder initiative (NRW, RLP, BW, Hamburg) and NRW's draft read via the NRW press release and campaign reports; no Landtag motions read."
-G0007,Bavaria,region,state (Land),G0001,https://www.bayern.de,pending,,,,,
-G0008,Berlin,region,state (Land),G0001,https://www.berlin.de,in_progress,R001,2026-10-20,2,1,"Sample: Abgeordnetenhaus motion 19/1952 (Left group, 2024-10-08) read. Other Berlin parties and the Senate not searched."
-G0009,Brandenburg,region,state (Land),G0001,https://www.brandenburg.de,pending,,,,,
-G0010,Bremen,region,state (Land),G0001,https://www.bremen.de,pending,,,,,
-G0011,Hamburg,region,state (Land),G0001,https://www.hamburg.de,in_progress,R003,2026-10-20,2,1,"2012 Länder initiative (NRW, RLP, BW, Hamburg) and NRW's draft read via the NRW press release and campaign reports; no Landtag motions read."
-G0012,Hesse,region,state (Land),G0001,https://www.hessen.de,in_progress,R002,2026-10-20,2,1,Left motion 19/4497 (2017) read; the 2009 motions are known only from a search summary; other parties not searched.
-G0013,Lower Saxony,region,state (Land),G0001,https://www.niedersachsen.de,in_progress,R003,2026-10-20,2,2,Greens' state party position (2015) read; the coalition agreement 2013 was described second-hand; no Landtag motions read.
-G0014,Mecklenburg-Vorpommern,region,state (Land),G0001,https://www.mv-regierung.de,pending,,,,,
-G0015,North Rhine-Westphalia,region,state (Land),G0001,https://www.land.nrw,in_progress,R003,2026-10-20,2,1,"2012 Länder initiative (NRW, RLP, BW, Hamburg) and NRW's draft read via the NRW press release and campaign reports; no Landtag motions read."
-G0016,Rhineland-Palatinate,region,state (Land),G0001,https://rlp.de,in_progress,R003,2026-10-20,2,1,"2012 Länder initiative (NRW, RLP, BW, Hamburg) and NRW's draft read via the NRW press release and campaign reports; no Landtag motions read."
-G0017,Saarland,region,state (Land),G0001,https://www.saarland.de,pending,,,,,
-G0018,Saxony,region,state (Land),G0001,https://www.sachsen.de,pending,,,,,
-G0019,Saxony-Anhalt,region,state (Land),G0001,https://www.sachsen-anhalt.de,in_progress,R002,2026-10-20,2,1,Left motion 7/845 (2017) and the Landtag debate of 2017-02-02 read (the coalition tabled an alternative motion; the Finance Minister called the tax unconstitutional). Other parties' groups not searched.
-G0020,Schleswig-Holstein,region,state (Land),G0001,https://www.schleswig-holstein.de,pending,,,,,
-G0021,Thuringia,region,state (Land),G0001,https://www.thueringen.de,pending,,,,,
+geo_unit_id,name,level,unit_type,parent_id,website,sweep_status,swept_run,swept_date,queries_run,hits,notes,code
+G0001,Germany,national,country,,https://www.bundesregierung.de,pending,,,,,,
+G0002,Bundestag,national,legislature,G0001,https://www.bundestag.de,in_progress,R001,2026-10-20,12,8,"R001: Bundestag motions and bills with a wealth tax or levy (17/2944, 17/8792, 17/10770, 17/10778, 19/94, 19/28908, 20/4307, 21/4029) read in full and their named sponsors recorded (H0001-H0008); first reading of 21/4029 (2026-03-06). Not done: roll-call lists (namentliche Abstimmungen), committee hearings, plenary debates 2010-2025, the 18th term (2013-2017), written questions, SPD and Green speeches.",
+G0003,Bundesrat,national,legislature,G0001,https://www.bundesrat.de,pending,,,,,Bundesrat initiatives on the wealth tax not searched. Berlin Left motion 19/1952 asks the Senate for one.,
+G0004,Bundesregierung (Federal Government),national,executive,G0001,https://www.bundesregierung.de,pending,,,,,Coalition agreement CDU/CSU-SPD 2025 and ministers not read. SPD finance minister Klingbeil did not name a wealth tax in the sources opened (exclusions X0004).,
+G0005,European Parliament (German MEPs),supranational,legislature,G0001,https://www.europarl.europa.eu,in_progress,R003,2026-10-20,4,1,"R003: one German MEP found (Langensiepen, Greens). No Parliament plenary vote on a wealth tax found; the March 2023 letter of 130 MEPs has no published list of signatories (searches). Others, for example Schirdewan (Left), not found with a statement.",
+G0006,Baden-Württemberg,region,state (Land),G0001,https://www.baden-wuerttemberg.de,in_progress,R003,2026-10-20,2,1,"2012 Länder initiative (NRW, RLP, BW, Hamburg) and NRW's draft read via the NRW press release and campaign reports; no Landtag motions read.",
+G0007,Bavaria,region,state (Land),G0001,https://www.bayern.de,pending,,,,,,
+G0008,Berlin,region,state (Land),G0001,https://www.berlin.de,in_progress,R001,2026-10-20,2,1,"Sample: Abgeordnetenhaus motion 19/1952 (Left group, 2024-10-08) read. Other Berlin parties and the Senate not searched.",
+G0009,Brandenburg,region,state (Land),G0001,https://www.brandenburg.de,pending,,,,,,
+G0010,Bremen,region,state (Land),G0001,https://www.bremen.de,pending,,,,,,
+G0011,Hamburg,region,state (Land),G0001,https://www.hamburg.de,in_progress,R003,2026-10-20,2,1,"2012 Länder initiative (NRW, RLP, BW, Hamburg) and NRW's draft read via the NRW press release and campaign reports; no Landtag motions read.",
+G0012,Hesse,region,state (Land),G0001,https://www.hessen.de,in_progress,R002,2026-10-20,2,1,Left motion 19/4497 (2017) read; the 2009 motions are known only from a search summary; other parties not searched.,
+G0013,Lower Saxony,region,state (Land),G0001,https://www.niedersachsen.de,in_progress,R003,2026-10-20,2,2,Greens' state party position (2015) read; the coalition agreement 2013 was described second-hand; no Landtag motions read.,
+G0014,Mecklenburg-Vorpommern,region,state (Land),G0001,https://www.mv-regierung.de,pending,,,,,,
+G0015,North Rhine-Westphalia,region,state (Land),G0001,https://www.land.nrw,in_progress,R003,2026-10-20,2,1,"2012 Länder initiative (NRW, RLP, BW, Hamburg) and NRW's draft read via the NRW press release and campaign reports; no Landtag motions read.",
+G0016,Rhineland-Palatinate,region,state (Land),G0001,https://rlp.de,in_progress,R003,2026-10-20,2,1,"2012 Länder initiative (NRW, RLP, BW, Hamburg) and NRW's draft read via the NRW press release and campaign reports; no Landtag motions read.",
+G0017,Saarland,region,state (Land),G0001,https://www.saarland.de,pending,,,,,,
+G0018,Saxony,region,state (Land),G0001,https://www.sachsen.de,pending,,,,,,
+G0019,Saxony-Anhalt,region,state (Land),G0001,https://www.sachsen-anhalt.de,in_progress,R002,2026-10-20,2,1,Left motion 7/845 (2017) and the Landtag debate of 2017-02-02 read (the coalition tabled an alternative motion; the Finance Minister called the tax unconstitutional). Other parties' groups not searched.,
+G0020,Schleswig-Holstein,region,state (Land),G0001,https://www.schleswig-holstein.de,pending,,,,,,
+G0021,Thuringia,region,state (Land),G0001,https://www.thueringen.de,pending,,,,,,
+G0022,Flensburg,council,city,G0020,,pending,,,,,,01001
+G0023,Kiel,council,city,G0020,,pending,,,,,,01002
+G0024,Lübeck,council,city,G0020,,pending,,,,,,01003
+G0025,Neumünster,council,city,G0020,,pending,,,,,,01004
+G0026,Kreis Dithmarschen,council,district,G0020,,pending,,,,,,01051
+G0027,Kreis Herzogtum Lauenburg,council,district,G0020,,pending,,,,,,01053
+G0028,Kreis Nordfriesland,council,district,G0020,,pending,,,,,,01054
+G0029,Kreis Ostholstein,council,district,G0020,,pending,,,,,,01055
+G0030,Kreis Pinneberg,council,district,G0020,,pending,,,,,,01056
+G0031,Kreis Plön,council,district,G0020,,pending,,,,,,01057
+G0032,Kreis Rendsburg-Eckernförde,council,district,G0020,,pending,,,,,,01058
+G0033,Kreis Schleswig-Flensburg,council,district,G0020,,pending,,,,,,01059
+G0034,Kreis Segeberg,council,district,G0020,,pending,,,,,,01060
+G0035,Kreis Steinburg,council,district,G0020,,pending,,,,,,01061
+G0036,Kreis Stormarn,council,district,G0020,,pending,,,,,,01062
+G0037,Hamburg,council,city,G0011,,pending,,,,,,02000
+G0038,Braunschweig,council,city,G0013,,pending,,,,,,03101
+G0039,Salzgitter,council,city,G0013,,pending,,,,,,03102
+G0040,Wolfsburg,council,city,G0013,,pending,,,,,,03103
+G0041,Landkreis Gifhorn,council,district,G0013,,pending,,,,,,03151
+G0042,Landkreis Goslar,council,district,G0013,,pending,,,,,,03153
+G0043,Landkreis Helmstedt,council,district,G0013,,pending,,,,,,03154
+G0044,Landkreis Northeim,council,district,G0013,,pending,,,,,,03155
+G0045,Landkreis Peine,council,district,G0013,,pending,,,,,,03157
+G0046,Landkreis Wolfenbüttel,council,district,G0013,,pending,,,,,,03158
+G0047,Landkreis Göttingen,council,district,G0013,,pending,,,,,,03159
+G0048,Region Hannover,council,district,G0013,,pending,,,,,,03241
+G0049,Landkreis Diepholz,council,district,G0013,,pending,,,,,,03251
+G0050,Landkreis Hameln-Pyrmont,council,district,G0013,,pending,,,,,,03252
+G0051,Landkreis Hildesheim,council,district,G0013,,pending,,,,,,03254
+G0052,Landkreis Holzminden,council,district,G0013,,pending,,,,,,03255
+G0053,Landkreis Nienburg (Weser),council,district,G0013,,pending,,,,,,03256
+G0054,Landkreis Schaumburg,council,district,G0013,,pending,,,,,,03257
+G0055,Landkreis Celle,council,district,G0013,,pending,,,,,,03351
+G0056,Landkreis Cuxhaven,council,district,G0013,,pending,,,,,,03352
+G0057,Landkreis Harburg,council,district,G0013,,pending,,,,,,03353
+G0058,Landkreis Lüchow-Dannenberg,council,district,G0013,,pending,,,,,,03354
+G0059,Landkreis Lüneburg,council,district,G0013,,pending,,,,,,03355
+G0060,Landkreis Osterholz,council,district,G0013,,pending,,,,,,03356
+G0061,Landkreis Rotenburg (Wümme),council,district,G0013,,pending,,,,,,03357
+G0062,Landkreis Heidekreis,council,district,G0013,,pending,,,,,,03358
+G0063,Landkreis Stade,council,district,G0013,,pending,,,,,,03359
+G0064,Landkreis Uelzen,council,district,G0013,,pending,,,,,,03360
+G0065,Landkreis Verden,council,district,G0013,,pending,,,,,,03361
+G0066,Delmenhorst,council,city,G0013,,pending,,,,,,03401
+G0067,Emden,council,city,G0013,,pending,,,,,,03402
+G0068,Oldenburg (Oldb),council,city,G0013,,pending,,,,,,03403
+G0069,Osnabrück,council,city,G0013,,pending,,,,,,03404
+G0070,Wilhelmshaven,council,city,G0013,,pending,,,,,,03405
+G0071,Landkreis Ammerland,council,district,G0013,,pending,,,,,,03451
+G0072,Landkreis Aurich,council,district,G0013,,pending,,,,,,03452
+G0073,Landkreis Cloppenburg,council,district,G0013,,pending,,,,,,03453
+G0074,Landkreis Emsland,council,district,G0013,,pending,,,,,,03454
+G0075,Landkreis Friesland,council,district,G0013,,pending,,,,,,03455
+G0076,Landkreis Grafschaft Bentheim,council,district,G0013,,pending,,,,,,03456
+G0077,Landkreis Leer,council,district,G0013,,pending,,,,,,03457
+G0078,Landkreis Oldenburg,council,district,G0013,,pending,,,,,,03458
+G0079,Landkreis Osnabrück,council,district,G0013,,pending,,,,,,03459
+G0080,Landkreis Vechta,council,district,G0013,,pending,,,,,,03460
+G0081,Landkreis Wesermarsch,council,district,G0013,,pending,,,,,,03461
+G0082,Landkreis Wittmund,council,district,G0013,,pending,,,,,,03462
+G0083,Bremen,council,city,G0010,,pending,,,,,,04011
+G0084,Bremerhaven,council,city,G0010,,pending,,,,,,04012
+G0085,Düsseldorf,council,city,G0015,,pending,,,,,,05111
+G0086,Duisburg,council,city,G0015,,pending,,,,,,05112
+G0087,Essen,council,city,G0015,,pending,,,,,,05113
+G0088,Krefeld,council,city,G0015,,pending,,,,,,05114
+G0089,Mönchengladbach,council,city,G0015,,pending,,,,,,05116
+G0090,Mülheim an der Ruhr,council,city,G0015,,pending,,,,,,05117
+G0091,Oberhausen,council,city,G0015,,pending,,,,,,05119
+G0092,Remscheid,council,city,G0015,,pending,,,,,,05120
+G0093,Solingen,council,city,G0015,,pending,,,,,,05122
+G0094,Wuppertal,council,city,G0015,,pending,,,,,,05124
+G0095,Kreis Kleve,council,district,G0015,,pending,,,,,,05154
+G0096,Kreis Mettmann,council,district,G0015,,pending,,,,,,05158
+G0097,Kreis Rhein-Kreis Neuss,council,district,G0015,,pending,,,,,,05162
+G0098,Kreis Viersen,council,district,G0015,,pending,,,,,,05166
+G0099,Kreis Wesel,council,district,G0015,,pending,,,,,,05170
+G0100,Bonn,council,city,G0015,,pending,,,,,,05314
+G0101,Köln,council,city,G0015,,pending,,,,,,05315
+G0102,Leverkusen,council,city,G0015,,pending,,,,,,05316
+G0103,Städteregion Aachen,council,district,G0015,,pending,,,,,,05334
+G0104,Kreis Düren,council,district,G0015,,pending,,,,,,05358
+G0105,Kreis Rhein-Erft-Kreis,council,district,G0015,,pending,,,,,,05362
+G0106,Kreis Euskirchen,council,district,G0015,,pending,,,,,,05366
+G0107,Kreis Heinsberg,council,district,G0015,,pending,,,,,,05370
+G0108,Kreis Oberbergischer Kreis,council,district,G0015,,pending,,,,,,05374
+G0109,Kreis Rheinisch-Bergischer Kreis,council,district,G0015,,pending,,,,,,05378
+G0110,Kreis Rhein-Sieg-Kreis,council,district,G0015,,pending,,,,,,05382
+G0111,Bottrop,council,city,G0015,,pending,,,,,,05512
+G0112,Gelsenkirchen,council,city,G0015,,pending,,,,,,05513
+G0113,Münster,council,city,G0015,,pending,,,,,,05515
+G0114,Kreis Borken,council,district,G0015,,pending,,,,,,05554
+G0115,Kreis Coesfeld,council,district,G0015,,pending,,,,,,05558
+G0116,Kreis Recklinghausen,council,district,G0015,,pending,,,,,,05562
+G0117,Kreis Steinfurt,council,district,G0015,,pending,,,,,,05566
+G0118,Kreis Warendorf,council,district,G0015,,pending,,,,,,05570
+G0119,Bielefeld,council,city,G0015,,pending,,,,,,05711
+G0120,Kreis Gütersloh,council,district,G0015,,pending,,,,,,05754
+G0121,Kreis Herford,council,district,G0015,,pending,,,,,,05758
+G0122,Kreis Höxter,council,district,G0015,,pending,,,,,,05762
+G0123,Kreis Lippe,council,district,G0015,,pending,,,,,,05766
+G0124,Kreis Minden-Lübbecke,council,district,G0015,,pending,,,,,,05770
+G0125,Kreis Paderborn,council,district,G0015,,pending,,,,,,05774
+G0126,Bochum,council,city,G0015,,pending,,,,,,05911
+G0127,Dortmund,council,city,G0015,,pending,,,,,,05913
+G0128,Hagen,council,city,G0015,,pending,,,,,,05914
+G0129,Hamm,council,city,G0015,,pending,,,,,,05915
+G0130,Herne,council,city,G0015,,pending,,,,,,05916
+G0131,Kreis Ennepe-Ruhr-Kreis,council,district,G0015,,pending,,,,,,05954
+G0132,Kreis Hochsauerlandkreis,council,district,G0015,,pending,,,,,,05958
+G0133,Kreis Märkischer Kreis,council,district,G0015,,pending,,,,,,05962
+G0134,Kreis Olpe,council,district,G0015,,pending,,,,,,05966
+G0135,Kreis Siegen-Wittgenstein,council,district,G0015,,pending,,,,,,05970
+G0136,Kreis Soest,council,district,G0015,,pending,,,,,,05974
+G0137,Kreis Unna,council,district,G0015,,pending,,,,,,05978
+G0138,Darmstadt,council,city,G0012,,pending,,,,,,06411
+G0139,Frankfurt am Main,council,city,G0012,,pending,,,,,,06412
+G0140,Offenbach am Main,council,city,G0012,,pending,,,,,,06413
+G0141,Wiesbaden,council,city,G0012,,pending,,,,,,06414
+G0142,Landkreis Bergstraße,council,district,G0012,,pending,,,,,,06431
+G0143,Landkreis Darmstadt-Dieburg,council,district,G0012,,pending,,,,,,06432
+G0144,Landkreis Groß-Gerau,council,district,G0012,,pending,,,,,,06433
+G0145,Landkreis Hochtaunuskreis,council,district,G0012,,pending,,,,,,06434
+G0146,Landkreis Main-Kinzig-Kreis,council,district,G0012,,pending,,,,,,06435
+G0147,Landkreis Main-Taunus-Kreis,council,district,G0012,,pending,,,,,,06436
+G0148,Landkreis Odenwaldkreis,council,district,G0012,,pending,,,,,,06437
+G0149,Landkreis Offenbach,council,district,G0012,,pending,,,,,,06438
+G0150,Landkreis Rheingau-Taunus-Kreis,council,district,G0012,,pending,,,,,,06439
+G0151,Landkreis Wetteraukreis,council,district,G0012,,pending,,,,,,06440
+G0152,Landkreis Gießen,council,district,G0012,,pending,,,,,,06531
+G0153,Landkreis Lahn-Dill-Kreis,council,district,G0012,,pending,,,,,,06532
+G0154,Landkreis Limburg-Weilburg,council,district,G0012,,pending,,,,,,06533
+G0155,Landkreis Marburg-Biedenkopf,council,district,G0012,,pending,,,,,,06534
+G0156,Landkreis Vogelsbergkreis,council,district,G0012,,pending,,,,,,06535
+G0157,Kassel,council,city,G0012,,pending,,,,,,06611
+G0158,Landkreis Fulda,council,district,G0012,,pending,,,,,,06631
+G0159,Landkreis Hersfeld-Rotenburg,council,district,G0012,,pending,,,,,,06632
+G0160,Landkreis Kassel,council,district,G0012,,pending,,,,,,06633
+G0161,Landkreis Schwalm-Eder-Kreis,council,district,G0012,,pending,,,,,,06634
+G0162,Landkreis Waldeck-Frankenberg,council,district,G0012,,pending,,,,,,06635
+G0163,Landkreis Werra-Meißner-Kreis,council,district,G0012,,pending,,,,,,06636
+G0164,Koblenz,council,city,G0016,,pending,,,,,,07111
+G0165,Landkreis Ahrweiler,council,district,G0016,,pending,,,,,,07131
+G0166,Landkreis Altenkirchen (Westerwald),council,district,G0016,,pending,,,,,,07132
+G0167,Landkreis Bad Kreuznach,council,district,G0016,,pending,,,,,,07133
+G0168,Landkreis Birkenfeld,council,district,G0016,,pending,,,,,,07134
+G0169,Landkreis Cochem-Zell,council,district,G0016,,pending,,,,,,07135
+G0170,Landkreis Mayen-Koblenz,council,district,G0016,,pending,,,,,,07137
+G0171,Landkreis Neuwied,council,district,G0016,,pending,,,,,,07138
+G0172,Landkreis Rhein-Hunsrück-Kreis,council,district,G0016,,pending,,,,,,07140
+G0173,Landkreis Rhein-Lahn-Kreis,council,district,G0016,,pending,,,,,,07141
+G0174,Landkreis Westerwaldkreis,council,district,G0016,,pending,,,,,,07143
+G0175,Trier,council,city,G0016,,pending,,,,,,07211
+G0176,Landkreis Bernkastel-Wittlich,council,district,G0016,,pending,,,,,,07231
+G0177,Landkreis Eifelkreis Bitburg-Prüm,council,district,G0016,,pending,,,,,,07232
+G0178,Landkreis Vulkaneifel,council,district,G0016,,pending,,,,,,07233
+G0179,Landkreis Trier-Saarburg,council,district,G0016,,pending,,,,,,07235
+G0180,Frankenthal (Pfalz),council,city,G0016,,pending,,,,,,07311
+G0181,Kaiserslautern,council,city,G0016,,pending,,,,,,07312
+G0182,Landau in der Pfalz,council,city,G0016,,pending,,,,,,07313
+G0183,Ludwigshafen am Rhein,council,city,G0016,,pending,,,,,,07314
+G0184,Mainz,council,city,G0016,,pending,,,,,,07315
+G0185,Neustadt an der Weinstraße,council,city,G0016,,pending,,,,,,07316
+G0186,Pirmasens,council,city,G0016,,pending,,,,,,07317
+G0187,Speyer,council,city,G0016,,pending,,,,,,07318
+G0188,Worms,council,city,G0016,,pending,,,,,,07319
+G0189,Zweibrücken,council,city,G0016,,pending,,,,,,07320
+G0190,Landkreis Alzey-Worms,council,district,G0016,,pending,,,,,,07331
+G0191,Landkreis Bad Dürkheim,council,district,G0016,,pending,,,,,,07332
+G0192,Landkreis Donnersbergkreis,council,district,G0016,,pending,,,,,,07333
+G0193,Landkreis Germersheim,council,district,G0016,,pending,,,,,,07334
+G0194,Landkreis Kaiserslautern,council,district,G0016,,pending,,,,,,07335
+G0195,Landkreis Kusel,council,district,G0016,,pending,,,,,,07336
+G0196,Landkreis Südliche Weinstraße,council,district,G0016,,pending,,,,,,07337
+G0197,Landkreis Rhein-Pfalz-Kreis,council,district,G0016,,pending,,,,,,07338
+G0198,Landkreis Mainz-Bingen,council,district,G0016,,pending,,,,,,07339
+G0199,Landkreis Südwestpfalz,council,district,G0016,,pending,,,,,,07340
+G0200,Stuttgart,council,city,G0006,,pending,,,,,,08111
+G0201,Landkreis Böblingen,council,district,G0006,,pending,,,,,,08115
+G0202,Landkreis Esslingen,council,district,G0006,,pending,,,,,,08116
+G0203,Landkreis Göppingen,council,district,G0006,,pending,,,,,,08117
+G0204,Landkreis Ludwigsburg,council,district,G0006,,pending,,,,,,08118
+G0205,Landkreis Rems-Murr-Kreis,council,district,G0006,,pending,,,,,,08119
+G0206,Heilbronn,council,city,G0006,,pending,,,,,,08121
+G0207,Landkreis Heilbronn,council,district,G0006,,pending,,,,,,08125
+G0208,Landkreis Hohenlohekreis,council,district,G0006,,pending,,,,,,08126
+G0209,Landkreis Schwäbisch Hall,council,district,G0006,,pending,,,,,,08127
+G0210,Landkreis Main-Tauber-Kreis,council,district,G0006,,pending,,,,,,08128
+G0211,Landkreis Heidenheim,council,district,G0006,,pending,,,,,,08135
+G0212,Landkreis Ostalbkreis,council,district,G0006,,pending,,,,,,08136
+G0213,Baden-Baden,council,city,G0006,,pending,,,,,,08211
+G0214,Karlsruhe,council,city,G0006,,pending,,,,,,08212
+G0215,Landkreis Karlsruhe,council,district,G0006,,pending,,,,,,08215
+G0216,Landkreis Rastatt,council,district,G0006,,pending,,,,,,08216
+G0217,Heidelberg,council,city,G0006,,pending,,,,,,08221
+G0218,Mannheim,council,city,G0006,,pending,,,,,,08222
+G0219,Landkreis Neckar-Odenwald-Kreis,council,district,G0006,,pending,,,,,,08225
+G0220,Landkreis Rhein-Neckar-Kreis,council,district,G0006,,pending,,,,,,08226
+G0221,Pforzheim,council,city,G0006,,pending,,,,,,08231
+G0222,Landkreis Calw,council,district,G0006,,pending,,,,,,08235
+G0223,Landkreis Enzkreis,council,district,G0006,,pending,,,,,,08236
+G0224,Landkreis Freudenstadt,council,district,G0006,,pending,,,,,,08237
+G0225,Freiburg im Breisgau,council,city,G0006,,pending,,,,,,08311
+G0226,Landkreis Breisgau-Hochschwarzwald,council,district,G0006,,pending,,,,,,08315
+G0227,Landkreis Emmendingen,council,district,G0006,,pending,,,,,,08316
+G0228,Landkreis Ortenaukreis,council,district,G0006,,pending,,,,,,08317
+G0229,Landkreis Rottweil,council,district,G0006,,pending,,,,,,08325
+G0230,Landkreis Schwarzwald-Baar-Kreis,council,district,G0006,,pending,,,,,,08326
+G0231,Landkreis Tuttlingen,council,district,G0006,,pending,,,,,,08327
+G0232,Landkreis Konstanz,council,district,G0006,,pending,,,,,,08335
+G0233,Landkreis Lörrach,council,district,G0006,,pending,,,,,,08336
+G0234,Landkreis Waldshut,council,district,G0006,,pending,,,,,,08337
+G0235,Landkreis Reutlingen,council,district,G0006,,pending,,,,,,08415
+G0236,Landkreis Tübingen,council,district,G0006,,pending,,,,,,08416
+G0237,Landkreis Zollernalbkreis,council,district,G0006,,pending,,,,,,08417
+G0238,Ulm,council,city,G0006,,pending,,,,,,08421
+G0239,Landkreis Alb-Donau-Kreis,council,district,G0006,,pending,,,,,,08425
+G0240,Landkreis Biberach,council,district,G0006,,pending,,,,,,08426
+G0241,Landkreis Bodenseekreis,council,district,G0006,,pending,,,,,,08435
+G0242,Landkreis Ravensburg,council,district,G0006,,pending,,,,,,08436
+G0243,Landkreis Sigmaringen,council,district,G0006,,pending,,,,,,08437
+G0244,Ingolstadt,council,city,G0007,,pending,,,,,,09161
+G0245,München,council,city,G0007,,pending,,,,,,09162
+G0246,Rosenheim,council,city,G0007,,pending,,,,,,09163
+G0247,Landkreis Altötting,council,district,G0007,,pending,,,,,,09171
+G0248,Landkreis Berchtesgadener Land,council,district,G0007,,pending,,,,,,09172
+G0249,Landkreis Bad Tölz-Wolfratshausen,council,district,G0007,,pending,,,,,,09173
+G0250,Landkreis Dachau,council,district,G0007,,pending,,,,,,09174
+G0251,Landkreis Ebersberg,council,district,G0007,,pending,,,,,,09175
+G0252,Landkreis Eichstätt,council,district,G0007,,pending,,,,,,09176
+G0253,Landkreis Erding,council,district,G0007,,pending,,,,,,09177
+G0254,Landkreis Freising,council,district,G0007,,pending,,,,,,09178
+G0255,Landkreis Fürstenfeldbruck,council,district,G0007,,pending,,,,,,09179
+G0256,Landkreis Garmisch-Partenkirchen,council,district,G0007,,pending,,,,,,09180
+G0257,Landkreis Landsberg am Lech,council,district,G0007,,pending,,,,,,09181
+G0258,Landkreis Miesbach,council,district,G0007,,pending,,,,,,09182
+G0259,Landkreis Mühldorf a.Inn,council,district,G0007,,pending,,,,,,09183
+G0260,Landkreis München,council,district,G0007,,pending,,,,,,09184
+G0261,Landkreis Neuburg-Schrobenhausen,council,district,G0007,,pending,,,,,,09185
+G0262,Landkreis Pfaffenhofen a.d.Ilm,council,district,G0007,,pending,,,,,,09186
+G0263,Landkreis Rosenheim,council,district,G0007,,pending,,,,,,09187
+G0264,Landkreis Starnberg,council,district,G0007,,pending,,,,,,09188
+G0265,Landkreis Traunstein,council,district,G0007,,pending,,,,,,09189
+G0266,Landkreis Weilheim-Schongau,council,district,G0007,,pending,,,,,,09190
+G0267,Landshut,council,city,G0007,,pending,,,,,,09261
+G0268,Passau,council,city,G0007,,pending,,,,,,09262
+G0269,Straubing,council,city,G0007,,pending,,,,,,09263
+G0270,Landkreis Deggendorf,council,district,G0007,,pending,,,,,,09271
+G0271,Landkreis Freyung-Grafenau,council,district,G0007,,pending,,,,,,09272
+G0272,Landkreis Kelheim,council,district,G0007,,pending,,,,,,09273
+G0273,Landkreis Landshut,council,district,G0007,,pending,,,,,,09274
+G0274,Landkreis Passau,council,district,G0007,,pending,,,,,,09275
+G0275,Landkreis Regen,council,district,G0007,,pending,,,,,,09276
+G0276,Landkreis Rottal-Inn,council,district,G0007,,pending,,,,,,09277
+G0277,Landkreis Straubing-Bogen,council,district,G0007,,pending,,,,,,09278
+G0278,Landkreis Dingolfing-Landau,council,district,G0007,,pending,,,,,,09279
+G0279,Amberg,council,city,G0007,,pending,,,,,,09361
+G0280,Regensburg,council,city,G0007,,pending,,,,,,09362
+G0281,Weiden i.d.OPf.,council,city,G0007,,pending,,,,,,09363
+G0282,Landkreis Amberg-Sulzbach,council,district,G0007,,pending,,,,,,09371
+G0283,Landkreis Cham,council,district,G0007,,pending,,,,,,09372
+G0284,Landkreis Neumarkt i.d.OPf.,council,district,G0007,,pending,,,,,,09373
+G0285,Landkreis Neustadt a.d.Waldnaab,council,district,G0007,,pending,,,,,,09374
+G0286,Landkreis Regensburg,council,district,G0007,,pending,,,,,,09375
+G0287,Landkreis Schwandorf,council,district,G0007,,pending,,,,,,09376
+G0288,Landkreis Tirschenreuth,council,district,G0007,,pending,,,,,,09377
+G0289,Bamberg,council,city,G0007,,pending,,,,,,09461
+G0290,Bayreuth,council,city,G0007,,pending,,,,,,09462
+G0291,Coburg,council,city,G0007,,pending,,,,,,09463
+G0292,Hof,council,city,G0007,,pending,,,,,,09464
+G0293,Landkreis Bamberg,council,district,G0007,,pending,,,,,,09471
+G0294,Landkreis Bayreuth,council,district,G0007,,pending,,,,,,09472
+G0295,Landkreis Coburg,council,district,G0007,,pending,,,,,,09473
+G0296,Landkreis Forchheim,council,district,G0007,,pending,,,,,,09474
+G0297,Landkreis Hof,council,district,G0007,,pending,,,,,,09475
+G0298,Landkreis Kronach,council,district,G0007,,pending,,,,,,09476
+G0299,Landkreis Kulmbach,council,district,G0007,,pending,,,,,,09477
+G0300,Landkreis Lichtenfels,council,district,G0007,,pending,,,,,,09478
+G0301,Landkreis Wunsiedel i.Fichtelgebirge,council,district,G0007,,pending,,,,,,09479
+G0302,Ansbach,council,city,G0007,,pending,,,,,,09561
+G0303,Erlangen,council,city,G0007,,pending,,,,,,09562
+G0304,Fürth,council,city,G0007,,pending,,,,,,09563
+G0305,Nürnberg,council,city,G0007,,pending,,,,,,09564
+G0306,Schwabach,council,city,G0007,,pending,,,,,,09565
+G0307,Landkreis Ansbach,council,district,G0007,,pending,,,,,,09571
+G0308,Landkreis Erlangen-Höchstadt,council,district,G0007,,pending,,,,,,09572
+G0309,Landkreis Fürth,council,district,G0007,,pending,,,,,,09573
+G0310,Landkreis Nürnberger Land,council,district,G0007,,pending,,,,,,09574
+G0311,Landkreis Neustadt a.d.Aisch-Bad Windsheim,council,district,G0007,,pending,,,,,,09575
+G0312,Landkreis Roth,council,district,G0007,,pending,,,,,,09576
+G0313,Landkreis Weißenburg-Gunzenhausen,council,district,G0007,,pending,,,,,,09577
+G0314,Aschaffenburg,council,city,G0007,,pending,,,,,,09661
+G0315,Schweinfurt,council,city,G0007,,pending,,,,,,09662
+G0316,Würzburg,council,city,G0007,,pending,,,,,,09663
+G0317,Landkreis Aschaffenburg,council,district,G0007,,pending,,,,,,09671
+G0318,Landkreis Bad Kissingen,council,district,G0007,,pending,,,,,,09672
+G0319,Landkreis Rhön-Grabfeld,council,district,G0007,,pending,,,,,,09673
+G0320,Landkreis Haßberge,council,district,G0007,,pending,,,,,,09674
+G0321,Landkreis Kitzingen,council,district,G0007,,pending,,,,,,09675
+G0322,Landkreis Miltenberg,council,district,G0007,,pending,,,,,,09676
+G0323,Landkreis Main-Spessart,council,district,G0007,,pending,,,,,,09677
+G0324,Landkreis Schweinfurt,council,district,G0007,,pending,,,,,,09678
+G0325,Landkreis Würzburg,council,district,G0007,,pending,,,,,,09679
+G0326,Augsburg,council,city,G0007,,pending,,,,,,09761
+G0327,Kaufbeuren,council,city,G0007,,pending,,,,,,09762
+G0328,Kempten (Allgäu),council,city,G0007,,pending,,,,,,09763
+G0329,Memmingen,council,city,G0007,,pending,,,,,,09764
+G0330,Landkreis Aichach-Friedberg,council,district,G0007,,pending,,,,,,09771
+G0331,Landkreis Augsburg,council,district,G0007,,pending,,,,,,09772
+G0332,Landkreis Dillingen a.d.Donau,council,district,G0007,,pending,,,,,,09773
+G0333,Landkreis Günzburg,council,district,G0007,,pending,,,,,,09774
+G0334,Landkreis Neu-Ulm,council,district,G0007,,pending,,,,,,09775
+G0335,Landkreis Lindau (Bodensee),council,district,G0007,,pending,,,,,,09776
+G0336,Landkreis Ostallgäu,council,district,G0007,,pending,,,,,,09777
+G0337,Landkreis Unterallgäu,council,district,G0007,,pending,,,,,,09778
+G0338,Landkreis Donau-Ries,council,district,G0007,,pending,,,,,,09779
+G0339,Landkreis Oberallgäu,council,district,G0007,,pending,,,,,,09780
+G0340,Regionalverband Saarbrücken,council,district,G0017,,pending,,,,,,10041
+G0341,Landkreis Merzig-Wadern,council,district,G0017,,pending,,,,,,10042
+G0342,Landkreis Neunkirchen,council,district,G0017,,pending,,,,,,10043
+G0343,Landkreis Saarlouis,council,district,G0017,,pending,,,,,,10044
+G0344,Landkreis Saarpfalz-Kreis,council,district,G0017,,pending,,,,,,10045
+G0345,Landkreis St. Wendel,council,district,G0017,,pending,,,,,,10046
+G0346,Berlin,council,city,G0008,,pending,,,,,,11000
+G0347,Brandenburg an der Havel,council,city,G0009,,pending,,,,,,12051
+G0348,Cottbus,council,city,G0009,,pending,,,,,,12052
+G0349,Frankfurt (Oder),council,city,G0009,,pending,,,,,,12053
+G0350,Potsdam,council,city,G0009,,pending,,,,,,12054
+G0351,Landkreis Barnim,council,district,G0009,,pending,,,,,,12060
+G0352,Landkreis Dahme-Spreewald,council,district,G0009,,pending,,,,,,12061
+G0353,Landkreis Elbe-Elster,council,district,G0009,,pending,,,,,,12062
+G0354,Landkreis Havelland,council,district,G0009,,pending,,,,,,12063
+G0355,Landkreis Märkisch-Oderland,council,district,G0009,,pending,,,,,,12064
+G0356,Landkreis Oberhavel,council,district,G0009,,pending,,,,,,12065
+G0357,Landkreis Oberspreewald-Lausitz,council,district,G0009,,pending,,,,,,12066
+G0358,Landkreis Oder-Spree,council,district,G0009,,pending,,,,,,12067
+G0359,Landkreis Ostprignitz-Ruppin,council,district,G0009,,pending,,,,,,12068
+G0360,Landkreis Potsdam-Mittelmark,council,district,G0009,,pending,,,,,,12069
+G0361,Landkreis Prignitz,council,district,G0009,,pending,,,,,,12070
+G0362,Landkreis Spree-Neiße,council,district,G0009,,pending,,,,,,12071
+G0363,Landkreis Teltow-Fläming,council,district,G0009,,pending,,,,,,12072
+G0364,Landkreis Uckermark,council,district,G0009,,pending,,,,,,12073
+G0365,Rostock,council,city,G0014,,pending,,,,,,13003
+G0366,Schwerin,council,city,G0014,,pending,,,,,,13004
+G0367,Landkreis Mecklenburgische Seenplatte,council,district,G0014,,pending,,,,,,13071
+G0368,Landkreis Rostock,council,district,G0014,,pending,,,,,,13072
+G0369,Landkreis Vorpommern-Rügen,council,district,G0014,,pending,,,,,,13073
+G0370,Landkreis Nordwestmecklenburg,council,district,G0014,,pending,,,,,,13074
+G0371,Landkreis Vorpommern-Greifswald,council,district,G0014,,pending,,,,,,13075
+G0372,Landkreis Ludwigslust-Parchim,council,district,G0014,,pending,,,,,,13076
+G0373,Chemnitz,council,city,G0018,,pending,,,,,,14511
+G0374,Landkreis Erzgebirgskreis,council,district,G0018,,pending,,,,,,14521
+G0375,Landkreis Mittelsachsen,council,district,G0018,,pending,,,,,,14522
+G0376,Landkreis Vogtlandkreis,council,district,G0018,,pending,,,,,,14523
+G0377,Landkreis Zwickau,council,district,G0018,,pending,,,,,,14524
+G0378,Dresden,council,city,G0018,,pending,,,,,,14612
+G0379,Landkreis Bautzen,council,district,G0018,,pending,,,,,,14625
+G0380,Landkreis Görlitz,council,district,G0018,,pending,,,,,,14626
+G0381,Landkreis Meißen,council,district,G0018,,pending,,,,,,14627
+G0382,Landkreis Sächsische Schweiz-Osterzgebirge,council,district,G0018,,pending,,,,,,14628
+G0383,Leipzig,council,city,G0018,,pending,,,,,,14713
+G0384,Landkreis Leipzig,council,district,G0018,,pending,,,,,,14729
+G0385,Landkreis Nordsachsen,council,district,G0018,,pending,,,,,,14730
+G0386,Dessau-Roßlau,council,city,G0019,,pending,,,,,,15001
+G0387,Halle (Saale),council,city,G0019,,pending,,,,,,15002
+G0388,Magdeburg,council,city,G0019,,pending,,,,,,15003
+G0389,Landkreis Altmarkkreis Salzwedel,council,district,G0019,,pending,,,,,,15081
+G0390,Landkreis Anhalt-Bitterfeld,council,district,G0019,,pending,,,,,,15082
+G0391,Landkreis Börde,council,district,G0019,,pending,,,,,,15083
+G0392,Landkreis Burgenlandkreis,council,district,G0019,,pending,,,,,,15084
+G0393,Landkreis Harz,council,district,G0019,,pending,,,,,,15085
+G0394,Landkreis Jerichower Land,council,district,G0019,,pending,,,,,,15086
+G0395,Landkreis Mansfeld-Südharz,council,district,G0019,,pending,,,,,,15087
+G0396,Landkreis Saalekreis,council,district,G0019,,pending,,,,,,15088
+G0397,Landkreis Salzlandkreis,council,district,G0019,,pending,,,,,,15089
+G0398,Landkreis Stendal,council,district,G0019,,pending,,,,,,15090
+G0399,Landkreis Wittenberg,council,district,G0019,,pending,,,,,,15091
+G0400,Erfurt,council,city,G0021,,pending,,,,,,16051
+G0401,Gera,council,city,G0021,,pending,,,,,,16052
+G0402,Jena,council,city,G0021,,pending,,,,,,16053
+G0403,Suhl,council,city,G0021,,pending,,,,,,16054
+G0404,Weimar,council,city,G0021,,pending,,,,,,16055
+G0405,Landkreis Eichsfeld,council,district,G0021,,pending,,,,,,16061
+G0406,Landkreis Nordhausen,council,district,G0021,,pending,,,,,,16062
+G0407,Landkreis Wartburgkreis,council,district,G0021,,pending,,,,,,16063
+G0408,Landkreis Unstrut-Hainich-Kreis,council,district,G0021,,pending,,,,,,16064
+G0409,Landkreis Kyffhäuserkreis,council,district,G0021,,pending,,,,,,16065
+G0410,Landkreis Schmalkalden-Meiningen,council,district,G0021,,pending,,,,,,16066
+G0411,Landkreis Gotha,council,district,G0021,,pending,,,,,,16067
+G0412,Landkreis Sömmerda,council,district,G0021,,pending,,,,,,16068
+G0413,Landkreis Hildburghausen,council,district,G0021,,pending,,,,,,16069
+G0414,Landkreis Ilm-Kreis,council,district,G0021,,pending,,,,,,16070
+G0415,Landkreis Weimarer Land,council,district,G0021,,pending,,,,,,16071
+G0416,Landkreis Sonneberg,council,district,G0021,,pending,,,,,,16072
+G0417,Landkreis Saalfeld-Rudolstadt,council,district,G0021,,pending,,,,,,16073
+G0418,Landkreis Saale-Holzland-Kreis,council,district,G0021,,pending,,,,,,16074
+G0419,Landkreis Saale-Orla-Kreis,council,district,G0021,,pending,,,,,,16075
+G0420,Landkreis Greiz,council,district,G0021,,pending,,,,,,16076
+G0421,Landkreis Altenburger Land,council,district,G0021,,pending,,,,,,16077
