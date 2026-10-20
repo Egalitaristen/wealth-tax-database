@@ -4,5 +4,20 @@
   "lead": "Egalitaristen",
   "status": "in progress",
   "boundaries": "boundaries.json",
-  "notes": "Scope: national (Riksdag, government), European Parliament, regional (21 län) and local (290 kommuner) level. First pass R001 (2026-10-19) covered the Riksdag motion archive only; the regional and local sweep has not started."
+  "notes": "Scope: national (Riksdag, government), European Parliament, regional (21 län) and local (290 kommuner) level. First pass R001 (2026-10-19) covered the Riksdag motion archive only; the regional and local sweep has not started.",
+  "polls": [
+    {
+      "support": 53,
+      "oppose": null,
+      "scope": "Sweden, adults",
+      "question": "A special billionaire tax for people with more than 1 billion kronor in wealth (\"very\" or \"fairly\" good)",
+      "question_original": "Vad tycker du om förslaget att införa en särskild miljardärsskatt för dem med över en 1 miljard kronor i förmögenhet?",
+      "pollster": "Verian",
+      "commissioned_by": "Oxfam Sverige",
+      "fieldwork": "",
+      "sample": "1,056 people",
+      "published": "2026-06-11",
+      "url": "https://www.realtid.se/bors-finans/varannan-svensk-vill-se-skatt-for-miljardarer/"
+    }
+  ]
 }
