@@ -423,9 +423,9 @@ function worldBoxes(W) {
   return WORLDBOX;
 }
 
-// The home page map: a world map shaded like the country maps. Zooming into a country with a register
-// (or clicking it) hands over to that country's own area map in the same frame, and zooming back out
-// returns to the world. Country maps use their own projections, hence the crossfade between the two.
+// The home page map: a world map shaded like the country maps. Clicking a country with a register opens
+// its own area map in the same frame; the World link goes back. Country maps use their own projections,
+// hence the crossfade between the two.
 function worldMap(box, W) {
   const layer = $('.area', box), crumb = $('.crumb', box);
   const byNum = {}; W.countries.forEach(c => { if (c.numeric) byNum[c.numeric] = c; });
@@ -453,21 +453,13 @@ function worldMap(box, W) {
       hideTip();
       if (byNum[id]) drill(byNum[id], id);
       else { const m = mains[id]; pz.animate(pz.target(m[0], m[1], m[2], m[3], .6)); }
-    },
-    onWheel: (f, e) => {
-      // Zooming in over a country with a register, once it fills much of the frame, opens its area map.
-      if (f >= 1 || busy) return;
-      const id = countryAt(e), c = id && byNum[id];
-      if (!c) return;
-      const m = mains[id], v = pz.view();
-      if (m[2] > v[2] * .45 || m[3] > v[3] * .45) drill(c, id);
     }});
   svg.addEventListener('pointerleave', hideTip);
 
   function setCrumb(c) {
-    crumb.innerHTML = c ? `<button type="button" data-world>World</button><span>›</span><b>${esc(c.name)}</b><a href="/${c.slug}">Open country page →</a>`
-      : `<b>World</b><span class="muted">Scroll to zoom · click a shaded country</span>`;
-    const b = $('[data-world]', crumb); if (b) b.onclick = () => leave(true);
+    crumb.innerHTML = c ? `<button type="button" data-world>← World</button><span>›</span><b>${esc(c.name)}</b><a href="/${c.slug}">Open country page →</a>`
+      : `<b>World</b><span class="muted">Scroll to zoom · click a shaded country to open it</span>`;
+    const b = $('[data-world]', crumb); if (b) b.onclick = leave;
   }
   async function drill(c, id) {
     if (busy) return;
@@ -485,14 +477,14 @@ function worldMap(box, W) {
     setCrumb(c); hideTip();
     setTimeout(() => { busy = false; }, 350);
   }
-  function leave(toWorld) {
+  function leave() {
     if (!area) return;
     layer.classList.remove('on'); svg.classList.remove('off');
     setTimeout(() => { if (!layer.classList.contains('on')) { layer.hidden = true; layer.innerHTML = ''; } }, 300);
     area = null; setCrumb(null);
-    if (toWorld) pz.fit(); else pz.zoomAt(1.6);
+    pz.fit();
   }
-  // A country's area map inside the home map; zooming out past its full extent goes back to the world.
+  // A country's area map inside the home map.
   function areaLayer(D, c) {
     const [vx, vy, vw, vh] = D.vb;
     const amx = Math.max(1, ...D.C.map(u => u[6].length));
@@ -502,7 +494,7 @@ function worldMap(box, W) {
       return `<path data-i="${i}" class="${n ? 'u-sup' : 'u-none'}"${n ? ` style="--t:${tt}"` : ''} d="${u[7]}"/>`; }).join('')}</g>`;
     layer.innerHTML = ''; layer.appendChild(svg);
     const apz = panZoom(svg, D.vb, {
-      maxOut: 1.6, maxIn: 80,
+      maxOut: 1, maxIn: 80,
       onView: (x, y, w, h) => svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`),
       onHover: e => {
         const p = e.target.closest('path[data-i]');
@@ -510,8 +502,7 @@ function worldMap(box, W) {
         const u = D.C[+p.dataset.i], n = u[6].length;
         showTip(`<b>${esc(u[0])}</b><span>${n ? fmt(n) + ' supporter' + (n === 1 ? '' : 's') + ' · click to see them' : 'none recorded yet'}</span>`, e.clientX, e.clientY);
       },
-      onTap: e => { const p = e.target.closest('path[data-i]'); if (p) { hideTip(); go(`/${c.slug}?place=${enc(D.C[+p.dataset.i][8])}#map`); } },
-      onWheel: f => { if (f > 1 && apz.view()[2] >= apz.fitView()[2] * 1.25) leave(false); }});
+      onTap: e => { const p = e.target.closest('path[data-i]'); if (p) { hideTip(); go(`/${c.slug}?place=${enc(D.C[+p.dataset.i][8])}#map`); } }});
     svg.addEventListener('pointerleave', hideTip);
     apz.fit(false);
     return apz;
@@ -520,8 +511,8 @@ function worldMap(box, W) {
     const b = e.target.closest('button'); if (!b) return;
     const cur = area || pz;
     if (b.dataset.z === 'in') cur.zoomAt(.6);
-    else if (b.dataset.z === 'out') { if (area && area.view()[2] >= area.fitView()[2] * 1.2) leave(false); else cur.zoomAt(1 / .6); }
-    else { if (area) leave(true); else pz.fit(); }
+    else if (b.dataset.z === 'out') cur.zoomAt(1 / .6);
+    else cur.fit();
   });
   setCrumb(null);
   pz.fit(false);
