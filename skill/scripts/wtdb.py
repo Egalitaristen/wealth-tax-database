@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""wtdb.py — helper for the Wealth Tax Database skill.
+"""wtdb.py — helper for the Wealth Tax Supporters skill.
 
 Standard library only, except `export`, which needs openpyxl (pip install openpyxl).
 

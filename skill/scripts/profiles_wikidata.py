@@ -15,7 +15,7 @@ from datetime import date
 from pathlib import Path
 
 WTDB = Path(__file__).with_name("wtdb.py")
-UA = {"User-Agent": "wealth-tax-database/0.1 (https://github.com/Egalitaristen/wealth-tax-database)"}
+UA = {"User-Agent": "wealth-tax-supporters/0.1 (https://github.com/Egalitaristen/wealth-tax-supporters)"}
 PROPS = {"P2002": ("x", "https://x.com/{}"), "P12361": ("bluesky", "https://bsky.app/profile/{}"),
          "P2003": ("instagram", "https://www.instagram.com/{}/"), "P2013": ("facebook", "https://www.facebook.com/{}"),
          "P2397": ("youtube", "https://www.youtube.com/channel/{}"), "P7085": ("tiktok", "https://www.tiktok.com/@{}"),

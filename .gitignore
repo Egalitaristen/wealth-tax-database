@@ -5,3 +5,11 @@ __pycache__/
 .DS_Store
 skill/scripts/node_modules/
 skill/scripts/package*.json
+
+# Cloudflare and community data (never commit)
+.wrangler/
+.dev.vars
+wrangler.toml
+*.sqlite
+*.sqlite3
+community_export*
