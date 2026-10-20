@@ -469,25 +469,56 @@ async function countryPage(slug, params) {
   const D = await loadCountry(slug), m = D.meta;
   setTitle(m.name);
   const sup = D.places.filter(p => p.mapped && p.ids.length).length;
+  // Overview figures for the top of the page.
+  const tally = f => { const o = {}; D.P.forEach(p => f(p).forEach(k => { if (k) o[k] = (o[k] || 0) + 1; })); return Object.entries(o).sort((a, b) => b[1] - a[1]); };
+  const perYear = {};
+  D.E.forEach(e => { const y = +year(e[E_.date]); if (y) perYear[y] = (perYear[y] || 0) + 1; });
+  const years = Object.keys(perYear).map(Number).sort((a, b) => a - b);
+  const span = years.length ? years.slice(-10) : [];
+  const yMax = Math.max(1, ...span.map(y => perYear[y]));
+  const peak = years.reduce((a, y) => perYear[y] > (perYear[a] || 0) ? y : a, years[0]);
+  const spark = span.length ? `<svg class="spark" viewBox="0 0 ${span.length * 12} 44" preserveAspectRatio="none" aria-hidden="true">${span.map((y, i) => {
+    const h = Math.max(1.5, perYear[y] / yMax * 40); return `<rect x="${i * 12 + 1.5}" y="${44 - h}" width="9" height="${h}"${y === peak ? ' class="pk"' : ''}><title>${y}: ${perYear[y]}</title></rect>`; }).join('')}</svg>
+    <div class="spark-x"><span>${span[0]}</span><span>${span[span.length - 1]}</span></div>` : '';
+  const topDes = tally(p => p[P_.des]).slice(0, 3), topTypes = tally(p => [p[P_.type], ...p[P_.other]]).slice(0, 5);
+  const desMax = topDes.length ? topDes[0][1] : 1;
   main.innerHTML = `
   <div class="wrap fade">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/#countries">All countries</a><span>/</span><span>${esc(m.name)}</span></nav>
-    <div class="c-head">
-      <div>
+    <div class="c-top">
+      <div class="c-title">
         <h1>${esc(m.name)}</h1>
-        <p class="lede">${fmt(m.supporters)} people and organisations in ${esc(m.name)} have backed a wealth tax in public, across ${fmt(m.evidence)} sourced statements.</p>
+        <p>${fmt(m.supporters)} people and organisations have backed a wealth tax in public, in ${fmt(m.evidence)} sourced statements.</p>
+      </div>
+      <div class="c-stats">
+        <div><b>${fmt(m.supporters)}</b><span>supporters</span></div>
+        <div><b>${fmt(m.A)}</b><span>explicit support</span></div>
+        <div><b>${fmt(m.evidence)}</b><span>statements</span></div>
+        <div><b>${fmt(m.units_with_supporters)}</b><span>areas with a supporter</span></div>
       </div>
     </div>
-    <div class="statline">
-      <div><b>${fmt(m.supporters)}</b><span>supporters</span></div>
-      <div><b>${fmt(m.A)}</b><span>with explicit support</span></div>
-      <div><b>${fmt(m.evidence)}</b><span>sourced statements</span></div>
-      <div><b>${fmt(m.units_with_supporters)}</b><span>of ${fmt(m.units)} areas with a supporter</span></div>
+    <div class="c-overview">
+      <a class="ov" href="#time">
+        <div class="kicker">Statements per year</div>
+        ${spark}
+        <div class="ov-foot">Peak <b>${peak || '·'}</b> with ${fmt(perYear[peak] || 0)} · latest ${esc(year(years.length ? String(years[years.length - 1]) : ''))}</div>
+      </a>
+      <a class="ov" href="#time">
+        <div class="kicker">What they back</div>
+        <div class="ov-bars">${topDes.map(([k, v]) => `<div><span>${esc(label(DES, k))}</span><i style="width:${(v / desMax * 100).toFixed(0)}%"></i><b>${fmt(v)}</b></div>`).join('')}</div>
+      </a>
+      <div class="ov">
+        <div class="kicker">Who they are · click to filter</div>
+        <div class="ov-chips">${topTypes.map(([k, v]) => `<button type="button" class="chip" data-type="${esc(k)}">${esc(label(TYPES_PL, k))} <b>${fmt(v)}</b></button>`).join('')}</div>
+      </div>
     </div>
   </div>
-  <div class="subnav"><div class="wrap">
-    ${D.C.length ? '<a href="#map">Map</a>' : ''}<a href="#directory">Directory</a><a href="#time">Over time</a><a href="#method">Method and gaps</a>
-  </div></div>
+  <nav class="c-tabs" aria-label="Sections"><div class="wrap">
+    ${D.C.length ? `<a href="#map"><b>Map</b><span>${fmt(m.units_with_supporters)} areas with supporters</span></a>` : ''}
+    <a href="#directory"><b>Directory</b><span>${fmt(m.supporters)} entries</span></a>
+    <a href="#time"><b>Over time</b><span>${years.length ? years[0] + '–' + years[years.length - 1] : 'by year'}</span></a>
+    <a href="#method"><b>Method</b><span>sources and downloads</span></a>
+  </div></nav>
   <div class="wrap">
     ${D.C.length ? `<section class="c-sec" id="map">
       <div class="sec-head" style="margin-bottom:0"><div><div class="kicker">Explore by place</div><h2>Where they are</h2></div>
@@ -589,6 +620,7 @@ async function countryPage(slug, params) {
   [['#f-type', 'type'], ['#f-party', 'party'], ['#f-grade', 'grade'], ['#f-sort', 'sort']].forEach(([s, k]) => $(s).addEventListener('change', e => { ST[k] = e.target.value; changed(); }));
   $('#f-level').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { ST.level = b.dataset.v; changed(); } });
   const filterBy = (k, v) => { ST[k] = v; changed(); $('#directory').scrollIntoView({block: 'start'}); };
+  $$('.ov-chips [data-type]').forEach(b => b.addEventListener('click', () => filterBy('type', b.dataset.type)));
 
   // ----- map -----
   let mapApi = null;
@@ -630,7 +662,7 @@ async function countryPage(slug, params) {
     </div>`;
 
   // Highlight the sub-nav item for the section in view.
-  const links = $$('.subnav a');
+  const links = $$('.c-tabs a');
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + en.target.id)); }), {rootMargin: '-40% 0px -55% 0px'});
   $$('.c-sec').forEach(s => io.observe(s));
   const prev = leaving;
