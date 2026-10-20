@@ -6,6 +6,7 @@ Run R001, 2026-10-20. Seed pass. Facts marked [verify] come from a search summar
 - Area: India (country). Depth: **seed**.
 - Levels in the register: the Union, 36 states and union territories, and 726 districts (the map tier). Actors are placed at the Union level so far; no state or district body was searched.
 - Languages to search in: English first; Hindi (संपत्ति कर, धन कर, विरासत कर) and Malayalam, Bengali and Tamil for the Left parties' state organs. Only English was used in R001.
+- R002 added: the Tax the Top campaign site (read with the headless browser), its petition and press statements, the 2024 joint memorandum of ten central trade unions, the Left parties' joint Budget statement (Feb 2025), and a search of Hindi, Malayalam, Bengali and Tamil pages (found nothing usable).
 - Left out: Hindi-language media and party documents, state assemblies (Kerala, West Bengal, Tamil Nadu above all), Lok Sabha and Rajya Sabha debates, union congress resolutions, Parliament standing committees.
 
 ## 2. Wealth tax history and live proposals (2010 onwards)
@@ -42,8 +43,9 @@ Run R001, 2026-10-20. Seed pass. Facts marked [verify] come from a search summar
 - Tax the Top campaign and its partners; Fight Inequality Alliance India; Oxfam India; the Left parties and their unions (CITU, AITUC, AIKS) and the Centre for Financial Accountability. The campaign's website (taxthetop) was not reachable from the sandbox, so its partner list is the top harvest target.
 
 ## 10. Plan for the next runs (ordered by expected yield)
-1. **Tax the Top campaign**: partners, unions, people's movements and spokespeople (blocked: the site is not reachable from the sandbox; try the Wayback Machine or the CFA report PDF). Expected 20–60 organisations.
-2. **Left parties and unions**: CITU, AITUC, AIKS, SFI, AIDWA statements and congress resolutions; CPI(M) and CPI MPs' Budget speeches in `rsdebate.nic.in` and `sansad.in`; Kerala's government. Expected 10–30 people.
+R002 did items 1 and 2 in part (see notes_next in runs.csv); the list below is the order after R002.
+1. **Tax the Top petition**: the press statement says about 100 signed but names 13; find the full signature list (not on taxthetop.org's front page; ask the campaign, or look for the petition on a petition site) and the 'more than 20 organisations' that took part. Expected 80+ people.
+2. **Unions and mass organisations**: AIKS, SFI, AIDWA and union congress resolutions; the ten central unions' memoranda for other years (2025, 2026); CPI(M) and CPI MPs' speeches in `rsdebate.nic.in` and `sansad.in` (full-text search needed). Expected 10–30 rows.
 3. **Economists and commentators**: Jayati Ghosh, C. P. Chandrasekhar, Arun Kumar, Himanshu, Sudipto Mundle, R. Nagaraj and others in The Wire, Scroll, Frontline; each needs a page where they argue for the tax.
 4. **Congress**: Jairam Ramesh's September 2024 G20 statement, Rahul Gandhi's survey speeches, any Congress MP speeches. Upgrade Ramesh from B.
 5. **Hindi and regional-language sources**, state assemblies, municipal bodies: only if 1–4 show support lives there.

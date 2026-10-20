@@ -1,7 +1,7 @@
 geo_unit_id,name,level,unit_type,parent_id,website,sweep_status,swept_run,swept_date,queries_run,hits,notes,code
-G0001,India,national,country,,https://www.india.gov.in,pending,,,,,,
-G0002,Lok Sabha,national,legislature,G0001,https://sansad.in/ls,pending,,,,,Not searched. Hansard and the debates database are on sansad.in (certificate and redirect issues from the sandbox).,
-G0003,Rajya Sabha,national,legislature,G0001,https://sansad.in/rs,pending,,,,,Not searched. Rajya Sabha debates are archived at rsdebate.nic.in.,
+G0001,India,national,country,,https://www.india.gov.in,pending,,,,,"R002 also ran searches in Hindi, Malayalam, Bengali and Tamil and for Kerala, Tamil Nadu, West Bengal and Karnataka governments: no wealth-tax statement found in those languages or states (Kerala's chief minister said in 2023 only that the Centre had not taxed the super-rich).",
+G0002,Lok Sabha,national,legislature,G0001,https://sansad.in/ls,in_progress,R002,2026-10-20,6,0,"R002: web searches for Lok Sabha speeches, motions and private members' bills found none naming a wealth tax; Hansard on sansad.in and rsdebate.nic.in was not searched in full text (the archive pages return no text to plain fetches). Written questions on a wealth tax exist (Rajya Sabha, Dec 2021 and Mar 2022) but a question is not support.",
+G0003,Rajya Sabha,national,legislature,G0001,https://sansad.in/rs,in_progress,R002,2026-10-20,6,0,R002: same searches as the Lok Sabha; no Rajya Sabha speech naming a wealth tax found; full-text search of rsdebate.nic.in still to do.,
 G0004,Government of India,national,executive,G0001,https://www.india.gov.in,pending,,,,,Finance Minister Sitharaman and the Chief Economic Adviser oppose an inheritance tax and a wealth tax (reported Dec 2024); no supporter found in government.,
 G0005,Mizoram,region,state or union territory,G0001,,pending,,,,,,15
 G0006,Tamil Nadu,region,state or union territory,G0001,,pending,,,,,,33
