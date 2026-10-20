@@ -233,6 +233,7 @@ def build_country(folder):
                    units=len(geo) - len(roots), units_done=done, units_with_supporters=with_sup, updated=last, excluded=len(excl),
                    polls=[p for p in meta.get("polls", []) if str(p.get("url", "")).startswith("https://")])
     summary["map_source"] = (bounds or {}).get("source", "")
+    summary["map_licence"] = [(bounds or {}).get("licence", ""), (bounds or {}).get("licence_url", "")]
     R = [r["path"] for r in (bounds or {}).get("regions", [])]
     country = dict(meta=summary, P=P, E=E, C=C, vb=vb, O=O, L=L, R=R)
 

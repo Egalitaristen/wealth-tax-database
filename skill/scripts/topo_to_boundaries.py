@@ -8,17 +8,26 @@ Map units are matched to geo_units.csv by `code` when the register has codes (th
 for example 30 US counties are called Washington County), and otherwise by name. A name also matches when the
 geo_units name starts with the boundary name followed by " (".
 
+Only use shapes with a stated open licence (public domain, CC0, CC BY, ODbL, an open government licence). A
+source that states no licence, or a non-commercial one such as GADM, is not used: a country without a map is
+better than a map that cannot be republished. --licence and --licence-url are required, and the official code
+system of the units goes in --code-scheme. Never invent codes.
+
 Examples
   # US counties, already projected to a flat 975 x 610 canvas (npm package us-atlas, counties-albers-10m.json)
   python skill/scripts/topo_to_boundaries.py counties-albers-10m.json --object counties --code-prop id \\
-      --scale 4 --simplify 1.5 --source "US Census cartographic boundaries via us-atlas" --out data/us/boundaries.json
+      --scale 4 --simplify 1.5 --source "US Census cartographic boundaries via us-atlas" \\
+      --licence "Public domain (US Government work)" --licence-url https://www.usa.gov/government-copyright \\
+      --code-scheme "Census FIPS county codes" --out data/us/boundaries.json
 
   # German Kreise from the BKG shapefile (planar UTM metres, so scale them down)
-  python skill/scripts/topo_to_boundaries.py VG2500_KRS.shp --name-prop GEN --code-prop ARS --scale 0.001 \\
-      --simplify 1 --source "(c) GeoBasis-DE / BKG" --out data/de/boundaries.json
+  python skill/scripts/topo_to_boundaries.py VG2500_KRS.shp --name-prop GEN --code-prop AGS --scale 0.002 \\
+      --flip-y --simplify 0.6 --source "(c) GeoBasis-DE / BKG (2025)" --licence dl-de/by-2-0 \\
+      --licence-url https://www.govdata.de/dl-de/by-2-0 --code-scheme AGS --out data/de/boundaries.json
 
-  # Longitude/latitude shapes (for example world-atlas or a GADM export converted to TopoJSON)
-  python skill/scripts/topo_to_boundaries.py regions.json --object regions --project lonlat --out data/xx/boundaries.json
+  # Longitude/latitude shapes (for example geoBoundaries gbOpen, after checking that country's licence)
+  python skill/scripts/topo_to_boundaries.py regions.geojson --project lonlat --name-prop shapeName \\
+      --licence CC-BY-4.0 --licence-url https://www.geoboundaries.org/ --out data/xx/boundaries.json
 """
 import argparse, json, math, sys
 from pathlib import Path
@@ -124,9 +133,20 @@ def main():
     ap.add_argument("--simplify", type=float, default=0, help="Douglas-Peucker tolerance in output units (0 = off)")
     ap.add_argument("--flip-y", action="store_true", help="planar sources with y pointing up (most shapefiles)")
     ap.add_argument("--where", default="", help="keep only shapes where FIELD=VALUE (for example GF=9 for land areas in BKG data)")
-    ap.add_argument("--source", default="", help="where the shapes come from and their licence, stored in the file")
+    ap.add_argument("--source", default="", help="where the shapes come from and the credit the licence asks for")
+    ap.add_argument("--licence", required=True,
+                    help="the shapes' open licence, as the source states it (CC0-1.0, CC-BY-4.0, OGL-UK-3.0, ...). "
+                         "No stated licence means do not use the source")
+    ap.add_argument("--licence-url", required=True, help="https link to the licence text or the source's licence page")
+    ap.add_argument("--code-scheme", default="",
+                    help="the official code system in --code-prop (GSS, FIPS, AGS, LGD ...); required for the local "
+                         "units. Never invent codes")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
+    if a.licence.strip().lower() in ("", "unknown", "none", "not stated", "unclear"):
+        ap.error("the shapes need an open licence; find a source that states one (SKILL.md, boundaries.json)")
+    if not a.licence_url.startswith("https://"):
+        ap.error("--licence-url must be an https link")
 
     ext = a.source_file.lower().rsplit(".", 1)[-1]
     if ext == "json" and not a.object:
@@ -158,6 +178,7 @@ def main():
     if not units:
         sys.exit("No shapes left: check --object, --name-prop, --code-prop and --where")
     out = {"viewBox": [min(xs), min(ys), max(xs) - min(xs), max(ys) - min(ys)], "source": a.source,
+           "licence": a.licence, "licence_url": a.licence_url, "code_scheme": a.code_scheme,
            "match": "code" if a.code_prop else "name", "units": units}
     Path(a.out).write_text(json.dumps(out, separators=(",", ":"), ensure_ascii=False), encoding="utf-8")
     print(f"Wrote {a.out}: {len(units)} units, {npts} points, {Path(a.out).stat().st_size // 1024} KB")
