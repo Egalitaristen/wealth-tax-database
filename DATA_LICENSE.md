@@ -10,7 +10,7 @@ Suggested credit: "Wealth Tax Supporters contributors, https://github.com/Egalit
 ## What the licence does not cover
 
 - **Quotes** in the `quote_original` column are short extracts from the cited sources. They remain under the copyright of their publishers and are included for attribution and verification.
-- **Boundary files** (`boundaries.json`) keep the licence of their source, named inside each file. The UK file uses ONS data under the Open Government Licence v3.0 (contains OS data © Crown copyright and database right).
+- **Boundary files** (`boundaries.json`) keep the licence of their source, named inside each file. The UK file uses ONS data under the Open Government Licence v3.0 (contains OS data © Crown copyright and database right). The US file uses US Census Bureau cartographic boundaries (public domain) via the us-atlas package. The German file uses © GeoBasis-DE / BKG (2025), VG2500, under the Datenlizenz Deutschland – Namensnennung – Version 2.0. The site prints each file's source on the country's Method page.
 - **World outlines** in `site/vendor/` come from the `world-atlas` package (Natural Earth, public domain).
 
 ## No warranty

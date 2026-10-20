@@ -8,16 +8,23 @@ A second worked example, next to the UK, at **Standard** depth: national and sta
 |---|---|---|
 | national | US Congress; the federal executive and agencies | Bills, cosponsors and roll calls |
 | region | The 50 states and DC | Name each unit like `Alabama (state legislature and state government)` so the boundary file can match on `Alabama` |
-| local | Counties, cities, school boards | Out of scope in the first run. Actors found here (a mayor, a city council, a county party) are still recorded, with `level=local` and a `location` such as `United States > California > Camarillo`; the city stays as place text until that layer is loaded |
+| local | 3,143 counties and equivalents (parishes, boroughs, census areas, independent cities) | The map tier. Named as the Census names them (`Ventura County`) with the 5-digit FIPS code in `code`. Cities stay as place text below their county: `United States > California > Ventura County > Camarillo` |
 
-The first run chose **national plus state level** and said so in `meta.json` and the area profile. That is a good pattern: pick a depth, write it down, and load only that depth into `geo_units.csv`.
+The register is loaded down to the counties (SKILL.md 6.7), but local sweeping stays proportionate: the first runs searched national and state level, and the counties stay `pending` until a sample shows they pay.
 
-**Map:** `data/us/boundaries.json` comes from the `us-atlas` package (`states-albers-10m.json`), which is already projected and has Alaska and Hawaii as insets:
+**Counties and places:** the county list with codes is the Census gazetteer (`2020_Gaz_counties_national`). To place a mayor or councillor, look the city up in the Census place-to-county table (`national_place_by_county2020.txt`) and use the county when the city lies in one county only; prefer the incorporated city when an unincorporated place shares its name. Congressional districts cross county lines, so a representative stays at state level with the district (`CA-47`) as place text.
+
+**Map:** `data/us/boundaries.json` comes from the `us-atlas` package (Census cartographic boundaries, already projected, with Alaska and Hawaii as insets): counties as units and states as region outlines.
 
 ```bash
-python skill/scripts/topo_to_boundaries.py states-albers-10m.json --object states --name-prop name \
-  --code-prop id --source "US Census cartographic boundaries via us-atlas" --out data/us/boundaries.json
+python skill/scripts/topo_to_boundaries.py counties-albers-10m.json --object counties --code-prop id \
+  --scale 4 --simplify 0.8 --source "US Census cartographic boundaries via us-atlas" --out counties.json
+python skill/scripts/topo_to_boundaries.py states-albers-10m.json --object states --code-prop id \
+  --scale 4 --simplify 1.5 --out states.json
+# then put the units of states.json into counties.json as "regions"
 ```
+
+us-atlas predates Alaska's 2019 split of Valdez-Cordova, so the register keeps Valdez-Cordova Census Area (02261) as one unit to match the map.
 
 ## What was in scope
 

@@ -186,6 +186,7 @@ def build_country(folder):
     if bfile and (folder / bfile).exists():
         bounds = json.load(open(folder / bfile, encoding="utf-8"))
     units = {_bare(g["name"]): g for g in geo}
+    by_code = {g["code"]: g for g in geo if g.get("code")}  # codes are safer: names repeat (US counties)
     here, inside = collections.defaultdict(list), collections.defaultdict(list)
     for a in actors:
         if a["actor_id"] not in by:
@@ -201,14 +202,18 @@ def build_country(folder):
     if bounds:
         vb = bounds["viewBox"]
         for u in bounds["units"]:
-            g = units.get(_bare(u["name"]))
+            g = by_code.get(u.get("code")) if by_code else units.get(_bare(u["name"]))
             if not g:
                 continue
             mapped.add(g["geo_unit_id"])
             ids = inside.get(g["geo_unit_id"], [])
             state = "support" if ids else ("clear" if g["sweep_status"] == "done" else "open")
-            C.append([u["name"], u.get("code", ""), state, g["sweep_status"], g["hits"], g["notes"][:600], ids, u["path"],
-                      unit_path(g["geo_unit_id"], by_id)])
+            # Supporters known only at the parent level (a state or Land, say) tint the area lightly on the map.
+            par = g.get("parent_id")
+            above = len(here.get(par, [])) if par and par not in roots else 0
+            C.append([re.sub(r"\s*\(.*$", "", g["name"]).strip(), u.get("code", ""), state, g["sweep_status"], g["hits"],
+                      g["notes"][:600], ids, u["path"], unit_path(g["geo_unit_id"], by_id), above,
+                      re.sub(r"\s*\(.*$", "", by_id[par]["name"]).strip() if above else ""])
     O = []
     for g in geo:
         uid = g["geo_unit_id"]
@@ -227,7 +232,9 @@ def build_country(folder):
                    supporters=len(P), evidence=len(E), verified=verified, A=grades["A"], B=grades["B"], C=grades["C"],
                    units=len(geo) - len(roots), units_done=done, units_with_supporters=with_sup, updated=last, excluded=len(excl),
                    polls=[p for p in meta.get("polls", []) if str(p.get("url", "")).startswith("https://")])
-    country = dict(meta=summary, P=P, E=E, C=C, vb=vb, O=O, L=L)
+    summary["map_source"] = (bounds or {}).get("source", "")
+    R = [r["path"] for r in (bounds or {}).get("regions", [])]
+    country = dict(meta=summary, P=P, E=E, C=C, vb=vb, O=O, L=L, R=R)
 
     # Search index rows: [slug, id, name, type, role, place, grade, statements]
     index = [[slug, p[0], p[1], p[3], p[4][:80], [x.strip() for x in p[7].split(">")][-1] if p[7] else "", p[8], p[9]]
@@ -348,7 +355,9 @@ def share_pages(out, base, countries, full):
     for c in countries:
         D, slug, name = full[c["slug"]], c["slug"], c["name"]
         mx = max([len(u[6]) for u in D["C"]] or [1]) or 1
-        units = [(u[7], (0.22 + 0.78 * math.log(len(u[6]) + 1) / math.log(mx + 1)) if u[6] else 0) for u in D["C"]]
+        pmx = max([u[9] for u in D["C"]] or [1]) or 1
+        units = [(u[7], (0.22 + 0.78 * math.log(len(u[6]) + 1) / math.log(mx + 1)) if u[6] else
+                  (0.1 + 0.22 * math.log(u[9] + 1) / math.log(pmx + 1)) if u[9] else 0) for u in D["C"]]
         found = f"public figures and organisations in {the(name)} on the record so far"
         years = sorted({e[1][:4] for e in D["E"] if e[1]})
         sections = {

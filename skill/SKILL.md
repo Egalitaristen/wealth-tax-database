@@ -18,7 +18,7 @@ Files in this skill (use them if present; the rules in this file are sufficient 
 - `references/countries/de.md` — a federal state with a suspended wealth tax, Bundestag motions as bulk lists of named sponsors, and an official member register for the alive check
 - `scripts/wtdb.py` — Python helper (stdlib; `openpyxl` only for xlsx export): `init`, `add`, `set`, `validate`, `dedupe`, `merge`, `checkquotes`, `status`, `export`
 - `scripts/profiles_wikidata.py` — fills `profiles.csv` (websites, socials, Wikipedia) from Wikidata IDs
-- `scripts/topo_to_boundaries.py` — turns a TopoJSON of areas into `boundaries.json`, so the country gets a local map on the site
+- `scripts/topo_to_boundaries.py` — turns a TopoJSON or shapefile of local areas (and their region outlines) into `boundaries.json`, so the country gets a local map on the site
 - `scripts/fetch_page.py` — optional headless-browser reader for JavaScript pages and sites that answer 403 to plain clients, including their PDFs (needs `pip install playwright trafilatura`, a Chromium build, and optionally `npm install defuddle jsdom` in `scripts/`). `wtdb.py checkquotes` uses it automatically when a page cannot be read otherwise
 - `scripts/adapters/se_meetingplus_scan.py` — optional Sweden adapter: full-text search of MeetingPlus council portals (Stockholm, Huddinge, Danderyd, Region Gotland)
 - `scripts/adapters/se_riksdag_scan.py` — optional Sweden adapter: Riksdag scanner: motions, questions, committee reports, plenary debates, votes, member register
@@ -161,15 +161,16 @@ In this repository, `<area-slug>` is the lowercase ISO 3166-1 alpha-2 code (`gb`
 - `verified`: n · y · failed (y means re-opened in QA and the quote was found)
 
 **geo_units.csv** — the tree of places you report on, and the checklist for regional and local sweeps (6.5, 6.7)
-`geo_unit_id, name, level, unit_type, parent_id, website, sweep_status, swept_run, swept_date, queries_run, hits, notes`
+`geo_unit_id, name, level, unit_type, parent_id, website, sweep_status, swept_run, swept_date, queries_run, hits, notes, code`
 - The register is a **tree**. The top row is the **country root** (`unit_type=country`, `level=national`, no parent), named as the first part of every `location`. Regions, states and nations are its children (`parent_id`), and councils, counties or cities sit below those. Institutions such as the legislature or the executive are also children of the root, but actors are not placed on them (see `location`).
-- Unit names must be unique among siblings. Write the plain name (`California`), not `California (state legislature)`; put descriptions in `unit_type` and `notes`.
-- `level`: supranational · national · devolved · region · county · combined_authority · council · sub_council. In a federal country, states are `region`. Load only the depth you are sweeping; a unit with children is a parent, and `status` counts the lowest units.
+- Unit names must be unique among siblings. Write the plain name (`California`), not `California (state legislature)`; put descriptions in `unit_type` and `notes`. Where a city and a district share a name, use the usual local form to tell them apart (`München` and `Landkreis München`).
+- `code`: the official code of the unit (ONS GSS code, US county FIPS, German AGS, Swedish kommunkod). Give every local unit one: map shapes are matched by code, because names repeat (thirty US counties are called Washington County).
+- `level`: supranational · national · devolved · region · county · combined_authority · council · sub_council. In a federal country, states are `region`. Load the register down to the local tier (6.7) even where you do not sweep it; a unit with children is a parent, and `status` counts the lowest units.
 - `sweep_status`: pending · in_progress · done · skipped
 
 **Polls** (optional, `meta.json` `polls`): published opinion polls on a wealth tax in the country, so a visitor can see that the register is the visible tip of wider support. One object per poll: `support` (percent), optional `support_text` ("About 8 in 10") and `oppose` (kept in the data, not shown on the site), `scope` (who was asked), `question` (the design asked about, in English), optional `question_original`, `pollster`, `commissioned_by`, `fieldwork`, `sample`, `published` (YYYY-MM-DD or YYYY-MM) and an https `url`. Use the pollster's own release or tables where they exist. Include polls that show low support as well as high, and put the most recent poll on a tax on the very rich first: the site shows the first one in the country header.
 
-**boundaries.json** (optional, in the country folder, named in `meta.json`) draws the local map on the site: `{"viewBox": [x, y, w, h], "units": [{"name", "code", "path"}]}`. A unit's `name` must equal a `geo_units.csv` name, or be that name up to the opening bracket (`Alabama` matches `Alabama (state legislature and state government)`). Make it from a TopoJSON with `scripts/topo_to_boundaries.py`. Check the licence of the shapes and say where they came from in the file's `source`.
+**boundaries.json** (in the country folder, named in `meta.json`) draws the local map on the site: `{"viewBox": [x, y, w, h], "source", "units": [{"name", "code", "path"}], "regions": [{"name", "code", "path"}]}`. `units` are the local tier (6.7) and are matched to `geo_units.csv` by `code` when the register has codes, otherwise by name. `regions` (optional) are the outlines of the level above (states, Länder), drawn as lines over the map. Make both with `scripts/topo_to_boundaries.py` from a TopoJSON or a shapefile (`--simplify` keeps the file small, `--where` drops water areas). `source` names where the shapes come from and their licence; the site prints it on the country's Method page as the credit most licences require. `wtdb.py validate` warns about shapes that match no unit.
 
 **links.csv** — relationships, used for snowballing
 `link_id, from_actor_id, to_actor_id, link_type, evidence_id, source_url, note`
@@ -204,7 +205,7 @@ python skill/scripts/wtdb.py dedupe data/gb       # likely duplicate actors
 python skill/scripts/wtdb.py merge data/gb A0012 A0345   # merge a duplicate (second) into the first: moves evidence, links, profiles
 python skill/scripts/wtdb.py checkquotes data/gb --run R004   # fetch sources and check the quotes are on the pages
 python skill/scripts/profiles_wikidata.py data/gb  # websites, socials and Wikipedia from Wikidata IDs
-python skill/scripts/topo_to_boundaries.py states.json --object states --out data/us/boundaries.json
+python skill/scripts/topo_to_boundaries.py counties-albers-10m.json --object counties --code-prop id --scale 4 --simplify 0.8 --out data/us/boundaries.json
 python skill/scripts/wtdb.py status data/gb       # counts, coverage grid, sweep progress, suggested next targets
 python skill/scripts/wtdb.py export data/gb       # writes data/gb/<slug>_wealth_tax_supporters.xlsx
 ```
@@ -274,7 +275,20 @@ Local support is real in some countries (UK councils pass motions) and nearly ab
 At the end of the first pass, write the plan into the last `runs.csv` row (`notes_next`) and the area profile (section 10): the layers and lists still to do, ordered by **expected yield per hour**, with what you expect from each and what is blocked. Include the regional and local decision from 6.5 and, if it is "continue", the order of regions. The user reads this to choose what to run next.
 
 ### 6.7 Geography register
-A tree of the places you will report on, in `geo_units.csv`, with a country root and `parent_id` set (section 5). Use the administrative hierarchy where political and tax power sits: a federal country goes country → state → county or city; a unitary country goes country → nation or region → municipality. Fetch the **official current list** (a statistics office or interior ministry), not memory. Load only the depth you will use. Finer places you meet earlier are not lost: put them in `location` as place text and they resolve when that layer is added. Seats are places, not institutions: an MP belongs to the constituency, a US representative to the district. For a map, also build `boundaries.json` (see `scripts/topo_to_boundaries.py`).
+A tree of the places you will report on, in `geo_units.csv`, with a country root and `parent_id` set (section 5).
+
+**Every country uses the same depth: the register and the map go down to the lowest tier of general-purpose local government, with the regions or states above it as parents.** That keeps countries comparable and lets a visitor find supporters near them. Today:
+
+| Country | Regions (parents) | Local tier (map units) |
+|---|---|---|
+| United Kingdom | nations and English regions, counties | 361 local authority districts (GSS codes) |
+| Sweden | 21 län | 290 kommuner (kommunkod) |
+| Germany | 16 Länder | 400 Kreise and kreisfreie Städte (AGS) |
+| United States | 50 states and DC | 3,143 counties and equivalents (FIPS) |
+
+For a new country, pick the tier that elects a council and runs local services (municipalities, districts or counties), not wards or parishes. Fetch the **official current list** with codes (a statistics office, mapping agency or interior ministry), not memory, and build `boundaries.json` from the same agency's shapes where possible, so codes match.
+
+Loading the local tier is not a promise to sweep it: sweeping stays proportionate to what the sample finds (6.5), and unswept units stay `pending`. Place each actor at the finest unit the source shows (a mayor in the city's unit, a state legislator in the state). Finer places you meet are not lost: put them in `location` as place text after the last unit (`United States > California > Ventura County > Camarillo`). On the map, areas with their own supporters are shaded, and areas whose region only has supporters at region level get a light tint. Seats are places, not institutions: an MP belongs to the constituency, a US representative to the district. For a map, also build `boundaries.json` (see `scripts/topo_to_boundaries.py`).
 
 ### 6.8 Later runs
 Each run reads the folder (`status`, `notes_next`), picks the top of the plan, works it, and writes a new plan. A good run is one harvest list, or one region, plus one layer pass. Priority order when the plan is silent:
@@ -327,5 +341,6 @@ The xlsx export contains: **Overview** (counts, grade mix, coverage and sweep pr
 - Pushing straight to `main`, or setting `verified=y` on one's own rows → branch, pull request, and a different checker for `verified=y`.
 - A run began by writing a crawler for 290 municipalities' protocols before the national legislature, parties and major organisations had been searched, because "every unit, no exceptions" was read as an order → touch every layer once first, sample local units, and build tooling only when a sample shows it pays (6.5).
 - Several scoping questions asked one after another before any research → one short message with recommended defaults, then start.
+- Countries were mapped at different depths (US and German maps stopped at states and Länder while the UK and Sweden went down to councils), so maps could not be compared and most local supporters had nowhere to go → load the local tier everywhere (6.7), whether or not you sweep it.
 - The UK's exhaustive council sweep was treated as the template for every country. It fits where councils pass motions and publish searchable minutes. Elsewhere, regional or local work should be proportionate to what the sample finds.
 - Progress measured by units marked done rather than by supporters found and checked → report supporters, grades and checked rows.
