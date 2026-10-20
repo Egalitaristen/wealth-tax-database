@@ -246,3 +246,75 @@ A0245,Bündnis Sahra Wagenknecht (BSW),organisation,party,,Political party (not 
 A0246,Jusos (Jungsozialisten in der SPD),organisation,party,,Youth organisation of the SPD,,SPD,A0118,DE,national,Germany,,https://www.jusos.de,active,na,national,,R001,2026-10-20
 A0247,Philipp Türmer,person,politician,,Chair of the Jusos (SPD youth organisation),Jusos (Jungsozialisten in der SPD),SPD,A0246,DE,national,Germany,,,active,y,national,,R001,2026-10-20
 A0248,Sarah Ganter,person,campaigner,,Head of sustainable development at the Global Policy Forum Europe; formerly Friedrich-Ebert-Stiftung,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0249,NaturFreunde Deutschland,organisation,ngo_campaign,,Environmental and cultural association,,,,DE,national,Germany,,,active,na,national,,R003,2026-10-20
+A0250,BUNDjugend,organisation,ngo_campaign,,Youth organisation of BUND,,,,DE,national,Germany,,,active,na,national,,R003,2026-10-20
+A0251,Förderverein gewerkschaftliche Arbeitslosenarbeit,organisation,ngo_campaign,,Support association for union work with the unemployed,,,,DE,national,Germany,,,active,na,national,,R003,2026-10-20
+A0252,"Länder working group on a revived Vermögensteuer (ten Länder, 2011–2014)",institution,government_body,,Working group of ten Länder finance ministries drafting a new wealth tax law,,,,DE,national,Germany,,,dissolved,na,national,Ten Länder took part from November 2011 (per the Mecklenburg-Vorpommern finance minister); the group ended without final results in 2014. Which Länder took part is not stated in the source opened.,R003,2026-10-20
+A0253,Landesregierung Mecklenburg-Vorpommern,institution,government_body,,State government of Mecklenburg-Vorpommern (finance ministry took part in the working group),,,,DE,regional,Germany > Mecklenburg-Vorpommern,,,active,na,regional,,R003,2026-10-20
+A0254,Eva von Redecker,person,academic,journalist,"Philosopher and author, University of Verona",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0255,Alex Demirović,person,academic,,"Social scientist, Goethe University Frankfurt",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0256,Gabriele Winker,person,academic,,Social scientist,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0257,Andreas Kemper,person,journalist,academic,Sociologist and publicist,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0258,Heinz-J. Bontrup,person,economist,academic,"Economist, University of Siegen; spokesperson of the Arbeitsgruppe Alternative Wirtschaftspolitik",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0259,Jendrik Sigwart,person,cultural_figure,,"Singer, ESC candidate",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0260,Frank Deppe,person,academic,,Political scientist,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0261,Inge Hannemann,person,campaigner,,Author and activist,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0262,Uta Ruppert,person,academic,,"Political scientist, Goethe University Frankfurt",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0263,Klaus Dörre,person,academic,,"Sociologist, University of Jena",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0264,Bernd Belina,person,academic,,"Geographer, Goethe University Frankfurt",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0265,Daniel Loick,person,academic,,"Philosopher, associate professor",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0266,Stephan Lessenich,person,academic,,"Sociologist, LMU Munich",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0267,Max Uthoff,person,cultural_figure,,"Cabaret artist, Munich",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0268,Anny Hartmann,person,cultural_figure,economist,Political cabaret artist and economist (Diplom-Volkswirtin),,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0269,Şeyda Kurt,person,journalist,,Author and journalist,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0270,Christian Neuhäuser,person,academic,,"Philosopher, TU Dortmund",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0271,Wolfgang M. Schmitt,person,journalist,,YouTuber and podcaster,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0272,Sharon Dodua Otoo,person,cultural_figure,,Author,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0273,Fatma Aydemir,person,journalist,,"Writer and journalist, Berlin",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0274,Hengameh Yaghoobifarah,person,journalist,,"Journalist and writer, Berlin",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0275,Eva Boesenberg,person,academic,,"American studies scholar, Humboldt University Berlin",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0276,Reyhan Şahin,person,cultural_figure,academic,"Social scientist, author and musician (Lady Bitch Ray)",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0277,Mithu Sanyal,person,cultural_figure,,Writer and cultural scientist,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0278,Antje Schrupp,person,journalist,academic,Political scientist and journalist,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0279,Francis Seeck,person,academic,,"Gender researcher, visiting professor",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0280,Julia Schramm,person,journalist,,Politician and publicist,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0281,Arne Heise,person,economist,academic,"Professor of finance, University of Hamburg",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0282,Thomas Sablowski,person,academic,,"Political scientist, Frankfurt",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0283,Nikolai Huke,person,academic,,Social scientist,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0284,Moshtari Hilal,person,cultural_figure,,Artist,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0285,Joseph Vogl,person,academic,,Literature and cultural scholar,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0286,Michael Klundt,person,academic,,"Political scientist, Hochschule Magdeburg-Stendal",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0287,Helge Peukert,person,economist,academic,"Economist and political scientist, University of Siegen",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0288,Ole Plogstedt,person,cultural_figure,,Cook and Oxfam campaign ambassador,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0289,Arne Semsrott,person,journalist,campaigner,Author and activist,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0290,Meron Mendel,person,academic,,Director of the Bildungsstätte Anne Frank,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0291,Matthias Quent,person,academic,,"Sociologist, Institut für Demokratie und Zivilgesellschaft Jena",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0292,Olaf Asbach,person,academic,,"Political scientist, University of Hamburg",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0293,Kai-Uwe Schnapp,person,academic,,"Political scientist, University of Hamburg",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0294,Juliane A. Lischka,person,academic,,"Journalism and communication scholar, University of Hamburg",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0295,Sebastian Hotz,person,cultural_figure,,Satirist (El Hotzo),,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0296,Florian Kessler,person,cultural_figure,,Editor (Lektor),,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0297,Hilke Brockmann,person,academic,,"Sociologist, Constructor University Bremen",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0298,Achim Kemmerling,person,academic,,"Political scientist, University of Erfurt",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0299,Thomas Rixen,person,academic,,"Political scientist, Freie Universität Berlin",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0300,Ferat Koçak,person,politician,campaigner,Member of the Berlin Abgeordnetenhaus (Die Linke); activist,,The Left,,DE,regional,Germany > Berlin,,,active,y,regional,,R003,2026-10-20
+A0301,Senthuran Varatharajah,person,cultural_figure,,Writer,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0302,Kurt Glockzin,person,cultural_figure,,Actor,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0303,Heike Solga,person,academic,,"Sociologist, Freie Universität Berlin",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0304,Christine Prayon,person,cultural_figure,,Cabaret artist and actress,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0305,Andreas Nölke,person,academic,,"Political scientist, Goethe University Frankfurt",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0306,Raul Zelik,person,cultural_figure,journalist,Author,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0307,Marcus Staiger,person,journalist,,Journalist,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0308,Max Czollek,person,cultural_figure,,Author,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0309,Mario Sixtus,person,journalist,,Filmmaker and author,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0310,Hans-Martin Gutmann,person,academic,,"Professor emeritus (theology), writer and jazz musician",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0311,Volker Lösch,person,cultural_figure,,"Theatre director, Berlin",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0312,Philipp Staab,person,academic,,"Sociologist, Humboldt University Berlin",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0313,Susanne Schunter-Kleemann,person,academic,,"Social and political scientist, Bremen",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0314,Walter Otto Ötsch,person,economist,academic,"Economist and cultural scientist, Cusanus Hochschule",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0315,Gerd Grözinger,person,economist,,"Economist and sociologist, Berlin",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0316,Timm Kunstreich,person,academic,,"Social work scholar, Hamburg",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0317,Andreas Fisahn,person,academic,,Public law scholar,,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0318,Niko Paech,person,economist,academic,"Economist, University of Siegen (plural economics)",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0319,Hauke Brunkhorst,person,academic,,"Sociologist, Europa-Universität Flensburg",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
+A0320,Martin Klepper,person,academic,,"American studies scholar, Humboldt University Berlin",,,,DE,national,Germany,,,active,y,national,,R003,2026-10-20
