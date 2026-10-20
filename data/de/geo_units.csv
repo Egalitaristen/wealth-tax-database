@@ -10,13 +10,13 @@ G0008,Berlin,region,state (Land),G0001,https://www.berlin.de,in_progress,R001,20
 G0009,Brandenburg,region,state (Land),G0001,https://www.brandenburg.de,pending,,,,,
 G0010,Bremen,region,state (Land),G0001,https://www.bremen.de,pending,,,,,
 G0011,Hamburg,region,state (Land),G0001,https://www.hamburg.de,pending,,,,,
-G0012,Hesse,region,state (Land),G0001,https://www.hessen.de,pending,,,,,
+G0012,Hesse,region,state (Land),G0001,https://www.hessen.de,in_progress,R002,2026-10-20,2,1,Hesse: Left motion 19/4497 (2017) read; the 2009 motions 18/399 and 18/1070 are known only from a search summary; other parties not searched.
 G0013,Lower Saxony,region,state (Land),G0001,https://www.niedersachsen.de,pending,,,,,
 G0014,Mecklenburg-Vorpommern,region,state (Land),G0001,https://www.mv-regierung.de,pending,,,,,
 G0015,North Rhine-Westphalia,region,state (Land),G0001,https://www.land.nrw,pending,,,,,
 G0016,Rhineland-Palatinate,region,state (Land),G0001,https://rlp.de,pending,,,,,
 G0017,Saarland,region,state (Land),G0001,https://www.saarland.de,pending,,,,,
 G0018,Saxony,region,state (Land),G0001,https://www.sachsen.de,pending,,,,,
-G0019,Saxony-Anhalt,region,state (Land),G0001,https://www.sachsen-anhalt.de,pending,,,,,
+G0019,Saxony-Anhalt,region,state (Land),G0001,https://www.sachsen-anhalt.de,in_progress,R002,2026-10-20,2,1,Saxony-Anhalt: Left motion 7/845 (2017) read; other parties and Bundesrat route not searched.
 G0020,Schleswig-Holstein,region,state (Land),G0001,https://www.schleswig-holstein.de,pending,,,,,
 G0021,Thuringia,region,state (Land),G0001,https://www.thueringen.de,pending,,,,,

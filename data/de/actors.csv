@@ -110,7 +110,7 @@ A0108,Claudia Roth,person,politician,,Member of the Bundestag,,Alliance 90/The G
 A0109,Manuel Sarrazin,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Hamburg,,,former_role,y,national,,R001,2026-10-20
 A0110,Elisabeth Scharfenberg,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
 A0111,Frithjof Schmidt,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,,R001,2026-10-20
-A0112,Ulrich Schneider,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0112,Ulrich Schneider,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,Not the chief executive of the Paritätischer Gesamtverband of the same name.,R001,2026-10-20
 A0113,Wolfgang Strengmann-Kuhn,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Hesse,,,former_role,y,national,,R001,2026-10-20
 A0114,Daniela Wagner,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Hesse,,,former_role,y,national,,R001,2026-10-20
 A0115,Arfst Wagner,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
@@ -199,4 +199,14 @@ A0198,Miriam Rehm,person,economist,academic,"Socio-economist, University of Duis
 A0199,Rolf Mützenich,person,politician,,Chair of the SPD parliamentary group,,SPD,A0118,DE,national,Germany > North Rhine-Westphalia,,,active,y,national,,R001,2026-10-20
 A0200,Saskia Esken,person,politician,,Co-chair of the SPD,,SPD,A0118,DE,national,Germany > Baden-Württemberg,,,active,y,national,,R001,2026-10-20
 A0201,Olaf Scholz,person,politician,,Federal Chancellor 2021–2025 (SPD),,SPD,A0118,DE,national,Germany > Brandenburg,,,active,y,national,,R001,2026-10-20
-A0202,Conny Reuter,person,campaigner,,"German co-organiser of the European Citizens' Initiative ""Tax the Rich""",,,,DE,supranational,Germany,,,active,y,regional,,R002,2026-10-20
+A0202,Conny Reuter,person,campaigner,,"Global Coordinator of the Progressive Alliance; former Secretary General of SOLIDAR; German co-organiser of the European Citizens' Initiative ""Tax the Rich""",,,,DE,supranational,Germany,,,active,y,regional,,R002,2026-10-20
+A0203,Die Linke Fraktion im Landtag von Sachsen-Anhalt,organisation,party,,Parliamentary group in the Saxony-Anhalt state parliament,,The Left,A0001,DE,regional,Germany > Saxony-Anhalt,,,active,na,regional,,R002,2026-10-20
+A0204,Die Linke Fraktion im Hessischen Landtag,organisation,party,,Parliamentary group in the Hesse state parliament,,The Left,A0001,DE,regional,Germany > Hesse,,,active,na,regional,,R002,2026-10-20
+A0205,Christoph Hein,person,cultural_figure,,Writer,,,,DE,national,Germany,,,active,y,national,,R002,2026-10-20
+A0206,Annette Humpe,person,cultural_figure,,Singer and musician,,,,DE,national,Germany,,,active,y,national,,R002,2026-10-20
+A0207,Maren Kroymann,person,cultural_figure,,Actress,,,,DE,national,Germany,,,active,y,national,,R002,2026-10-20
+A0208,Marina Weisband,person,journalist,,Publicist and politician,,,,DE,national,Germany,,,active,y,national,,R002,2026-10-20
+A0209,Deutsche Steuer-Gewerkschaft,organisation,union,,Union of tax officials,,,,DE,national,Germany,,,active,na,national,,R002,2026-10-20
+A0210,Thomas Eigenthaler,person,union_official,legal_tax_professional,Honorary chair of the Deutsche Steuer-Gewerkschaft; its federal chair 2011-2022,Deutsche Steuer-Gewerkschaft,,A0209,DE,national,Germany,,,active,y,national,,R002,2026-10-20
+A0211,Till Kellerhoff,person,academic,campaigner,"Political scientist, programme director at the Club of Rome; co-author of ""Tax the Rich"" (oekom 2024)",,,,DE,national,Germany,,,active,y,national,,R002,2026-10-20
+A0212,Ulrich Schneider (Paritätischer Gesamtverband),person,campaigner,,Chief executive of the Paritätischer Gesamtverband (at the time of the letter),Der Paritätische Gesamtverband,,,DE,national,Germany,,,active,y,national,Not the Green member of the Bundestag of the same name (A0112).,R002,2026-10-20
