@@ -1,0 +1,164 @@
+actor_id,name,kind,actor_type,other_types,role,affiliation,party,affiliation_actor_id,country,level,location,wikidata_qid,website,status,alive_checked,prominence,notes,added_run,updated
+A0001,Die Linke,organisation,party,,Political party (Bundestag),,The Left,,DE,national,Germany,,https://www.die-linke.de,active,na,national,,R001,2026-10-20
+A0002,Bündnis 90/Die Grünen,organisation,party,,Political party (Bundestag),,Alliance 90/The Greens,,DE,national,Germany,,https://www.gruene.de,active,na,national,,R001,2026-10-20
+A0003,Christian Görke,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Brandenburg,,,active,y,national,,R001,2026-10-20
+A0004,Janine Wissler,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Hesse,,,active,y,national,,R001,2026-10-20
+A0005,Doris Achelwilm,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Bremen,,,active,y,national,,R001,2026-10-20
+A0006,Dietmar Bartsch,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Mecklenburg-Vorpommern,,,active,y,national,,R001,2026-10-20
+A0007,Desiree Becker,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Hesse,,,active,y,national,,R001,2026-10-20
+A0008,Janina Böttger,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Saxony-Anhalt,,,active,y,national,,R001,2026-10-20
+A0009,Jörg Cezanne,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Hesse,,,active,y,national,,R001,2026-10-20
+A0010,Agnes Conrad,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Bavaria,,,active,y,national,,R001,2026-10-20
+A0011,Mirze Edis,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > North Rhine-Westphalia,,,active,y,national,,R001,2026-10-20
+A0012,Cem Ince,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Lower Saxony,,,active,y,national,,R001,2026-10-20
+A0013,Tamara Mazzi,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Schleswig-Holstein,,,active,y,national,,R001,2026-10-20
+A0014,Pascal Meiser,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Berlin,,,active,y,national,,R001,2026-10-20
+A0015,Zada Salihović,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0016,Lisa Schubert,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > North Rhine-Westphalia,,,active,y,national,,R001,2026-10-20
+A0017,Ines Schwerdtner,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Berlin,,,active,y,national,,R001,2026-10-20
+A0018,Isabelle Vandre,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Brandenburg,,,active,y,national,,R001,2026-10-20
+A0019,Sarah Vollath,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Bavaria,,,active,y,national,,R001,2026-10-20
+A0020,Sascha Wagner,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > North Rhine-Westphalia,,,active,y,national,,R001,2026-10-20
+A0021,Anne Zerr,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Baden-Württemberg,,,active,y,national,,R001,2026-10-20
+A0022,Heidi Reichinnek,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Lower Saxony,,,active,y,national,,R001,2026-10-20
+A0023,Sören Pellmann,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Saxony,,,active,y,national,,R001,2026-10-20
+A0024,Gesine Lötzsch,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Berlin,,,former_role,y,national,,R001,2026-10-20
+A0025,Klaus Ernst,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Bavaria,,,former_role,y,national,Party shown is the one at the time of the evidence; the Bundestag register now lists BSW.,R001,2026-10-20
+A0026,Susanne Ferschl,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Bavaria,,,former_role,y,national,,R001,2026-10-20
+A0027,Susanne Hennig-Wellsow,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Thuringia,,,former_role,y,national,,R001,2026-10-20
+A0028,Jan Korte,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Saxony-Anhalt,,,former_role,y,national,,R001,2026-10-20
+A0029,Caren Lay,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Saxony,,,active,y,national,,R001,2026-10-20
+A0030,Ralph Lenkert,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Thuringia,,,former_role,y,national,,R001,2026-10-20
+A0031,Christian Leye,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,Party shown is the one at the time of the evidence; the Bundestag register now lists BSW.,R001,2026-10-20
+A0032,Thomas Lutze,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0033,Victor Perli,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Lower Saxony,,,former_role,y,national,,R001,2026-10-20
+A0034,Bernd Riexinger,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Baden-Württemberg,,,former_role,y,national,,R001,2026-10-20
+A0035,Alexander Ulrich,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Rhineland-Palatinate,,,former_role,y,national,Party shown is the one at the time of the evidence; the Bundestag register now lists BSW.,R001,2026-10-20
+A0036,Sahra Wagenknecht,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,Party shown is the one at the time of the evidence; the Bundestag register now lists BSW.,R001,2026-10-20
+A0037,Amira Mohamed Ali,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Lower Saxony,,,former_role,y,national,Party shown is the one at the time of the evidence; the Bundestag register now lists BSW.,R001,2026-10-20
+A0038,Fabio De Masi,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0039,Stefan Liebich,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Berlin,,,former_role,y,national,,R001,2026-10-20
+A0040,Lorenz Gösta Beutin,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Schleswig-Holstein,,,active,y,national,,R001,2026-10-20
+A0041,Matthias W. Birkwald,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,,R001,2026-10-20
+A0042,Kerstin Kassner,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Mecklenburg-Vorpommern,,,former_role,y,national,,R001,2026-10-20
+A0043,Sabine Leidig,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Hesse,,,former_role,y,national,,R001,2026-10-20
+A0044,Kirsten Tackmann,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Brandenburg,,,former_role,y,national,,R001,2026-10-20
+A0045,Andreas Wagner,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Bavaria,,,former_role,y,national,,R001,2026-10-20
+A0046,Hubertus Zdebel,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,,R001,2026-10-20
+A0047,Brigitte Freihold,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Rhineland-Palatinate,,,former_role,y,national,,R001,2026-10-20
+A0048,Jutta Krellmann,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Lower Saxony,,,former_role,y,national,,R001,2026-10-20
+A0049,Diether Dehm,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Lower Saxony,,,former_role,y,national,,R001,2026-10-20
+A0050,Wolfgang Gehrcke,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0051,Christine Buchholz,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Hesse,,,former_role,y,national,,R001,2026-10-20
+A0052,Roland Claus,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0053,Sevim Dağdelen,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,Party shown is the one at the time of the evidence; the Bundestag register now lists BSW.,R001,2026-10-20
+A0054,Dagmar Enkelmann,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Brandenburg,,,former_role,y,national,,R001,2026-10-20
+A0055,Nicole Gohlke,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Bavaria,,,active,y,national,,R001,2026-10-20
+A0056,Annette Groth,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0057,Gregor Gysi,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Berlin,,,active,y,national,,R001,2026-10-20
+A0058,Heike Hänsel,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Baden-Württemberg,,,former_role,y,national,,R001,2026-10-20
+A0059,Inge Höger,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0060,Barbara Höll,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0061,Andrej Hunko,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,Party shown is the one at the time of the evidence; the Bundestag register now lists BSW.,R001,2026-10-20
+A0062,Harald Koch,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Saxony-Anhalt,,,former_role,y,national,,R001,2026-10-20
+A0063,Ulla Lötzer,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0064,Ulrich Maurer,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0065,Niema Movassat,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,,R001,2026-10-20
+A0066,Thomas Nord,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Brandenburg,,,former_role,y,national,,R001,2026-10-20
+A0067,Richard Pitterle,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0068,Paul Schäfer,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0069,Michael Schlecht,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0070,Kathrin Vogler,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,,R001,2026-10-20
+A0071,Katrin Werner,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Rhineland-Palatinate,,,former_role,y,national,,R001,2026-10-20
+A0072,Karin Binder,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0073,Werner Dreibus,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0074,Eva Bulling-Schröter,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0075,Dorothee Menzner,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Lower Saxony,,,former_role,y,national,,R001,2026-10-20
+A0076,Sabine Stüber,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Brandenburg,,,former_role,y,national,,R001,2026-10-20
+A0077,Johanna Voß,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Lower Saxony,,,former_role,y,national,,R001,2026-10-20
+A0078,Cansın Köktürk,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > North Rhine-Westphalia,,,active,y,national,,R001,2026-10-20
+A0079,Jan van Aken,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0080,Lisa Paus,person,politician,,Member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Berlin,,,active,y,national,,R001,2026-10-20
+A0081,Kerstin Andreae,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Baden-Württemberg,,,former_role,y,national,,R001,2026-10-20
+A0082,Thomas Gambke,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0083,Britta Haßelmann,person,politician,,Member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > North Rhine-Westphalia,,,active,y,national,,R001,2026-10-20
+A0084,Priska Hinz,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0085,Tobias Lindner,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Rhineland-Palatinate,,,former_role,y,national,,R001,2026-10-20
+A0086,Gerhard Schick,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Baden-Württemberg,,,former_role,y,national,,R001,2026-10-20
+A0087,Birgitt Bender,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0088,Ekin Deligöz,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Bavaria,,,former_role,y,national,,R001,2026-10-20
+A0089,Katja Dörner,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,,R001,2026-10-20
+A0090,Harald Ebner,person,politician,,Member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Baden-Württemberg,,,active,y,national,,R001,2026-10-20
+A0091,Kai Gehring,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,,R001,2026-10-20
+A0092,Katrin Göring-Eckardt,person,politician,,Member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Thuringia,,,active,y,national,,R001,2026-10-20
+A0093,Bärbel Höhn,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0094,Ingrid Hönlinger,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0095,Thilo Hoppe,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Lower Saxony,,,former_role,y,national,,R001,2026-10-20
+A0096,Uwe Kekeritz,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Bavaria,,,former_role,y,national,,R001,2026-10-20
+A0097,Katja Keul,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Lower Saxony,,,former_role,y,national,,R001,2026-10-20
+A0098,Sven-Christian Kindler,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Lower Saxony,,,former_role,y,national,,R001,2026-10-20
+A0099,Maria Klein-Schmeink,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,,R001,2026-10-20
+A0100,Oliver Krischer,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,,R001,2026-10-20
+A0101,Agnes Krumwiede,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0102,Stephan Kühn,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Saxony,,,former_role,y,national,,R001,2026-10-20
+A0103,Markus Kurth,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,,R001,2026-10-20
+A0104,Beate Müller-Gemmeke,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Baden-Württemberg,,,former_role,y,national,,R001,2026-10-20
+A0105,Hermann E. Ott,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0106,Brigitte Pothmer,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Lower Saxony,,,former_role,y,national,,R001,2026-10-20
+A0107,Tabea Rößner,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Rhineland-Palatinate,,,former_role,y,national,,R001,2026-10-20
+A0108,Claudia Roth,person,politician,,Member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Bavaria,,,active,y,national,,R001,2026-10-20
+A0109,Manuel Sarrazin,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Hamburg,,,former_role,y,national,,R001,2026-10-20
+A0110,Elisabeth Scharfenberg,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0111,Frithjof Schmidt,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,,R001,2026-10-20
+A0112,Ulrich Schneider,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0113,Wolfgang Strengmann-Kuhn,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Hesse,,,former_role,y,national,,R001,2026-10-20
+A0114,Daniela Wagner,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Hesse,,,former_role,y,national,,R001,2026-10-20
+A0115,Arfst Wagner,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0116,Agnieszka Brugger,person,politician,,Member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Baden-Württemberg,,,active,y,national,,R001,2026-10-20
+A0117,Viola von Cramon-Taubadel,person,politician,,Former member of the Bundestag,,Alliance 90/The Greens,A0002,DE,national,Germany > Lower Saxony,,,former_role,y,national,,R001,2026-10-20
+A0118,SPD (Sozialdemokratische Partei Deutschlands),organisation,party,,"Political party (Bundestag, federal government)",,SPD,,DE,national,Germany,,https://www.spd.de,active,na,national,,R001,2026-10-20
+A0119,350.org Deutschland,organisation,ngo_campaign,,Climate campaign group,,,,DE,national,Germany,,https://350.org/de/,active,na,national,,R001,2026-10-20
+A0120,Attac Deutschland,organisation,ngo_campaign,,Globalisation-critical campaign network,,,,DE,national,Germany,,https://www.attac.de,active,na,national,,R001,2026-10-20
+A0121,AWO Bundesverband,organisation,ngo_campaign,,Welfare association,,,,DE,national,Germany,,https://www.awo.org,active,na,national,,R001,2026-10-20
+A0122,AWO International e.V.,organisation,ngo_campaign,,Humanitarian aid organisation,,,,DE,national,Germany,,https://awointernational.de,active,na,national,,R001,2026-10-20
+A0123,Brot für die Welt,organisation,ngo_campaign,faith,Protestant development agency,,,,DE,national,Germany,,https://www.brot-fuer-die-welt.de,active,na,national,,R001,2026-10-20
+A0124,Deutscher Gewerkschaftsbund (DGB),organisation,union,,Trade union confederation,,,,DE,national,Germany,,https://www.dgb.de,active,na,national,,R001,2026-10-20
+A0125,Forum Ökologisch-Soziale Marktwirtschaft (FÖS),organisation,think_tank,,Think tank for ecological tax reform,,,,DE,national,Germany,,https://foes.de,active,na,national,,R001,2026-10-20
+A0126,Gemeingut in BürgerInnenhand,organisation,ngo_campaign,,Campaign group against privatisation,,,,DE,national,Germany,,https://www.gemeingut.org,active,na,national,,R001,2026-10-20
+A0127,Germanwatch,organisation,ngo_campaign,,Development and climate NGO,,,,DE,national,Germany,,https://www.germanwatch.org,active,na,national,,R001,2026-10-20
+A0128,Gewerkschaft Erziehung und Wissenschaft (GEW),organisation,union,,Education and science trade union,,,,DE,national,Germany,,https://www.gew.de,active,na,national,,R001,2026-10-20
+A0129,Greenpeace Deutschland,organisation,ngo_campaign,,Environmental NGO,,,,DE,national,Germany,,https://www.greenpeace.de,active,na,national,,R001,2026-10-20
+A0130,Klima-Allianz Deutschland,organisation,ngo_campaign,,Climate coalition of more than 140 organisations,,,,DE,national,Germany,,https://www.klima-allianz.de,active,na,national,,R001,2026-10-20
+A0131,Misereor,organisation,ngo_campaign,faith,Catholic development agency,,,,DE,national,Germany,,https://www.misereor.de,active,na,national,,R001,2026-10-20
+A0132,Netzwerk Steuergerechtigkeit,organisation,ngo_campaign,,Tax justice network,,,,DE,national,Germany,,https://www.netzwerk-steuergerechtigkeit.de,active,na,national,,R001,2026-10-20
+A0133,Oxfam Deutschland,organisation,ngo_campaign,,Development and anti-inequality NGO,,,,DE,national,Germany,,https://www.oxfam.de,active,na,national,,R001,2026-10-20
+A0134,Der Paritätische Gesamtverband,organisation,ngo_campaign,,Welfare association,,,,DE,national,Germany,,https://www.der-paritaetische.de,active,na,national,,R001,2026-10-20
+A0135,Sozialverband Deutschland (SoVD),organisation,ngo_campaign,,Social association,,,,DE,national,Germany,,https://www.sovd.de,active,na,national,,R001,2026-10-20
+A0136,taxmenow – Initiative für Steuergerechtigkeit,organisation,ngo_campaign,wealthy_individual,Initiative of wealthy people for higher taxes on large fortunes,,,,DE,national,Germany,,https://www.taxmenow.eu,active,na,national,,R001,2026-10-20
+A0137,ungleichheit.info,organisation,think_tank,,Inequality information platform,,,,DE,national,Germany,,https://ungleichheit.info,active,na,national,,R001,2026-10-20
+A0138,Sozialverband VdK Deutschland,organisation,ngo_campaign,,Social association,,,,DE,national,Germany,,https://www.vdk.de,active,na,national,,R001,2026-10-20
+A0139,Vereinte Dienstleistungsgewerkschaft (ver.di),organisation,union,,Services trade union,,,,DE,national,Germany,,https://www.verdi.de,active,na,national,,R001,2026-10-20
+A0140,"WEED – Weltwirtschaft, Ökologie & Entwicklung",organisation,ngo_campaign,,"Global economy, ecology and development NGO",,,,DE,national,Germany,,https://www.weed-online.org,active,na,national,,R001,2026-10-20
+A0141,IG Metall,organisation,union,,Metalworkers trade union,,,,DE,national,Germany,,https://www.igmetall.de,active,na,national,,R001,2026-10-20
+A0142,Arbeitnehmerkammer Bremen,organisation,union,,Chamber of employees (Bremen),,,,DE,national,Germany,,https://www.arbeitnehmerkammer.de,active,na,national,,R001,2026-10-20
+A0143,Arbeitskammer des Saarlandes,organisation,union,,Chamber of employees (Saarland),,,,DE,national,Germany,,https://www.arbeitskammer.de,active,na,national,,R001,2026-10-20
+A0144,FiscalFuture e.V.,organisation,think_tank,,Youth think tank for fiscal policy,,,,DE,national,Germany,,https://fiscalfuture.de,active,na,national,,R001,2026-10-20
+A0145,Gemeinwohl-Ökonomie Deutschland,organisation,ngo_campaign,,Economy for the common good movement,,,,DE,national,Germany,,https://germany.econgood.org,active,na,national,,R001,2026-10-20
+A0146,Mein Grundeinkommen,organisation,ngo_campaign,,Basic income crowdfunding association,,,,DE,national,Germany,,https://www.mein-grundeinkommen.de,active,na,national,,R001,2026-10-20
+A0147,wer hat der gibt,organisation,ngo_campaign,wealthy_individual,Initiative of wealthy people for redistribution,,,,DE,national,Germany,,,active,na,national,,R001,2026-10-20
+A0148,Konzeptwerk Neue Ökonomie,organisation,think_tank,,Think tank for economic alternatives,,,,DE,national,Germany,,https://www.knoe.org,active,na,national,,R001,2026-10-20
+A0149,jesuitenweltweit,organisation,ngo_campaign,faith,Jesuit development organisation,,,,DE,national,Germany,,https://www.jesuitenweltweit.de,active,na,national,,R001,2026-10-20
+A0150,Rebalance Now,organisation,ngo_campaign,,Campaign for fair taxation of wealth,,,,DE,national,Germany,,,active,na,national,,R001,2026-10-20
+A0151,Forum Umwelt & Entwicklung,organisation,ngo_campaign,,Network of environment and development NGOs,,,,DE,national,Germany,,https://www.forumue.de,active,na,national,,R001,2026-10-20
+A0152,FIAN Deutschland,organisation,ngo_campaign,,Human right to food organisation,,,,DE,national,Germany,,https://fian.de,active,na,national,,R001,2026-10-20
+A0153,Yasmin Fahimi,person,union_official,,Chair of the DGB (German trade union confederation),Deutscher Gewerkschaftsbund (DGB),,A0124,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0155,Marcel Fratzscher,person,economist,academic,President of DIW Berlin; professor at Humboldt University Berlin,Deutsches Institut für Wirtschaftsforschung (DIW Berlin),,,DE,national,Germany > Berlin,,,active,y,national,,R001,2026-10-20
+A0156,Julia Jirmann,person,campaigner,,"Spokesperson, Netzwerk Steuergerechtigkeit",Netzwerk Steuergerechtigkeit,,A0132,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0157,Bastian Neuwirth,person,campaigner,,"Economic expert, Greenpeace",Greenpeace Deutschland,,A0129,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0158,Maike Finnern,person,union_official,,Chair of the GEW,Gewerkschaft Erziehung und Wissenschaft (GEW),,A0128,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0159,Verena Bentele,person,campaigner,,President of the VdK social association,Sozialverband VdK Deutschland,,A0138,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0160,Jorinde Schulz,person,campaigner,,"Spokesperson, Gemeingut in BürgerInnenhand",Gemeingut in BürgerInnenhand,,A0126,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0161,Carolin Schenuit,person,economist,,"Managing director, Forum Ökologisch-Soziale Marktwirtschaft (FÖS)",Forum Ökologisch-Soziale Marktwirtschaft (FÖS),,A0125,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0162,Klara Simon,person,campaigner,,"Chair of the board, Mein Grundeinkommen e.V.",Mein Grundeinkommen,,A0146,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0163,Manuel Schmitt,person,campaigner,,"Social inequality officer, Oxfam Deutschland",Oxfam Deutschland,,A0133,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0164,Marlene Engelhorn,person,wealthy_individual,campaigner,Co-founder of taxmenow; heiress; founder of the Guter Rat für Rückverteilung,taxmenow – Initiative für Steuergerechtigkeit,,A0136,DE,national,Germany,,,active,y,national,"German-Austrian; taxmenow acts in Germany, Austria and Switzerland.",R001,2026-10-20
