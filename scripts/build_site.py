@@ -11,6 +11,7 @@ import argparse, csv, hashlib, json, math, re, shutil, sys, collections, datetim
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 DATA = ROOT / "data"
 SITE = ROOT / "site"
 RANK = {"A": 0, "B": 1, "C": 2}
@@ -273,6 +274,127 @@ def featured(P, ev):
     return out
 
 
+# ---------- share pages: one small HTML file per page with its own title, description and image ----------
+SITE_URL = "https://wealthtaxsupporters.com"
+TYPE = {"politician": "Politician", "party": "Party", "government_body": "Council or public body", "academic": "Academic",
+        "economist": "Economist", "think_tank": "Think tank", "ngo_campaign": "Campaign group", "union": "Union",
+        "union_official": "Union official", "journalist": "Commentator", "media_outlet": "Media outlet",
+        "legal_tax_professional": "Legal or tax expert", "wealthy_individual": "Wealthy individual",
+        "business_leader": "Business leader", "faith": "Faith leader or body", "cultural_figure": "Cultural figure",
+        "campaigner": "Campaigner", "international_body": "International body", "funder": "Funder"}
+GRADE = {"A": "Explicit support", "B": "Named support", "C": "Implied support"}
+SPOKEN = {"speech", "op_ed", "statement", "interview", "social_post", "testimony", "publication", "editorial", "campaign"}
+
+
+def the(name):
+    return ("the " if name.startswith(("United ", "Netherlands", "Philippines", "Czech")) else "") + name
+
+
+def _attr(s):
+    return (s or "").replace("&", "&amp;").replace('"', "&quot;").replace("<", "&lt;")
+
+
+def page_html(base, title, desc, path, image, alt):
+    """The site page with this page's meta tags, so link previews show the right title and image."""
+    h = base
+    h = re.sub(r"<title>.*?</title>", f"<title>{_attr(title)}</title>", h, count=1)
+    for prop, val in (("name=\"description\"", desc), ("property=\"og:title\"", title), ("property=\"og:description\"", desc),
+                      ("property=\"og:url\"", SITE_URL + path), ("property=\"og:image\"", SITE_URL + image),
+                      ("property=\"og:image:alt\"", alt)):
+        h = re.sub(r'(<meta %s content=")[^"]*(")' % prop, lambda m: m.group(1) + _attr(val) + m.group(2), h, count=1)
+    return h
+
+
+def poll_line(c):
+    p = (c.get("polls") or [None])[0]
+    if not p:
+        return ""
+    q = re.sub(r"\s*\(.*?\)", "", p["question"])
+    return f" In polls, {p.get('support_text') or str(p['support']) + '%'} back {q[0].lower() + q[1:]} ({p['pollster']}, {str(p.get('published', ''))[:4]})."
+
+
+def share_pages(out, base, countries, full):
+    """Writes per-page HTML (and share images when Pillow is installed). Returns the number of pages."""
+    try:
+        import share_cards as cards
+    except ImportError:
+        cards = None
+        print("  Pillow not installed: pages get text previews and the default image (pip install pillow)")
+    pages = 0
+
+    def write(path, title, desc, image_key, alt, draw):
+        nonlocal pages
+        img = f"/og/{image_key}.png"
+        if cards:
+            draw(out / img.lstrip("/"))
+        else:
+            img = "/og.png"
+        dest = out / ("index.html" if path == "/" else path.lstrip("/") + ".html")
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(page_html(base, title, desc, path, img, alt), encoding="utf-8")
+        pages += 1
+
+    tot = dict(supporters=sum(c["supporters"] for c in countries), evidence=sum(c["evidence"] for c in countries), countries=len(countries))
+    write("/", "Wealth Tax Supporters: who backs a wealth tax near you?",
+          f"{tot['supporters']:,} public figures and organisations across {tot['countries']} countries who have backed a wealth tax on the record. Every name links to its source.",
+          "home", "Who backs a wealth tax near you?", lambda o: cards.home_card(o, tot))
+    write("/about", "How the register is built · Wealth Tax Supporters",
+          "What counts as support for a wealth tax, how statements are sourced and graded, and how to report a mistake.",
+          "about", "How the register is built", lambda o: cards.page_card(o, "Method", "How the register is built", "Sourced, graded and open: every name links to where they said it."))
+    write("/contribute", "Put your country on the map · Wealth Tax Supporters",
+          "Start a register for your country, suggest a supporter, or help check the entries that are already here.",
+          "contribute", "Put your country on the map", lambda o: cards.page_card(o, "Contribute", "Put your country on the map", "Start a register for your country, or suggest a supporter."))
+
+    for c in countries:
+        D, slug, name = full[c["slug"]], c["slug"], c["name"]
+        mx = max([len(u[6]) for u in D["C"]] or [1]) or 1
+        units = [(u[7], (0.22 + 0.78 * math.log(len(u[6]) + 1) / math.log(mx + 1)) if u[6] else 0) for u in D["C"]]
+        found = f"public figures and organisations in {the(name)} on the record so far"
+        years = sorted({e[1][:4] for e in D["E"] if e[1]})
+        sections = {
+            "": (f"Wealth tax supporters in {the(name)}", "Wealth tax supporters in", found,
+                 f"{c['supporters']:,} public figures and organisations in {the(name)} have backed a wealth tax on the record, found so far.{poll_line(c)}"),
+            "directory": (f"Directory of wealth tax supporters · {name}", "Directory · every name with its source", found,
+                          f"Browse all {c['supporters']:,} public figures and organisations in {the(name)} who back a wealth tax, by place, party and type."),
+            "time": (f"When they said it · {name}", "Over time · statements per year", f"sourced statements since {years[0] if years else ''}",
+                     f"{c['evidence']:,} sourced statements in support of a wealth tax in {the(name)}, year by year."),
+            "method": (f"How it was built · {name}", "Method · polls, sources and downloads", found,
+                       f"How the {name} register was built, what polls say about a wealth tax, and the data as CSV.{poll_line(c)}"),
+        }
+        for sec, (title, kicker, sub, desc) in sections.items():
+            n_sub = c["evidence"] if sec == "time" else c["supporters"]
+            cc = dict(c, supporters=n_sub)
+            write(f"/{slug}" + (f"/{sec}" if sec else ""), f"{title} · Wealth Tax Supporters", desc, slug + (f"-{sec}" if sec else ""),
+                  f"{title}: {c['supporters']:,} found so far",
+                  lambda o, cc=cc, kicker=kicker, sub=sub: cards.country_card(o, cc, units, kicker, sub))
+        # one page per supporter
+        ev_by = collections.defaultdict(list)
+        for e in D["E"]:
+            ev_by[e[0]].append(e)
+        inside = collections.defaultdict(set)
+        for i, u in enumerate(D["C"]):
+            for a in u[6]:
+                inside[a].add(i)
+        for p in D["P"]:
+            es = sorted(ev_by[p[0]], key=lambda e: (e[2] != "A", e[3] not in SPOKEN, not e[6], -int((e[1] or "0")[:4] or 0)))
+            quote = re.sub(r"\s+", " ", es[0][6]).strip() if es and es[0][6] else ""
+            if quote and quote[0].islower():
+                quote = "…" + quote
+            role = " · ".join(x for x in (p[4], p[5]) if x)
+            y0, y1 = (p[10] or "")[:4], (p[11] or "")[:4]
+            span = y0 if y0 == y1 else f"{y0}–{y1}"
+            gradeline = f"{GRADE.get(p[8], '')} · {p[9]} statement{'s' if p[9] != 1 else ''}" + (f" · {span}" if y0 else "")
+            desc = (f"{role}. " if role else "") + (f"“{quote[:200]}{'…' if len(quote) > 200 else ''}” " if quote else "") + \
+                f"{p[9]} sourced statement{'s' if p[9] != 1 else ''} in support of a wealth tax."
+            hl = inside.get(p[0], set())
+            write(f"/{slug}/{p[0]}", f"{p[1]} backs a wealth tax · Wealth Tax Supporters", desc, f"{slug}/{p[0]}",
+                  f"{p[1]}, {TYPE.get(p[3], p[3])}, {name}",
+                  lambda o, p=p, quote=quote, gradeline=gradeline, hl=hl: cards.person_card(
+                      o, {"name": p[1], "role": role if (role := " · ".join(x for x in (p[4], p[5]) if x)) else ""}, name, quote,
+                      units if hl else [], hl, TYPE.get(p[3], p[3]), gradeline))
+    return pages
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=str(ROOT / "_site"))
@@ -291,12 +413,13 @@ def main():
             h = hashlib.md5(f.read_bytes()).hexdigest()[:8]
             html = html.replace(f'"/{f.name}"', f'"/{f.name}?v={h}"')
     (out / "index.html").write_text(html, encoding="utf-8")
-    countries, index, places = [], [], []
+    countries, index, places, full = [], [], [], {}
     for folder in sorted(DATA.iterdir()):
         if folder.is_dir() and (folder / "meta.json").exists():
             summary, country, idx, pl = build_country(folder)
             summary["numeric"] = numeric_for(summary["iso2"].split("-")[0])
             countries.append(summary)
+            full[folder.name] = country
             index += idx
             places += pl
             json.dump(country, open(out / "data" / f"{folder.name}.json", "w", encoding="utf-8"),
@@ -311,7 +434,8 @@ def main():
     json.dump(world, open(out / "data" / "world.json", "w", encoding="utf-8"), separators=(",", ":"), ensure_ascii=False)
     json.dump(dict(people=index, places=places), open(out / "data" / "index.json", "w", encoding="utf-8"),
               separators=(",", ":"), ensure_ascii=False)
-    print(f"Built {len(countries)} countr{'y' if len(countries) == 1 else 'ies'} into {out}")
+    n = share_pages(out, html, countries, full)
+    print(f"Built {len(countries)} countr{'y' if len(countries) == 1 else 'ies'} and {n} share pages into {out}")
 
 
 if __name__ == "__main__":
