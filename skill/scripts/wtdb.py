@@ -768,9 +768,9 @@ def cmd_merge(a):
     print(f"Merged {a.drop} ({drop['name']}) into {a.keep} ({keep['name']}); moved {n} evidence rows")
 
 
-def _plain(s):
+def _plain(s, tags=True):
     import html as _html
-    s = _html.unescape(re.sub(r"<[^>]+>", " ", s))
+    s = _html.unescape(re.sub(r"<[^>]+>", " ", s) if tags else s)
     s = unicodedata.normalize("NFKC", s).lower()
     for a_, b_ in (("‘", "'"), ("’", "'"), ("“", '"'), ("”", '"'), ("–", "-"), ("—", "-")):
         s = s.replace(a_, b_)
@@ -815,7 +815,7 @@ def _fetch_for_check(u, timeout):
             ctype = resp.headers.get("Content-Type", "").lower()
         if raw[:4] == b"%PDF" or "pdf" in ctype:
             text = _pdf_to_text(raw)
-            return _plain(text) if text else None
+            return _plain(text, tags=False) if text else None  # a "<" in PDF text must not swallow what follows
         return _plain(raw.decode("utf-8", "ignore"))
     except Exception:
         text = _browser_text(u)
