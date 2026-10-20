@@ -37,7 +37,7 @@ import argparse, datetime as dt, html, json, os, re, sys, time, urllib.parse, ur
 
 BASE = "https://data.riksdagen.se"
 CACHE = os.environ.get("SE_CACHE", "/tmp/riksdag_cache")
-UA = {"User-Agent": "wealth-tax-database/1.0 (https://github.com/egalitaristen/wealth-tax-database)"}
+UA = {"User-Agent": "wealth-tax-supporters/1.0 (https://github.com/egalitaristen/wealth-tax-supporters)"}
 SEARCH_TERMS = ["förmögenhetsskatt", "miljardärsskatt", "miljardärskatt", "förmögenhetsbeskattning",
                 "förmögenhetsskatten", "förmögenhetsskatter", "miljardärsskatten", "miljardärer", "superrika"]
 TERMS_RE = re.compile(r"(?i)förmögenhetsskatt\w*|förmögenhetsbeskatt\w*|miljardärs?skatt\w*|skatt(en)? på (stora |extrema )?"

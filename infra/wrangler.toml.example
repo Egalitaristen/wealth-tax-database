@@ -1,0 +1,14 @@
+# Example Cloudflare config for the future community layer. Copy to wrangler.toml and fill in the ids.
+# Nothing here is deployed yet. See infra/README.md.
+name = "wealth-tax-supporters"
+compatibility_date = "2026-10-01"
+pages_build_output_dir = "_site"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "wts-community"
+# database_id = "<from `wrangler d1 create wts-community`>"
+
+# Secrets (set with `wrangler pages secret put`, never committed):
+#   HASH_KEY        key for hashing platform user ids
+#   SESSION_SECRET  key for signing sign-in sessions

@@ -21,7 +21,7 @@ mention, not support: read in context.
 """
 import argparse, html, json, os, re, subprocess, sys, tempfile, time, urllib.parse, urllib.request
 
-UA = {"User-Agent": "wealth-tax-database/1.0 (https://github.com/egalitaristen/wealth-tax-database)"}
+UA = {"User-Agent": "wealth-tax-supporters/1.0 (https://github.com/egalitaristen/wealth-tax-supporters)"}
 TERMS = ["förmögenhetsskatt*", "miljardärsskatt*", "miljardärskatt*", "förmögenhetsbeskattning*"]  # the search is whole-word; * matches endings
 TERMS_RE = re.compile(r"(?i)förmögenhetsskatt\w*|förmögenhetsbeskatt\w*|miljardärs?skatt\w*|skatt på (?:stora )?förmögenhet\w*")
 _last = [0.0]

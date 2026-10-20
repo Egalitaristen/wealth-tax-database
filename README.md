@@ -1,8 +1,12 @@
-# Wealth Tax Database
+# Wealth Tax Supporters
 
-An open, sourced database of who publicly backs an actual wealth tax, built country by country. Each country is a folder of CSV files; a GitHub Action turns them into a [world map and browsable site](https://egalitaristen.github.io/wealth-tax-database/).
+An open, sourced database of who publicly backs an actual wealth tax, built country by country. Each country is a folder of CSV files; a GitHub Action turns them into a [world map and browsable site](https://egalitaristen.github.io/wealth-tax-supporters/).
 
 > **The data is AI-generated and may be wrong.** Every entry links to a source, and many rows have not yet been checked by a person. If you spot a mistake or want an entry removed, use the **Report** link on the site, or [open an issue](../../issues/new?template=data-report.yml).
+
+## Why this exists
+
+The aim is to make it easy for people who share the view that wealth should be taxed to find each other, wherever they are. The place to start is the public record: the politicians, parties, organisations, economists and commentators who have said so, each with a source. A community layer for ordinary supporters is planned, but not built. See [docs/community.md](docs/community.md).
 
 ## What is here
 
@@ -12,6 +16,7 @@ An open, sourced database of who publicly backs an actual wealth tax, built coun
 | `skill/` | The research workflow (`SKILL.md`), source playbook, country examples and helper scripts (`wtdb.py`, `profiles_wikidata.py`, `topo_to_boundaries.py`). Works for people and for AI assistants. |
 | `site/` | The static front end (world map, country views). |
 | `scripts/build_site.py` | Turns `data/` into the site data. No framework, standard library only. |
+| `docs/`, `infra/` | The community plan, and the Cloudflare setup and draft database schema. Nothing deployed yet. |
 
 Three countries so far, all built with Claude and all work in progress: the United Kingdom (`data/gb/`, with a council-level map), the United States (`data/us/`, federal and state level, with a state map) and Sweden (`data/se/`, national first pass done; regional and local sweep planned, with a municipality map). Most rows are still marked `verified=n`.
 

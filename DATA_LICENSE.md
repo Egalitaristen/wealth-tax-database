@@ -5,7 +5,7 @@ The compilation in `data/` (the CSV tables, notes and area profiles) is licensed
 
 You may share and adapt it, including commercially, if you give credit, link to the licence and say if you made changes.
 
-Suggested credit: "Wealth Tax Database contributors, https://github.com/Egalitaristen/wealth-tax-database".
+Suggested credit: "Wealth Tax Supporters contributors, https://github.com/Egalitaristen/wealth-tax-supporters".
 
 ## What the licence does not cover
 
