@@ -21,7 +21,7 @@ The aim is to make it easy for people who share the view that wealth should be t
 | `scripts/deploy.py`, `wrangler.jsonc` | Build and deploy the site to Cloudflare from a local checkout. |
 | `docs/`, `infra/` | The community plan, and the Cloudflare setup and draft database schema. Nothing deployed yet. |
 
-Three countries so far, all built with Claude and all work in progress: the United Kingdom (`data/gb/`, with a council-level map), the United States (`data/us/`, federal and state level, with a state map) and Sweden (`data/se/`, national first pass done; regional and local sweep planned, with a municipality map). Most rows are still marked `verified=n`.
+Four countries so far, all built with Claude and all work in progress: the United Kingdom (`data/gb/`, with a council-level map), the United States (`data/us/`, federal and state level, with a state map), Sweden (`data/se/`, national first pass done; regional and local sweep planned, with a municipality map) and Germany (`data/de/`, a seed pass: Bundestag sponsors since 2010, party programmes, the alliance "Vermögen besteuern jetzt", unions, economists and commentators, with a map of the 16 Länder). Most rows are still marked `verified=n`.
 
 ## What counts
 
