@@ -1,0 +1,30 @@
+{
+  "name": "France",
+  "iso2": "FR",
+  "lead": "Egalitaristen",
+  "status": "in progress",
+  "boundaries": "boundaries.json",
+  "notes": "Depth: seed. Scope: national level. Votes and bills of the Assemblée nationale (17th and 16th legislatures) and the Sénat (12 June 2025), the 16 Feb 2025 Le Monde appeal, the 7 Nobel economists' tribune, the main NGOs, unions and left parties, and four French signatories of Proud to Pay More. Register: 13 regions plus 5 overseas regions and 101 départements (INSEE codes); map of 96 metropolitan départements (ODbL, OpenStreetMap France). Communes (about 35,000) are not loaded; overseas départements have no shape. Party column follows the parliamentary group or Wikidata, and is approximate for GDR, LIOT and non-attached members. Not done: Senate votes of Nov 2025, Dec 2024 NFP budget votes, PLF 2027 votes (Oct 2026), the full 2025 appeal list, MEP petition list, Meurthe-et-Moselle department motion (site blocked), media, Tondelier/Roussel/Piketty statements, other unions (FSU, Solidaires), regional and local sweep.",
+  "polls": [
+    {
+      "support": 86,
+      "scope": "France, adults",
+      "question": "2% tax on wealth above EUR 100m (taxe Zucman)",
+      "pollster": "Ifop",
+      "commissioned_by": "Parti socialiste",
+      "fieldwork": "2025-09-10/11",
+      "published": "2025-09",
+      "url": "https://www.publicsenat.fr/actualites/politique/la-taxe-zucman-plebiscitee-par-86-des-francais-il-se-passe-un-truc-massif-et-transpartisan-dans-le-pays"
+    },
+    {
+      "support": 74,
+      "scope": "France, adults",
+      "question": "2% tax on wealth above EUR 100m (taxe Zucman)",
+      "pollster": "Elabe",
+      "commissioned_by": "BFMTV",
+      "fieldwork": "2025-09",
+      "published": "2025-09-25",
+      "url": "https://elabe.fr/wp-content/uploads/2025/09/25092025_elabe_bfmtv_les-francais-et-les-impots.pdf"
+    }
+  ]
+}
