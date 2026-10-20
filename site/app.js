@@ -104,6 +104,7 @@ async function render(fresh) {
     else if (parts[0] === 'about' && parts.length === 1) aboutPage(W);
     else if (parts[0] === 'contribute' && parts.length === 1) contributePage(W);
     else if (country && parts.length === 1) await countryPage(country.slug, params);
+    else if (country && parts.length === 2 && SECTIONS[parts[1]]) await countryPage(country.slug, params, parts[1]);
     else if (country && parts.length === 2) await personPage(country.slug, parts[1]);
     else notFound();
     const navKey = parts[0] === 'about' ? '/about' : parts[0] === 'contribute' ? '/contribute' : null;
@@ -170,7 +171,7 @@ function resultsHtml(S, res, q) {
   if (res.countries.length) groups.push(`<div class="rgroup">Countries</div>` + res.countries.map(c =>
     `<a class="ritem" href="/${c.slug}"><span class="rm"><span class="rn">${mark(c.name, q)}</span><span class="rs">${fmt(c.n)} supporters</span></span><span class="rc">Country</span></a>`).join(''));
   if (res.places.length) groups.push(`<div class="rgroup">Places</div>` + res.places.map(p =>
-    `<a class="ritem" href="/${p.slug}?place=${enc(p.path)}#map"><span class="rm"><span class="rn">${mark(p.name, q)}</span><span class="rs">${esc(p.path)}</span></span><span class="rc">${fmt(p.n)}</span></a>`).join(''));
+    `<a class="ritem" href="/${p.slug}?place=${enc(p.path)}"><span class="rm"><span class="rn">${mark(p.name, q)}</span><span class="rs">${esc(p.path)}</span></span><span class="rc">${fmt(p.n)}</span></a>`).join(''));
   if (res.people.length) groups.push(`<div class="rgroup">People and organisations${res.total > res.people.length ? ` · top ${res.people.length} of ${fmt(res.total)}` : ''}</div>` + res.people.map(p =>
     `<a class="ritem" href="/${p.slug}/${enc(p.id)}">${glyph(p.grade)}<span class="rm"><span class="rn">${mark(p.name, q)}</span><span class="rs">${esc([TYPE[p.type], p.role, p.place].filter(Boolean).join(' · '))}</span></span><span class="rc" title="${esc(S.cname[p.slug])}">${esc(S.ciso[p.slug])}</span></a>`).join(''));
   return groups.join('') || `<div class="rempty">No match for “${esc(q)}”. Try a surname, a town, or a type such as “economists”.</div>`;
@@ -464,27 +465,26 @@ function worldMap(box, W) {
 }
 
 // ---------- country ----------
-async function countryPage(slug, params) {
-  main.innerHTML = '<div class="loading">Loading</div>';
-  const D = await loadCountry(slug), m = D.meta;
-  setTitle(m.name);
-  const sup = D.places.filter(p => p.mapped && p.ids.length).length;
-  // Overview figures for the top of the page.
-  const tally = f => { const o = {}; D.P.forEach(p => f(p).forEach(k => { if (k) o[k] = (o[k] || 0) + 1; })); return Object.entries(o).sort((a, b) => b[1] - a[1]); };
+// A country has four pages: /gb (overview and map), /gb/directory, /gb/time and /gb/method.
+const SECTIONS = {map: 'Map', directory: 'Directory', time: 'Over time', method: 'Method'};
+function countryStats(D) {
   const perYear = {};
   D.E.forEach(e => { const y = +year(e[E_.date]); if (y) perYear[y] = (perYear[y] || 0) + 1; });
   const years = Object.keys(perYear).map(Number).sort((a, b) => a - b);
-  const span = years.length ? years.slice(-10) : [];
-  const yMax = Math.max(1, ...span.map(y => perYear[y]));
-  const peak = years.reduce((a, y) => perYear[y] > (perYear[a] || 0) ? y : a, years[0]);
-  const spark = span.length ? `<svg class="spark" viewBox="0 0 ${span.length * 12} 44" preserveAspectRatio="none" aria-hidden="true">${span.map((y, i) => {
-    const h = Math.max(1.5, perYear[y] / yMax * 40); return `<rect x="${i * 12 + 1.5}" y="${44 - h}" width="9" height="${h}"${y === peak ? ' class="pk"' : ''}><title>${y}: ${perYear[y]}</title></rect>`; }).join('')}</svg>
-    <div class="spark-x"><span>${span[0]}</span><span>${span[span.length - 1]}</span></div>` : '';
-  const topDes = tally(p => p[P_.des]).slice(0, 3), topTypes = tally(p => [p[P_.type], ...p[P_.other]]).slice(0, 5);
-  const desMax = topDes.length ? topDes[0][1] : 1;
+  const tally = f => { const o = {}; D.P.forEach(p => f(p).forEach(k => { if (k) o[k] = (o[k] || 0) + 1; })); return Object.entries(o).sort((a, b) => b[1] - a[1]); };
+  return {perYear, years, tally, types: tally(p => [p[P_.type], ...p[P_.other]]), designs: tally(p => p[P_.des])};
+}
+async function countryPage(slug, params, section = 'map') {
+  main.innerHTML = '<div class="loading">Loading</div>';
+  const D = await loadCountry(slug), m = D.meta, S = countryStats(D);
+  if (section === 'map' && !D.C.length) section = 'directory';
+  setTitle(section === 'map' ? m.name : `${SECTIONS[section]} · ${m.name}`);
+  const base = `/${slug}`;
+  const {perYear, years} = S;
+  const tab = (key, href, sub) => `<a href="${href}"${key === section ? ' class="on" aria-current="page"' : ''}><b>${SECTIONS[key]}</b><span>${sub}</span></a>`;
   main.innerHTML = `
   <div class="wrap fade">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/#countries">All countries</a><span>/</span><span>${esc(m.name)}</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/#countries">All countries</a><span>/</span>${section === 'map' ? `<span>${esc(m.name)}</span>` : `<a href="${base}">${esc(m.name)}</a><span>/</span><span>${SECTIONS[section]}</span>`}</nav>
     <div class="c-top">
       <div class="c-title">
         <h1>${esc(m.name)}</h1>
@@ -497,31 +497,49 @@ async function countryPage(slug, params) {
         <div><b>${fmt(m.units_with_supporters)}</b><span>areas with a supporter</span></div>
       </div>
     </div>
-    <div class="c-overview">
-      <a class="ov" href="#time">
+    ${section === 'map' ? overviewHtml(D, S, base) : ''}
+  </div>
+  <nav class="c-tabs" aria-label="${esc(m.name)} pages"><div class="wrap">
+    ${D.C.length ? tab('map', base, `${fmt(m.units_with_supporters)} areas with supporters`) : ''}
+    ${tab('directory', `${base}/directory`, `${fmt(m.supporters)} entries`)}
+    ${tab('time', `${base}/time`, years.length ? years[0] + '–' + years[years.length - 1] : 'by year')}
+    ${tab('method', `${base}/method`, 'sources and downloads')}
+  </div></nav>
+  <div class="wrap" id="csec"></div>`;
+  const box = $('#csec');
+  if (section === 'map') mapSection(box, D, slug, params);
+  else if (section === 'directory') directorySection(box, D, slug, params);
+  else if (section === 'time') timeSection(box, D, slug, S);
+  else methodSection(box, D, slug);
+}
+function overviewHtml(D, S, base) {
+  const {perYear, years} = S;
+  const span = years.slice(-10), yMax = Math.max(1, ...span.map(y => perYear[y]));
+  const peak = years.reduce((a, y) => perYear[y] > (perYear[a] || 0) ? y : a, years[0]);
+  const spark = span.length ? `<svg class="spark" viewBox="0 0 ${span.length * 12} 44" preserveAspectRatio="none" aria-hidden="true">${span.map((y, i) => {
+    const h = Math.max(1.5, perYear[y] / yMax * 40); return `<rect x="${i * 12 + 1.5}" y="${44 - h}" width="9" height="${h}"${y === peak ? ' class="pk"' : ''}><title>${y}: ${perYear[y]}</title></rect>`; }).join('')}</svg>
+    <div class="spark-x"><span>${span[0]}</span><span>${span[span.length - 1]}</span></div>` : '';
+  const topDes = S.designs.slice(0, 3), desMax = topDes.length ? topDes[0][1] : 1;
+  return `<div class="c-overview">
+      <a class="ov" href="${base}/time">
         <div class="kicker">Statements per year</div>
         ${spark}
-        <div class="ov-foot">Peak <b>${peak || '·'}</b> with ${fmt(perYear[peak] || 0)} · latest ${esc(year(years.length ? String(years[years.length - 1]) : ''))}</div>
+        <div class="ov-foot">Peak <b>${peak || '·'}</b> with ${fmt(perYear[peak] || 0)} · latest ${years.length ? years[years.length - 1] : '·'}</div>
       </a>
-      <a class="ov" href="#time">
+      <a class="ov" href="${base}/time">
         <div class="kicker">What they back</div>
         <div class="ov-bars">${topDes.map(([k, v]) => `<div><span>${esc(label(DES, k))}</span><i style="width:${(v / desMax * 100).toFixed(0)}%"></i><b>${fmt(v)}</b></div>`).join('')}</div>
       </a>
       <div class="ov">
-        <div class="kicker">Who they are · click to filter</div>
-        <div class="ov-chips">${topTypes.map(([k, v]) => `<button type="button" class="chip" data-type="${esc(k)}">${esc(label(TYPES_PL, k))} <b>${fmt(v)}</b></button>`).join('')}</div>
+        <div class="kicker">Who they are</div>
+        <div class="ov-chips">${S.types.slice(0, 5).map(([k, v]) => `<a class="chip" href="${base}/directory?type=${enc(k)}">${esc(label(TYPES_PL, k))} <b>${fmt(v)}</b></a>`).join('')}</div>
       </div>
-    </div>
-  </div>
-  <nav class="c-tabs" aria-label="Sections"><div class="wrap">
-    ${D.C.length ? `<a href="#map"><b>Map</b><span>${fmt(m.units_with_supporters)} areas with supporters</span></a>` : ''}
-    <a href="#directory"><b>Directory</b><span>${fmt(m.supporters)} entries</span></a>
-    <a href="#time"><b>Over time</b><span>${years.length ? years[0] + '–' + years[years.length - 1] : 'by year'}</span></a>
-    <a href="#method"><b>Method</b><span>sources and downloads</span></a>
-  </div></nav>
-  <div class="wrap">
-    ${D.C.length ? `<section class="c-sec" id="map">
-      <div class="sec-head" style="margin-bottom:0"><div><div class="kicker">Explore by place</div><h2>Where they are</h2></div>
+    </div>`;
+}
+
+function mapSection(box, D, slug, params) {
+  box.innerHTML = `<section class="c-sec">
+      <div class="sec-head"><div><div class="kicker">Explore by place</div><h2>Where they are</h2></div>
         <p>Darker areas have more supporters. The search is never finished, so an empty area means nobody recorded yet, not nobody there.</p></div>
       <div class="atlas">
         <div class="mapbox" id="mapbox">
@@ -530,117 +548,32 @@ async function countryPage(slug, params) {
         </div>
         <div class="panel" id="panel"></div>
       </div>
-    </section>` : ''}
-    <section class="c-sec" id="directory">
-      <div class="sec-head" style="margin-bottom:0"><div><div class="kicker">Directory</div><h2>Everyone on record</h2></div>
-        <p>Sorted by the strength of the evidence. Open any entry to read what they said and where.</p></div>
-      <div id="dir-controls"></div>
-      <div class="count-line" id="count"></div>
-      <ul class="dir" id="dir"></ul>
-      <div class="more" id="more"></div>
-    </section>
-    <section class="c-sec" id="time">
-      <div class="sec-head" style="margin-bottom:0"><div><div class="kicker">Over time</div><h2>When they said it</h2></div>
+    </section>`;
+  const api = countryMap(D, slug, path => go(`/${slug}/directory?place=${enc(path)}`));
+  const place = params.get('place');
+  if (place) api.select(place, false);
+}
+
+function timeSection(box, D, slug, S) {
+  const hbars = (rows, labels, link) => { const mx = rows[0] ? rows[0][1] : 1; return rows.slice(0, 10).map(([k, v]) =>
+    `<${link ? `a href="${link(k)}"` : 'div'} class="hb"><span>${esc(label(labels, k))}</span><span class="hb-bar"><i style="width:${(v / mx * 100).toFixed(1)}%"></i></span><span class="n">${fmt(v)}</span></${link ? 'a' : 'div'}>`).join(''); };
+  box.innerHTML = `<section class="c-sec">
+      <div class="sec-head"><div><div class="kicker">Over time</div><h2>When they said it</h2></div>
         <p>Statements per year, by strength of evidence. A person who spoke out several times counts each time.</p></div>
-      <div class="charts" id="charts"></div>
-    </section>
-    <section class="c-sec" id="method">
-      <div class="sec-head" style="margin-bottom:0"><div><div class="kicker">Method and gaps</div><h2>How this was built</h2></div></div>
-      <div class="method" id="methodbody"></div>
-    </section>
-  </div>`;
+      <div class="charts">
+        <div><div class="kicker" style="margin-bottom:12px">Statements per year</div>${yearChart(D.E)}
+          <div class="chart-key"><span><i style="background:var(--ink)"></i>Explicit</span><span><i style="background:var(--signal)"></i>Named</span><span><i style="background:var(--rule-2)"></i>Implied</span></div></div>
+        <div><div class="kicker" style="margin-bottom:10px">What they back</div><div class="hbars">${hbars(S.designs, DES)}</div>
+          <div class="kicker" style="margin:28px 0 10px">Who they are · click to see them</div><div class="hbars">${hbars(S.types, TYPES_PL, k => `/${slug}/directory?type=${enc(k)}`)}</div></div>
+      </div>
+    </section>`;
+}
 
-  // ----- directory state, kept in the URL so filtered views can be shared -----
-  const ST = {q: params.get('q') || '', type: params.get('type') || '', party: params.get('party') || '', level: params.get('level') || '',
-    grade: params.get('grade') || '', place: params.get('place') || '', sort: params.get('sort') || 'strength', limit: 50};
-  const syncUrl = () => {
-    const u = new URLSearchParams();
-    ['q', 'type', 'party', 'level', 'grade', 'place'].forEach(k => { if (ST[k]) u.set(k, ST[k]); });
-    if (ST.sort !== 'strength') u.set('sort', ST.sort);
-    const s = u.toString();
-    history.replaceState(null, '', location.pathname + (s ? '?' + s : '') + location.hash);
-  };
-  const count = (f) => { const o = {}; D.P.forEach(p => f(p).forEach(k => { if (k) o[k] = (o[k] || 0) + 1; })); return Object.entries(o).sort((a, b) => b[1] - a[1]); };
-  const typeCounts = count(p => [p[P_.type], ...p[P_.other]]), partyCounts = count(p => [p[P_.party]]), levelCounts = count(p => [p[P_.level]]);
-  $('#dir-controls').innerHTML = `
-    <div class="filters">
-      <input class="field q" id="f-q" type="search" placeholder="Filter by name, role or place" value="${esc(ST.q)}" aria-label="Filter the directory">
-      <select class="field" id="f-type" aria-label="Type"><option value="">All types</option>${typeCounts.map(([k, n]) => `<option value="${esc(k)}">${esc(label(TYPES_PL, k))} (${n})</option>`).join('')}</select>
-      <select class="field" id="f-party" aria-label="Party" ${partyCounts.length ? '' : 'disabled'}><option value="">${partyCounts.length ? 'All parties' : 'No party data'}</option>${partyCounts.map(([k, n]) => `<option value="${esc(k)}">${esc(k)} (${n})</option>`).join('')}</select>
-      <select class="field" id="f-grade" aria-label="Evidence"><option value="">Any evidence</option><option value="A">Explicit only</option><option value="AB">Explicit or named</option></select>
-      <select class="field" id="f-sort" aria-label="Sort"><option value="strength">Strongest evidence</option><option value="recent">Most recent</option><option value="count">Most statements</option><option value="az">A to Z</option></select>
-    </div>
-    <div class="filter-row">
-      <div class="seg" id="f-level" role="group" aria-label="Level"><button type="button" data-v="">All levels</button>${levelCounts.map(([k]) => `<button type="button" data-v="${esc(k)}">${esc(label(LEVEL, k))}</button>`).join('')}</div>
-      <span id="f-place"></span>
-    </div>`;
-  const setSel = () => {
-    $('#f-type').value = ST.type; $('#f-party').value = ST.party; $('#f-grade').value = ST.grade; $('#f-sort').value = ST.sort;
-    $$('#f-level button').forEach(b => b.classList.toggle('on', b.dataset.v === ST.level));
-    $('#f-place').innerHTML = ST.place ? `<button class="chip on" type="button" id="clear-place">${esc(ST.place.split(' > ').pop())} <span class="x" aria-label="Remove place filter">×</span></button>` : '';
-    const cp = $('#clear-place'); if (cp) cp.onclick = () => { ST.place = ''; changed(); if (mapApi) mapApi.select(null); };
-  };
-  const filtered = () => {
-    const toks = norm(ST.q).trim().split(/\s+/).filter(Boolean);
-    const inPlace = ST.place ? idsForPlace(D, ST.place) : null;
-    const list = D.P.filter(p =>
-      (!ST.type || p[P_.type] === ST.type || p[P_.other].includes(ST.type)) &&
-      (!ST.party || p[P_.party] === ST.party) &&
-      (!ST.level || p[P_.level] === ST.level) &&
-      (!ST.grade || ST.grade.includes(p[P_.grade])) &&
-      (!inPlace || inPlace.has(p[P_.id])) &&
-      (!toks.length || toks.every(t => norm([p[P_.name], p[P_.role], p[P_.aff], p[P_.loc], p[P_.party]].join(' ')).includes(t))));
-    const sorts = {strength: byStrength, recent: (a, b) => (b[P_.last] || '').localeCompare(a[P_.last] || '') || byStrength(a, b),
-      count: (a, b) => b[P_.n] - a[P_.n] || byStrength(a, b), az: (a, b) => a[P_.name].localeCompare(b[P_.name])};
-    return list.sort(sorts[ST.sort] || byStrength);
-  };
-  const row = p => {
-    const tags = [p[P_.type], ...p[P_.other]].slice(0, 2).map(t => `<span class="tag">${esc(label(TYPE, t))}</span>`).join('');
-    return `<li><a class="drow" href="/${slug}/${enc(p[P_.id])}">
-      ${glyph(p[P_.grade])}
-      <span><span class="dn">${esc(p[P_.name])}</span><span class="dr" style="display:block">${esc([p[P_.role], p[P_.aff]].filter(Boolean).join(' · ').slice(0, 140))}</span></span>
-      <span class="dt">${tags}${p[P_.party] ? `<span class="tag signal">${esc(p[P_.party])}</span>` : ''}</span>
-      <span class="dp">${esc(placeShort(p[P_.loc]))}</span>
-      <span class="dd"><b>${esc(year(p[P_.last]))}</b>${p[P_.n]} statement${p[P_.n] === 1 ? '' : 's'}</span>
-    </a></li>`;
-  };
-  function drawList() {
-    const list = filtered(), shown = list.slice(0, ST.limit);
-    const active = ['q', 'type', 'party', 'level', 'grade', 'place'].some(k => ST[k]);
-    $('#count').innerHTML = `<span>Showing <b>${fmt(shown.length)}</b> of <b>${fmt(list.length)}</b>${list.length !== D.P.length ? ` (${fmt(D.P.length)} in total)` : ''}</span>
-      <span style="display:flex;gap:16px">${active ? '<a href="#" id="clear-all">Clear filters</a>' : ''}<span class="grade-key">${glyph('A')} explicit ${glyph('B')} named ${glyph('C')} implied</span></span>`;
-    $('#dir').innerHTML = shown.map(row).join('') || `<li class="empty">Nobody matches these filters yet. The register is never complete, so that does not mean nobody there supports a wealth tax.</li>`;
-    $('#more').innerHTML = list.length > shown.length ? `<button class="btn ghost" type="button" id="more-btn">Show ${Math.min(50, list.length - shown.length)} more</button>` : '';
-    const mb = $('#more-btn'); if (mb) mb.onclick = () => { ST.limit += 50; drawList(); };
-    const ca = $('#clear-all'); if (ca) ca.onclick = e => { e.preventDefault(); Object.assign(ST, {q: '', type: '', party: '', level: '', grade: '', place: ''}); $('#f-q').value = ''; changed(); if (mapApi) mapApi.select(null); };
-  }
-  function changed() { ST.limit = 50; syncUrl(); setSel(); drawList(); }
-  let qt;
-  $('#f-q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { ST.q = e.target.value; changed(); }, 120); });
-  [['#f-type', 'type'], ['#f-party', 'party'], ['#f-grade', 'grade'], ['#f-sort', 'sort']].forEach(([s, k]) => $(s).addEventListener('change', e => { ST[k] = e.target.value; changed(); }));
-  $('#f-level').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { ST.level = b.dataset.v; changed(); } });
-  const filterBy = (k, v) => { ST[k] = v; changed(); $('#directory').scrollIntoView({block: 'start'}); };
-  $$('.ov-chips [data-type]').forEach(b => b.addEventListener('click', () => filterBy('type', b.dataset.type)));
-
-  // ----- map -----
-  let mapApi = null;
-  if (D.C.length) mapApi = countryMap(D, slug, path => filterBy('place', path));
-  setSel(); drawList();
-  if (mapApi && ST.place) mapApi.select(ST.place, false);
-
-  // ----- charts -----
-  $('#charts').innerHTML = `<div><div class="kicker" style="margin-bottom:12px">Statements per year</div>${yearChart(D.E)}
-      <div class="chart-key"><span><i style="background:var(--ink)"></i>Explicit</span><span><i style="background:var(--signal)"></i>Named</span><span><i style="background:var(--rule-2)"></i>Implied</span></div></div>
-    <div><div class="kicker" style="margin-bottom:10px">What they back</div><div class="hbars" id="desbars"></div>
-      <div class="kicker" style="margin:28px 0 10px">Who they are · click to filter</div><div class="hbars" id="typebars"></div></div>`;
-  const hbars = (rows, labels, onClick) => { const mx = rows[0] ? rows[0][1] : 1; return rows.slice(0, 10).map(([k, v]) =>
-    `<${onClick ? `a href="#directory" data-f="${esc(k)}"` : 'div'} class="hb"><span>${esc(label(labels, k))}</span><span class="hb-bar"><i style="width:${(v / mx * 100).toFixed(1)}%"></i></span><span class="n">${fmt(v)}</span></${onClick ? 'a' : 'div'}>`).join(''); };
-  $('#desbars').innerHTML = hbars(count(p => p[P_.des]), DES);
-  $('#typebars').innerHTML = hbars(typeCounts, TYPES_PL, true);
-  $$('#typebars a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); filterBy('type', a.dataset.f); }));
-
-  // ----- method -----
-  $('#methodbody').innerHTML = `
+function methodSection(box, D, slug) {
+  const m = D.meta, sup = D.places.filter(p => p.mapped && p.ids.length).length;
+  box.innerHTML = `<section class="c-sec">
+    <div class="sec-head"><div><div class="kicker">Method and gaps</div><h2>How this was built</h2></div></div>
+    <div class="method">
     <div class="prose">
       ${m.notes ? `<p>${esc(m.notes)}</p>` : ''}
       <p>Researchers search parliaments, councils, parties, unions, campaigns, open letters and the press, and record only statements that back an actual wealth tax. Each statement is quoted word for word, linked to its source and graded by how explicit it is.</p>
@@ -659,14 +592,177 @@ async function countryPage(slug, params) {
       <div class="kicker" style="margin-top:28px">Download (CSV, CC BY 4.0)</div>
       <div class="downloads">${['actors', 'evidence', 'profiles', 'geo_units'].map(f => `<a class="chip" href="/download/${slug}/${f}.csv" download>${f}.csv</a>`).join('')}
         ${ext(`https://github.com/${REPO}/tree/main/data/${slug}`, 'All files on GitHub ↗', 'chip')}</div>
-    </div>`;
+    </div>
+    </div></section>`;
+}
 
-  // Highlight the sub-nav item for the section in view.
-  const links = $$('.c-tabs a');
-  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + en.target.id)); }), {rootMargin: '-40% 0px -55% 0px'});
-  $$('.c-sec').forEach(s => io.observe(s));
+// The directory: filters kept in the URL, a list, and a preview of the selected entry beside it
+// (a bottom sheet on narrow screens). A plain click previews; the full profile is one more click.
+function directorySection(box, D, slug, params) {
+  const ST = {q: params.get('q') || '', type: params.get('type') || '', party: params.get('party') || '', level: params.get('level') || '',
+    grade: params.get('grade') || '', place: params.get('place') || '', sort: params.get('sort') || 'strength', sel: params.get('sel') || '', limit: 50};
+  const syncUrl = () => {
+    const u = new URLSearchParams();
+    ['q', 'type', 'party', 'level', 'grade', 'place'].forEach(k => { if (ST[k]) u.set(k, ST[k]); });
+    if (ST.sort !== 'strength') u.set('sort', ST.sort);
+    if (ST.sel && new URLSearchParams(location.search).has('sel') || ST.picked) u.set('sel', ST.sel);
+    const s = u.toString();
+    history.replaceState(null, '', location.pathname + (s ? '?' + s : ''));
+  };
+  const count = f => { const o = {}; D.P.forEach(p => f(p).forEach(k => { if (k) o[k] = (o[k] || 0) + 1; })); return Object.entries(o).sort((a, b) => b[1] - a[1]); };
+  const typeCounts = count(p => [p[P_.type], ...p[P_.other]]), partyCounts = count(p => [p[P_.party]]), levelCounts = count(p => [p[P_.level]]);
+  box.innerHTML = `<section class="c-sec">
+    <div class="dir-layout">
+      <div class="dir-main">
+        <div class="filters">
+          <input class="field q" id="f-q" type="search" placeholder="Filter by name, role or place" value="${esc(ST.q)}" aria-label="Filter the directory">
+          <select class="field" id="f-type" aria-label="Type"><option value="">All types</option>${typeCounts.map(([k, n]) => `<option value="${esc(k)}">${esc(label(TYPES_PL, k))} (${n})</option>`).join('')}</select>
+          <select class="field" id="f-party" aria-label="Party" ${partyCounts.length ? '' : 'disabled'}><option value="">${partyCounts.length ? 'All parties' : 'No party data'}</option>${partyCounts.map(([k, n]) => `<option value="${esc(k)}">${esc(k)} (${n})</option>`).join('')}</select>
+          <select class="field" id="f-grade" aria-label="Evidence"><option value="">Any evidence</option><option value="A">Explicit only</option><option value="AB">Explicit or named</option></select>
+          <select class="field" id="f-sort" aria-label="Sort"><option value="strength">Strongest evidence</option><option value="recent">Most recent</option><option value="count">Most statements</option><option value="az">A to Z</option></select>
+        </div>
+        <div class="filter-row">
+          <div class="seg" id="f-level" role="group" aria-label="Level"><button type="button" data-v="">All levels</button>${levelCounts.map(([k]) => `<button type="button" data-v="${esc(k)}">${esc(label(LEVEL, k))}</button>`).join('')}</div>
+          <span id="f-place"></span>
+        </div>
+        <div class="count-line" id="count"></div>
+        <ul class="dir" id="dir"></ul>
+        <div class="more" id="more"></div>
+      </div>
+      <aside class="preview" id="preview" aria-live="polite"></aside>
+    </div></section>`;
+  const setSel = () => {
+    $('#f-type').value = ST.type; $('#f-party').value = ST.party; $('#f-grade').value = ST.grade; $('#f-sort').value = ST.sort;
+    $$('#f-level button').forEach(b => b.classList.toggle('on', b.dataset.v === ST.level));
+    $('#f-place').innerHTML = ST.place ? `<button class="chip on" type="button" id="clear-place">${esc(ST.place.split(' > ').pop())} <span class="x" aria-label="Remove place filter">×</span></button>` : '';
+    const cp = $('#clear-place'); if (cp) cp.onclick = () => { ST.place = ''; changed(); };
+  };
+  let list = [];
+  const filtered = () => {
+    const toks = norm(ST.q).trim().split(/\s+/).filter(Boolean);
+    const inPlace = ST.place ? idsForPlace(D, ST.place) : null;
+    const out = D.P.filter(p =>
+      (!ST.type || p[P_.type] === ST.type || p[P_.other].includes(ST.type)) &&
+      (!ST.party || p[P_.party] === ST.party) &&
+      (!ST.level || p[P_.level] === ST.level) &&
+      (!ST.grade || ST.grade.includes(p[P_.grade])) &&
+      (!inPlace || inPlace.has(p[P_.id])) &&
+      (!toks.length || toks.every(t => norm([p[P_.name], p[P_.role], p[P_.aff], p[P_.loc], p[P_.party]].join(' ')).includes(t))));
+    const sorts = {strength: byStrength, recent: (a, b) => (b[P_.last] || '').localeCompare(a[P_.last] || '') || byStrength(a, b),
+      count: (a, b) => b[P_.n] - a[P_.n] || byStrength(a, b), az: (a, b) => a[P_.name].localeCompare(b[P_.name])};
+    return out.sort(sorts[ST.sort] || byStrength);
+  };
+  const row = p => {
+    const tags = [p[P_.type], ...p[P_.other]].slice(0, 2).map(t => `<span class="tag">${esc(label(TYPE, t))}</span>`).join('');
+    return `<li><a class="drow${p[P_.id] === ST.sel ? ' sel' : ''}" data-id="${esc(p[P_.id])}" href="/${slug}/${enc(p[P_.id])}">
+      ${glyph(p[P_.grade])}
+      <span class="dm"><span class="dn">${esc(p[P_.name])}</span><span class="dr">${esc([p[P_.role], p[P_.aff]].filter(Boolean).join(' · ').slice(0, 140))}</span>
+        <span class="dt">${tags}${p[P_.party] ? `<span class="tag signal">${esc(p[P_.party])}</span>` : ''}</span></span>
+      <span class="dp">${esc(placeShort(p[P_.loc]))}</span>
+      <span class="dd"><b>${esc(year(p[P_.last]))}</b>${p[P_.n]} statement${p[P_.n] === 1 ? '' : 's'}</span>
+    </a></li>`;
+  };
+  const wide = () => matchMedia('(min-width: 1021px)').matches;
+  function drawList() {
+    list = filtered();
+    const shown = list.slice(0, ST.limit);
+    const active = ['q', 'type', 'party', 'level', 'grade', 'place'].some(k => ST[k]);
+    $('#count').innerHTML = `<span>Showing <b>${fmt(shown.length)}</b> of <b>${fmt(list.length)}</b>${list.length !== D.P.length ? ` (${fmt(D.P.length)} in total)` : ''}</span>
+      <span style="display:flex;gap:16px">${active ? '<a href="#" id="clear-all">Clear filters</a>' : ''}<span class="grade-key">${glyph('A')} explicit ${glyph('B')} named ${glyph('C')} implied</span></span>`;
+    $('#dir').innerHTML = shown.map(row).join('') || `<li class="empty">Nobody matches these filters yet. The register is never complete, so that does not mean nobody there supports a wealth tax.</li>`;
+    $('#more').innerHTML = list.length > shown.length ? `<button class="btn ghost" type="button" id="more-btn">Show ${Math.min(50, list.length - shown.length)} more</button>` : '';
+    const mb = $('#more-btn'); if (mb) mb.onclick = () => { ST.limit += 50; drawList(); };
+    const ca = $('#clear-all'); if (ca) ca.onclick = e => { e.preventDefault(); Object.assign(ST, {q: '', type: '', party: '', level: '', grade: '', place: ''}); $('#f-q').value = ''; changed(); };
+    // On wide screens the preview always shows something: the selected entry, or the first one.
+    if (wide() && (!ST.sel || !list.some(p => p[P_.id] === ST.sel)) && list.length) preview(list[0][P_.id], false, true);
+    else if (!list.length) $('#preview').innerHTML = '';
+  }
+  function changed() { ST.limit = 50; syncUrl(); setSel(); drawList(); }
+  // auto: the first entry shown by default, which is not written to the URL.
+  function preview(id, open = true, auto = false) {
+    const p = D.byId[id]; if (!p) return;
+    ST.sel = id; if (!auto) syncUrl();
+    $$('#dir .drow.sel').forEach(a => a.classList.remove('sel'));
+    const a = $(`#dir .drow[data-id="${CSS.escape(id)}"]`); if (a) a.classList.add('sel');
+    const pv = $('#preview');
+    pv.innerHTML = profilePreview(D, slug, p);
+    pv.scrollTop = 0;
+    $('.pv-close', pv).onclick = closeSheet;
+    if (open && !wide()) { pv.classList.add('open'); document.body.classList.add('sheet-open'); }
+  }
+  function closeSheet() { $('#preview').classList.remove('open'); document.body.classList.remove('sheet-open'); }
+  $('#dir').addEventListener('click', e => {
+    const a = e.target.closest('a.drow');
+    if (!a || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    ST.picked = true;
+    preview(a.dataset.id);
+  });
+  // Arrow keys move through the list while the preview follows.
+  const keys = e => {
+    if (/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) || !pal.hidden) return;
+    if (e.key === 'Escape') return closeSheet();
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'Enter') return;
+    const shown = list.slice(0, ST.limit), i = shown.findIndex(p => p[P_.id] === ST.sel);
+    if (e.key === 'Enter') { if (ST.sel) go(`/${slug}/${enc(ST.sel)}`); return; }
+    e.preventDefault();
+    const j = Math.max(0, Math.min(shown.length - 1, i + (e.key === 'ArrowDown' ? 1 : -1)));
+    ST.picked = true;
+    if (shown[j]) { preview(shown[j][P_.id], false); const r = $(`#dir .drow[data-id="${CSS.escape(shown[j][P_.id])}"]`); if (r) r.scrollIntoView({block: 'nearest'}); }
+  };
+  document.addEventListener('keydown', keys);
+  let qt;
+  $('#f-q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { ST.q = e.target.value; changed(); }, 120); });
+  [['#f-type', 'type'], ['#f-party', 'party'], ['#f-grade', 'grade'], ['#f-sort', 'sort']].forEach(([s, k]) => $(s).addEventListener('change', e => { ST[k] = e.target.value; changed(); }));
+  $('#f-level').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { ST.level = b.dataset.v; changed(); } });
+  setSel(); drawList();
+  if (ST.sel && D.byId[ST.sel]) preview(ST.sel, false);
   const prev = leaving;
-  leaving = () => { prev(); io.disconnect(); };
+  leaving = () => { prev(); document.removeEventListener('keydown', keys); document.body.classList.remove('sheet-open'); };
+}
+
+// Shared pieces of a person's profile, used by the preview and the full page.
+function profileLinks(p, limit = 99) {
+  const prof = p[P_.prof].slice().sort((a, b) => Object.keys(PLAT).indexOf(a[0]) - Object.keys(PLAT).indexOf(b[0]));
+  const web = safeUrl(p[P_.web]);
+  return [web && !prof.some(x => x[1] === web) ? ext(web, 'Website ↗', 'primary') : '',
+    ...prof.filter(x => safeUrl(x[1])).map((x, i) => ext(x[1], esc(label(PLAT, x[0])) + ' ↗', !web && i === 0 ? 'primary' : ''))].filter(Boolean).slice(0, limit).join('');
+}
+function placeCrumbs(D, slug, p) {
+  const parts = (p[P_.loc] || '').split('>').map(s => s.trim()).filter(Boolean);
+  const reg = D.places.map(pl => pl.path);
+  return parts.map((part, i) => {
+    const path = parts.slice(0, i + 1).join(' > ');
+    const known = i > 0 && reg.some(r => norm(r) === norm(path) || norm(r).startsWith(norm(path) + ' > '));
+    const real = known ? reg.find(r => norm(r) === norm(path)) || path : null;
+    return known ? `<a href="/${slug}?place=${enc(real)}">${esc(part)}</a>` : `<span>${esc(part)}</span>`;
+  }).join('<span class="sep">›</span>');
+}
+const PIN = '<svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.6;flex:none"><path d="M10 18s6-5.3 6-10a6 6 0 0 0-12 0c0 4.7 6 10 6 10z"/><circle cx="10" cy="8" r="2"/></svg>';
+function profilePreview(D, slug, p) {
+  const id = p[P_.id], m = D.meta;
+  const ev = (D.evBy[id] || []).slice().sort((a, b) => (a[E_.grade] || 'Z').localeCompare(b[E_.grade] || 'Z') || (b[E_.date] || '').localeCompare(a[E_.date] || ''));
+  const links = profileLinks(p, 4), crumbs = placeCrumbs(D, slug, p);
+  const firstY = year(p[P_.first]), lastY = year(p[P_.last]);
+  return `<div class="pv-in">
+    <button type="button" class="pv-close" aria-label="Close preview">×</button>
+    <div class="kicker">${esc(label(TYPE, p[P_.type]))}${p[P_.level] ? ' · ' + esc(label(LEVEL, p[P_.level])) : ''}</div>
+    <h3>${esc(p[P_.name])}</h3>
+    <div class="pv-role">${esc([p[P_.role], p[P_.aff]].filter(Boolean).join(' · '))}</div>
+    <div class="p-tags">${p[P_.party] ? `<span class="tag signal">${esc(p[P_.party])}</span>` : ''}${p[P_.other].map(t => `<span class="tag">${esc(label(TYPE, t))}</span>`).join('')}</div>
+    ${crumbs ? `<div class="p-place">${PIN}${crumbs}</div>` : ''}
+    ${links ? `<div class="p-links">${links}</div>` : ''}
+    <div class="pv-sum">${glyph(p[P_.grade])} <b>${esc(GRADE[p[P_.grade]] || '')}</b> · ${p[P_.n]} statement${p[P_.n] === 1 ? '' : 's'}${firstY ? `, ${firstY === lastY ? firstY : firstY + '–' + lastY}` : ''}</div>
+    ${p[P_.des].length ? `<div class="pv-des">Backs ${p[P_.des].map(d => esc(label(DES, d).replace(/^./, c => c.toLowerCase()))).join(', ')}</div>` : ''}
+    <div class="pv-ev">${ev.slice(0, 2).map(e => `<div class="pv-q">
+        <div class="ev-meta"><span class="d">${esc(e[E_.date] || 'Undated')}</span><span>${esc(label(EVT, e[E_.type]))}</span></div>
+        ${e[E_.quote] ? `<blockquote>${/^[a-z]/.test(e[E_.quote]) ? '…' : ''}${esc(e[E_.quote])}</blockquote>` : ''}
+        ${safeUrl(e[E_.url]) ? ext(e[E_.url], esc(e[E_.pub] || e[E_.title] || 'Source') + ' ↗', 'pv-src') : ''}
+      </div>`).join('')}
+      ${ev.length > 2 ? `<div class="muted" style="font-size:13px">and ${ev.length - 2} more on the full profile</div>` : ''}</div>
+    <div class="pv-acts"><a class="btn sm" href="/${slug}/${enc(id)}">Open full profile →</a>
+      <a class="report" style="margin:0" href="${esc(issueUrl(`[${m.iso2}] Report: ${p[P_.name]}`, {country: slug, entry: id}))}" target="_blank" rel="noopener">Report ↗</a></div>
+  </div>`;
 }
 
 function yearChart(E) {
@@ -779,19 +875,7 @@ async function personPage(slug, id) {
   if (!p) return notFound();
   setTitle(`${p[P_.name]} (${m.name})`);
   const ev = (D.evBy[id] || []).slice().sort((a, b) => (b[E_.date] || '').localeCompare(a[E_.date] || '') || (a[E_.grade] || '').localeCompare(b[E_.grade] || ''));
-  const locParts = (p[P_.loc] || '').split('>').map(s => s.trim()).filter(Boolean);
-  // Place breadcrumb: each part links to the country map when it is a known area.
-  const reg = D.places.map(pl => pl.path);
-  const crumbs = locParts.map((part, i) => {
-    const path = locParts.slice(0, i + 1).join(' > ');
-    const known = i > 0 && reg.some(r => norm(r) === norm(path) || norm(r).startsWith(norm(path) + ' > '));
-    const real = known ? reg.find(r => norm(r) === norm(path)) || path : null;
-    return known ? `<a href="/${slug}?place=${enc(real)}#map">${esc(part)}</a>` : `<span>${esc(part)}</span>`;
-  }).join('<span class="sep">›</span>');
-  const prof = p[P_.prof].slice().sort((a, b) => Object.keys(PLAT).indexOf(a[0]) - Object.keys(PLAT).indexOf(b[0]));
-  const web = safeUrl(p[P_.web]);
-  const linkBtns = [web && !prof.some(x => x[1] === web) ? ext(web, 'Website ↗', 'primary') : '',
-    ...prof.filter(x => safeUrl(x[1])).map((x, i) => ext(x[1], esc(label(PLAT, x[0])) + ' ↗', !web && i === 0 ? 'primary' : ''))].filter(Boolean).join('');
+  const crumbs = placeCrumbs(D, slug, p), linkBtns = profileLinks(p);
   // Others in the same, most specific area.
   const mine = D.places.filter(pl => pl.ids.includes(id) && pl.path.includes(' > ')).sort((a, b) => b.path.length - a.path.length)[0];
   const near = mine ? [...idsForPlace(D, mine.path)].filter(i => i !== id).map(i => D.byId[i]).filter(Boolean).sort(byStrength).slice(0, 8) : [];
@@ -799,14 +883,14 @@ async function personPage(slug, id) {
   const firstY = year(p[P_.first]), lastY = year(p[P_.last]);
   main.innerHTML = `
   <div class="wrap fade">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/#countries">All countries</a><span>/</span><a href="/${slug}">${esc(m.name)}</a><span>/</span><a href="/${slug}#directory">Directory</a></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/#countries">All countries</a><span>/</span><a href="/${slug}">${esc(m.name)}</a><span>/</span><a href="/${slug}/directory">Directory</a></nav>
     <div class="person">
       <aside class="p-side">
         <div class="kicker">${esc(label(TYPE, p[P_.type]))}${p[P_.level] ? ' · ' + esc(label(LEVEL, p[P_.level])) : ''}</div>
         <h1>${esc(p[P_.name])}</h1>
         <div class="p-role">${esc([p[P_.role], p[P_.aff]].filter(Boolean).join(' · '))}</div>
-        <div class="p-tags">${p[P_.party] ? `<a class="tag signal" style="text-decoration:none" href="/${slug}?party=${enc(p[P_.party])}#directory">${esc(p[P_.party])}</a>` : ''}${p[P_.other].map(t => `<span class="tag">${esc(label(TYPE, t))}</span>`).join('')}</div>
-        ${crumbs ? `<div class="p-place"><svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.6"><path d="M10 18s6-5.3 6-10a6 6 0 0 0-12 0c0 4.7 6 10 6 10z"/><circle cx="10" cy="8" r="2"/></svg>${crumbs}</div>` : ''}
+        <div class="p-tags">${p[P_.party] ? `<a class="tag signal" style="text-decoration:none" href="/${slug}/directory?party=${enc(p[P_.party])}">${esc(p[P_.party])}</a>` : ''}${p[P_.other].map(t => `<span class="tag">${esc(label(TYPE, t))}</span>`).join('')}</div>
+        ${crumbs ? `<div class="p-place">${PIN}${crumbs}</div>` : ''}
         ${linkBtns ? `<div class="p-links">${linkBtns}</div>` : ''}
         <dl class="kv p-summary" style="margin-top:28px">
           <div><span>Strongest evidence</span><b>${glyph(p[P_.grade])}&nbsp; ${esc(GRADE[p[P_.grade]] || '')}</b></div>
@@ -821,7 +905,7 @@ async function personPage(slug, id) {
         <div style="margin-top:18px">${ev.map(e => evCard(e, m, slug)).join('')}</div>
         ${near.length ? `<div class="nearby"><div class="kicker">Nearby</div><h3>Also in ${esc(mine.name)}</h3>
           <div class="mini">${near.map(q => `<a href="/${slug}/${enc(q[P_.id])}">${glyph(q[P_.grade])}&nbsp; ${esc(q[P_.name])}<span>${esc([label(TYPE, q[P_.type]), q[P_.role]].filter(Boolean).join(' · '))}</span></a>`).join('')}</div>
-          <p style="margin-top:14px;font-size:14px"><a href="/${slug}?place=${enc(mine.path)}#map">See everyone in ${esc(mine.name)} →</a></p></div>` : ''}
+          <p style="margin-top:14px;font-size:14px"><a href="/${slug}/directory?place=${enc(mine.path)}">See everyone in ${esc(mine.name)} →</a></p></div>` : ''}
         ${links.length ? `<div class="nearby"><div class="kicker">Connections</div><h3>Linked entries</h3>
           <div class="mini">${links.map(([q, l]) => `<a href="/${slug}/${enc(q[P_.id])}">${esc(q[P_.name])}<span>${esc(label({}, l[2]))}${l[3] ? ' · ' + esc(l[3]) : ''}</span></a>`).join('')}</div></div>` : ''}
       </div>

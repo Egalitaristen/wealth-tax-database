@@ -60,9 +60,9 @@ python scripts/build_site.py          # writes _site/
 python scripts/serve.py               # http://localhost:8000
 ```
 
-The site uses clean URLs (`/gb`, `/gb/A0001`, `/about`), so it needs a host that falls back to `index.html` for unknown paths. The Cloudflare deployment does this (`not_found_handling` in `wrangler.jsonc`), and `scripts/serve.py` does the same locally.
+The site uses clean URLs (`/gb` with its map, `/gb/directory`, `/gb/time`, `/gb/method`, a profile at `/gb/A0001`, `/about`), so it needs a host that falls back to `index.html` for unknown paths. The Cloudflare deployment does this (`not_found_handling` in `wrangler.jsonc`), and `scripts/serve.py` does the same locally.
 
-The maintainer deploys from a local checkout with `python scripts/deploy.py` (after a one-time `npx wrangler login`). Merging to `main` does not deploy by itself. Filtered views are shareable: `/gb?place=United Kingdom > Wales&type=economist`.
+The maintainer deploys from a local checkout with `python scripts/deploy.py` (after a one-time `npx wrangler login`). Merging to `main` does not deploy by itself. Filtered views are shareable: `/gb/directory?place=United Kingdom > Wales&type=economist`.
 
 ## Licences
 
