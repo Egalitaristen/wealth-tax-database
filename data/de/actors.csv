@@ -157,7 +157,7 @@ A0156,Julia Jirmann,person,campaigner,,"Spokesperson, Netzwerk Steuergerechtigke
 A0157,Bastian Neuwirth,person,campaigner,,"Economic expert, Greenpeace",Greenpeace Deutschland,,A0129,DE,national,Germany,,,active,y,national,,R001,2026-10-20
 A0158,Maike Finnern,person,union_official,,Chair of the GEW,Gewerkschaft Erziehung und Wissenschaft (GEW),,A0128,DE,national,Germany,,,active,y,national,,R001,2026-10-20
 A0159,Verena Bentele,person,campaigner,,President of the VdK social association,Sozialverband VdK Deutschland,,A0138,DE,national,Germany,,,active,y,national,,R001,2026-10-20
-A0160,Jorinde Schulz,person,campaigner,,"Spokesperson, Gemeingut in BürgerInnenhand",Gemeingut in BürgerInnenhand,,A0126,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0160,Jorinde Schulz,person,campaigner,,"Spokesperson, Gemeingut in BürgerInnenhand",Gemeingut in BürgerInnenhand,,A0126,DE,national,Germany,,,active,y,national,Role taken from the cited page; people of the same name exist.,R001,2026-10-20
 A0161,Carolin Schenuit,person,economist,,"Managing director, Forum Ökologisch-Soziale Marktwirtschaft (FÖS)",Forum Ökologisch-Soziale Marktwirtschaft (FÖS),,A0125,DE,national,Germany,,,active,y,national,,R001,2026-10-20
 A0162,Klara Simon,person,campaigner,,"Chair of the board, Mein Grundeinkommen e.V.",Mein Grundeinkommen,,A0146,DE,national,Germany,,,active,y,national,,R001,2026-10-20
 A0163,Manuel Schmitt,person,campaigner,,"Social inequality officer, Oxfam Deutschland",Oxfam Deutschland,,A0133,DE,national,Germany,,,active,y,national,,R001,2026-10-20
@@ -167,9 +167,9 @@ A0166,Gabriel Zucman,person,economist,academic,"Professor, Paris School of Econo
 A0167,Christoph Butterwegge,person,academic,journalist,"Political scientist, former professor at the University of Cologne",,,,DE,national,Germany > North Rhine-Westphalia,,,active,y,national,,R001,2026-10-20
 A0168,Simon Poelchau,person,journalist,,"Economics editor, taz",taz,,,DE,national,Germany,,,active,y,national,,R001,2026-10-20
 A0169,Robert Habeck,person,politician,,Former Federal Minister for Economic Affairs and Climate Action; Greens candidate for chancellor 2025,Bündnis 90/Die Grünen,Alliance 90/The Greens,A0002,DE,national,Germany > Schleswig-Holstein,,,former_role,y,national,,R001,2026-10-20
-A0170,Svenja Schulze,person,politician,,Former Federal Minister for Economic Cooperation and Development,SPD (Sozialdemokratische Partei Deutschlands),SPD,A0118,DE,national,Germany > North Rhine-Westphalia,,,former_role,y,national,,R001,2026-10-20
+A0170,Svenja Schulze,person,politician,,Member of the Bundestag (SPD); former Federal Minister for Economic Cooperation and Development,SPD (Sozialdemokratische Partei Deutschlands),SPD,A0118,DE,national,Germany > North Rhine-Westphalia,,,active,y,national,,R001,2026-10-20
 A0171,Die Linke Fraktion im Abgeordnetenhaus von Berlin,organisation,party,,Parliamentary group in the Berlin state parliament,,The Left,A0001,DE,regional,Germany > Berlin,,,active,na,regional,,R001,2026-10-20
-A0172,Julia Elwing,person,campaigner,,Member of the Attac coordination circle,Attac Deutschland,,A0120,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0172,Julia Elwing,person,campaigner,,Member of the Attac coordination circle,Attac Deutschland,,A0120,DE,national,Germany,,,active,y,national,Role taken from the cited page; people of the same name exist.,R001,2026-10-20
 A0173,Bündnis Umfairteilen – Reichtum besteuern!,organisation,ngo_campaign,,"Alliance of trade unions, welfare associations, Attac, Campact and others (campaign from summer 2012)",,,,DE,national,Germany,,,active,na,national,Campaign of 2012–2013; current activity not checked.,R001,2026-10-20
 A0174,Campact,organisation,ngo_campaign,,Campaigning network,,,,DE,national,Germany,,https://www.campact.de,active,na,national,,R001,2026-10-20
 A0175,Vermögende für eine Vermögensabgabe,organisation,wealthy_individual,ngo_campaign,Initiative of wealthy people calling for a wealth levy and a permanent wealth tax (49 members in 2011),,,,DE,national,Germany,,,active,na,national,Activity after 2011 not checked.,R001,2026-10-20

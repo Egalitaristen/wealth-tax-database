@@ -1,0 +1,35 @@
+# Germany: a federal state with a suspended wealth tax
+
+A fourth worked example. It shows a country where the wealth tax was never repealed, only suspended (1997), where the opposition has tabled motions on it in every Bundestag term, and where the strongest evidence is a few bulk lists: Bundestag sponsors and an alliance statement. Check every URL still works before relying on it.
+
+## Levels and the geography register
+
+| Level (`level`) | Units | Notes |
+|---|---|---|
+| national | Bundestag, Bundesrat, Bundesregierung | The tax is federal law (*Vermögensteuergesetz*); the yield goes to the Länder |
+| supranational | German MEPs | Not yet searched |
+| region | 16 Länder (each with a Landtag) | Names written in English (Bavaria, Lower Saxony, …) so the site reads in English |
+| local | municipalities | Not loaded. They cannot levy the tax; sample the largest cities only if the Länder pass finds council motions |
+
+**Map:** `data/de/boundaries.json` is the Länder map from the Federal Agency for Cartography and Geodesy (VG250/NUTS 1:250,000, Data licence Germany – Attribution – Version 2.0) via geoBoundaries gbOpen (CC BY 4.0), simplified with a Douglas-Peucker pass and drawn from longitude/latitude with a mid-latitude correction. Credit: © GeoBasis-DE / BKG.
+
+## Where the national record is
+
+- **Drucksachen** (motions, bills, committee reports) as PDF: `https://dserver.bundestag.de/btd/<term>/<nnn>/<term><number>.pdf`, for example `21/040/2104029.pdf`. They open with the named sponsors (*Antrag der Abgeordneten … und der Fraktion …*), which makes each motion a bulk list (SKILL 6.4). The demand is in section II (*Der Deutsche Bundestag fordert die Bundesregierung auf*).
+- **Official member register with death dates:** `https://www.bundestag.de/resource/blob/472878/MdB-Stammdaten.zip` (XML, linked from `bundestag.de/services/opendata`). It gives name, party, birth and death date and the Land of each term, so one lookup does the alive check and the `location` for every MP. Names differ from the Drucksache in places (*Cansin Köktürk*, *Agnieszka Brugger*, *Jan Aken* with *van* in a separate field), so match on surname plus first initial and read the unmatched ones by hand.
+- **Plenary summaries:** `bundestag.de/dokumente/textarchiv/<year>/kw<nn>-de-…` (speakers and quotes of each debate).
+- **Terms in German:** Vermögensteuer / Vermögenssteuer, Vermögensabgabe (one-off levy, Art. 106(1) no. 5 Basic Law, Lastenausgleich), Millionärsteuer, Milliardärssteuer, Zucman-Steuer. *Reichensteuer* is also the top income tax rate. *Erbschaftsteuer* alone is out of the definition.
+
+## What worked and what to watch
+
+- **Bulk lists first.** Eight Drucksachen gave 120 of the first 176 actors with a stated design (Left motions 2010–2026; the Greens' 2012 bill). The same names appear in several terms, so the member register and one actor row per person kept the file small.
+- **Alliance statements.** The joint statement of 4 October 2024 ("Die Zeit ist reif: Superreiche gerecht besteuern", PDF on attac.de) names 22 signatories and the demand in one sentence; the roster page of Netzwerk Steuergerechtigkeit lists 27 plus 12 supporters. Roster-only organisations are grade B.
+- **Party programmes.** The SPD (2025 government programme PDF) and Greens (2021 programme PDF) are fetchable. For the Greens 2025 use the web page `gruene.de/artikel/zusammen-wachsen`.
+- **Two parties voted against the Left in 2026.** The Finance Committee's report 21/8481 records SPD and Greens voting against motion 21/4029; their own positions are recorded from their programmes, not from that vote.
+- **Do not count as support:** statements about the inheritance tax (*Erbschaftsteuer*) alone (Truger, Sachverständigenrat 2025) and revenue calculations without an endorsement (Stefan Bach, DIW). A pseudonymous campaigner whose real name is withheld (Stefanie Bremer) cannot be identified or checked for death.
+
+## Tooling that changed what was reachable
+
+- `die-linke.de` and `linksfraktion.de` answer 403 to curl and to the headless browser; an easy-read edition of the 2025 programme is hosted by a third party. `bsw-vg.de` is refused by the egress proxy. `taxmenow.eu` shows a bot check; `zeit.de`, `gew.de` and `der-paritaetische.de` answer 403 to plain clients.
+- Wikipedia and Wikidata APIs rate-limit shared addresses (HTTP 429); `profiles_wikidata.py` needs QIDs, which are not yet filled.
+- `wtdb.py checkquotes` skips quotes of fewer than three words, so a roster entry that is only a name must be quoted with its neighbours on the printed list.
