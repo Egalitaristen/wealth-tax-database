@@ -1,0 +1,767 @@
+geo_unit_id,name,level,unit_type,parent_id,website,sweep_status,swept_run,swept_date,queries_run,hits,notes,code
+G0001,India,national,country,,https://www.india.gov.in,pending,,,,,"R002 also ran searches in Hindi, Malayalam, Bengali and Tamil and for Kerala, Tamil Nadu, West Bengal and Karnataka governments: no wealth-tax statement found in those languages or states (Kerala's chief minister said in 2023 only that the Centre had not taxed the super-rich).",
+G0002,Lok Sabha,national,legislature,G0001,https://sansad.in/ls,in_progress,R002,2026-10-20,6,0,"R002: web searches for Lok Sabha speeches, motions and private members' bills found none naming a wealth tax; Hansard on sansad.in and rsdebate.nic.in was not searched in full text (the archive pages return no text to plain fetches). Written questions on a wealth tax exist (Rajya Sabha, Dec 2021 and Mar 2022) but a question is not support.",
+G0003,Rajya Sabha,national,legislature,G0001,https://sansad.in/rs,in_progress,R002,2026-10-20,6,0,R002: same searches as the Lok Sabha; no Rajya Sabha speech naming a wealth tax found; full-text search of rsdebate.nic.in still to do.,
+G0004,Government of India,national,executive,G0001,https://www.india.gov.in,pending,,,,,Finance Minister Sitharaman and the Chief Economic Adviser oppose an inheritance tax and a wealth tax (reported Dec 2024); no supporter found in government.,
+G0005,Mizoram,region,state or union territory,G0001,,pending,,,,,,15
+G0006,Tamil Nadu,region,state or union territory,G0001,,pending,,,,,,33
+G0007,Madhya Pradesh,region,state or union territory,G0001,,pending,,,,,,23
+G0008,Maharashtra,region,state or union territory,G0001,,pending,,,,,,27
+G0009,Chhattisgarh,region,state or union territory,G0001,,pending,,,,,,22
+G0010,Gujarat,region,state or union territory,G0001,,pending,,,,,,24
+G0011,Odisha,region,state or union territory,G0001,,pending,,,,,,21
+G0012,Andhra Pradesh,region,state or union territory,G0001,,pending,,,,,,37
+G0013,Karnataka,region,state or union territory,G0001,,pending,,,,,,29
+G0014,Goa,region,state or union territory,G0001,,pending,,,,,,30
+G0015,Kerala,region,state or union territory,G0001,,pending,,,,,,32
+G0016,Telangana,region,state or union territory,G0001,,pending,,,,,,36
+G0017,West Bengal,region,state or union territory,G0001,,pending,,,,,,19
+G0018,Dadra and Nagar Haveli and Daman and Diu,region,state or union territory,G0001,,pending,,,,,,26
+G0019,Puducherry,region,state or union territory,G0001,,pending,,,,,,34
+G0020,Lakshadweep,region,state or union territory,G0001,,pending,,,,,,31
+G0021,Arunachal Pradesh,region,state or union territory,G0001,,pending,,,,,,12
+G0022,Assam,region,state or union territory,G0001,,pending,,,,,,18
+G0023,Nagaland,region,state or union territory,G0001,,pending,,,,,,13
+G0024,Meghalaya,region,state or union territory,G0001,,pending,,,,,,17
+G0025,Manipur,region,state or union territory,G0001,,pending,,,,,,14
+G0026,Tripura,region,state or union territory,G0001,,pending,,,,,,16
+G0027,Andaman and Nicobar Islands,region,state or union territory,G0001,,pending,,,,,,35
+G0028,Uttar Pradesh,region,state or union territory,G0001,,pending,,,,,,09
+G0029,Rajasthan,region,state or union territory,G0001,,pending,,,,,,08
+G0030,Delhi,region,state or union territory,G0001,,pending,,,,,,07
+G0031,Haryana,region,state or union territory,G0001,,pending,,,,,,06
+G0032,Sikkim,region,state or union territory,G0001,,pending,,,,,,11
+G0033,Bihar,region,state or union territory,G0001,,pending,,,,,,10
+G0034,Jharkhand,region,state or union territory,G0001,,pending,,,,,,20
+G0035,Ladakh,region,state or union territory,G0001,,pending,,,,,,38
+G0036,Jammu and Kashmir,region,state or union territory,G0001,,pending,,,,,,01
+G0037,Himachal Pradesh,region,state or union territory,G0001,,pending,,,,,,02
+G0038,Punjab,region,state or union territory,G0001,,pending,,,,,,03
+G0039,Uttarakhand,region,state or union territory,G0001,,pending,,,,,,05
+G0040,Chandigarh,region,state or union territory,G0001,,pending,,,,,,04
+G0041,Aizawl,council,district,G0005,,pending,,,,,,15001
+G0042,Champhai,council,district,G0005,,pending,,,,,,15002
+G0043,Kolasib,council,district,G0005,,pending,,,,,,15003
+G0044,Lawngtlai,council,district,G0005,,pending,,,,,,15004
+G0045,Lunglei,council,district,G0005,,pending,,,,,,15005
+G0046,Mamit,council,district,G0005,,pending,,,,,,15006
+G0047,Saiha,council,district,G0005,,pending,,,,,,15007
+G0048,Serchhip,council,district,G0005,,pending,,,,,,15008
+G0049,Khawzawl,council,district,G0005,,pending,,,,,,15009
+G0050,Hnahthial,council,district,G0005,,pending,,,,,,15010
+G0051,Thiruvallur,council,district,G0006,,pending,,,,,,33001
+G0052,Chennai,council,district,G0006,,pending,,,,,,33002
+G0053,Krishnagiri,council,district,G0006,,pending,,,,,,33003
+G0054,Tiruvannamalai,council,district,G0006,,pending,,,,,,33004
+G0055,Dharmapuri,council,district,G0006,,pending,,,,,,33005
+G0056,Salem,council,district,G0006,,pending,,,,,,33006
+G0057,Erode,council,district,G0006,,pending,,,,,,33007
+G0058,Nilgiris,council,district,G0006,,pending,,,,,,33008
+G0059,Namakkal,council,district,G0006,,pending,,,,,,33009
+G0060,Perambalur,council,district,G0006,,pending,,,,,,33010
+G0061,Coimbatore,council,district,G0006,,pending,,,,,,33011
+G0062,Tiruchirappalli,council,district,G0006,,pending,,,,,,33012
+G0063,Ariyalur,council,district,G0006,,pending,,,,,,33013
+G0064,Tiruppur,council,district,G0006,,pending,,,,,,33014
+G0065,Thanjavur,council,district,G0006,,pending,,,,,,33015
+G0066,Karur,council,district,G0006,,pending,,,,,,33016
+G0067,Thiruvarur,council,district,G0006,,pending,,,,,,33017
+G0068,Dindigul,council,district,G0006,,pending,,,,,,33018
+G0069,Madurai,council,district,G0006,,pending,,,,,,33019
+G0070,Theni,council,district,G0006,,pending,,,,,,33020
+G0071,Virudhunagar,council,district,G0006,,pending,,,,,,33021
+G0072,Thoothukkudi,council,district,G0006,,pending,,,,,,33022
+G0073,Kanyakumari,council,district,G0006,,pending,,,,,,33023
+G0074,Viluppuram,council,district,G0006,,pending,,,,,,33024
+G0075,Cuddalore,council,district,G0006,,pending,,,,,,33025
+G0076,Pudukkottai,council,district,G0006,,pending,,,,,,33026
+G0077,Sivaganga,council,district,G0006,,pending,,,,,,33027
+G0078,Ramanathapuram,council,district,G0006,,pending,,,,,,33028
+G0079,Nagapattinam,council,district,G0006,,pending,,,,,,33029
+G0080,Kallakurichi,council,district,G0006,,pending,,,,,,33030
+G0081,Tenkasi,council,district,G0006,,pending,,,,,,33031
+G0082,Tirunelveli,council,district,G0006,,pending,,,,,,33032
+G0083,Vellore,council,district,G0006,,pending,,,,,,33033
+G0084,Ranipet,council,district,G0006,,pending,,,,,,33034
+G0085,Tirupathur,council,district,G0006,,pending,,,,,,33035
+G0086,Kancheepuram,council,district,G0006,,pending,,,,,,33036
+G0087,Chengalpattu,council,district,G0006,,pending,,,,,,33037
+G0088,Burhanpur,council,district,G0007,,pending,,,,,,23001
+G0089,Gondia,council,district,G0008,,pending,,,,,,27001
+G0090,Bhandara,council,district,G0008,,pending,,,,,,27002
+G0091,Jalgaon,council,district,G0008,,pending,,,,,,27003
+G0092,Mahasamund,council,district,G0009,,pending,,,,,,22001
+G0093,Wardha,council,district,G0008,,pending,,,,,,27004
+G0094,Buldhana,council,district,G0008,,pending,,,,,,27005
+G0095,Valsad,council,district,G0010,,pending,,,,,,24001
+G0096,Akola,council,district,G0008,,pending,,,,,,27006
+G0097,Bhadrak,council,district,G0011,,pending,,,,,,21001
+G0098,Dhenkanal,council,district,G0011,,pending,,,,,,21002
+G0099,Jajpur,council,district,G0011,,pending,,,,,,21003
+G0100,Subarnapur,council,district,G0011,,pending,,,,,,21004
+G0101,Nuapada,council,district,G0011,,pending,,,,,,21005
+G0102,Balangir,council,district,G0011,,pending,,,,,,21006
+G0103,Nashik,council,district,G0008,,pending,,,,,,27007
+G0104,Boudh,council,district,G0011,,pending,,,,,,21007
+G0105,Gadchiroli,council,district,G0008,,pending,,,,,,27008
+G0106,Washim,council,district,G0008,,pending,,,,,,27009
+G0107,Cuttack,council,district,G0011,,pending,,,,,,21008
+G0108,Chandrapur,council,district,G0008,,pending,,,,,,27010
+G0109,Yavatmal,council,district,G0008,,pending,,,,,,27011
+G0110,Kandhamal,council,district,G0011,,pending,,,,,,21009
+G0111,Jalna,council,district,G0008,,pending,,,,,,27012
+G0112,Nayagarh,council,district,G0011,,pending,,,,,,21010
+G0113,Uttar Bastar Kanker,council,district,G0009,,pending,,,,,,22002
+G0114,Khordha,council,district,G0011,,pending,,,,,,21011
+G0115,Kalahandi,council,district,G0011,,pending,,,,,,21012
+G0116,Jagatsinghpur,council,district,G0011,,pending,,,,,,21013
+G0117,Puri,council,district,G0011,,pending,,,,,,21014
+G0118,Ahmednagar,council,district,G0008,,pending,,,,,,27013
+G0119,Nabarangapur,council,district,G0011,,pending,,,,,,21015
+G0120,Hingoli,council,district,G0008,,pending,,,,,,27014
+G0121,Rayagada,council,district,G0011,,pending,,,,,,21016
+G0122,Nanded,council,district,G0008,,pending,,,,,,27015
+G0123,Narayanpur,council,district,G0009,,pending,,,,,,22003
+G0124,Parbhani,council,district,G0008,,pending,,,,,,27016
+G0125,Pune,council,district,G0008,,pending,,,,,,27017
+G0126,Beed,council,district,G0008,,pending,,,,,,27018
+G0127,Mumbai,council,district,G0008,,pending,,,,,,27019
+G0128,Koraput,council,district,G0011,,pending,,,,,,21017
+G0129,Srikakulam,council,district,G0012,,pending,,,,,,37001
+G0130,Vizianagaram,council,district,G0012,,pending,,,,,,37002
+G0131,Latur,council,district,G0008,,pending,,,,,,27020
+G0132,Osmanabad,council,district,G0008,,pending,,,,,,27021
+G0133,Malkangiri,council,district,G0011,,pending,,,,,,21018
+G0134,Solapur,council,district,G0008,,pending,,,,,,27022
+G0135,Visakhapatnam,council,district,G0012,,pending,,,,,,37003
+G0136,Bidar,council,district,G0013,,pending,,,,,,29001
+G0137,Satara,council,district,G0008,,pending,,,,,,27023
+G0138,Ratnagiri,council,district,G0008,,pending,,,,,,27024
+G0139,Kalaburagi,council,district,G0013,,pending,,,,,,29002
+G0140,Sangli,council,district,G0008,,pending,,,,,,27025
+G0141,Kolhapur,council,district,G0008,,pending,,,,,,27026
+G0142,Krishna,council,district,G0012,,pending,,,,,,37004
+G0143,Belagavi,council,district,G0013,,pending,,,,,,29003
+G0144,Yadgir,council,district,G0013,,pending,,,,,,29004
+G0145,Bagalkote,council,district,G0013,,pending,,,,,,29005
+G0146,Sindhudurg,council,district,G0008,,pending,,,,,,27027
+G0147,Guntur,council,district,G0012,,pending,,,,,,37005
+G0148,East Godavari,council,district,G0012,,pending,,,,,,37006
+G0149,Raichur,council,district,G0013,,pending,,,,,,29006
+G0150,Prakasam,council,district,G0012,,pending,,,,,,37007
+G0151,Kurnool,council,district,G0012,,pending,,,,,,37008
+G0152,Koppal,council,district,G0013,,pending,,,,,,29007
+G0153,Gadag,council,district,G0013,,pending,,,,,,29008
+G0154,North Goa,council,district,G0014,,pending,,,,,,30001
+G0155,Ballari,council,district,G0013,,pending,,,,,,29009
+G0156,Dharwad,council,district,G0013,,pending,,,,,,29010
+G0157,Uttara Kannada,council,district,G0013,,pending,,,,,,29011
+G0158,South Goa,council,district,G0014,,pending,,,,,,30002
+G0159,Haveri,council,district,G0013,,pending,,,,,,29012
+G0160,Anantapur,council,district,G0012,,pending,,,,,,37009
+G0161,S.P.S. Nellore,council,district,G0012,,pending,,,,,,37010
+G0162,Chitradurga,council,district,G0013,,pending,,,,,,29013
+G0163,Davanagere,council,district,G0013,,pending,,,,,,29014
+G0164,Shivamogga,council,district,G0013,,pending,,,,,,29015
+G0165,Udupi,council,district,G0013,,pending,,,,,,29016
+G0166,Chikkamagaluru,council,district,G0013,,pending,,,,,,29017
+G0167,Chikkaballapura,council,district,G0013,,pending,,,,,,29018
+G0168,Hassan,council,district,G0013,,pending,,,,,,29019
+G0169,Kolar,council,district,G0013,,pending,,,,,,29020
+G0170,Bengaluru Rural,council,district,G0013,,pending,,,,,,29021
+G0171,Dakshina Kannada,council,district,G0013,,pending,,,,,,29022
+G0172,Bengaluru Urban,council,district,G0013,,pending,,,,,,29023
+G0173,Kasaragod,council,district,G0015,,pending,,,,,,32001
+G0174,Kodagu,council,district,G0013,,pending,,,,,,29024
+G0175,Chamarajanagara,council,district,G0013,,pending,,,,,,29025
+G0176,Wayanad,council,district,G0015,,pending,,,,,,32002
+G0177,Kozhikode,council,district,G0015,,pending,,,,,,32003
+G0178,Malappuram,council,district,G0015,,pending,,,,,,32004
+G0179,Palakkad,council,district,G0015,,pending,,,,,,32005
+G0180,Thrissur,council,district,G0015,,pending,,,,,,32006
+G0181,Idukki,council,district,G0015,,pending,,,,,,32007
+G0182,Ernakulam,council,district,G0015,,pending,,,,,,32008
+G0183,Alappuzha,council,district,G0015,,pending,,,,,,32009
+G0184,Kottayam,council,district,G0015,,pending,,,,,,32010
+G0185,Pathanamthitta,council,district,G0015,,pending,,,,,,32011
+G0186,Kollam,council,district,G0015,,pending,,,,,,32012
+G0187,Thiruvananthapuram,council,district,G0015,,pending,,,,,,32013
+G0188,West Godavari,council,district,G0012,,pending,,,,,,37011
+G0189,Dakshin Bastar Dantewada,council,district,G0009,,pending,,,,,,22004
+G0190,Bastar,council,district,G0009,,pending,,,,,,22005
+G0191,Kondagaon,council,district,G0009,,pending,,,,,,22006
+G0192,Gariaband,council,district,G0009,,pending,,,,,,22007
+G0193,Raipur,council,district,G0009,,pending,,,,,,22008
+G0194,Durg,council,district,G0009,,pending,,,,,,22009
+G0195,Thane,council,district,G0008,,pending,,,,,,27028
+G0196,Adilabad,council,district,G0016,,pending,,,,,,36001
+G0197,Hyderabad,council,district,G0016,,pending,,,,,,36002
+G0198,Jagtial,council,district,G0016,,pending,,,,,,36003
+G0199,Jangaon,council,district,G0016,,pending,,,,,,36004
+G0200,Mulugu,council,district,G0016,,pending,,,,,,36005
+G0201,Jogulamba Gadwal,council,district,G0016,,pending,,,,,,36006
+G0202,Kamareddy,council,district,G0016,,pending,,,,,,36007
+G0203,Karimnagar,council,district,G0016,,pending,,,,,,36008
+G0204,Khammam,council,district,G0016,,pending,,,,,,36009
+G0205,Komaram Bheem,council,district,G0016,,pending,,,,,,36010
+G0206,Mahabubabad,council,district,G0016,,pending,,,,,,36011
+G0207,Mahabubnagar,council,district,G0016,,pending,,,,,,36012
+G0208,Mancherial,council,district,G0016,,pending,,,,,,36013
+G0209,Medak,council,district,G0016,,pending,,,,,,36014
+G0210,Medchal Malkajgiri,council,district,G0016,,pending,,,,,,36015
+G0211,Nagarkurnool,council,district,G0016,,pending,,,,,,36016
+G0212,Nalgonda,council,district,G0016,,pending,,,,,,36017
+G0213,Nirmal,council,district,G0016,,pending,,,,,,36018
+G0214,Nizamabad,council,district,G0016,,pending,,,,,,36019
+G0215,Peddapalli,council,district,G0016,,pending,,,,,,36020
+G0216,Rajanna Sircilla,council,district,G0016,,pending,,,,,,36021
+G0217,Ranga Reddy,council,district,G0016,,pending,,,,,,36022
+G0218,Sangareddy,council,district,G0016,,pending,,,,,,36023
+G0219,Siddipet,council,district,G0016,,pending,,,,,,36024
+G0220,Suryapet,council,district,G0016,,pending,,,,,,36025
+G0221,Vikarabad,council,district,G0016,,pending,,,,,,36026
+G0222,Wanaparthy,council,district,G0016,,pending,,,,,,36027
+G0223,Warangal Rural,council,district,G0016,,pending,,,,,,36028
+G0224,Warangal Urban,council,district,G0016,,pending,,,,,,36029
+G0225,Yadadri Bhuvanagiri,council,district,G0016,,pending,,,,,,36030
+G0226,South 24 Parganas,council,district,G0017,,pending,,,,,,19001
+G0227,Amreli,council,district,G0010,,pending,,,,,,24002
+G0228,Angul,council,district,G0011,,pending,,,,,,21019
+G0229,Dang,council,district,G0010,,pending,,,,,,24003
+G0230,Dhamtari,council,district,G0009,,pending,,,,,,22010
+G0231,Kendrapara,council,district,G0011,,pending,,,,,,21020
+G0232,Dadra and Nagar Haveli,council,district,G0018,,pending,,,,,,26001
+G0233,Palghar,council,district,G0008,,pending,,,,,,27029
+G0234,Ganjam,council,district,G0011,,pending,,,,,,21021
+G0235,Gajapati,council,district,G0011,,pending,,,,,,21022
+G0236,Y.S.R. Kadapa,council,district,G0012,,pending,,,,,,37012
+G0237,Tumakuru,council,district,G0013,,pending,,,,,,29026
+G0238,Chittoor,council,district,G0012,,pending,,,,,,37013
+G0239,Ramanagara,council,district,G0013,,pending,,,,,,29027
+G0240,Mandya,council,district,G0013,,pending,,,,,,29028
+G0241,Mysuru,council,district,G0013,,pending,,,,,,29029
+G0242,Kannur,council,district,G0015,,pending,,,,,,32014
+G0243,Puducherry,council,district,G0019,,pending,,,,,,34001
+G0244,Balod,council,district,G0009,,pending,,,,,,22011
+G0245,Bhadradri Kothagudem,council,district,G0016,,pending,,,,,,36031
+G0246,Vadodara,council,district,G0010,,pending,,,,,,24004
+G0247,Paschim Medinipur,council,district,G0017,,pending,,,,,,19002
+G0248,Seoni,council,district,G0007,,pending,,,,,,23002
+G0249,Alirajpur,council,district,G0007,,pending,,,,,,23003
+G0250,Chhindwara,council,district,G0007,,pending,,,,,,23004
+G0251,Harda,council,district,G0007,,pending,,,,,,23005
+G0252,Khargone,council,district,G0007,,pending,,,,,,23006
+G0253,Purba Medinipur,council,district,G0017,,pending,,,,,,19003
+G0254,Mayurbhanj,council,district,G0011,,pending,,,,,,21023
+G0255,Bharuch,council,district,G0010,,pending,,,,,,24005
+G0256,Sundargarh,council,district,G0011,,pending,,,,,,21024
+G0257,Kabeerdham,council,district,G0009,,pending,,,,,,22012
+G0258,Khandwa,council,district,G0007,,pending,,,,,,23007
+G0259,Porbandar,council,district,G0010,,pending,,,,,,24006
+G0260,Balaghat,council,district,G0007,,pending,,,,,,23008
+G0261,Narmada,council,district,G0010,,pending,,,,,,24007
+G0262,Barwani,council,district,G0007,,pending,,,,,,23009
+G0263,Janjgir Champa,council,district,G0009,,pending,,,,,,22013
+G0264,Nandurbar,council,district,G0008,,pending,,,,,,27030
+G0265,Kendujhar,council,district,G0011,,pending,,,,,,21025
+G0266,Balasore,council,district,G0011,,pending,,,,,,21026
+G0267,Jharsuguda,council,district,G0011,,pending,,,,,,21027
+G0268,Bametara,council,district,G0009,,pending,,,,,,22014
+G0269,Rajnandgaon,council,district,G0009,,pending,,,,,,22015
+G0270,Amravati,council,district,G0008,,pending,,,,,,27031
+G0271,Surat,council,district,G0010,,pending,,,,,,24008
+G0272,Dhule,council,district,G0008,,pending,,,,,,27032
+G0273,Tapi,council,district,G0010,,pending,,,,,,24009
+G0274,Bargarh,council,district,G0011,,pending,,,,,,21028
+G0275,Nagpur,council,district,G0008,,pending,,,,,,27033
+G0276,Baloda Bazar,council,district,G0009,,pending,,,,,,22016
+G0277,Mungeli,council,district,G0009,,pending,,,,,,22017
+G0278,Botad,council,district,G0010,,pending,,,,,,24010
+G0279,Chhota Udaipur,council,district,G0010,,pending,,,,,,24011
+G0280,Gir Somnath,council,district,G0010,,pending,,,,,,24012
+G0281,Jhargram,council,district,G0017,,pending,,,,,,19004
+G0282,Rajkot,council,district,G0010,,pending,,,,,,24013
+G0283,Bhavnagar,council,district,G0010,,pending,,,,,,24014
+G0284,Betul,council,district,G0007,,pending,,,,,,23010
+G0285,Junagadh,council,district,G0010,,pending,,,,,,24015
+G0286,Deogarh,council,district,G0011,,pending,,,,,,21029
+G0287,Jamnagar,council,district,G0010,,pending,,,,,,24016
+G0288,Devbhumi Dwarka,council,district,G0010,,pending,,,,,,24017
+G0289,Aurangabad,council,district,G0008,,pending,,,,,,27034
+G0290,Vijayapura,council,district,G0013,,pending,,,,,,29030
+G0291,Bijapur,council,district,G0009,,pending,,,,,,22018
+G0292,Raigad,council,district,G0008,,pending,,,,,,27035
+G0293,Raigarh,council,district,G0009,,pending,,,,,,22019
+G0294,Bilaspur,council,district,G0009,,pending,,,,,,22020
+G0295,Karaikal,council,district,G0019,,pending,,,,,,34002
+G0296,Mahe,council,district,G0019,,pending,,,,,,34003
+G0297,Yanam,council,district,G0019,,pending,,,,,,34004
+G0298,Sambalpur,council,district,G0011,,pending,,,,,,21030
+G0299,Navsari,council,district,G0010,,pending,,,,,,24018
+G0300,Lakshadweep,council,district,G0020,,pending,,,,,,31001
+G0301,Daman,council,district,G0018,,pending,,,,,,26002
+G0302,Diu,council,district,G0018,,pending,,,,,,26003
+G0303,Jayashankar Bhupalapally,council,district,G0016,,pending,,,,,,36032
+G0304,Narayanpet,council,district,G0016,,pending,,,,,,36033
+G0305,Sukma,council,district,G0009,,pending,,,,,,22021
+G0306,Upper Subansiri,council,district,G0021,,pending,,,,,,12001
+G0307,Anjaw,council,district,G0021,,pending,,,,,,12002
+G0308,Tinsukia,council,district,G0022,,pending,,,,,,18001
+G0309,Dhemaji,council,district,G0022,,pending,,,,,,18002
+G0310,Changlang,council,district,G0021,,pending,,,,,,12003
+G0311,Dibrugarh,council,district,G0022,,pending,,,,,,18003
+G0312,Tawang,council,district,G0021,,pending,,,,,,12004
+G0313,Papum Pare,council,district,G0021,,pending,,,,,,12005
+G0314,Lakhimpur,council,district,G0022,,pending,,,,,,18004
+G0315,Tirap,council,district,G0021,,pending,,,,,,12006
+G0316,Sivasagar,council,district,G0022,,pending,,,,,,18005
+G0317,Jorhat,council,district,G0022,,pending,,,,,,18006
+G0318,Mon,council,district,G0023,,pending,,,,,,13001
+G0319,Sonitpur,council,district,G0022,,pending,,,,,,18007
+G0320,Golaghat,council,district,G0022,,pending,,,,,,18008
+G0321,Longleng,council,district,G0023,,pending,,,,,,13002
+G0322,Mokokchung,council,district,G0023,,pending,,,,,,13003
+G0323,Udalguri,council,district,G0022,,pending,,,,,,18009
+G0324,Chirang,council,district,G0022,,pending,,,,,,18010
+G0325,Baksa,council,district,G0022,,pending,,,,,,18011
+G0326,Nagaon,council,district,G0022,,pending,,,,,,18012
+G0327,Kokrajhar,council,district,G0022,,pending,,,,,,18013
+G0328,Darrang,council,district,G0022,,pending,,,,,,18014
+G0329,Tuensang,council,district,G0023,,pending,,,,,,13004
+G0330,Barpeta,council,district,G0022,,pending,,,,,,18015
+G0331,Nalbari,council,district,G0022,,pending,,,,,,18016
+G0332,Morigaon,council,district,G0022,,pending,,,,,,18017
+G0333,Kamrup,council,district,G0022,,pending,,,,,,18018
+G0334,Bongaigaon,council,district,G0022,,pending,,,,,,18019
+G0335,Dhubri,council,district,G0022,,pending,,,,,,18020
+G0336,Kamrup Metropolitan,council,district,G0022,,pending,,,,,,18021
+G0337,Kiphire,council,district,G0023,,pending,,,,,,13005
+G0338,Goalpara,council,district,G0022,,pending,,,,,,18022
+G0339,Ribhoi,council,district,G0024,,pending,,,,,,17001
+G0340,Dima Hasao,council,district,G0022,,pending,,,,,,18023
+G0341,Kamjong,council,district,G0025,,pending,,,,,,14001
+G0342,West Khasi Hills,council,district,G0024,,pending,,,,,,17002
+G0343,Peren,council,district,G0023,,pending,,,,,,13006
+G0344,Senapati,council,district,G0025,,pending,,,,,,14002
+G0345,East Jaintia Hills,council,district,G0024,,pending,,,,,,17003
+G0346,East Khasi Hills,council,district,G0024,,pending,,,,,,17004
+G0347,Tamenglong,council,district,G0025,,pending,,,,,,14003
+G0348,South Garo Hills,council,district,G0024,,pending,,,,,,17005
+G0349,Cachar,council,district,G0022,,pending,,,,,,18024
+G0350,Imphal West,council,district,G0025,,pending,,,,,,14004
+G0351,Karimganj,council,district,G0022,,pending,,,,,,18025
+G0352,Hailakandi,council,district,G0022,,pending,,,,,,18026
+G0353,Kakching,council,district,G0025,,pending,,,,,,14005
+G0354,Bishnupur,council,district,G0025,,pending,,,,,,14006
+G0355,Chandel,council,district,G0025,,pending,,,,,,14007
+G0356,Churachandpur,council,district,G0025,,pending,,,,,,14008
+G0357,North Tripura,council,district,G0026,,pending,,,,,,16001
+G0358,Dhalai,council,district,G0026,,pending,,,,,,16002
+G0359,Sipahijala,council,district,G0026,,pending,,,,,,16003
+G0360,Gomati,council,district,G0026,,pending,,,,,,16004
+G0361,Wokha,council,district,G0023,,pending,,,,,,13007
+G0362,Zunheboto,council,district,G0023,,pending,,,,,,13008
+G0363,Phek,council,district,G0023,,pending,,,,,,13009
+G0364,West Garo Hills,council,district,G0024,,pending,,,,,,17006
+G0365,East Garo Hills,council,district,G0024,,pending,,,,,,17007
+G0366,Kohima,council,district,G0023,,pending,,,,,,13010
+G0367,Dimapur,council,district,G0023,,pending,,,,,,13011
+G0368,East Siang,council,district,G0021,,pending,,,,,,12007
+G0369,Lohit,council,district,G0021,,pending,,,,,,12008
+G0370,Kurung Kumey,council,district,G0021,,pending,,,,,,12009
+G0371,Lower Subansiri,council,district,G0021,,pending,,,,,,12010
+G0372,East Kameng,council,district,G0021,,pending,,,,,,12011
+G0373,West Kameng,council,district,G0021,,pending,,,,,,12012
+G0374,West Jaintia Hills,council,district,G0024,,pending,,,,,,17008
+G0375,South West Khasi Hills,council,district,G0024,,pending,,,,,,17009
+G0376,North Garo Hills,council,district,G0024,,pending,,,,,,17010
+G0377,South West Garo Hills,council,district,G0024,,pending,,,,,,17011
+G0378,Khowai,council,district,G0026,,pending,,,,,,16005
+G0379,West Tripura,council,district,G0026,,pending,,,,,,16006
+G0380,South Tripura,council,district,G0026,,pending,,,,,,16007
+G0381,Unokoti,council,district,G0026,,pending,,,,,,16008
+G0382,Charaideo,council,district,G0022,,pending,,,,,,18027
+G0383,Majuli,council,district,G0022,,pending,,,,,,18028
+G0384,Biswanath,council,district,G0022,,pending,,,,,,18029
+G0385,Hojai,council,district,G0022,,pending,,,,,,18030
+G0386,South Salmara Mankachar,council,district,G0022,,pending,,,,,,18031
+G0387,Karbi Anglong,council,district,G0022,,pending,,,,,,18032
+G0388,West Karbi Anglong,council,district,G0022,,pending,,,,,,18033
+G0389,Kra Daadi,council,district,G0021,,pending,,,,,,12013
+G0390,Namsai,council,district,G0021,,pending,,,,,,12014
+G0391,Longding,council,district,G0021,,pending,,,,,,12015
+G0392,Imphal East,council,district,G0025,,pending,,,,,,14009
+G0393,Jiribam,council,district,G0025,,pending,,,,,,14010
+G0394,Kangpokpi,council,district,G0025,,pending,,,,,,14011
+G0395,Thoubal,council,district,G0025,,pending,,,,,,14012
+G0396,Tengnoupal,council,district,G0025,,pending,,,,,,14013
+G0397,Ukhrul,council,district,G0025,,pending,,,,,,14014
+G0398,Noney,council,district,G0025,,pending,,,,,,14015
+G0399,Pherzawl,council,district,G0025,,pending,,,,,,14016
+G0400,Upper Siang,council,district,G0021,,pending,,,,,,12016
+G0401,Lower Siang,council,district,G0021,,pending,,,,,,12017
+G0402,Upper Dibang Valley,council,district,G0021,,pending,,,,,,12018
+G0403,Lower Dibang Valley,council,district,G0021,,pending,,,,,,12019
+G0404,Siang,council,district,G0021,,pending,,,,,,12020
+G0405,Shi Yomi,council,district,G0021,,pending,,,,,,12021
+G0406,Pakke Kessang,council,district,G0021,,pending,,,,,,12022
+G0407,West Siang,council,district,G0021,,pending,,,,,,12023
+G0408,Lepa Rada,council,district,G0021,,pending,,,,,,12024
+G0409,Kamle,council,district,G0021,,pending,,,,,,12025
+G0410,North and Middle Andaman,council,district,G0027,,pending,,,,,,35001
+G0411,South Andaman,council,district,G0027,,pending,,,,,,35002
+G0412,Nicobars,council,district,G0027,,pending,,,,,,35003
+G0413,Amroha,council,district,G0028,,pending,,,,,,09001
+G0414,Churu,council,district,G0029,,pending,,,,,,08001
+G0415,Hapur,council,district,G0028,,pending,,,,,,09002
+G0416,Delhi,council,district,G0030,,pending,,,,,,07001
+G0417,Jhajjar,council,district,G0031,,pending,,,,,,06001
+G0418,Bareilly,council,district,G0028,,pending,,,,,,09003
+G0419,Pilibhit,council,district,G0028,,pending,,,,,,09004
+G0420,Bulandshahr,council,district,G0028,,pending,,,,,,09005
+G0421,Gautam Buddha Nagar,council,district,G0028,,pending,,,,,,09006
+G0422,Lakhimpur Kheri,council,district,G0028,,pending,,,,,,09007
+G0423,Jhunjhunu,council,district,G0029,,pending,,,,,,08002
+G0424,Gurugram,council,district,G0031,,pending,,,,,,06002
+G0425,Faridabad,council,district,G0031,,pending,,,,,,06003
+G0426,Mahendragarh,council,district,G0031,,pending,,,,,,06004
+G0427,Rewari,council,district,G0031,,pending,,,,,,06005
+G0428,Budaun,council,district,G0028,,pending,,,,,,09008
+G0429,Jaisalmer,council,district,G0029,,pending,,,,,,08003
+G0430,Bahraich,council,district,G0028,,pending,,,,,,09009
+G0431,Nuh,council,district,G0031,,pending,,,,,,06006
+G0432,Shahjahanpur,council,district,G0028,,pending,,,,,,09010
+G0433,Sikar,council,district,G0029,,pending,,,,,,08004
+G0434,Palwal,council,district,G0031,,pending,,,,,,06007
+G0435,Alwar,council,district,G0029,,pending,,,,,,08005
+G0436,North Sikkim,council,district,G0032,,pending,,,,,,11001
+G0437,Aligarh,council,district,G0028,,pending,,,,,,09011
+G0438,Kasganj,council,district,G0028,,pending,,,,,,09012
+G0439,Mathura,council,district,G0028,,pending,,,,,,09013
+G0440,Jaipur,council,district,G0029,,pending,,,,,,08006
+G0441,Shrawasti,council,district,G0028,,pending,,,,,,09014
+G0442,Jodhpur,council,district,G0029,,pending,,,,,,08007
+G0443,Sitapur,council,district,G0028,,pending,,,,,,09015
+G0444,Bharatpur,council,district,G0029,,pending,,,,,,08008
+G0445,Hathras,council,district,G0028,,pending,,,,,,09016
+G0446,Nagaur,council,district,G0029,,pending,,,,,,08009
+G0447,Etah,council,district,G0028,,pending,,,,,,09017
+G0448,Hardoi,council,district,G0028,,pending,,,,,,09018
+G0449,Farrukhabad,council,district,G0028,,pending,,,,,,09019
+G0450,West Sikkim,council,district,G0032,,pending,,,,,,11002
+G0451,South Sikkim,council,district,G0032,,pending,,,,,,11003
+G0452,East Sikkim,council,district,G0032,,pending,,,,,,11004
+G0453,Firozabad,council,district,G0028,,pending,,,,,,09020
+G0454,West Champaran,council,district,G0033,,pending,,,,,,10001
+G0455,Siddharthnagar,council,district,G0028,,pending,,,,,,09021
+G0456,Mainpuri,council,district,G0028,,pending,,,,,,09022
+G0457,Maharajganj,council,district,G0028,,pending,,,,,,09023
+G0458,Agra,council,district,G0028,,pending,,,,,,09024
+G0459,Gonda,council,district,G0028,,pending,,,,,,09025
+G0460,Barabanki,council,district,G0028,,pending,,,,,,09026
+G0461,Darjeeling,council,district,G0017,,pending,,,,,,19005
+G0462,Dausa,council,district,G0029,,pending,,,,,,08010
+G0463,Kushinagar,council,district,G0028,,pending,,,,,,09027
+G0464,Kannauj,council,district,G0028,,pending,,,,,,09028
+G0465,Lucknow,council,district,G0028,,pending,,,,,,09029
+G0466,Jalpaiguri,council,district,G0017,,pending,,,,,,19006
+G0467,Basti,council,district,G0028,,pending,,,,,,09030
+G0468,Gorakhpur,council,district,G0028,,pending,,,,,,09031
+G0469,Sant Kabir Nagar,council,district,G0028,,pending,,,,,,09032
+G0470,Karauli,council,district,G0029,,pending,,,,,,08011
+G0471,East Champaran,council,district,G0033,,pending,,,,,,10002
+G0472,Unnao,council,district,G0028,,pending,,,,,,09033
+G0473,Etawah,council,district,G0028,,pending,,,,,,09034
+G0474,Dholpur,council,district,G0029,,pending,,,,,,08012
+G0475,Kanpur Nagar,council,district,G0028,,pending,,,,,,09035
+G0476,Auraiya,council,district,G0028,,pending,,,,,,09036
+G0477,Morena,council,district,G0007,,pending,,,,,,23011
+G0478,Barmer,council,district,G0029,,pending,,,,,,08013
+G0479,Ayodhya,council,district,G0028,,pending,,,,,,09037
+G0480,Kanpur Dehat,council,district,G0028,,pending,,,,,,09038
+G0481,Bhind,council,district,G0007,,pending,,,,,,23012
+G0482,Sawai Madhopur,council,district,G0029,,pending,,,,,,08014
+G0483,Deoria,council,district,G0028,,pending,,,,,,09039
+G0484,Sitamarhi,council,district,G0033,,pending,,,,,,10003
+G0485,Tonk,council,district,G0029,,pending,,,,,,08015
+G0486,Sheohar,council,district,G0033,,pending,,,,,,10004
+G0487,Sultanpur,council,district,G0028,,pending,,,,,,09040
+G0488,Pali,council,district,G0029,,pending,,,,,,08016
+G0489,Gopalganj,council,district,G0033,,pending,,,,,,10005
+G0490,Ambedkar Nagar,council,district,G0028,,pending,,,,,,09041
+G0491,Rae Bareli,council,district,G0028,,pending,,,,,,09042
+G0492,Jalaun,council,district,G0028,,pending,,,,,,09043
+G0493,Azamgarh,council,district,G0028,,pending,,,,,,09044
+G0494,Gwalior,council,district,G0007,,pending,,,,,,23013
+G0495,Sheopur,council,district,G0007,,pending,,,,,,23014
+G0496,Mau,council,district,G0028,,pending,,,,,,09045
+G0497,Fatehpur,council,district,G0028,,pending,,,,,,09046
+G0498,Ballia,council,district,G0028,,pending,,,,,,09047
+G0499,Jaunpur,council,district,G0028,,pending,,,,,,09048
+G0500,Bhilwara,council,district,G0029,,pending,,,,,,08017
+G0501,Samastipur,council,district,G0033,,pending,,,,,,10006
+G0502,Jalore,council,district,G0029,,pending,,,,,,08018
+G0503,Bundi,council,district,G0029,,pending,,,,,,08019
+G0504,Katihar,council,district,G0033,,pending,,,,,,10007
+G0505,Jhansi,council,district,G0028,,pending,,,,,,09049
+G0506,Shivpuri,council,district,G0007,,pending,,,,,,23015
+G0507,Kota,council,district,G0029,,pending,,,,,,08020
+G0508,Banda,council,district,G0028,,pending,,,,,,09050
+G0509,Ghazipur,council,district,G0028,,pending,,,,,,09051
+G0510,Kaushambi,council,district,G0028,,pending,,,,,,09052
+G0511,Khagaria,council,district,G0033,,pending,,,,,,10008
+G0512,Bhojpur,council,district,G0033,,pending,,,,,,10009
+G0513,Prayagraj,council,district,G0028,,pending,,,,,,09053
+G0514,Buxar,council,district,G0033,,pending,,,,,,10010
+G0515,Dakshin Dinajpur,council,district,G0017,,pending,,,,,,19007
+G0516,Malda,council,district,G0017,,pending,,,,,,19008
+G0517,Tikamgarh,council,district,G0007,,pending,,,,,,23016
+G0518,Varanasi,council,district,G0028,,pending,,,,,,09054
+G0519,Darbhanga,council,district,G0033,,pending,,,,,,10011
+G0520,Saharsa,council,district,G0033,,pending,,,,,,10012
+G0521,Sirohi,council,district,G0029,,pending,,,,,,08021
+G0522,Chitrakoot,council,district,G0028,,pending,,,,,,09055
+G0523,Chandauli,council,district,G0028,,pending,,,,,,09056
+G0524,Bhadohi,council,district,G0028,,pending,,,,,,09057
+G0525,Baran,council,district,G0029,,pending,,,,,,08022
+G0526,Sahibganj,council,district,G0034,,pending,,,,,,20001
+G0527,Kaimur,council,district,G0033,,pending,,,,,,10013
+G0528,Rohtas,council,district,G0033,,pending,,,,,,10014
+G0529,Udaipur,council,district,G0029,,pending,,,,,,08023
+G0530,Godda,council,district,G0034,,pending,,,,,,20002
+G0531,Mirzapur,council,district,G0028,,pending,,,,,,09058
+G0532,Lalitpur,council,district,G0028,,pending,,,,,,09059
+G0533,Jamui,council,district,G0033,,pending,,,,,,10015
+G0534,Neemuch,council,district,G0007,,pending,,,,,,23017
+G0535,Banka,council,district,G0033,,pending,,,,,,10016
+G0536,Rewa,council,district,G0007,,pending,,,,,,23018
+G0537,Satna,council,district,G0007,,pending,,,,,,23019
+G0538,Guna,council,district,G0007,,pending,,,,,,23020
+G0539,Nawada,council,district,G0033,,pending,,,,,,10017
+G0540,Gaya,council,district,G0033,,pending,,,,,,10018
+G0541,Ashoknagar,council,district,G0007,,pending,,,,,,23021
+G0542,Jhalawar,council,district,G0029,,pending,,,,,,08024
+G0543,Murshidabad,council,district,G0017,,pending,,,,,,19009
+G0544,Sonbhadra,council,district,G0028,,pending,,,,,,09060
+G0545,Pakur,council,district,G0034,,pending,,,,,,20003
+G0546,Mandsaur,council,district,G0007,,pending,,,,,,23022
+G0547,Munger,council,district,G0033,,pending,,,,,,10019
+G0548,Giridih,council,district,G0034,,pending,,,,,,20004
+G0549,Dumka,council,district,G0034,,pending,,,,,,20005
+G0550,Singrauli,council,district,G0007,,pending,,,,,,23023
+G0551,Birbhum,council,district,G0017,,pending,,,,,,19010
+G0552,Deoghar,council,district,G0034,,pending,,,,,,20006
+G0553,Palamu,council,district,G0034,,pending,,,,,,20007
+G0554,Sidhi,council,district,G0007,,pending,,,,,,23024
+G0555,Chatra,council,district,G0034,,pending,,,,,,20008
+G0556,Garhwa,council,district,G0034,,pending,,,,,,20009
+G0557,Sagar,council,district,G0007,,pending,,,,,,23025
+G0558,Patan,council,district,G0010,,pending,,,,,,24019
+G0559,Damoh,council,district,G0007,,pending,,,,,,23026
+G0560,Shajapur,council,district,G0007,,pending,,,,,,23027
+G0561,Vidisha,council,district,G0007,,pending,,,,,,23028
+G0562,Mehsana,council,district,G0010,,pending,,,,,,24020
+G0563,Rajgarh,council,district,G0007,,pending,,,,,,23029
+G0564,Shahdol,council,district,G0007,,pending,,,,,,23030
+G0565,Nadia,council,district,G0017,,pending,,,,,,19011
+G0566,Jamtara,council,district,G0034,,pending,,,,,,20010
+G0567,Dungarpur,council,district,G0029,,pending,,,,,,08025
+G0568,Katni,council,district,G0007,,pending,,,,,,23031
+G0569,Dhanbad,council,district,G0034,,pending,,,,,,20011
+G0570,Banswara,council,district,G0029,,pending,,,,,,08026
+G0571,Umaria,council,district,G0007,,pending,,,,,,23032
+G0572,Latehar,council,district,G0034,,pending,,,,,,20012
+G0573,Ratlam,council,district,G0007,,pending,,,,,,23033
+G0574,Bokaro,council,district,G0034,,pending,,,,,,20013
+G0575,Ramgarh,council,district,G0034,,pending,,,,,,20014
+G0576,Bhopal,council,district,G0007,,pending,,,,,,23034
+G0577,Purba Bardhaman,council,district,G0017,,pending,,,,,,19012
+G0578,Koriya,council,district,G0009,,pending,,,,,,22022
+G0579,Ujjain,council,district,G0007,,pending,,,,,,23035
+G0580,Gandhinagar,council,district,G0010,,pending,,,,,,24021
+G0581,Ahmedabad,council,district,G0010,,pending,,,,,,24022
+G0582,Raisen,council,district,G0007,,pending,,,,,,23036
+G0583,Purulia,council,district,G0017,,pending,,,,,,19013
+G0584,Sehore,council,district,G0007,,pending,,,,,,23037
+G0585,Ranchi,council,district,G0034,,pending,,,,,,20015
+G0586,Bankura,council,district,G0017,,pending,,,,,,19014
+G0587,Lohardaga,council,district,G0034,,pending,,,,,,20016
+G0588,Panchmahal,council,district,G0010,,pending,,,,,,24023
+G0589,Jabalpur,council,district,G0007,,pending,,,,,,23038
+G0590,Gumla,council,district,G0034,,pending,,,,,,20017
+G0591,Dahod,council,district,G0010,,pending,,,,,,24024
+G0592,Dewas,council,district,G0007,,pending,,,,,,23039
+G0593,Anuppur,council,district,G0007,,pending,,,,,,23040
+G0594,Jhabua,council,district,G0007,,pending,,,,,,23041
+G0595,North 24 Parganas,council,district,G0017,,pending,,,,,,19015
+G0596,Dindori,council,district,G0007,,pending,,,,,,23042
+G0597,Hooghly,council,district,G0017,,pending,,,,,,19016
+G0598,Khunti,council,district,G0034,,pending,,,,,,20018
+G0599,Narsinghpur,council,district,G0007,,pending,,,,,,23043
+G0600,Dhar,council,district,G0007,,pending,,,,,,23044
+G0601,Jashpur,council,district,G0009,,pending,,,,,,22023
+G0602,Indore,council,district,G0007,,pending,,,,,,23045
+G0603,Saraikela-Kharsawan,council,district,G0034,,pending,,,,,,20019
+G0604,Mandla,council,district,G0007,,pending,,,,,,23046
+G0605,East Singhbhum,council,district,G0034,,pending,,,,,,20020
+G0606,Hoshangabad,council,district,G0007,,pending,,,,,,23047
+G0607,Korba,council,district,G0009,,pending,,,,,,22024
+G0608,West Singhbhum,council,district,G0034,,pending,,,,,,20021
+G0609,Howrah,council,district,G0017,,pending,,,,,,19017
+G0610,Simdega,council,district,G0034,,pending,,,,,,20022
+G0611,Kolkata,council,district,G0017,,pending,,,,,,19018
+G0612,Koderma,council,district,G0034,,pending,,,,,,20023
+G0613,Hazaribagh,council,district,G0034,,pending,,,,,,20024
+G0614,Vaishali,council,district,G0033,,pending,,,,,,10020
+G0615,Begusarai,council,district,G0033,,pending,,,,,,10021
+G0616,Bhagalpur,council,district,G0033,,pending,,,,,,10022
+G0617,Lakhisarai,council,district,G0033,,pending,,,,,,10023
+G0618,Sheikhpura,council,district,G0033,,pending,,,,,,10024
+G0619,Arwal,council,district,G0033,,pending,,,,,,10025
+G0620,Jehanabad,council,district,G0033,,pending,,,,,,10026
+G0621,Nalanda,council,district,G0033,,pending,,,,,,10027
+G0622,Patna,council,district,G0033,,pending,,,,,,10028
+G0623,Saran,council,district,G0033,,pending,,,,,,10029
+G0624,Siwan,council,district,G0033,,pending,,,,,,10030
+G0625,Muzaffarpur,council,district,G0033,,pending,,,,,,10031
+G0626,Madhepura,council,district,G0033,,pending,,,,,,10032
+G0627,Araria,council,district,G0033,,pending,,,,,,10033
+G0628,Supaul,council,district,G0033,,pending,,,,,,10034
+G0629,Madhubani,council,district,G0033,,pending,,,,,,10035
+G0630,Purnia,council,district,G0033,,pending,,,,,,10036
+G0631,Surajpur,council,district,G0009,,pending,,,,,,22025
+G0632,Surguja,council,district,G0009,,pending,,,,,,22026
+G0633,Aravalli,council,district,G0010,,pending,,,,,,24025
+G0634,Mahisagar,council,district,G0010,,pending,,,,,,24026
+G0635,Amethi,council,district,G0028,,pending,,,,,,09061
+G0636,Ghaziabad,council,district,G0028,,pending,,,,,,09062
+G0637,Agar Malwa,council,district,G0007,,pending,,,,,,23048
+G0638,Sambhal,council,district,G0028,,pending,,,,,,09063
+G0639,Charkhi Dadri,council,district,G0031,,pending,,,,,,06008
+G0640,Alipurduar,council,district,G0017,,pending,,,,,,19019
+G0641,Paschim Bardhaman,council,district,G0017,,pending,,,,,,19020
+G0642,Kalimpong,council,district,G0017,,pending,,,,,,19021
+G0643,Ajmer,council,district,G0029,,pending,,,,,,08027
+G0644,Cooch Behar,council,district,G0017,,pending,,,,,,19022
+G0645,Uttar Dinajpur,council,district,G0017,,pending,,,,,,19023
+G0646,Datia,council,district,G0007,,pending,,,,,,23049
+G0647,Rajsamand,council,district,G0029,,pending,,,,,,08028
+G0648,Mahoba,council,district,G0028,,pending,,,,,,09064
+G0649,Chhatarpur,council,district,G0007,,pending,,,,,,23050
+G0650,Chittorgarh,council,district,G0029,,pending,,,,,,08029
+G0651,Panna,council,district,G0007,,pending,,,,,,23051
+G0652,Sabarkantha,council,district,G0010,,pending,,,,,,24027
+G0653,Kutch,council,district,G0010,,pending,,,,,,24028
+G0654,Surendranagar,council,district,G0010,,pending,,,,,,24029
+G0655,Kheda,council,district,G0010,,pending,,,,,,24030
+G0656,Anand,council,district,G0010,,pending,,,,,,24031
+G0657,Kishanganj,council,district,G0033,,pending,,,,,,10037
+G0658,Morbi,council,district,G0010,,pending,,,,,,24032
+G0659,Leh,council,district,G0035,,pending,,,,,,38001
+G0660,Kargil,council,district,G0035,,pending,,,,,,38002
+G0661,Kupwara,council,district,G0036,,pending,,,,,,01001
+G0662,Bandipora,council,district,G0036,,pending,,,,,,01002
+G0663,Baramulla,council,district,G0036,,pending,,,,,,01003
+G0664,Ganderbal,council,district,G0036,,pending,,,,,,01004
+G0665,Anantnag,council,district,G0036,,pending,,,,,,01005
+G0666,Kishtwar,council,district,G0036,,pending,,,,,,01006
+G0667,Srinagar,council,district,G0036,,pending,,,,,,01007
+G0668,Budgam,council,district,G0036,,pending,,,,,,01008
+G0669,Pulwama,council,district,G0036,,pending,,,,,,01009
+G0670,Punch,council,district,G0036,,pending,,,,,,01010
+G0671,Shopiyan,council,district,G0036,,pending,,,,,,01011
+G0672,Kulgam,council,district,G0036,,pending,,,,,,01012
+G0673,Rajouri,council,district,G0036,,pending,,,,,,01013
+G0674,Ramban,council,district,G0036,,pending,,,,,,01014
+G0675,Reasi,council,district,G0036,,pending,,,,,,01015
+G0676,Doda,council,district,G0036,,pending,,,,,,01016
+G0677,Lahaul and Spiti,council,district,G0037,,pending,,,,,,02001
+G0678,Chamba,council,district,G0037,,pending,,,,,,02002
+G0679,Jammu,council,district,G0036,,pending,,,,,,01017
+G0680,Kathua,council,district,G0036,,pending,,,,,,01018
+G0681,Gurdaspur,council,district,G0038,,pending,,,,,,03001
+G0682,Kangra,council,district,G0037,,pending,,,,,,02003
+G0683,Kullu,council,district,G0037,,pending,,,,,,02004
+G0684,Hoshiarpur,council,district,G0038,,pending,,,,,,03002
+G0685,Amritsar,council,district,G0038,,pending,,,,,,03003
+G0686,Mandi,council,district,G0037,,pending,,,,,,02005
+G0687,Kinnaur,council,district,G0037,,pending,,,,,,02006
+G0688,Una,council,district,G0037,,pending,,,,,,02007
+G0689,Shimla,council,district,G0037,,pending,,,,,,02008
+G0690,Jalandhar,council,district,G0038,,pending,,,,,,03004
+G0691,Tarn Taran,council,district,G0038,,pending,,,,,,03005
+G0692,Rupnagar,council,district,G0038,,pending,,,,,,03006
+G0693,Uttarkashi,council,district,G0039,,pending,,,,,,05001
+G0694,Solan,council,district,G0037,,pending,,,,,,02009
+G0695,Shahid Bhagat Singh Nagar,council,district,G0038,,pending,,,,,,03007
+G0696,Fazilka,council,district,G0038,,pending,,,,,,03008
+G0697,Moga,council,district,G0038,,pending,,,,,,03009
+G0698,Ludhiana,council,district,G0038,,pending,,,,,,03010
+G0699,Chamoli,council,district,G0039,,pending,,,,,,05002
+G0700,Dehradun,council,district,G0039,,pending,,,,,,05003
+G0701,Sirmaur,council,district,G0037,,pending,,,,,,02010
+G0702,S.A.S. Nagar,council,district,G0038,,pending,,,,,,03011
+G0703,Faridkot,council,district,G0038,,pending,,,,,,03012
+G0704,Fatehgarh Sahib,council,district,G0038,,pending,,,,,,03013
+G0705,Tehri Garhwal,council,district,G0039,,pending,,,,,,05004
+G0706,Chandigarh,council,district,G0040,,pending,,,,,,04001
+G0707,Sri Muktsar Sahib,council,district,G0038,,pending,,,,,,03014
+G0708,Rudraprayag,council,district,G0039,,pending,,,,,,05005
+G0709,Pithoragarh,council,district,G0039,,pending,,,,,,05006
+G0710,Sangrur,council,district,G0038,,pending,,,,,,03015
+G0711,Barnala,council,district,G0038,,pending,,,,,,03016
+G0712,Bathinda,council,district,G0038,,pending,,,,,,03017
+G0713,Patiala,council,district,G0038,,pending,,,,,,03018
+G0714,Yamunanagar,council,district,G0031,,pending,,,,,,06009
+G0715,Saharanpur,council,district,G0028,,pending,,,,,,09065
+G0716,Ganganagar,council,district,G0029,,pending,,,,,,08030
+G0717,Mansa,council,district,G0038,,pending,,,,,,03019
+G0718,Kurukshetra,council,district,G0031,,pending,,,,,,06010
+G0719,Bageshwar,council,district,G0039,,pending,,,,,,05007
+G0720,Haridwar,council,district,G0039,,pending,,,,,,05008
+G0721,Pauri Garhwal,council,district,G0039,,pending,,,,,,05009
+G0722,Kaithal,council,district,G0031,,pending,,,,,,06011
+G0723,Sirsa,council,district,G0031,,pending,,,,,,06012
+G0724,Hanumangarh,council,district,G0029,,pending,,,,,,08031
+G0725,Karnal,council,district,G0031,,pending,,,,,,06013
+G0726,Almora,council,district,G0039,,pending,,,,,,05010
+G0727,Jind,council,district,G0031,,pending,,,,,,06014
+G0728,Fatehabad,council,district,G0031,,pending,,,,,,06015
+G0729,Bijnor,council,district,G0028,,pending,,,,,,09066
+G0730,Muzaffarnagar,council,district,G0028,,pending,,,,,,09067
+G0731,Hisar,council,district,G0031,,pending,,,,,,06016
+G0732,Nainital,council,district,G0039,,pending,,,,,,05011
+G0733,Panipat,council,district,G0031,,pending,,,,,,06017
+G0734,Champawat,council,district,G0039,,pending,,,,,,05012
+G0735,Udham Singh Nagar,council,district,G0039,,pending,,,,,,05013
+G0736,Sonipat,council,district,G0031,,pending,,,,,,06018
+G0737,Baghpat,council,district,G0028,,pending,,,,,,09068
+G0738,Meerut,council,district,G0028,,pending,,,,,,09069
+G0739,Moradabad,council,district,G0028,,pending,,,,,,09070
+G0740,Bikaner,council,district,G0029,,pending,,,,,,08032
+G0741,Rampur,council,district,G0028,,pending,,,,,,09071
+G0742,Bhiwani,council,district,G0031,,pending,,,,,,06019
+G0743,Rohtak,council,district,G0031,,pending,,,,,,06020
+G0744,Shamli,council,district,G0028,,pending,,,,,,09072
+G0745,Ferozepur,council,district,G0038,,pending,,,,,,03020
+G0746,Pathankot,council,district,G0038,,pending,,,,,,03021
+G0747,Udhampur,council,district,G0036,,pending,,,,,,01019
+G0748,Samba,council,district,G0036,,pending,,,,,,01020
+G0749,Kapurthala,council,district,G0038,,pending,,,,,,03022
+G0750,Panchkula,council,district,G0031,,pending,,,,,,06021
+G0751,Ambala,council,district,G0031,,pending,,,,,,06022
+G0752,Aurangabad,council,district,G0033,,pending,,,,,,10038
+G0753,Balrampur,council,district,G0009,,pending,,,,,,22027
+G0754,Balrampur,council,district,G0028,,pending,,,,,,09073
+G0755,Hamirpur,council,district,G0028,,pending,,,,,,09074
+G0756,Hamirpur,council,district,G0037,,pending,,,,,,02011
+G0757,Pratapgarh,council,district,G0029,,pending,,,,,,08033
+G0758,Pratapgarh,council,district,G0028,,pending,,,,,,09075
+G0759,Bilaspur,council,district,G0037,,pending,,,,,,02012
+G0760,Niwari,council,district,G0007,,pending,,,,,,23052
+G0761,Muzaffarabad,council,district,G0036,,pending,,,,,,01021
+G0762,Mirpur,council,district,G0036,,pending,,,,,,01022
+G0763,Lakshadweep,council,district,G0020,,pending,,,,,,31002
+G0764,Chandigarh,council,district,G0040,,pending,,,,,,04002
+G0765,Banaskantha,council,district,G0010,,pending,,,,,,24033
+G0766,Vav-Tharad,council,district,G0010,,pending,,,,,,24034
