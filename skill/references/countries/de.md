@@ -22,7 +22,7 @@ A fourth worked example. It shows a country where the wealth tax was never repea
 
 ## What worked and what to watch
 
-- **Bulk lists first.** Eight Drucksachen gave 120 of the first 176 actors with a stated design (Left motions 2010–2026; the Greens' 2012 bill). The same names appear in several terms, so the member register and one actor row per person kept the file small.
+- **Bulk lists first.** Eight Drucksachen gave 115 of the first 176 actors, each with a stated design (Left motions 2010–2026; the Greens' 2012 bill). The same names appear in several terms, so the member register and one actor row per person kept the file small.
 - **Alliance statements.** The joint statement of 4 October 2024 ("Die Zeit ist reif: Superreiche gerecht besteuern", PDF on attac.de) names 22 signatories and the demand in one sentence; the roster page of Netzwerk Steuergerechtigkeit lists 27 plus 12 supporters. Roster-only organisations are grade B.
 - **Party programmes.** The SPD (2025 government programme PDF) and Greens (2021 programme PDF) are fetchable. For the Greens 2025 use the web page `gruene.de/artikel/zusammen-wachsen`.
 - **Two parties voted against the Left in 2026.** The Finance Committee's report 21/8481 records SPD and Greens voting against motion 21/4029; their own positions are recorded from their programmes, not from that vote.

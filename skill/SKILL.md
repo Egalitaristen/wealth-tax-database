@@ -15,6 +15,7 @@ Files in this skill (use them if present; the rules in this file are sufficient 
 - `references/countries/gb.md` — the UK: levels of government, sources and an exhaustive council sweep (a worked example, not the template for every country)
 - `references/countries/us.md` — a federal system (states, ballot measures, coalition letters), and what worked there
 - `references/countries/se.md` — a unitary state with open parliamentary data, 21 regions and 290 municipalities
+- `references/countries/de.md` — a federal state with a suspended wealth tax, Bundestag motions as bulk lists of named sponsors, and an official member register for the alive check
 - `scripts/wtdb.py` — Python helper (stdlib; `openpyxl` only for xlsx export): `init`, `add`, `set`, `validate`, `dedupe`, `merge`, `checkquotes`, `status`, `export`
 - `scripts/profiles_wikidata.py` — fills `profiles.csv` (websites, socials, Wikipedia) from Wikidata IDs
 - `scripts/topo_to_boundaries.py` — turns a TopoJSON of areas into `boundaries.json`, so the country gets a local map on the site
