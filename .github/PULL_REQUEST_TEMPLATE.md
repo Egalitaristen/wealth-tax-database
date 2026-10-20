@@ -16,6 +16,7 @@
 - [ ] I checked for death records; anyone found dead is in `exclusions.csv`
 - [ ] New rows are `verified=n` (only a second person sets `y`)
 - [ ] `meta.json` is filled in (`name`, `iso2`, `lead`, `status`)
+- [ ] If there is a map: the shapes have a stated open licence (named here, with a link), and the unit codes are the official ones, not invented (`licence`, `licence_url` and `code_scheme` in `boundaries.json`)
 
 ## AI assistance
 

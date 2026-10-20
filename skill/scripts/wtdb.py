@@ -375,31 +375,53 @@ def validate(db):
     return errs, warns
 
 
+# Licences that let anyone republish map shapes. A map from a source with no stated licence is not published.
+OPEN_LICENCES = ("cc0", "cc-by", "cc by", "odbl", "pddl", "public domain", "ogl", "open government licence", "dl-de",
+                 "datenlizenz deutschland", "godl", "licence ouverte", "etalab", "nlod")
+
+
 def check_boundaries(d, db):
-    """Warnings for map shapes in boundaries.json that match no geo unit (by code, else by name)."""
+    """Errors and warnings for boundaries.json: its licence and code scheme, and shapes that match no geo unit."""
+    errs, warns = [], []
     try:
         meta = json.load(open(os.path.join(d, "meta.json"), encoding="utf-8"))
     except (OSError, ValueError):
-        return []
+        return errs, warns
     bfile = meta.get("boundaries")
     if not bfile or not os.path.exists(os.path.join(d, bfile)):
-        return []
+        return errs, warns
     b = json.load(open(os.path.join(d, bfile), encoding="utf-8"))
+    lic = (b.get("licence") or "").strip()
+    if not lic or lic.lower() in ("unknown", "none", "not stated", "unclear"):
+        errs.append("boundaries: no licence. Use shapes from a source with an open licence and record it in "
+                    "\"licence\" and \"licence_url\" (SKILL.md 5, boundaries.json); a map without one is not published")
+    elif not any(k in lic.lower() for k in OPEN_LICENCES):
+        warns.append(f"boundaries: licence '{lic}' is not one of the known open licences; check that it allows "
+                     f"republishing before merging")
+    if lic and not b.get("licence_url", "").startswith("https://"):
+        errs.append("boundaries: licence_url must link to the licence text (https)")
+    if not b.get("code_scheme"):
+        errs.append("boundaries: no code_scheme. Name the official code system of the units (GSS, FIPS, AGS, "
+                    "kommunkod, LGD ...); codes must never be invented")
     by_code = {g["code"] for g in db["geo_units"] if g.get("code")}
     by_name = {_bare(g["name"]) for g in db["geo_units"]}
     miss = [u["name"] for u in b.get("units", [])
             if not ((u.get("code") and u["code"] in by_code) or (not by_code and _bare(u["name"]) in by_name))]
-    if not miss:
-        return []
-    return [f"boundaries: {len(miss)} map shapes match no geo unit (by code{'' if by_code else ' or name'}), "
-            f"for example {', '.join(miss[:5])}"]
+    if miss:
+        warns.append(f"boundaries: {len(miss)} map shapes match no geo unit (by code{'' if by_code else ' or name'}), "
+                     f"for example {', '.join(miss[:5])}")
+    if not by_code:
+        warns.append("boundaries: geo_units has no codes; give each mapped unit its official code (column code)")
+    return errs, warns
 
 
 def cmd_validate(a):
     need_dir(a.dir)
     db = load_all(a.dir)
     errs, warns = validate(db)
-    warns += check_boundaries(a.dir, db)
+    be, bw = check_boundaries(a.dir, db)
+    errs += be
+    warns += bw
     for w in warns:
         print("WARN  " + w)
     for e in errs:

@@ -4,7 +4,7 @@ Run R001, 2026-10-20. Seed pass. Facts marked [verify] come from a search summar
 
 ## 1. Scope
 - Area: India (country). Depth: **seed**.
-- Levels in the register: the Union, 36 states and union territories, and 726 districts (the map tier). Actors are placed at the Union level so far; no state or district body was searched.
+- Levels in the register: the Union, 36 states and union territories, and 734 districts (the map tier, with Local Government Directory codes). Actors are placed at the Union level so far; no state or district body was searched.
 - Languages to search in: English first; Hindi (संपत्ति कर, धन कर, विरासत कर) and Malayalam, Bengali and Tamil for the Left parties' state organs. Only English was used in R001.
 - R002 added: the Tax the Top campaign sites (taxthetop.org via the headless browser; taxtherichin.wordpress.com and its nine-part 2023 op-ed series), the petition press statement, the 2024 joint memorandum of ten central trade unions, the Left parties' joint Budget statement (Feb 2025), the CPI(M) and CPI(ML) manifestos and Central Committee texts, the Rozgar Adhikar Abhiyan conference report in Hindi, and Hindi, Bengali, Malayalam and Tamil searches. Generic Hindi and Bengali searches mostly returned Bangladeshi, explainer or tax-collection pages: the useful Hindi and Bengali pages (Nyay Tak, cpimwestbengal.org) were found by following named people and organisations from English sources, so that is the method to repeat.
 - Left out: Hindi-language media and party documents, state assemblies (Kerala, West Bengal, Tamil Nadu above all), Lok Sabha and Rajya Sabha debates, union congress resolutions, Parliament standing committees.

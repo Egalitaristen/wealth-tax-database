@@ -620,7 +620,7 @@ function methodSection(box, D, slug) {
         <div><span>Areas shown on the map with a supporter</span><b>${fmt(sup)}</b></div>
         <div><span>Candidates left out</span><b>${fmt(m.excluded)}</b></div>
       </dl>
-      ${m.map_source ? `<p class="map-source">Map: ${esc(m.map_source)}</p>` : ''}
+      ${m.map_source ? `<p class="map-source">Map: ${esc(m.map_source)}${m.map_licence && m.map_licence[0] ? ` Licence: ${safeUrl(m.map_licence[1]) ? ext(m.map_licence[1], esc(m.map_licence[0]) + ' ↗') : esc(m.map_licence[0])}.` : ''}</p>` : ''}
       <div class="kicker" style="margin-top:28px">Download (CSV, CC BY 4.0)</div>
       <div class="downloads">${['actors', 'evidence', 'profiles', 'geo_units'].map(f => `<a class="chip" href="/download/${slug}/${f}.csv" download>${f}.csv</a>`).join('')}
         ${ext(`https://github.com/${REPO}/tree/main/data/${slug}`, 'All files on GitHub ↗', 'chip')}</div>
