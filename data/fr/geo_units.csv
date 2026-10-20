@@ -1,0 +1,125 @@
+geo_unit_id,name,level,unit_type,parent_id,website,sweep_status,swept_run,swept_date,queries_run,hits,notes,code
+G0001,France,national,country,,https://www.gouvernement.fr,pending,,,,,,
+G0002,National Assembly,national,legislature,G0001,https://www.assemblee-nationale.fr,pending,,,,,,
+G0003,Senate,national,legislature,G0001,https://www.senat.fr,pending,,,,,,
+G0004,Government,national,executive,G0001,https://www.gouvernement.fr,pending,,,,,,
+G0005,European Parliament (French MEPs),supranational,legislature,G0001,https://www.europarl.europa.eu,pending,,,,,,
+G0006,Guadeloupe,region,overseas region and département,G0001,,pending,,,,,,FR-GP
+G0007,Martinique,region,overseas region and département,G0001,,pending,,,,,,FR-MQ
+G0008,French Guiana,region,overseas region and département,G0001,,pending,,,,,,FR-GF
+G0009,Réunion,region,overseas region and département,G0001,,pending,,,,,,FR-RE
+G0010,Mayotte,region,overseas region and département,G0001,,pending,,,,,,FR-YT
+G0011,Île-de-France,region,region,G0001,,pending,,,,,,FR-IDF
+G0012,Centre-Val de Loire,region,region,G0001,,pending,,,,,,FR-CVL
+G0013,Bourgogne-Franche-Comté,region,region,G0001,,pending,,,,,,FR-BFC
+G0014,Normandy,region,region,G0001,,pending,,,,,,FR-NOR
+G0015,Hauts-de-France,region,region,G0001,,pending,,,,,,FR-HDF
+G0016,Grand Est,region,region,G0001,,pending,,,,,,FR-GES
+G0017,Pays de la Loire,region,region,G0001,,pending,,,,,,FR-PDL
+G0018,Brittany,region,region,G0001,,pending,,,,,,FR-BRE
+G0019,Nouvelle-Aquitaine,region,region,G0001,,pending,,,,,,FR-NAQ
+G0020,Occitanie,region,region,G0001,,pending,,,,,,FR-OCC
+G0021,Auvergne-Rhône-Alpes,region,region,G0001,,pending,,,,,,FR-ARA
+G0022,Provence-Alpes-Côte d'Azur,region,region,G0001,,pending,,,,,,FR-PAC
+G0023,Corsica,region,region,G0001,,pending,,,,,,FR-COR
+G0024,Ain,county,département,G0021,,pending,,,,,,01
+G0025,Aisne,county,département,G0015,,pending,,,,,,02
+G0026,Allier,county,département,G0021,,pending,,,,,,03
+G0027,Alpes-de-Haute-Provence,county,département,G0022,,pending,,,,,,04
+G0028,Hautes-Alpes,county,département,G0022,,pending,,,,,,05
+G0029,Alpes-Maritimes,county,département,G0022,,pending,,,,,,06
+G0030,Ardèche,county,département,G0021,,pending,,,,,,07
+G0031,Ardennes,county,département,G0016,,pending,,,,,,08
+G0032,Ariège,county,département,G0020,,pending,,,,,,09
+G0033,Aube,county,département,G0016,,pending,,,,,,10
+G0034,Aude,county,département,G0020,,pending,,,,,,11
+G0035,Aveyron,county,département,G0020,,pending,,,,,,12
+G0036,Bouches-du-Rhône,county,département,G0022,,pending,,,,,,13
+G0037,Calvados,county,département,G0014,,pending,,,,,,14
+G0038,Cantal,county,département,G0021,,pending,,,,,,15
+G0039,Charente,county,département,G0019,,pending,,,,,,16
+G0040,Charente-Maritime,county,département,G0019,,pending,,,,,,17
+G0041,Cher,county,département,G0012,,pending,,,,,,18
+G0042,Corrèze,county,département,G0019,,pending,,,,,,19
+G0043,Côte-d'Or,county,département,G0013,,pending,,,,,,21
+G0044,Côtes-d'Armor,county,département,G0018,,pending,,,,,,22
+G0045,Creuse,county,département,G0019,,pending,,,,,,23
+G0046,Dordogne,county,département,G0019,,pending,,,,,,24
+G0047,Doubs,county,département,G0013,,pending,,,,,,25
+G0048,Drôme,county,département,G0021,,pending,,,,,,26
+G0049,Eure,county,département,G0014,,pending,,,,,,27
+G0050,Eure-et-Loir,county,département,G0012,,pending,,,,,,28
+G0051,Finistère,county,département,G0018,,pending,,,,,,29
+G0052,Corse-du-Sud,county,département,G0023,,pending,,,,,,2A
+G0053,Haute-Corse,county,département,G0023,,pending,,,,,,2B
+G0054,Gard,county,département,G0020,,pending,,,,,,30
+G0055,Haute-Garonne,county,département,G0020,,pending,,,,,,31
+G0056,Gers,county,département,G0020,,pending,,,,,,32
+G0057,Gironde,county,département,G0019,,pending,,,,,,33
+G0058,Hérault,county,département,G0020,,pending,,,,,,34
+G0059,Ille-et-Vilaine,county,département,G0018,,pending,,,,,,35
+G0060,Indre,county,département,G0012,,pending,,,,,,36
+G0061,Indre-et-Loire,county,département,G0012,,pending,,,,,,37
+G0062,Isère,county,département,G0021,,pending,,,,,,38
+G0063,Jura,county,département,G0013,,pending,,,,,,39
+G0064,Landes,county,département,G0019,,pending,,,,,,40
+G0065,Loir-et-Cher,county,département,G0012,,pending,,,,,,41
+G0066,Loire,county,département,G0021,,pending,,,,,,42
+G0067,Haute-Loire,county,département,G0021,,pending,,,,,,43
+G0068,Loire-Atlantique,county,département,G0017,,pending,,,,,,44
+G0069,Loiret,county,département,G0012,,pending,,,,,,45
+G0070,Lot,county,département,G0020,,pending,,,,,,46
+G0071,Lot-et-Garonne,county,département,G0019,,pending,,,,,,47
+G0072,Lozère,county,département,G0020,,pending,,,,,,48
+G0073,Maine-et-Loire,county,département,G0017,,pending,,,,,,49
+G0074,Manche,county,département,G0014,,pending,,,,,,50
+G0075,Marne,county,département,G0016,,pending,,,,,,51
+G0076,Haute-Marne,county,département,G0016,,pending,,,,,,52
+G0077,Mayenne,county,département,G0017,,pending,,,,,,53
+G0078,Meurthe-et-Moselle,county,département,G0016,,pending,,,,,,54
+G0079,Meuse,county,département,G0016,,pending,,,,,,55
+G0080,Morbihan,county,département,G0018,,pending,,,,,,56
+G0081,Moselle,county,département,G0016,,pending,,,,,,57
+G0082,Nièvre,county,département,G0013,,pending,,,,,,58
+G0083,Nord,county,département,G0015,,pending,,,,,,59
+G0084,Oise,county,département,G0015,,pending,,,,,,60
+G0085,Orne,county,département,G0014,,pending,,,,,,61
+G0086,Pas-de-Calais,county,département,G0015,,pending,,,,,,62
+G0087,Puy-de-Dôme,county,département,G0021,,pending,,,,,,63
+G0088,Pyrénées-Atlantiques,county,département,G0019,,pending,,,,,,64
+G0089,Hautes-Pyrénées,county,département,G0020,,pending,,,,,,65
+G0090,Pyrénées-Orientales,county,département,G0020,,pending,,,,,,66
+G0091,Bas-Rhin,county,département,G0016,,pending,,,,,,67
+G0092,Haut-Rhin,county,département,G0016,,pending,,,,,,68
+G0093,Rhône,county,département,G0021,,pending,,,,,,69
+G0094,Haute-Saône,county,département,G0013,,pending,,,,,,70
+G0095,Saône-et-Loire,county,département,G0013,,pending,,,,,,71
+G0096,Sarthe,county,département,G0017,,pending,,,,,,72
+G0097,Savoie,county,département,G0021,,pending,,,,,,73
+G0098,Haute-Savoie,county,département,G0021,,pending,,,,,,74
+G0099,Paris,county,département,G0011,,pending,,,,,,75
+G0100,Seine-Maritime,county,département,G0014,,pending,,,,,,76
+G0101,Seine-et-Marne,county,département,G0011,,pending,,,,,,77
+G0102,Yvelines,county,département,G0011,,pending,,,,,,78
+G0103,Deux-Sèvres,county,département,G0019,,pending,,,,,,79
+G0104,Somme,county,département,G0015,,pending,,,,,,80
+G0105,Tarn,county,département,G0020,,pending,,,,,,81
+G0106,Tarn-et-Garonne,county,département,G0020,,pending,,,,,,82
+G0107,Var,county,département,G0022,,pending,,,,,,83
+G0108,Vaucluse,county,département,G0022,,pending,,,,,,84
+G0109,Vendée,county,département,G0017,,pending,,,,,,85
+G0110,Vienne,county,département,G0019,,pending,,,,,,86
+G0111,Haute-Vienne,county,département,G0019,,pending,,,,,,87
+G0112,Vosges,county,département,G0016,,pending,,,,,,88
+G0113,Yonne,county,département,G0013,,pending,,,,,,89
+G0114,Territoire de Belfort,county,département,G0013,,pending,,,,,,90
+G0115,Essonne,county,département,G0011,,pending,,,,,,91
+G0116,Hauts-de-Seine,county,département,G0011,,pending,,,,,,92
+G0117,Seine-Saint-Denis,county,département,G0011,,pending,,,,,,93
+G0118,Val-de-Marne,county,département,G0011,,pending,,,,,,94
+G0119,Val-d'Oise,county,département,G0011,,pending,,,,,,95
+G0120,Guadeloupe,county,overseas département,G0006,,pending,,,,,Single-département overseas region; no shape on the map yet.,971
+G0121,Martinique,county,overseas département,G0007,,pending,,,,,Single-département overseas region; no shape on the map yet.,972
+G0122,Guyane,county,overseas département,G0008,,pending,,,,,Single-département overseas region; no shape on the map yet.,973
+G0123,La Réunion,county,overseas département,G0009,,pending,,,,,Single-département overseas region; no shape on the map yet.,974
+G0124,Mayotte,county,overseas département,G0010,,pending,,,,,Single-département overseas region; no shape on the map yet.,976
