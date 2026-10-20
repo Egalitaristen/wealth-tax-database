@@ -12,8 +12,11 @@ ROOT = Path(__file__).resolve().parent.parent / "_site"
 class Handler(http.server.SimpleHTTPRequestHandler):
     def send_head(self):
         path = Path(self.translate_path(self.path))
-        if not path.exists():  # a client-side route such as /gb or /gb/A0001
-            self.path = "/index.html"
+        if not path.is_file() and not (path / "index.html").is_file():
+            if path.with_name(path.name + ".html").is_file():  # a page with its own share tags: /gb -> gb.html
+                self.path = self.path.split("?")[0].rstrip("/") + ".html"
+            else:  # any other client-side route
+                self.path = "/index.html"
         return super().send_head()
 
     def end_headers(self):

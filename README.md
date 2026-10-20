@@ -16,6 +16,7 @@ The aim is to make it easy for people who share the view that wealth should be t
 | `skill/` | The research workflow (`SKILL.md`), source playbook, country examples and helper scripts (`wtdb.py`, `profiles_wikidata.py`, `topo_to_boundaries.py`). Works for people and for AI assistants. |
 | `site/` | The static front end: one page and one script, no framework. Home with search and a dot world map, country pages (area map, directory, timeline, method), a page per supporter, method and contribute pages. |
 | `scripts/build_site.py` | Turns `data/` into the site data, a search index and CSV downloads. Standard library plus `pycountry`. |
+| `scripts/share_cards.py`, `scripts/fonts/` | Link-preview images for every page (home, each country page, each supporter), drawn with Pillow. The build also writes a small HTML file per page with its own title, description and image, so previews on Discord and social media match the page. |
 | `scripts/serve.py` | Serves the built site locally the way Cloudflare does (unknown paths fall back to `index.html`). |
 | `scripts/deploy.py`, `wrangler.jsonc` | Build and deploy the site to Cloudflare from a local checkout. |
 | `docs/`, `infra/` | The community plan, and the Cloudflare setup and draft database schema. Nothing deployed yet. |
@@ -55,7 +56,7 @@ The goal is a trustworthy list of who publicly backs an actual wealth tax, with 
 ## Build the site locally
 
 ```bash
-pip install pycountry
+pip install pycountry pillow          # Pillow is optional: without it pages share the default image
 python scripts/build_site.py          # writes _site/
 python scripts/serve.py               # http://localhost:8000
 ```
