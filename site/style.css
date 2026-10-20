@@ -92,6 +92,9 @@ main { outline: none; min-height: 70vh; }
 .icon-btn:hover { border-color: var(--ink); }
 .icon-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .icon-btn .half { fill: currentColor; stroke: none; }
+a.icon-btn { color: var(--ink-2); text-decoration: none; }
+a.icon-btn:hover { color: var(--ink); }
+.icon-btn .brand-ico { width: 17px; height: 17px; fill: currentColor; stroke: none; }
 
 /* ---------- buttons, chips, fields ---------- */
 .btn { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 500; font-size: 15px; cursor: pointer; white-space: nowrap; }
@@ -498,6 +501,7 @@ a.ov:hover .spark rect.pk { fill: var(--signal); }
   .search-btn span, .search-btn kbd { display: none; }
 }
 @media (max-width: 720px) {
+  .icon-btn.social.gh { display: none; }
   .worldmap { aspect-ratio: 1.15 / 1; }
   .crumb .muted { display: none; }
   .legend { position: static; max-width: none; border: 0; border-top: 1px solid var(--rule-2); }
