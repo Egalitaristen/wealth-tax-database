@@ -1,0 +1,37 @@
+name: Suggest a supporter
+description: Know someone who has backed a wealth tax in public? Tell us who, and where they said it.
+title: "Suggest: "
+labels: ["suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Three quick answers are enough. We check the source and add them if it fits.
+        Only public figures and organisations are listed: politicians, economists, unions, campaigners, commentators, businesses and the like.
+  - type: input
+    id: who
+    attributes:
+      label: Who?
+      description: Their name, and their role if you know it.
+      placeholder: "Jane Smith, councillor in Leeds"
+    validations:
+      required: true
+  - type: input
+    id: country
+    attributes:
+      label: Country
+      placeholder: "United Kingdom"
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Where did they say it?
+      description: A link to the article, video, post, speech or letter.
+      placeholder: "https://"
+    validations:
+      required: true
+  - type: textarea
+    id: note
+    attributes:
+      label: Anything else? (optional)

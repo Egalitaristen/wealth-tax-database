@@ -11,18 +11,19 @@ The domain is registered at GoDaddy. A new registration cannot be transferred to
 3. Wait until Cloudflare shows the domain as **Active** (minutes to a few hours).
 4. Optional, later: transfer the registration to Cloudflare once the 60 days have passed and the GoDaddy term no longer matters.
 
-## 2. Host the site on Cloudflare Pages
+## 2. Host the site on Cloudflare
 
-1. **Workers & Pages** → **Create** → **Pages** → **Connect to Git** → this repository.
-2. Build settings:
-   - Build command: `pip install pycountry && python scripts/build_site.py`
-   - Build output directory: `_site`
-   - Environment variable: `PYTHON_VERSION` = `3.12`
-3. Deploy. Check the `*.pages.dev` address works.
-4. **Custom domains** → add `wealthtaxsupporters.com` and `www.wealthtaxsupporters.com`. Cloudflare creates the DNS records and the certificate.
-5. Once the new address works, switch off the GitHub Pages deployment (delete `.github/workflows/pages.yml`, and turn Pages off in the repository settings) so there is one live site.
+The site is deployed from the maintainer's machine as a Cloudflare Worker with static assets. That is what Cloudflare Pages has become. Nothing builds on GitHub.
 
-Every push to `main` then rebuilds the site on Cloudflare. The `validate` workflow on GitHub still checks pull requests.
+1. Install Node.js and run `npx wrangler login` once.
+2. In Cloudflare DNS, delete any records on `wealthtaxsupporters.com` and `www` left over from GoDaddy (parking `A` records, the `www` CNAME). Custom domains cannot be attached while other records hold those names.
+3. Run `python scripts/deploy.py`. It builds `_site/` and runs `wrangler deploy` with the settings in `wrangler.jsonc`:
+   - the static assets
+   - the single-page fallback for clean URLs
+   - the custom domains `wealthtaxsupporters.com` and `www.wealthtaxsupporters.com`, with DNS records and certificates created by Cloudflare
+4. Turn GitHub Pages off in the repository settings so the old address stops serving a stale copy.
+
+Deploy again whenever `main` changes. The `validate` workflow on GitHub still checks pull requests.
 
 ## 3. Email for requests (needed before any registration)
 

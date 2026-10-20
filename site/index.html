@@ -4,78 +4,81 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Wealth Tax Supporters</title>
-<meta name="description" content="A sourced, open database of who publicly backs wealth taxation, country by country.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="style.css">
+<meta name="description" content="Find the politicians, economists, unions, campaigners and millionaires who publicly back a wealth tax, country by country. Every entry links to its source.">
+<meta property="og:title" content="Wealth Tax Supporters">
+<meta property="og:description" content="Who backs a wealth tax near you? A sourced, open register of public supporters, country by country.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12110e" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/style.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
-<div class="banner" role="note">
+<a class="skip" href="#main">Skip to content</a>
+<div class="notice" role="note">
   <div class="wrap">
-    <b>AI-generated data, and it may be wrong.</b> Every entry links to its source, and many rows are not yet verified by a person.
-    Spotted a mistake or want an entry removed? <a id="report-top" href="#" target="_blank" rel="noopener">Report it on GitHub</a>.
+    <span class="notice-tag">AI-assembled</span>
+    <span>Compiled with AI from public sources, so entries can be wrong. Every claim links to its source.</span>
+    <a id="report-top" href="#" target="_blank" rel="noopener">Report a mistake&nbsp;&#8599;</a>
   </div>
 </div>
-<div class="wrap">
-<header>
-  <div><h1>Wealth Tax Supporters</h1>
-  <p class="sub">Who publicly backs an actual wealth tax, country by country, with the source behind every entry. Supporters only; petition signers are never recorded.</p></div>
-  <div class="stats" id="stats"></div>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/" aria-label="Wealth Tax Supporters, home">
+      <svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="12" width="5" height="10"/><rect x="9.5" y="8" width="5" height="14"/><rect x="17" y="8" width="5" height="14"/><rect class="cut" x="17" y="2" width="5" height="5"/></svg>
+      <span>Wealth Tax <i>Supporters</i></span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#countries">Countries</a>
+      <a href="/about">Method</a>
+      <a href="/contribute">Contribute</a>
+    </nav>
+    <div class="tools">
+      <button class="search-btn" id="open-search" type="button" aria-label="Search">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg>
+        <span>Search</span><kbd>/</kbd>
+      </button>
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch colour theme">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path class="half" d="M10 3a7 7 0 0 1 0 14z"/></svg>
+      </button>
+    </div>
+  </div>
 </header>
-<nav role="tablist" id="tabs" aria-label="Sections">
-  <button role="tab" data-t="world" aria-selected="true">World</button>
-  <button role="tab" data-t="country" aria-selected="false">Country</button>
-  <button role="tab" data-t="contribute" aria-selected="false">Add a country</button>
-</nav>
-
-<section id="world">
-  <div class="grid">
-    <div class="mapbox" id="wmapbox">
-      <svg class="map" id="wsvg" role="img" aria-label="World map; countries with a database are shaded"></svg>
-      <div class="legend">
-        <span><i class="sw sw-has"></i>Database started (darker = more supporters)</span>
-        <span><i class="sw sw-none"></i>No database yet</span>
-      </div>
-      <div class="tip" id="wtip" hidden></div>
+<main id="main" tabindex="-1"></main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-big">Wealth Tax <i>Supporters</i></div>
+    <div class="foot-grid">
+      <p>A sourced, open register of people and organisations that publicly back a wealth tax. Built so supporters can find each other, wherever they are.</p>
+      <ul>
+        <li><a href="/#countries">Countries</a></li>
+        <li><a href="/about">Method and grades</a></li>
+        <li><a href="/contribute">Add a country</a></li>
+      </ul>
+      <ul>
+        <li><a id="repo-link" href="#" target="_blank" rel="noopener">Source on GitHub&nbsp;&#8599;</a></li>
+        <li><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Data: CC BY 4.0&nbsp;&#8599;</a></li>
+        <li><a id="report-foot" href="#" target="_blank" rel="noopener">Report a mistake&nbsp;&#8599;</a></li>
+      </ul>
     </div>
-    <aside class="panel" id="wside"></aside>
+    <p class="foot-small" id="built"></p>
   </div>
-</section>
-
-<section id="country" hidden>
-  <div class="ctl"><select id="csel" aria-label="Country"></select>
-    <div class="sub-tabs" id="subtabs" role="tablist" aria-label="Country views">
-      <button data-s="map" aria-selected="true">Local map</button>
-      <button data-s="people" aria-selected="false">People and groups</button>
-      <button data-s="timeline" aria-selected="false">Over time</button>
-      <button data-s="method" aria-selected="false">Method and gaps</button>
+</footer>
+<div class="palette" id="palette" hidden>
+  <div class="palette-box" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="palette-in">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg>
+      <input id="pal-q" type="search" placeholder="A name, a place, an organisation…" autocomplete="off" spellcheck="false" aria-label="Search">
+      <button type="button" class="esc" id="pal-close">Esc</button>
     </div>
+    <div class="results" id="pal-res" role="listbox"></div>
   </div>
-  <div id="cbody"></div>
-</section>
-
-<section id="contribute" hidden>
-  <div class="panel method">
-    <h2>Build a database for your country or region</h2>
-    <p>Each country is a folder of plain CSV files in <code>data/&lt;iso2&gt;/</code>. A GitHub Action rebuilds this site whenever a pull request is merged, so a new folder becomes a shaded country on the world map.</p>
-    <ol>
-      <li><b>Fork the repository</b> and read <code>CONTRIBUTING.md</code>.</li>
-      <li><b>Follow the workflow</b> in <code>skill/SKILL.md</code>, by hand or with an AI assistant. Start with the most prominent supporters in every layer, then plan the next runs. Local sweeps are sampled first. The skill covers where to look, how to grade evidence and how to record sources.</li>
-      <li><b>Create <code>data/&lt;iso2&gt;/</code></b> with <code>python skill/scripts/wtdb.py init</code>, add a <code>meta.json</code>, and fill the tables.</li>
-      <li><b>Validate</b> with <code>python skill/scripts/wtdb.py validate data/&lt;iso2&gt;</code>. The same check runs on your pull request.</li>
-      <li><b>Open a pull request.</b> New rows start as unverified; a second person confirms them.</li>
-    </ol>
-    <p>Optional: add a <code>boundaries.json</code> of your sub-national units to get a local map like the UK one.</p>
-    <p><a id="repo-link" href="#" target="_blank" rel="noopener">Open the repository on GitHub</a></p>
-    <h3 style="margin-top:20px">Rules that apply everywhere</h3>
-    <ul>
-      <li>Supporters only. Opponents and sceptics are not listed.</li>
-      <li>Public figures and organisations, with a dated source and a short quote.</li>
-      <li>Petition signers and other private individuals are never recorded.</li>
-      <li>People are assumed alive unless a death record is found; those people are removed.</li>
-    </ul>
-  </div>
-</section>
 </div>
-<script src="app.js"></script>
+<div class="tip" id="tip" hidden></div>
+<script src="/app.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+// Deploys the built site (_site/) to Cloudflare as static assets.
+// Build and deploy from a local checkout:  python scripts/deploy.py
+{
+  "name": "wealth-tax-supporters",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./_site",
+    // Client-side routes such as /gb or /gb/A0001 get index.html.
+    "not_found_handling": "single-page-application"
+  },
+  "workers_dev": true,
+  "routes": [
+    {"pattern": "wealthtaxsupporters.com", "custom_domain": true},
+    {"pattern": "www.wealthtaxsupporters.com", "custom_domain": true}
+  ]
+}
