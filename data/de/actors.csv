@@ -175,3 +175,28 @@ A0174,Campact,organisation,ngo_campaign,,Campaigning network,,,,DE,national,Germ
 A0175,Vermögende für eine Vermögensabgabe,organisation,wealthy_individual,ngo_campaign,Initiative of wealthy people calling for a wealth levy and a permanent wealth tax (49 members in 2011),,,,DE,national,Germany,,,active,na,national,Activity after 2011 not checked.,R001,2026-10-20
 A0176,Peter Vollmer,person,wealthy_individual,campaigner,"Berlin entrepreneur and foundation donor; spokesperson of the initiative ""Vermögende für eine Vermögensabgabe""",Vermögende für eine Vermögensabgabe,,A0175,DE,national,Germany > Berlin,,,active,y,national,Aged 71 in 2011. Not to be confused with other people of the same name.,R001,2026-10-20
 A0177,Marius Müller-Westernhagen,person,cultural_figure,,Rock musician and actor,,,,DE,national,Germany,,,active,y,national,,R001,2026-10-20
+A0178,Ali Al-Dailami,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Hesse,,,former_role,y,national,Party shown is the one at the time of the evidence; the Bundestag register now lists BSW.,R001,2026-10-20
+A0179,André Hahn,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Saxony,,,former_role,y,national,,R001,2026-10-20
+A0180,Ates Gürpinar,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Bavaria,,,active,y,national,,R001,2026-10-20
+A0181,Clara Bünger,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Saxony,,,active,y,national,,R001,2026-10-20
+A0182,Cornelia Möhring,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Schleswig-Holstein,,,former_role,y,national,,R001,2026-10-20
+A0183,Gökay Akbulut,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Baden-Württemberg,,,active,y,national,,R001,2026-10-20
+A0184,Ina Latendorf,person,politician,,Member of the Bundestag,,The Left,A0001,DE,national,Germany > Mecklenburg-Vorpommern,,,active,y,national,,R001,2026-10-20
+A0185,Jessica Tatti,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Baden-Württemberg,,,former_role,y,national,Party shown is the one at the time of the evidence; the Bundestag register now lists BSW.,R001,2026-10-20
+A0186,Martina Renner,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Thuringia,,,former_role,y,national,,R001,2026-10-20
+A0187,Petra Pau,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Berlin,,,former_role,y,national,,R001,2026-10-20
+A0188,Petra Sitte,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Saxony-Anhalt,,,former_role,y,national,,R001,2026-10-20
+A0189,Stefan Seidler,person,politician,,Member of the Bundestag,,SSW,,DE,national,Germany > Schleswig-Holstein,,,active,y,national,,R001,2026-10-20
+A0190,Zaklin Nastić,person,politician,,Former member of the Bundestag,,The Left,A0001,DE,national,Germany > Hamburg,,,former_role,y,national,Party shown is the one at the time of the evidence; the Bundestag register now lists BSW.,R001,2026-10-20
+A0191,Jürgen Trittin,person,politician,,Chair of the Greens parliamentary group (2012),,Alliance 90/The Greens,A0002,DE,national,Germany > Lower Saxony,,,former_role,y,national,,R001,2026-10-20
+A0192,Sigmar Gabriel,person,politician,,Chair of the SPD (2012),,SPD,A0118,DE,national,Germany > Lower Saxony,,,former_role,y,national,,R001,2026-10-20
+A0193,Cansel Kiziltepe,person,politician,,Member of the Bundestag (SPD) in 2021,,SPD,A0118,DE,national,Germany > Berlin,,,former_role,y,national,,R001,2026-10-20
+A0194,Nicolette Kressl,person,politician,,Finance spokesperson of the SPD group (2010),,SPD,A0118,DE,national,Germany,,,former_role,y,national,,R001,2026-10-20
+A0195,Katharina Beck,person,politician,,Member of the Bundestag (Greens),,Alliance 90/The Greens,A0002,DE,national,Germany > Hamburg,,,active,y,national,,R001,2026-10-20
+A0196,Joachim Wieland,person,academic,legal_tax_professional,"Professor of public law and administrative science, Speyer",,,,DE,national,Germany > Rhineland-Palatinate,,,active,y,national,,R002,2026-10-20
+A0197,Katja Rietzler,person,economist,,"Economist, Hans-Böckler-Stiftung (IMK)",,,,DE,national,Germany,,,active,y,national,,R002,2026-10-20
+A0198,Miriam Rehm,person,economist,academic,"Socio-economist, University of Duisburg-Essen",,,,DE,national,Germany > North Rhine-Westphalia,,,active,y,national,,R002,2026-10-20
+A0199,Rolf Mützenich,person,politician,,Chair of the SPD parliamentary group,,SPD,A0118,DE,national,Germany > North Rhine-Westphalia,,,active,y,national,,R001,2026-10-20
+A0200,Saskia Esken,person,politician,,Co-chair of the SPD,,SPD,A0118,DE,national,Germany > Baden-Württemberg,,,active,y,national,,R001,2026-10-20
+A0201,Olaf Scholz,person,politician,,Federal Chancellor 2021–2025 (SPD),,SPD,A0118,DE,national,Germany > Brandenburg,,,active,y,national,,R001,2026-10-20
+A0202,Conny Reuter,person,campaigner,,"German co-organiser of the European Citizens' Initiative ""Tax the Rich""",,,,DE,supranational,Germany,,,active,y,regional,,R002,2026-10-20
