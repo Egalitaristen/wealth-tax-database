@@ -16,6 +16,7 @@ Files in this skill (use them if present; the rules in this file are sufficient 
 - `references/countries/us.md` — a federal system (states, ballot measures, coalition letters), and what worked there
 - `references/countries/se.md` — a unitary state with open parliamentary data, 21 regions and 290 municipalities
 - `references/countries/de.md` — a federal state with a suspended wealth tax, Bundestag motions as bulk lists of named sponsors, and an official member register for the alive check
+- `references/countries/in.md` — a country with no wealth tax since 2015, where support sits in the Left parties, a campaign (Tax the Top), Oxfam India and a handful of economists; notes on blocked sources and the district map
 - `scripts/wtdb.py` — Python helper (stdlib; `openpyxl` only for xlsx export): `init`, `add`, `set`, `validate`, `dedupe`, `merge`, `checkquotes`, `status`, `export`
 - `scripts/profiles_wikidata.py` — fills `profiles.csv` (websites, socials, Wikipedia) from Wikidata IDs
 - `scripts/topo_to_boundaries.py` — turns a TopoJSON or shapefile of local areas (and their region outlines) into `boundaries.json`, so the country gets a local map on the site
@@ -284,6 +285,7 @@ A tree of the places you will report on, in `geo_units.csv`, with a country root
 | United Kingdom | nations and English regions, counties | 361 local authority districts (GSS codes) |
 | Sweden | 21 län | 290 kommuner (kommunkod) |
 | Germany | 16 Länder | 400 Kreise and kreisfreie Städte (AGS) |
+| India | 36 states and union territories | 726 districts (Census 2011 shapes; codes assigned in this project) |
 | United States | 50 states and DC | 3,143 counties and equivalents (FIPS) |
 
 For a new country, pick the tier that elects a council and runs local services (municipalities, districts or counties), not wards or parishes. Fetch the **official current list** with codes (a statistics office, mapping agency or interior ministry), not memory, and build `boundaries.json` from the same agency's shapes where possible, so codes match.
