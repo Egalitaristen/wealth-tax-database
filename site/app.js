@@ -280,7 +280,6 @@ async function home(W) {
     <div class="sec-head"><div><div class="kicker">The map so far</div><h2>Country <em>by</em> country</h2></div>
       <p>Each country is researched separately, from parliaments and councils down to unions and open letters. Pick one to see who is on record there.</p></div>
     <div class="worldmap" id="world">
-      <div class="mapframe area" hidden></div>
       <div class="crumb"></div>
       <div class="zoomer"><button type="button" data-z="in" aria-label="Zoom in">+</button><button type="button" data-z="out" aria-label="Zoom out">−</button><button type="button" data-z="fit" aria-label="Show the whole world">⤢</button></div>
     </div>
@@ -423,21 +422,18 @@ function worldBoxes(W) {
   return WORLDBOX;
 }
 
-// The home page map: a world map shaded like the country maps. Clicking a country with a register opens
-// its own area map in the same frame; the World link goes back. Country maps use their own projections,
-// hence the crossfade between the two.
+// The home page map: a world map shaded like the country maps. Scroll to zoom, drag to pan, and click a
+// shaded country to open its page.
 function worldMap(box, W) {
-  const layer = $('.area', box), crumb = $('.crumb', box);
+  const crumb = $('.crumb', box);
   const byNum = {}; W.countries.forEach(c => { if (c.numeric) byNum[c.numeric] = c; });
   const {mains, extent} = worldBoxes(W);
   const mx = Math.max(1, ...W.countries.map(c => c.supporters));
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('class', 'world-svg');
-  svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', 'World map. Countries with a register are shaded; zoom in to see their areas.');
+  svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', 'World map. Countries with a register are shaded.');
   svg.innerHTML = `<g>${Object.entries(W.paths).map(([id, p]) => { const c = byNum[id], tt = c ? (.35 + .65 * Math.log(c.supporters + 1) / Math.log(mx + 1)).toFixed(3) : 0;
     return `<path data-id="${id}" class="${c ? 'u-sup' : 'u-none'}"${c ? ` style="--t:${tt}"` : ''} d="${p.path}"/>`; }).join('')}</g>`;
   box.prepend(svg);
-  let area = null, busy = false;
   const countryAt = e => { const p = e.target.closest && e.target.closest('path[data-id]'); return p ? p.dataset.id : null; };
   const pz = panZoom(svg, extent, {
     maxOut: 1, maxIn: 60,
@@ -446,78 +442,23 @@ function worldMap(box, W) {
       const id = countryAt(e);
       if (!id) return hideTip();
       const c = byNum[id];
-      showTip(c ? `<b>${esc(c.name)}</b><span>${fmt(c.supporters)} supporters · click to explore</span>` : `<b>${esc(W.paths[id].name)}</b><span>no register yet</span>`, e.clientX, e.clientY);
+      showTip(c ? `<b>${esc(c.name)}</b><span>${fmt(c.supporters)} supporters →</span>` : `<b>${esc(W.paths[id].name)}</b><span>no register yet</span>`, e.clientX, e.clientY);
     },
     onTap: e => {
       const id = countryAt(e); if (!id) return;
       hideTip();
-      if (byNum[id]) drill(byNum[id], id);
+      if (byNum[id]) go(`/${byNum[id].slug}`);
       else { const m = mains[id]; pz.animate(pz.target(m[0], m[1], m[2], m[3], .6)); }
     }});
   svg.addEventListener('pointerleave', hideTip);
-
-  function setCrumb(c) {
-    crumb.innerHTML = c ? `<button type="button" data-world>← World</button><span>›</span><b>${esc(c.name)}</b><a href="/${c.slug}">Open country page →</a>`
-      : `<b>World</b><span class="muted">Scroll to zoom · click a shaded country to open it</span>`;
-    const b = $('[data-world]', crumb); if (b) b.onclick = leave;
-  }
-  async function drill(c, id) {
-    if (busy) return;
-    busy = true;
-    const m = mains[id];
-    const D = loadCountry(c.slug);
-    pz.animate(pz.target(m[0], m[1], m[2], m[3], .08));
-    let data;
-    try { data = await D; } catch (err) { busy = false; return; }
-    if (!data.C.length) { busy = false; go(`/${c.slug}`); return; }
-    layer.hidden = false; // shown before it is sized, so the area map gets the frame's real shape
-    area = areaLayer(data, c);
-    svg.classList.add('off');
-    requestAnimationFrame(() => layer.classList.add('on'));
-    setCrumb(c); hideTip();
-    setTimeout(() => { busy = false; }, 350);
-  }
-  function leave() {
-    if (!area) return;
-    layer.classList.remove('on'); svg.classList.remove('off');
-    setTimeout(() => { if (!layer.classList.contains('on')) { layer.hidden = true; layer.innerHTML = ''; } }, 300);
-    area = null; setCrumb(null);
-    pz.fit();
-  }
-  // A country's area map inside the home map.
-  function areaLayer(D, c) {
-    const [vx, vy, vw, vh] = D.vb;
-    const amx = Math.max(1, ...D.C.map(u => u[6].length));
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `Map of ${D.meta.name} by area`);
-    svg.innerHTML = `<g>${D.C.map((u, i) => { const n = u[6].length, tt = n ? (.22 + .78 * Math.log(n + 1) / Math.log(amx + 1)).toFixed(3) : 0;
-      return `<path data-i="${i}" class="${n ? 'u-sup' : 'u-none'}"${n ? ` style="--t:${tt}"` : ''} d="${u[7]}"/>`; }).join('')}</g>`;
-    layer.innerHTML = ''; layer.appendChild(svg);
-    const apz = panZoom(svg, D.vb, {
-      maxOut: 1, maxIn: 80,
-      onView: (x, y, w, h) => svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`),
-      onHover: e => {
-        const p = e.target.closest('path[data-i]');
-        if (!p) return hideTip();
-        const u = D.C[+p.dataset.i], n = u[6].length;
-        showTip(`<b>${esc(u[0])}</b><span>${n ? fmt(n) + ' supporter' + (n === 1 ? '' : 's') + ' · click to see them' : 'none recorded yet'}</span>`, e.clientX, e.clientY);
-      },
-      onTap: e => { const p = e.target.closest('path[data-i]'); if (p) { hideTip(); go(`/${c.slug}?place=${enc(D.C[+p.dataset.i][8])}#map`); } }});
-    svg.addEventListener('pointerleave', hideTip);
-    apz.fit(false);
-    return apz;
-  }
+  crumb.innerHTML = `<b>World</b><span class="muted">Scroll to zoom · click a shaded country to open it</span>`;
   $('.zoomer', box).addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
-    const cur = area || pz;
-    if (b.dataset.z === 'in') cur.zoomAt(.6);
-    else if (b.dataset.z === 'out') cur.zoomAt(1 / .6);
-    else cur.fit();
+    if (b.dataset.z === 'in') pz.zoomAt(.6); else if (b.dataset.z === 'out') pz.zoomAt(1 / .6); else pz.fit();
   });
-  setCrumb(null);
   pz.fit(false);
   let lastW = svg.clientWidth;
-  const ro = new ResizeObserver(() => { if (Math.abs(svg.clientWidth - lastW) > 1) { lastW = svg.clientWidth; if (!area) pz.fit(false); } });
+  const ro = new ResizeObserver(() => { if (Math.abs(svg.clientWidth - lastW) > 1) { lastW = svg.clientWidth; pz.fit(false); } });
   ro.observe(svg);
   return () => { ro.disconnect(); hideTip(); };
 }
