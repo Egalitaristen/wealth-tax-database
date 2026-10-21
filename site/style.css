@@ -133,9 +133,11 @@ select.field { appearance: none; padding-right: 30px; background-image: linear-g
 .try { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--ink-3); }
 .drop { position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 30; background: var(--card); border: 1px solid var(--ink); box-shadow: var(--shadow); max-height: 420px; overflow: auto; }
 .ledger { border-top: 1.5px solid var(--ink); }
-.ledger div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
-.ledger b { font: 400 clamp(34px, 4vw, 52px)/1 var(--serif); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-.ledger span { font-size: 14px; color: var(--ink-2); text-align: right; }
+/* Each row reads as one line of type: the figure and its words at the same size, the words a shade lighter. */
+.ledger div { padding: 14px 0; border-bottom: 1px solid var(--rule); font: 400 clamp(26px, 2.8vw, 38px)/1.1 var(--serif); letter-spacing: -.01em; }
+.ledger b { font-weight: 400; font-variant-numeric: tabular-nums; margin-right: .25em; }
+.ledger span { color: var(--ink-2); }
+.ledger em { color: var(--signal); font-style: italic; }
 
 /* ---------- sections ---------- */
 .sec { padding: clamp(48px, 7vw, 88px) 0; border-top: 1px solid var(--rule); }
