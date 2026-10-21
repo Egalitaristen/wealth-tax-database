@@ -99,7 +99,7 @@ Someone who supports both an included design and an excluded one qualifies on th
 |---|---|---|
 | **A** | Explicit | Endorses an included design **with specifics** (rate, threshold, named bill or proposal), **or** a formal act: voted for, sponsored or co-sponsored, signed a motion or letter that calls for an included design, organisational policy adoption, authored a publication recommending one, gave supportive testimony. |
 | **B** | Named | Supports "a wealth tax", "wealth levy", "billionaire tax" or an equivalent local term by name, without specifics. |
-| **C** | Implied | Language that probably means wealth taxation but is ambiguous ("make the super-rich pay on their wealth"). Included and flagged as *appears to support*; a target for upgrade. |
+| **C** | Implied | Language that probably means wealth taxation but is ambiguous ("make the super-rich pay on their wealth"). Included and flagged as *appears to support*; a target for upgrade. C still needs words about wealth: "those with most should contribute more" is not C, it is an exclusion (section 2). Neither is a name on an event programme or a speaking slot without the words spoken. |
 
 **Roster and endorsement lists.** When a campaign's own page lists someone as an endorser, that is a claim by the campaign, not a statement by the endorser. Grade it **B** and say so in `grading_note`; upgrade to A when you find the endorser's own statement, vote or signature. Sponsors and cosponsors in official bill data are a formal act (A).
 
@@ -229,7 +229,7 @@ Writing CSVs directly is fine too, but quote fields properly (quotes often conta
 1. Read this file, the area's folder if it exists (`area_profile.md`, the last three `runs.csv` rows, `wtdb.py status`), and the notes for the nearest country in `skill/references/countries/`.
 2. Settle three things with the user, in **one short message**, each with a recommended default: **which area**, **scope** (national only; plus regional; plus local) and **depth** (see the ladder below). If the user has already told you, do not ask again. If they do not answer, use the defaults and say so.
 3. In this repository, work on a branch and open one pull request per run. Never push to `main`.
-4. `wtdb.py init data/<iso2> --area "<Name>"`, then go straight to 6.2. State your plan in a few lines and begin; do not wait for approval of the plan.
+4. `wtdb.py init data/<iso2> --area "<Name>"`, then **load the geography register down to the local tier and build the map** (6.7): an official list with codes and one open-licence shape file, usually under an hour. It is part of every seed pass, not a later run, and `validate` fails while the register stops at regions. Then go straight to 6.2. State your plan in a few lines and begin; do not wait for approval of the plan.
 
 **Depth ladder** (pick one, and say which in `meta.json` `notes`):
 
@@ -256,7 +256,7 @@ Touch **every layer once, highest yield first**, before going deep in any one. A
 
 For bulk lists (letters, rosters, coalition pages, bill cosponsor data) queue them in `harvest.csv` and process them whole; they produce many actors with uniform evidence (6.4). Use search in the area's languages (the playbook has terms). Check the definition against what each list or person actually calls for.
 
-**End the first pass when every layer has been touched and the biggest lists are in.** Then validate, run the quote check, open the pull request, and write the run plan (6.6). The first pass should take hours. If you find yourself building a crawler or loading hundreds of units, stop and check the plan against the goal.
+**End the first pass when every layer has been touched and the biggest lists are in.** Then validate, run the quote check, open the pull request, and write the run plan (6.6). The first pass should take hours. If you find yourself building a crawler or sweeping hundreds of units one by one, stop and check the plan against the goal.
 
 ### 6.4 Bulk harvest
 Lists produce many actors at once with uniform, strong evidence. Queue each in `harvest.csv`, then process it entry by entry:
@@ -296,10 +296,12 @@ A tree of the places you will report on, in `geo_units.csv`, with a country root
 | Germany | 16 Länder | 400 Kreise and kreisfreie Städte (AGS) |
 | India | 36 states and union territories (ISO 3166-2:IN) | 734 districts (LGD codes; Survey of India shapes) |
 | United States | 50 states and DC | 3,143 counties and equivalents (FIPS) |
+| France | 13 regions (ISO 3166-2:FR) | 96 départements (INSEE) |
+| Spain | 17 autonomous communities and 2 autonomous cities (ISO 3166-2:ES) | 52 provinces (INE) |
 
-For a new country, pick the tier that elects a council and runs local services (municipalities, districts or counties), not wards or parishes. Fetch the **official current list** with codes (a statistics office, mapping agency or interior ministry), not memory, and build `boundaries.json` from the same agency's shapes where possible, so codes match. **Check the licence before you download anything** (map licence rule, section 5): an unlicensed map has to be thrown away later, and so does the work built on it.
+For a new country, pick the tier that elects a council and runs local services (municipalities, districts or counties), not wards or parishes. Where that tier runs to many thousands of small units (France's 35,000 communes, Spain's 8,000 municipios), use the tier above it (départements, provinces), as long as it covers the whole country, and keep towns as place text in `location`. Give the regions a different code system from the units when the official ones overlap (INE numbers both Spanish provinces and communities from 01): use ISO 3166-2 for the regions, since `validate` rejects duplicate codes. Fetch the **official current list** with codes (a statistics office, mapping agency or interior ministry), not memory, and build `boundaries.json` from the same agency's shapes where possible, so codes match. **Check the licence before you download anything** (map licence rule, section 5): an unlicensed map has to be thrown away later, and so does the work built on it.
 
-Loading the local tier is not a promise to sweep it: sweeping stays proportionate to what the sample finds (6.5), and unswept units stay `pending`. Place each actor at the finest unit the source shows (a mayor in the city's unit, a state legislator in the state). Finer places you meet are not lost: put them in `location` as place text after the last unit (`United States > California > Ventura County > Camarillo`). On the map, areas with their own supporters are shaded, and areas whose region only has supporters at region level get a light tint. Seats are places, not institutions: an MP belongs to the constituency, a US representative to the district. For a map, also build `boundaries.json` (see `scripts/topo_to_boundaries.py`).
+Loading the local tier is not a promise to sweep it: sweeping stays proportionate to what the sample finds (6.5), and unswept units stay `pending`. Place each actor at the finest unit the source shows (a mayor in the city's unit, a state legislator in the state). Finer places you meet are not lost: put them in `location` as place text after the last unit (`United States > California > Ventura County > Camarillo`). On the map, areas with their own supporters are shaded, and areas whose region only has supporters at region level get a light tint. Seats are places, not institutions: an MP belongs to the constituency, a US representative to the district. Roll calls rarely print the constituency, so look it up in bulk: Wikidata records it as the qualifier *electoral district* (P768) on the member's *position held* (P39) statement, one SPARQL query for the whole list. `validate` warns about legislators left at the country root. For a map, also build `boundaries.json` (see `scripts/topo_to_boundaries.py`).
 
 ### 6.8 Later runs
 Each run reads the folder (`status`, `notes_next`), picks the top of the plan, works it, and writes a new plan. A good run is one harvest list, or one region, plus one layer pass. Priority order when the plan is silent:
@@ -316,7 +318,7 @@ Each run reads the folder (`status`, `notes_next`), picks the top of the plan, w
 1. `validate` → fix every error. Warnings: fix or justify in `notes`.
 2. `dedupe` → merge true duplicates with `merge`.
 3. **Quote check:** `checkquotes --run <this run>`. Fix or remove every row it reports as not found. Rows it skips (PDFs, blocked pages) need a manual look: open the page, find the quote. Then spot-check at least 10% of the run's rows (minimum 5) by hand for grade and meaning, not just wording. **`verified=y` is set only by someone other than the row's author**: a person, or a separate agent that has not seen the work. Authors leave rows at `n`. A row whose quote cannot be found is set to `failed` and then fixed or removed.
-4. `profiles_wikidata.py` for new actors with Wikidata IDs; add `boundaries.json` if the area has a map.
+4. `profiles_wikidata.py` for new actors with Wikidata IDs. Check that `boundaries.json` exists (6.7); `validate` warns when it does not.
 5. Append the run row to `runs.csv`, including `saturation` and `notes_next` (the plan).
 6. Open or update the pull request and report to the user: new actors and evidence by type and level, what was left out and why, the plan for the next runs, and numbers from `status`, not from memory.
 
@@ -356,3 +358,5 @@ The xlsx export contains: **Overview** (counts, grade mix, coverage and sweep pr
 - Maps were built from whatever shapes were easiest to find: Sweden from a GitHub repository whose licence was "to be confirmed", India from a personal compilation with no licence and district codes invented for the project. Both had to be rebuilt → follow the map licence rule (section 5): an open licence and official codes, or no map.
 - The UK's exhaustive council sweep was treated as the template for every country. It fits where councils pass motions and publish searchable minutes. Elsewhere, regional or local work should be proportionate to what the sample finds.
 - Progress measured by units marked done rather than by supporters found and checked → report supporters, grades and checked rows.
+- Spain's seed pass stopped the register at the autonomous communities and shipped without a map, and left all 58 deputies of a roll call at "Spain", because 6.3 warned against "loading hundreds of units" and the map step came last → the register and map are now step 4 of 6.1, `validate` fails without a local tier and warns about a missing map and about legislators at the root.
+- A journalist went in at grade C for "those with most should contribute more", and a minister for opening a conference on wealth caps → grade C still needs words about wealth; vague fairness language and event programmes are exclusions or nothing.
