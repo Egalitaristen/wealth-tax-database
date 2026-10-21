@@ -31,7 +31,7 @@ const pollSource = p => [p.pollster, p.commissioned_by ? `for ${p.commissioned_b
 const glyph = g => `<i class="g ${esc(g)}" title="${esc(GRADE_LONG[g] || '')}"></i>`;
 const label = (map, k) => map[k] || String(k || '').replace(/_/g, ' ').replace(/^./, c => c.toUpperCase());
 // People rows from build_site.py
-const P_ = {id: 0, name: 1, kind: 2, type: 3, role: 4, aff: 5, level: 6, loc: 7, grade: 8, n: 9, first: 10, last: 11, des: 12, notes: 13, web: 14, party: 15, other: 16, prof: 17};
+const P_ = {id: 0, name: 1, kind: 2, type: 3, role: 4, aff: 5, level: 6, loc: 7, grade: 8, n: 9, first: 10, last: 11, des: 12, notes: 13, web: 14, party: 15, other: 16, prof: 17, qid: 18};
 const E_ = {actor: 0, date: 1, grade: 2, type: 3, des: 4, detail: 5, quote: 6, url: 7, title: 8, pub: 9, verified: 10, id: 11};
 
 // ---------- data ----------
@@ -957,6 +957,7 @@ async function personPage(slug, id) {
           <div><span>Statements on record</span><b>${p[P_.n]}${firstY ? ` · ${firstY === lastY ? firstY : firstY + '–' + lastY}` : ''}</b></div>
           ${p[P_.des].length ? `<div><span>Backs</span><b>${p[P_.des].map(d => esc(label(DES, d))).join('<br>')}</b></div>` : ''}
         </dl>
+        <div id="elsewhere"></div>
         ${p[P_.notes] ? `<p class="p-note">${esc(p[P_.notes])}</p>` : ''}
         <a class="report" href="${esc(issueUrl(`[${m.iso2}] Report: ${p[P_.name]}`, {country: slug, entry: id}))}" target="_blank" rel="noopener">Something wrong, or want this removed? Report it ↗</a>
       </aside>
@@ -971,6 +972,13 @@ async function personPage(slug, id) {
       </div>
     </div>
   </div>`;
+  // The same person on other countries' registers, linked by their Wikidata ID.
+  if (p[P_.qid]) Promise.all([INDEX(), WORLD()]).then(([I, W]) => {
+    const names = Object.fromEntries((W.countries || []).map(c => [c.slug, c.name]));
+    const other = I.people.filter(r => r[8] === p[P_.qid] && r[0] !== slug);
+    const box = $('#elsewhere');
+    if (box && other.length) box.innerHTML = `<p class="p-else">Also on the record in ${other.map(r => `<a href="/${r[0]}/${enc(r[1])}">${esc(names[r[0]] || r[0].toUpperCase())}</a>`).join(', ')}</p>`;
+  });
 }
 function evCard(e, m, slug) {
   const url = safeUrl(e[E_.url]);

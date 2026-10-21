@@ -179,7 +179,8 @@ def build_country(folder):
         P.append([a["actor_id"], a["name"], a["kind"], a["actor_type"], a["role"], a["affiliation"], a["level"],
                   a.get("location", ""), "ABC"[best], len(es), dates[0] if dates else "",
                   dates[-1] if dates else "", designs, a["notes"], a["website"], a.get("party", ""),
-                  [x.strip() for x in a.get("other_types", "").split(";") if x.strip()], prof.get(a["actor_id"], [])])
+                  [x.strip() for x in a.get("other_types", "").split(";") if x.strip()], prof.get(a["actor_id"], []),
+                  a.get("wikidata_qid", "")])
 
     bounds = None
     bfile = meta.get("boundaries")
@@ -191,7 +192,7 @@ def build_country(folder):
     for a in actors:
         if a["actor_id"] not in by:
             continue
-        uid = resolve_location(a.get("location", ""), gidx)[0]
+        uid = a.get("geo_unit_id") if a.get("geo_unit_id") in by_id else resolve_location(a.get("location", ""), gidx)[0]
         if uid:
             here[uid].append(a["actor_id"])
         seen = set()
@@ -251,7 +252,7 @@ def build_country(folder):
     country = dict(meta=summary, P=P, E=E, C=C, UP=UP, vb=vb, O=O, L=L, R=R, R2=R2)
 
     # Search index rows: [slug, id, name, type, role, place, grade, statements]
-    index = [[slug, p[0], p[1], p[3], p[4][:80], [x.strip() for x in p[7].split(">")][-1] if p[7] else "", p[8], p[9]]
+    index = [[slug, p[0], p[1], p[3], p[4][:80], [x.strip() for x in p[7].split(">")][-1] if p[7] else "", p[8], p[9], p[18]]
              for p in P]
     # Place rows: [slug, unit path, supporters inside]
     places = [[slug, unit_path(u, by_id), len(ids)] for u, ids in inside.items() if ids and u not in roots]
