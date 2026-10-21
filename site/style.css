@@ -552,3 +552,5 @@ a.ov:hover .spark rect.pk { fill: var(--signal); }
   .big-search .btn { display: none; }
 }
 .p-else { margin-top: 18px; font-size: 14px; color: var(--ink-2); }
+.pl-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+.pl-actions .btn { justify-content: center; white-space: normal; text-align: center; height: auto; min-height: 34px; padding: 7px 12px; }
