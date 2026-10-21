@@ -290,7 +290,7 @@ async function home(W) {
       </div>
       <div class="hero-side">
         <div class="ledger">
-          <div><b>${fmt(tot('supporters'))}</b><span>public figures and organisations found so far</span></div>
+          <div><b>${fmt(tot('supporters'))}</b><span>public figures and organisations found <em>so far</em></span></div>
           <div><b>${fmt(tot('evidence'))}</b><span>sourced statements</span></div>
           <div><b>${fmt(tot('A'))}</b><span>with explicit support</span></div>
           <div><b>${cs.length}</b><span>${cs.length === 1 ? 'country' : 'countries'}, and counting</span></div>
