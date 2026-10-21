@@ -156,6 +156,7 @@ def main():
     ap.add_argument("--code-scheme", default="",
                     help="the official code system in --code-prop (GSS, FIPS, AGS, LGD ...); required for the local "
                          "units. Never invent codes")
+    ap.add_argument("--strip-prefix", default="", help="drop this prefix from codes (OCHA P-codes: BR1100015 -> 1100015)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     if a.licence.strip().lower() in ("", "unknown", "none", "not stated", "unclear"):
@@ -167,6 +168,8 @@ def main():
     if ext == "json" and not a.object:
         ap.error("--object is needed for TopoJSON")
     shapes = list(read_shapefile(a) if ext == "shp" else read_geojson(a) if ext == "geojson" else read_topojson(a))
+    if a.strip_prefix:
+        shapes = [(n, str(c)[len(a.strip_prefix):] if str(c).startswith(a.strip_prefix) else c, r) for n, c, r in shapes]
     for spec in a.shift:
         codes, _, d = spec.partition(":")
         dx, dy = (float(v) for v in d.split(","))
