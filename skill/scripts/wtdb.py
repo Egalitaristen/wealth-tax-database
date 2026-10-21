@@ -12,6 +12,7 @@ Commands
   merge    DIR KEEP_ID DROP_ID      merge a duplicate actor into another (moves evidence, links, profiles)
   checkquotes DIR [--run R] [--ids E1,E2] [--sample N] [--strict]
                                     fetch source pages and check each quote appears on the page
+  locate   DIR                      fill geo_unit_id from location, and rewrite location after a unit is renamed
   status   DIR                      counts, coverage grid, sweep progress, next targets
   export   DIR [--out FILE]         write the xlsx report
 """
@@ -20,7 +21,7 @@ from collections import Counter, defaultdict
 
 SCHEMA = {
     "actors": ["actor_id", "name", "kind", "actor_type", "other_types", "role", "affiliation", "party", "affiliation_actor_id", "country",
-               "level", "location", "wikidata_qid", "website", "status", "alive_checked", "prominence", "notes",
+               "level", "location", "geo_unit_id", "wikidata_qid", "website", "status", "alive_checked", "prominence", "notes",
                "added_run", "updated"],
     "profiles": ["profile_id", "actor_id", "platform", "url", "source", "checked"],
     "evidence": ["evidence_id", "actor_id", "date", "stance", "grade", "evidence_type", "wt_design", "design_detail",
@@ -109,7 +110,7 @@ def save(d, t, rows):
     p = path(d, t)
     tmp = p + ".tmp"
     with open(tmp, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=SCHEMA[t], extrasaction="ignore")
+        w = csv.DictWriter(f, fieldnames=SCHEMA[t], extrasaction="ignore", lineterminator="\n")
         w.writeheader()
         for r in rows:
             w.writerow({k: r.get(k, "") for k in SCHEMA[t]})
@@ -201,6 +202,8 @@ def cmd_add(a):
         elif r[idcol(t)] in existing:
             sys.exit(f"ID {r[idcol(t)]} already exists in {t}")
         if t == "actors":
+            if not r.get("geo_unit_id") and r.get("location"):
+                r["geo_unit_id"] = resolve_location(r["location"], geo_index(load(a.dir, "geo_units")))[0]
             r.setdefault("updated", today)
             r.setdefault("status", "active")
             if r.get("kind") in ("organisation", "institution"):
@@ -305,6 +308,13 @@ def validate(db):
         if r.get("kind") != "person" and r.get("alive_checked") == "y" and r.get("status") == "dissolved":
             warns.append(f"{where}: dissolved organisation marked alive_checked=y")
         uid, depth, rest = resolve_location(r.get("location", ""), gidx)
+        gu = r.get("geo_unit_id", "")
+        if gu and gu not in geo:
+            errs.append(f"{where}: geo_unit_id {gu} is not in geo_units.csv")
+        elif uid and gu != uid:
+            errs.append(f"{where}: location '{r.get('location')}' resolves to {uid or 'nothing'} but geo_unit_id is "
+                        f"{gu or 'empty'}. Run `wtdb.py locate` (it fills empty IDs and rewrites locations after a "
+                        f"unit is renamed), or fix whichever one is wrong")
         if not r.get("location"):
             warns.append(f"{where}: no location (use at least the country name)")
         elif gidx[2] and not uid:
@@ -559,6 +569,38 @@ def sweep_progress(db):
                 break
         prog[group][g["sweep_status"]] += 1
     return prog
+
+
+def unit_names(uid, by_id):
+    names, seen = [], set()
+    while uid and uid in by_id and uid not in seen:
+        seen.add(uid); names.append(by_id[uid]["name"]); uid = by_id[uid].get("parent_id")
+    return names[::-1]
+
+
+def cmd_locate(a):
+    """geo_unit_id is the actor's place; location is its readable path plus any finer place text.
+    Fill empty geo_unit_ids from location, and rewrite the unit part of location from the register when a unit was
+    renamed or moved (the place text after it is kept)."""
+    need_dir(a.dir)
+    geo = load(a.dir, "geo_units")
+    gidx = geo_index(geo)
+    by_id = gidx[0]
+    rows = load(a.dir, "actors")
+    filled = rewritten = 0
+    for r in rows:
+        uid, depth, rest = resolve_location(r.get("location", ""), gidx)
+        gu = r.get("geo_unit_id", "")
+        if not gu:
+            if uid:
+                r["geo_unit_id"] = uid; filled += 1
+            continue
+        if gu in by_id and gu != uid:
+            names = unit_names(gu, by_id)
+            parts = [p.strip() for p in r.get("location", "").split(">") if p.strip()]
+            r["location"] = " > ".join(names + parts[len(names):]); rewritten += 1
+    save(a.dir, "actors", rows)
+    print(f"geo_unit_id filled for {filled} actors; location rewritten for {rewritten}")
 
 
 def cmd_status(a):
@@ -917,6 +959,7 @@ def main():
     x.add_argument("pairs", nargs="+"); x.set_defaults(f=cmd_set)
     for name, fn in (("validate", cmd_validate), ("dedupe", cmd_dedupe), ("status", cmd_status)):
         x = s.add_parser(name); x.add_argument("dir"); x.set_defaults(f=fn)
+    x = s.add_parser("locate"); x.add_argument("dir"); x.set_defaults(f=cmd_locate)
     x = s.add_parser("merge"); x.add_argument("dir"); x.add_argument("keep"); x.add_argument("drop"); x.set_defaults(f=cmd_merge)
     x = s.add_parser("checkquotes"); x.add_argument("dir"); x.add_argument("--run"); x.add_argument("--ids")
     x.add_argument("--sample", type=int, default=0); x.add_argument("--seed", type=int, default=1)

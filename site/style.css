@@ -551,3 +551,4 @@ a.ov:hover .spark rect.pk { fill: var(--signal); }
   .big-search input { font-size: 16px; }
   .big-search .btn { display: none; }
 }
+.p-else { margin-top: 18px; font-size: 14px; color: var(--ink-2); }
