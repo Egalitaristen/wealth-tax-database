@@ -409,7 +409,7 @@ def check_boundaries(d, db):
     if not lic or lic.lower() in ("unknown", "none", "not stated", "unclear"):
         errs.append("boundaries: no licence. Use shapes from a source with an open licence and record it in "
                     "\"licence\" and \"licence_url\" (SKILL.md 5, boundaries.json); a map without one is not published")
-    elif not any(k in lic.lower() for k in OPEN_LICENCES):
+    elif not any(k in lic.lower() or k in lic.lower().replace("-", " ") for k in OPEN_LICENCES):
         warns.append(f"boundaries: licence '{lic}' is not one of the known open licences; check that it allows "
                      f"republishing before merging")
     if lic and not b.get("licence_url", "").startswith("https://"):

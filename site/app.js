@@ -43,6 +43,8 @@ const prepared = {};
 function loadCountry(slug) {
   return prepared[slug] || (prepared[slug] = getJSON(`/data/${slug}.json`).then(D => {
     D.byId = Object.fromEntries(D.P.map(p => [p[P_.id], p]));
+    // C[8] is an index into UP, the parent's place path; rebuild the unit's own path from it.
+    if (D.UP) D.C.forEach(c => { if (typeof c[8] === 'number') c[8] = (D.UP[c[8]] ? D.UP[c[8]] + ' > ' : '') + c[0]; });
     D.evBy = {};
     D.E.forEach(e => (D.evBy[e[E_.actor]] = D.evBy[e[E_.actor]] || []).push(e));
     // Every place that can be selected: map units (C) and unmapped units with people (O).
@@ -50,17 +52,23 @@ function loadCountry(slug) {
       ...D.C.map(c => ({name: c[0], path: c[8], ids: c[6], state: c[2], sweep: c[3], notes: c[5], mapped: true})),
       ...D.O.map(o => ({name: o[0], path: o[5], ids: o[4], state: 'support', sweep: o[2], notes: o[3], mapped: false}))];
     // The list of places to browse: every area and every region above it, counting everyone inside.
-    const paths = new Set();
-    D.places.forEach(pl => { const parts = pl.path.split(' > '); parts.forEach((_, i) => { if (i) paths.add(parts.slice(0, i + 1).join(' > ')); }); });
-    D.placeList = [...paths].map(path => {
-      const own = D.places.find(pl => pl.path === path);
-      const ids = idsForPlace(D, path);
-      return {path, name: path.split(' > ').pop(), n: ids.size, state: own ? own.state : 'support', notes: own ? own.notes : '',
-        mapped: D.places.some(pl => pl.mapped && (pl.path === path || pl.path.startsWith(path + ' > ')))};
+    // Built in one pass with maps: a commune map has tens of thousands of places.
+    const own = new Map(), agg = new Map();
+    D.places.forEach(pl => {
+      own.set(pl.path, pl);
+      const parts = pl.path.split(' > ');
+      for (let i = 1; i < parts.length; i++) {
+        const path = parts.slice(0, i + 1).join(' > ');
+        const a = agg.get(path) || agg.set(path, {ids: new Set(), mapped: false}).get(path);
+        pl.ids.forEach(x => a.ids.add(x));
+        if (pl.mapped) a.mapped = true;
+      }
     });
+    D.placeList = [...agg].map(([path, a]) => { const o = own.get(path);
+      return {path, name: path.split(' > ').pop(), n: a.ids.size, state: o ? o.state : 'support', notes: o ? o.notes : '', mapped: a.mapped}; });
     // A city-state is both a region and its only area (Berlin in Berlin): list it once.
-    D.placeList = D.placeList.filter(pl => { const parts = pl.path.split(' > '), up = parts.slice(0, -1).join(' > ');
-      const parent = D.placeList.find(q => q.path === up);
+    const byPath = new Map(D.placeList.map(p => [p.path, p]));
+    D.placeList = D.placeList.filter(pl => { const parts = pl.path.split(' > '), parent = byPath.get(parts.slice(0, -1).join(' > '));
       return !(parent && parts.length > 2 && parts[parts.length - 1] === parts[parts.length - 2] && parent.n === pl.n) || !pl.mapped; });
     const root = D.places.find(pl => !pl.path.includes(' > '));
     D.nationalOnly = root ? root.ids.length : 0;
@@ -565,7 +573,7 @@ function mapSection(box, D, slug, params) {
       <div class="atlas">
         <div class="mapbox" id="mapbox">
           <div class="zoomer"><button type="button" data-z="in" aria-label="Zoom in">+</button><button type="button" data-z="out" aria-label="Zoom out">−</button><button type="button" data-z="fit" aria-label="Show the whole country">⤢</button></div>
-          <div class="legend"><span><span class="ramp" style="display:inline-block;vertical-align:-1px;margin-right:6px"></span>Supporters</span>${D.C.some(c => c[9]) ? '<span><i class="sw up"></i>Supporters known by region only</span>' : ''}<span><i class="sw none"></i>None recorded yet</span></div>
+          <div class="legend"><span><span class="ramp" style="display:inline-block;vertical-align:-1px;margin-right:6px"></span>Supporters</span>${D.C.some(c => c[9]) ? '<span><span class="ramp up" style="display:inline-block;vertical-align:-1px;margin-right:6px"></span>Supporters known only for the wider area</span>' : ''}<span><i class="sw none"></i>None recorded yet</span></div>
         </div>
         <div class="panel" id="panel"></div>
       </div>
@@ -833,18 +841,21 @@ function yearChart(E) {
 function countryMap(D, slug, onShowAll) {
   const box = $('#mapbox'), panel = $('#panel');
   const [vx, vy, vw, vh] = D.vb;
-  const mx = Math.max(1, ...D.C.map(c => c[6].length));
+  const mx = Math.max(1, ...D.C.map(c => c[6].length)), mxUp = Math.max(1, ...D.C.map(c => c[9] || 0));
   const svgNS = 'http://www.w3.org/2000/svg';
   const svg = document.createElementNS(svgNS, 'svg');
   svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `Map of ${D.meta.name} by area`);
+  if (D.C.length > 2000) svg.classList.add('dense');
   // Areas with their own supporters are shaded from a clearly visible start; areas whose region has supporters
-  // known only at region level (a state, Land or län) get one fixed faint tint, always lighter than a real
-  // supporter, so the two never look alike; region outlines go on top.
+  // known only at a level above (a province, département, state or län) get a faint tint graded by how many are known
+  // there, from 8% to 28%: always lighter than the 42% where real local supporters start, so the two never look
+  // alike; region outlines go on top.
   svg.innerHTML = `<g>${D.C.map((c, i) => { const n = c[6].length, up = c[9] || 0;
       if (n) return `<path data-i="${i}" class="u-sup" style="--t:${(.42 + .58 * Math.log(n + 1) / Math.log(mx + 1)).toFixed(3)}" d="${c[7]}"/>`;
-      if (up) return `<path data-i="${i}" class="u-up" style="--t:.13" d="${c[7]}"/>`;
+      if (up) return `<path data-i="${i}" class="u-up" style="--t:${(.08 + .2 * Math.log(up + 1) / Math.log(mxUp + 1)).toFixed(3)}" d="${c[7]}"/>`;
       return `<path data-i="${i}" class="u-none" d="${c[7]}"/>`; }).join('')}</g>
-    ${(D.R || []).length ? `<g class="regions">${D.R.map(d => `<path d="${d}"/>`).join('')}</g>` : ''}`;
+    ${(D.R || []).length ? `<g class="regions${(D.R2 || []).length ? ' lower' : ''}">${D.R.map(d => `<path d="${d}"/>`).join('')}</g>` : ''}
+    ${(D.R2 || []).length ? `<g class="regions upper">${D.R2.map(d => `<path d="${d}"/>`).join('')}</g>` : ''}`;
   const frame = document.createElement('div'); frame.className = 'mapframe'; frame.appendChild(svg);
   box.prepend(frame);
   box.style.setProperty('--ar', Math.max(.75, Math.min(1.6, vw / vh)).toFixed(3));

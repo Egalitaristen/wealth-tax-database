@@ -288,7 +288,13 @@ a.ov:hover .spark rect.pk { fill: var(--signal); }
 .mapbox path.u-up { fill: color-mix(in oklab, var(--signal) calc(var(--t) * 100%), var(--land)); }
 .mapbox .regions path { fill: none; stroke: var(--ink-3); stroke-width: 1.1px; pointer-events: none; }
 .mapbox .regions path:hover { stroke: var(--ink-3); stroke-width: 1.1px; }
-.legend .sw.up { background: color-mix(in oklab, var(--signal) 13%, var(--land)); }
+.mapbox .regions.lower path, .mapbox .regions.lower path:hover { stroke-width: .6px; opacity: .75; }
+.mapbox .regions.upper path, .mapbox .regions.upper path:hover { stroke: var(--ink-2); stroke-width: 1.4px; }
+/* Thousands of small areas (communes, municipios): hairline borders, so the map reads as areas, not a mesh */
+.mapbox svg.dense path[data-i] { stroke-width: .25px; }
+.mapbox svg.dense path[data-i]:hover { stroke-width: 1.2px; }
+.mapbox svg.dense path[data-i].sel { stroke-width: 2.2px; }
+.legend .ramp.up { width: 48px; background: linear-gradient(to right, color-mix(in oklab, var(--signal) 8%, var(--land)), color-mix(in oklab, var(--signal) 28%, var(--land))); }
 .map-source { font-size: 12.5px; color: var(--ink-3); margin-top: 18px; }
 .mapbox path.u-sup { fill: color-mix(in oklab, var(--signal) calc(var(--t) * 100%), var(--land)); }
 .mapbox path:hover { stroke: var(--ink); stroke-width: 1.2px; }

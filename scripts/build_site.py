@@ -199,6 +199,16 @@ def build_country(folder):
             seen.add(uid); inside[uid].append(a["actor_id"]); uid = by_id[uid]["parent_id"]
     roots = set(gidx[2].values())
     C, vb, mapped = [], None, set()
+    # A unit's place path is its parent's path plus its name; send each parent path once (UP) and its index in C,
+    # since a commune map repeats "France > Occitanie > Haute-Garonne" thousands of times.
+    UP, up_at = [], {}
+
+    def up_index(g):
+        par = unit_path(g.get("parent_id"), by_id)
+        if par not in up_at:
+            up_at[par] = len(UP); UP.append(par)
+        return up_at[par]
+
     if bounds:
         vb = bounds["viewBox"]
         for u in bounds["units"]:
@@ -208,12 +218,14 @@ def build_country(folder):
             mapped.add(g["geo_unit_id"])
             ids = inside.get(g["geo_unit_id"], [])
             state = "support" if ids else ("clear" if g["sweep_status"] == "done" else "open")
-            # Supporters known only at the parent level (a state or Land, say) tint the area lightly on the map.
-            par = g.get("parent_id")
-            above = len(here.get(par, [])) if par and par not in roots else 0
+            # Supporters known only at a level above (a province, state or Land, say) tint the area lightly on the map.
+            above, near, anc = 0, "", g.get("parent_id")
+            while anc and anc in by_id and anc not in roots:
+                if here.get(anc):
+                    above += len(here[anc]); near = near or re.sub(r"\s*\(.*$", "", by_id[anc]["name"]).strip()
+                anc = by_id[anc].get("parent_id")
             C.append([re.sub(r"\s*\(.*$", "", g["name"]).strip(), u.get("code", ""), state, g["sweep_status"], g["hits"],
-                      g["notes"][:600], ids, u["path"], unit_path(g["geo_unit_id"], by_id), above,
-                      re.sub(r"\s*\(.*$", "", by_id[par]["name"]).strip() if above else ""])
+                      g["notes"][:600], ids, u["path"], up_index(g), above, near])
     O = []
     for g in geo:
         uid = g["geo_unit_id"]
@@ -235,7 +247,8 @@ def build_country(folder):
     summary["map_source"] = (bounds or {}).get("source", "")
     summary["map_licence"] = [(bounds or {}).get("licence", ""), (bounds or {}).get("licence_url", "")]
     R = [r["path"] for r in (bounds or {}).get("regions", [])]
-    country = dict(meta=summary, P=P, E=E, C=C, vb=vb, O=O, L=L, R=R)
+    R2 = [r["path"] for r in (bounds or {}).get("regions_upper", [])]  # a second, bolder outline (régions over départements)
+    country = dict(meta=summary, P=P, E=E, C=C, UP=UP, vb=vb, O=O, L=L, R=R, R2=R2)
 
     # Search index rows: [slug, id, name, type, role, place, grade, statements]
     index = [[slug, p[0], p[1], p[3], p[4][:80], [x.strip() for x in p[7].split(">")][-1] if p[7] else "", p[8], p[9]]
@@ -356,9 +369,11 @@ def share_pages(out, base, countries, full):
     for c in countries:
         D, slug, name = full[c["slug"]], c["slug"], c["name"]
         mx = max([len(u[6]) for u in D["C"]] or [1]) or 1
-        # The same shading as the site map: real supporters from 0.42 up, region-only areas a fixed faint 0.13.
-        units = [(u[7], (0.42 + 0.58 * math.log(len(u[6]) + 1) / math.log(mx + 1)) if u[6] else 0.13 if u[9] else 0)
-                 for u in D["C"]]
+        mx_up = max([u[9] for u in D["C"]] or [1]) or 1
+        # The same shading as the site map: real supporters from 0.42 up, areas known only through the level above
+        # a faint 0.08 to 0.28.
+        units = [(u[7], (0.42 + 0.58 * math.log(len(u[6]) + 1) / math.log(mx + 1)) if u[6]
+                  else (0.08 + 0.2 * math.log(u[9] + 1) / math.log(mx_up + 1)) if u[9] else 0) for u in D["C"]]
         found = f"public figures and organisations in {the(name)} on the record so far"
         years = sorted({e[1][:4] for e in D["E"] if e[1]})
         sections = {
