@@ -459,7 +459,16 @@ def main():
                 if (folder / name).exists():
                     shutil.copy(folder / name, dl / name)
             print(f"  {folder.name}: {summary['supporters']} supporters, {summary['evidence']} evidence rows")
-    world = dict(paths=world_paths(), countries=countries, built=datetime.date.today().isoformat())
+    paths = world_paths()
+    # Every country's everyday name, for the suggestion form: people may suggest supporters anywhere, not only
+    # where a register has started.
+    # One name per ISO country: the register's name, else the world map's everyday name, else ISO's common name.
+    own = {c["iso2"].upper(): c["name"] for c in countries}
+    every = {p["name"] for p in paths.values()} | set(own.values())
+    for c in (pycountry.countries if pycountry else []):
+        if c.alpha_2 not in own and str(int(c.numeric)) not in paths:
+            every.add(getattr(c, "common_name", None) or c.name)
+    world = dict(paths=paths, countries=countries, all_countries=sorted(every), built=datetime.date.today().isoformat())
     json.dump(world, open(out / "data" / "world.json", "w", encoding="utf-8"), separators=(",", ":"), ensure_ascii=False)
     json.dump(dict(people=index, places=places), open(out / "data" / "index.json", "w", encoding="utf-8"),
               separators=(",", ":"), ensure_ascii=False)

@@ -229,7 +229,7 @@ Writing CSVs directly is fine too, but quote fields properly (quotes often conta
 ## 6. Workflow
 
 ### 6.1 Start (brief)
-1. Read this file, the area's folder if it exists (`area_profile.md`, the last three `runs.csv` rows, `wtdb.py status`), and the notes for the nearest country in `skill/references/countries/`.
+1. Read this file, the area's folder if it exists (`area_profile.md`, the last three `runs.csv` rows, `wtdb.py status`), and the notes for the nearest country in `skill/references/countries/`. For a new country, also list the suggestions people have already sent for it from the site (`python scripts/suggestions.py`): the form accepts any country, so they wait there until a register starts, and they go into the first pass's leads.
 2. Settle three things with the user, in **one short message**, each with a recommended default: **which area**, **scope** (national only; plus regional; plus local) and **depth** (see the ladder below). If the user has already told you, do not ask again. If they do not answer, use the defaults and say so.
 3. In this repository, work on a branch and open one pull request per run. Never push to `main`.
 4. `wtdb.py init data/<iso2> --area "<Name>"`, then **load the geography register down to the local tier and build the map** (6.7): an official list with codes and one open-licence shape file, usually under an hour. It is part of every seed pass, not a later run, and `validate` fails while the register stops at regions. Then go straight to 6.2. State your plan in a few lines and begin; do not wait for approval of the plan.
