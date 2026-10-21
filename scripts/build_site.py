@@ -107,7 +107,7 @@ def numeric_for(iso2):
     if pycountry:
         c = pycountry.countries.get(alpha_2=iso2.upper())
         if c:
-            return str(int(c.numeric))
+            return c.numeric  # three digits, zero-padded, as the world map ids are ("076" for Brazil)
     return ""
 
 
@@ -466,7 +466,7 @@ def main():
     own = {c["iso2"].upper(): c["name"] for c in countries}
     every = {p["name"] for p in paths.values()} | set(own.values())
     for c in (pycountry.countries if pycountry else []):
-        if c.alpha_2 not in own and str(int(c.numeric)) not in paths:
+        if c.alpha_2 not in own and c.numeric not in paths:
             every.add(getattr(c, "common_name", None) or c.name)
     world = dict(paths=paths, countries=countries, all_countries=sorted(every), built=datetime.date.today().isoformat())
     json.dump(world, open(out / "data" / "world.json", "w", encoding="utf-8"), separators=(",", ":"), ensure_ascii=False)
