@@ -308,12 +308,13 @@ Loading the local tier is not a promise to sweep it: sweeping stays proportionat
 
 ### 6.8 Later runs
 Each run reads the folder (`status`, `notes_next`), picks the top of the plan, works it, and writes a new plan. A good run is one harvest list, or one region, plus one layer pass. Priority order when the plan is silent:
-1. queued harvest lists
-2. thin cells in the coverage grid (actor type × level)
-3. upgrades of C- and B-graded actors (look for a vote, a signed letter, a specified design; leave the old evidence in place)
-4. snowballing: follow co-authors, co-signatories, coalition members, their organisation and party outwards
-5. regional and local units, as decided in 6.5
-6. retractions: for prominent supporters, check whether they have since retracted
+1. suggestions sent from the site for this country (`python scripts/suggestions.py export new.csv`; check each against its source, then `mark` it added, duplicate or rejected)
+2. queued harvest lists
+3. thin cells in the coverage grid (actor type × level)
+4. upgrades of C- and B-graded actors (look for a vote, a signed letter, a specified design; leave the old evidence in place)
+5. snowballing: follow co-authors, co-signatories, coalition members, their organisation and party outwards
+6. regional and local units, as decided in 6.5
+7. retractions: for prominent supporters, check whether they have since retracted
 
 **Stopping.** A layer is saturated when about nine in ten of the candidates you find are already in the database (or excluded) for two passes in a row. The database is "complete for now" when the plan is empty or the remaining items are low yield; after that, runs are update sweeps (new evidence since the last run). Completeness is never a precondition for publishing: a partial database with honest coverage notes is the normal state.
 

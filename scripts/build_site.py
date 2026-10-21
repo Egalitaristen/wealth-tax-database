@@ -366,6 +366,9 @@ def share_pages(out, base, countries, full):
     write("/contribute", "Put your country on the map · Wealth Tax Supporters",
           "Start a register for your country, suggest a supporter, or help check the entries that are already here.",
           "contribute", "Put your country on the map", lambda o: cards.page_card(o, "Contribute", "Put your country on the map", "Start a register for your country, or suggest a supporter."))
+    write("/suggest", "Suggest a supporter · Wealth Tax Supporters",
+          "Know a public figure or organisation who has backed a wealth tax? Send a name, a country and a link. No account needed.",
+          "suggest", "Suggest a supporter", lambda o: cards.page_card(o, "Suggest a supporter", "Know someone on the record?", "A name, a country and a link to where they said it. No account needed."))
 
     for c in countries:
         D, slug, name = full[c["slug"]], c["slug"], c["name"]

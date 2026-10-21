@@ -12,7 +12,10 @@ const year = d => (d || '').slice(0, 4);
 const issueUrl = (title, fields = {}) =>
   `https://github.com/${REPO}/issues/new?template=data-report.yml&title=${enc(title)}` +
   Object.entries(fields).map(([k, v]) => `&${k}=${enc(v)}`).join('');
-const suggestUrl = (fields = {}) =>
+const DISCORD = 'https://discord.gg/yCjEK47aeh';
+// The site's own suggestion form (no account needed), prefilled with a country and place where known.
+const suggestUrl = (fields = {}) => '/suggest' + (Object.keys(fields).length ? '?' + new URLSearchParams(fields) : '');
+const githubSuggestUrl = (fields = {}) =>
   `https://github.com/${REPO}/issues/new?template=suggest-supporter.yml` + Object.entries(fields).map(([k, v]) => `&${k}=${enc(v)}`).join('');
 const ext = (href, text, cls = '') => `<a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener noreferrer nofollow">${text}</a>`;
 
@@ -121,11 +124,12 @@ async function render(fresh) {
     if (!parts.length) await home(W);
     else if (parts[0] === 'about' && parts.length === 1) aboutPage(W);
     else if (parts[0] === 'contribute' && parts.length === 1) contributePage(W);
+    else if (parts[0] === 'suggest' && parts.length === 1) suggestPage(W, params);
     else if (country && parts.length === 1) await countryPage(country.slug, params);
     else if (country && parts.length === 2 && SECTIONS[parts[1]]) await countryPage(country.slug, params, parts[1]);
     else if (country && parts.length === 2) await personPage(country.slug, parts[1]);
     else notFound();
-    const navKey = parts[0] === 'about' ? '/about' : parts[0] === 'contribute' ? '/contribute' : null;
+    const navKey = {about: '/about', contribute: '/contribute', suggest: '/suggest'}[parts[0]] || null;
     if (navKey) $$('.nav a').forEach(a => { if (a.getAttribute('href') === navKey) a.setAttribute('aria-current', 'page'); });
   } catch (err) {
     console.error(err);
@@ -674,7 +678,7 @@ function directorySection(box, D, slug, params) {
         </div>
         <ul class="dir" id="dir"></ul>
         <div class="more" id="more"></div>
-        <p class="dir-suggest">Someone missing? <a href="${esc(suggestUrl({country: D.meta.name}))}" target="_blank" rel="noopener">Suggest a supporter ↗</a></p>
+        <p class="dir-suggest">Someone missing? <a href="${esc(suggestUrl({country: D.meta.name}))}">Suggest a supporter →</a></p>
       </div>
       <aside class="preview" id="preview" aria-live="polite"></aside>
     </div></section>`;
@@ -939,7 +943,7 @@ function countryMap(D, slug, onShowAll) {
       <div class="pl-actions">
         ${people.length ? `<button class="btn sm ghost" type="button" id="pl-all">Show ${people.length > 40 ? 'all ' + fmt(people.length) : 'them'} in the directory ↓</button>`
           : near && near.ids.length > 40 ? `<button class="btn sm ghost" type="button" id="pl-near">Show all ${fmt(near.ids.length)} in ${esc(near.name)} ↓</button>` : ''}
-        <a class="btn sm" href="${esc(suggestUrl({country: D.meta.name, note: 'Place: ' + path}))}" target="_blank" rel="noopener">Suggest a supporter from ${esc(name)} ↗</a>
+        <a class="btn sm" href="${esc(suggestUrl({country: D.meta.name, place: path.split(' > ').slice(1).reverse().join(', ')}))}">Suggest a supporter from ${esc(name)} →</a>
       </div>`;
     $('#pl-back', panel).onclick = () => select(null);
     const all = $('#pl-all', panel); if (all) all.onclick = () => onShowAll(path);
@@ -1064,13 +1068,61 @@ function contributePage(W) {
       <h2>Help check what is here</h2>
       <p>Open an entry, follow the source, and report anything that does not match.</p>
       <h2>Suggest a supporter</h2>
-      <p>Know someone who has backed a wealth tax in public? <a href="${esc(suggestUrl())}" target="_blank" rel="noopener">Suggest them</a>: just their name, the country and a link to where they said it. You need a free GitHub account.</p>
+      <p>Know someone who has backed a wealth tax in public? <a href="/suggest">Suggest them</a>: just their name, the country and a link to where they said it. No account needed.</p>
     </div>
     <aside class="aside-card"><h3>Get started</h3>
       <p><a class="btn sm" href="https://github.com/${REPO}/issues/new?template=new-country.yml" target="_blank" rel="noopener">Start a new country ↗</a></p>
-      <p><a class="btn sm ghost" href="${esc(suggestUrl())}" target="_blank" rel="noopener">Suggest a supporter ↗</a></p>
+      <p><a class="btn sm ghost" href="/suggest">Suggest a supporter →</a></p>
       <p style="margin:18px 0 0"><a href="https://github.com/${REPO}/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing guide ↗</a><br><a href="https://github.com/${REPO}/blob/main/skill/SKILL.md" target="_blank" rel="noopener">The research workflow ↗</a></p></aside>
   </div>`;
+}
+
+// ---------- suggest a supporter ----------
+function suggestPage(W, params) {
+  setTitle('Suggest a supporter');
+  const names = [...W.countries.map(c => c.name)].sort();
+  const val = k => esc(params.get(k) || '');
+  main.innerHTML = `
+  <div class="wrap page-head fade"><div class="kicker">Suggest a supporter</div><h1>Know someone <em>on the record?</em></h1>
+    <p class="lede" style="margin-top:18px">Tell us about a public figure or organisation who has backed a wealth tax in public. No account needed: a name, a country and a link to where they said it is enough.</p></div>
+  <div class="wrap two" style="margin-top:36px">
+    <form class="suggest" id="suggest-form" novalidate>
+      <label><span>Who <b>*</b></span><input class="field" name="name" required maxlength="200" placeholder="Name of the person or organisation" autocomplete="off"></label>
+      <div class="pair">
+        <label><span>Country <b>*</b></span><input class="field" name="country" required maxlength="80" list="sg-countries" value="${val('country')}" placeholder="Any country" autocomplete="off"></label>
+        <label><span>Where in the country</span><input class="field" name="place" maxlength="200" value="${val('place')}" placeholder="Town, region or constituency" autocomplete="off"></label>
+      </div>
+      <datalist id="sg-countries">${names.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
+      <label><span>Where they said it <b>*</b></span><textarea class="field" name="links" rows="3" required maxlength="2000" placeholder="https://… one link per line: an article, video, post, letter or vote"></textarea></label>
+      <label><span>What they said, or why they belong here</span><textarea class="field" name="said" rows="5" maxlength="3000" placeholder="A quote, or a few words on what they back (a tax on wealth, not just “tax the rich”)"></textarea></label>
+      <label class="hp" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label>
+      <div class="suggest-foot"><button class="btn" type="submit" id="sg-send">Send suggestion</button><span class="sg-msg" id="sg-msg" role="status"></span></div>
+      <p class="fine">We check every suggestion against its source before it appears, so it can take a while. We don't ask who you are. To stop spam we keep a scrambled code of your connection that changes every day and can't be traced back to you.</p>
+    </form>
+    <aside class="aside-card"><h3>Other ways</h3>
+      <p>Prefer to talk it through, or have a whole list? Post it in the Discord and someone will pick it up.</p>
+      <p><a class="btn sm" href="${DISCORD}" target="_blank" rel="noopener">Join the Discord ↗</a></p>
+      <p style="margin-top:18px">Have a GitHub account? Open an issue, and follow it as it is checked.</p>
+      <p><a class="btn sm ghost" href="${esc(githubSuggestUrl({country: params.get('country') || ''}))}" target="_blank" rel="noopener">Suggest on GitHub ↗</a></p>
+      <p class="fine" style="margin-top:18px">What counts: a public statement, vote, letter or policy backing a tax on wealth (net assets), such as an annual wealth tax or a billionaire minimum tax. Read <a href="/about">the method</a>.</p></aside>
+  </div>`;
+  const form = $('#suggest-form'), msg = $('#sg-msg'), send = $('#sg-send');
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form));
+    data.page = document.referrer && new URL(document.referrer).origin === location.origin ? new URL(document.referrer).pathname : '';
+    if (!data.name.trim() || !data.country.trim() || !data.links.trim()) { msg.textContent = 'Please fill in who, the country and at least one link.'; msg.className = 'sg-msg err'; return; }
+    send.disabled = true; msg.textContent = 'Sending…'; msg.className = 'sg-msg';
+    try {
+      const r = await fetch('/api/suggest', {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify(data)});
+      const out = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(out.error || 'Could not send it. Please try again, or post it on Discord.');
+      form.innerHTML = `<div class="sg-done"><h2>Thank you.</h2><p>We'll check <b>${esc(data.name)}</b> against the source and add them if it holds up.</p>
+        <p style="margin-top:18px"><a class="btn" href="/suggest${data.country ? '?country=' + enc(data.country) : ''}">Suggest someone else</a></p></div>`;
+    } catch (err) {
+      msg.textContent = err.message; msg.className = 'sg-msg err'; send.disabled = false;
+    }
+  });
 }
 
 // ---------- start ----------
