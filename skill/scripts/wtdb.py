@@ -389,8 +389,8 @@ def validate(db):
 OPEN_LICENCES = ("cc0", "cc-by", "cc by", "odbl", "pddl", "public domain", "ogl", "open government licence", "dl-de",
                  "datenlizenz deutschland", "godl", "licence ouverte", "etalab", "nlod")
 LOCAL_LEVELS = {"county", "combined_authority", "council", "sub_council"}
-LEGISLATOR = re.compile(r"(?i)\b(member of (the )?(congress|parliament|bundestag|lok sabha|riksdag|house of|assembl|national assembly)"
-                        r"|MP\b|MdB\b|député|diputad|deputy\b|senator|sénat|congress(wo)?man|representative\b)")
+LEGISLATOR = re.compile(r"(?i)\b(member of (the )?(congress|parliament|bundestag|lok sabha|riksdag|house of (commons|representatives|delegates)|assembl|national assembly)"
+                        r"|MP\b|MdB\b|député|diputad|deputy\b(?!\s*,|\s+(chair|head|leader|director|general|secretary|mayor|prime|minister|governor))|senator|sénat|congress(wo)?man|representative\b)")
 
 
 def check_boundaries(d, db):

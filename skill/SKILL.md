@@ -296,7 +296,7 @@ A tree of the places you will report on, in `geo_units.csv`, with a country root
 |---|---|---|
 | United Kingdom | nations and English regions, counties | 361 local authority districts (GSS codes) |
 | Sweden | 21 län | 290 kommuner (kommunkod) |
-| Germany | 16 Länder | 400 Kreise and kreisfreie Städte (AGS) |
+| Germany | 16 Länder, 401 Kreise and kreisfreie Städte | 10,939 Gemeinden and unincorporated areas (AGS, BKG VG250) |
 | India | 36 states and union territories (ISO 3166-2:IN) | 734 districts (LGD codes; Survey of India shapes) |
 | United States | 50 states and DC | 3,143 counties and equivalents (FIPS) |
 | France | 13 regions (ISO 3166-2:FR), 101 départements | 34,920 communes (INSEE, COG 2025) |

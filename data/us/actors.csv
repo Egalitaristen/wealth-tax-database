@@ -268,7 +268,7 @@ A0266,Harris Mojadedi,person,politician,,Chabot-Las Positas Community College Di
 A0267,Nassim Nouri,person,politician,,"County Council member, Green Party of Santa Clara County",,Green Party,,US,local,United States > California,G0007,,,active,y,local,Party taken from the role as listed by the campaign (Green Party of Santa Clara County).,R001,2026-10-19
 A0268,Ruscal Cayangyang,person,politician,,"Vallejo School Board President (ret.), CA Assembly Dist. 14 Delegate (Ret.)",,,,US,regional,United States > California,G0007,,,active,y,regional,Party not recorded: holds a local nonpartisan office in California and no party source was found.,R001,2026-10-19
 A0269,Sara Lamnin,person,politician,,"Director, Hayward Area Recreation and Park District",,,,US,local,United States > California,G0007,,,active,y,local,Party not recorded: holds a local nonpartisan office in California and no party source was found.,R001,2026-10-19
-A0270,Eleanor Holmes Norton,person,politician,,US Delegate (D-DC-At Large),,Democratic Party,,US,national,United States > District of Columbia,G0011,Q461649,,active,y,national,,R003,2026-10-19
+A0270,Eleanor Holmes Norton,person,politician,,US Delegate (D-DC-At Large),,Democratic Party,,US,national,United States > District of Columbia > District of Columbia,G0375,Q461649,,active,y,national,,R003,2026-10-19
 A0271,Barbara Lee,person,politician,,US Representative (D-CA-13),,Democratic Party,,US,national,United States > California > CA-13,G0007,Q289317,,active,y,national,,R003,2026-10-19
 A0272,Ilhan Omar,person,politician,,US Representative (D-MN-5),,Democratic Party,,US,national,United States > Minnesota > MN-05,G0026,Q26436159,,active,y,national,,R003,2026-10-19
 A0273,Alexandria Ocasio-Cortez,person,politician,,US Representative (D-NY-14),,Democratic Party,,US,national,United States > New York > NY-14,G0035,Q55223040,,active,y,national,,R003,2026-10-19
@@ -564,9 +564,9 @@ A0562,John Yarmuth,person,politician,,US Representative (D-KY-3),,Democratic Par
 A0563,Stacey Plaskett,person,politician,,US Delegate (D-VI-At Large),,Democratic Party,,US,national,United States,G0054,Q18739104,,active,y,national,,R008,2026-10-19
 A0564,Carolyn Maloney,person,politician,,US Representative (D-NY-12),,Democratic Party,,US,national,United States > New York > NY-12,G0035,Q455833,,active,y,national,,R008,2026-10-19
 A0565,Ann Kirkpatrick,person,politician,,US Representative (D-AZ-2),,Democratic Party,,US,national,United States > Arizona > AZ-02,G0005,Q558460,,active,y,national,,R008,2026-10-19
-A0566,Debbie Stabenow,person,politician,,US Senator,,Democratic Party,,US,national,United States,G0054,Q241092,,active,y,national,,R008,2026-10-19
-A0567,Bob Casey,person,politician,,US Senator,,Democratic Party,,US,national,United States,G0054,,,active,y,national,,R008,2026-10-19
-A0568,Sherrod Brown,person,politician,,US Senator,,Democratic Party,,US,national,United States,G0054,Q381880,,active,y,national,,R008,2026-10-19
+A0566,Debbie Stabenow,person,politician,,US Senator,,Democratic Party,,US,national,United States > Michigan,G0025,Q241092,,active,y,national,US Senator for Michigan.,R008,2026-10-19
+A0567,Bob Casey,person,politician,,US Senator,,Democratic Party,,US,national,United States > Pennsylvania,G0041,,,active,y,national,US Senator for Pennsylvania.,R008,2026-10-19
+A0568,Sherrod Brown,person,politician,,US Senator,,Democratic Party,,US,national,United States > Ohio,G0038,Q381880,,active,y,national,US Senator for Ohio.,R008,2026-10-19
 A0569,Joe Nguyen,person,politician,,"Washington State Senator, District 34",,Democratic Party,,US,regional,United States > Washington,G0050,Q58813036,,active,y,regional,Party from the legislature's member service.,R008,2026-10-19
 A0570,June Robinson,person,politician,,"Washington State Senator, District 38",,Democratic Party,,US,regional,United States > Washington,G0050,Q16193333,,active,y,regional,Party from the legislature's member service.,R008,2026-10-19
 A0571,Sam Hunt,person,politician,,"Washington State Senator, District 22",,Democratic Party,,US,regional,United States > Washington,G0050,Q7407671,,active,y,regional,Party from the legislature's member service.,R008,2026-10-19
@@ -726,7 +726,7 @@ A0724,Simon Johnson,person,economist,,"Professor of economics, MIT; Nobel laurea
 A0725,Gavin Newsom,person,politician,,Governor of California,,Democratic Party,,US,regional,United States > California,G0007,Q461391,,active,y,national,Opposes California Prop 40; supports a national minimum tax on net worth over $100 million (June 2026).,R020,2026-10-19
 A0726,Tony Thurmond,person,politician,,California State Superintendent of Public Instruction; 2026 candidate for governor,,Democratic Party,,US,regional,United States > California,G0007,Q18631948,,active,y,regional,,R020,2026-10-19
 A0727,Graham Platner,person,politician,,2026 Democratic nominee for US Senate (Maine),,Democratic Party,,US,national,United States,G0054,Q136001228,,active,y,national,,R020,2026-10-19
-A0728,Angie Nixon,person,politician,,Florida state representative; 2026 Democratic nominee for US Senate (Florida),,Democratic Party,,US,national,United States,G0054,Q98690818,,active,y,national,,R020,2026-10-19
+A0728,Angie Nixon,person,politician,,Florida state representative; 2026 Democratic nominee for US Senate (Florida),,Democratic Party,,US,national,United States > Florida,G0012,Q98690818,,active,y,national,Florida House of Representatives.,R020,2026-10-19
 A0729,ACLU of Southern California,organisation,ngo_campaign,,"Civil liberties organisation, Southern California",,,,US,regional,United States > California,G0007,,,active,na,regional,,R020,2026-10-19
 A0730,Asian Pacific Environmental Network (APEN Action),organisation,ngo_campaign,,"Environmental justice organisation, Bay Area",,,,US,regional,United States > California,G0007,,,active,na,regional,,R020,2026-10-19
 A0731,Consumer Watchdog,organisation,ngo_campaign,,"Consumer advocacy organisation, California",,,,US,regional,United States > California,G0007,Q5164683,,active,na,regional,,R020,2026-10-19
