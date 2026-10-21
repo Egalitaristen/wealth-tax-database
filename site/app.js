@@ -1080,7 +1080,8 @@ function contributePage(W) {
 // ---------- suggest a supporter ----------
 function suggestPage(W, params) {
   setTitle('Suggest a supporter');
-  const names = [...W.countries.map(c => c.name)].sort();
+  const started = new Set(W.countries.map(c => c.name));
+  const names = W.all_countries || [...started].sort();
   const val = k => esc(params.get(k) || '');
   main.innerHTML = `
   <div class="wrap page-head fade"><div class="kicker">Suggest a supporter</div><h1>Know someone <em>on the record?</em></h1>
@@ -1089,10 +1090,10 @@ function suggestPage(W, params) {
     <form class="suggest" id="suggest-form" novalidate>
       <label><span>Who <b>*</b></span><input class="field" name="name" required maxlength="200" placeholder="Name of the person or organisation" autocomplete="off"></label>
       <div class="pair">
-        <label><span>Country <b>*</b></span><input class="field" name="country" required maxlength="80" list="sg-countries" value="${val('country')}" placeholder="Any country" autocomplete="off"></label>
+        <label><span>Country <b>*</b></span><input class="field" name="country" required maxlength="80" list="sg-countries" value="${val('country')}" placeholder="Any country, type to search" autocomplete="off"><small>Any country. Where no register has started yet, we keep the suggestion for when one does.</small></label>
         <label><span>Where in the country</span><input class="field" name="place" maxlength="200" value="${val('place')}" placeholder="Town, region or constituency" autocomplete="off"></label>
       </div>
-      <datalist id="sg-countries">${names.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
+      <datalist id="sg-countries">${names.map(n => `<option value="${esc(n)}"${started.has(n) ? ' label="Register started"' : ''}>`).join('')}</datalist>
       <label><span>Where they said it <b>*</b></span><textarea class="field" name="links" rows="3" required maxlength="2000" placeholder="https://… one link per line: an article, video, post, letter or vote"></textarea></label>
       <label><span>What they said, or why they belong here</span><textarea class="field" name="said" rows="5" maxlength="3000" placeholder="A quote, or a few words on what they back (a tax on wealth, not just “tax the rich”)"></textarea></label>
       <label class="hp" aria-hidden="true">Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label>
