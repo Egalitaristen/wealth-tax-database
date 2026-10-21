@@ -34,7 +34,7 @@ Examples
   python skill/scripts/topo_to_boundaries.py regions.geojson --project lonlat --name-prop shapeName \\
       --licence CC-BY-4.0 --licence-url https://www.geoboundaries.org/ --out data/xx/boundaries.json
 """
-import argparse, json, math, sys
+import argparse, fnmatch, json, math, sys
 from pathlib import Path
 
 
@@ -85,12 +85,12 @@ def simplify(pts, tol):
 
 
 def keep(where, get):
-    """--where FIELD=V1,V2 keeps shapes whose FIELD is one of the values; FIELD!=V1,V2 drops them."""
+    """--where FIELD=V1,V2 keeps shapes whose FIELD is one of the values; FIELD!=V1,V2 drops them. Values may use * (53*)."""
     if not where:
         return True
     neg = "!=" in where
     key, _, vals = where.partition("!=" if neg else "=")
-    return (str(get(key)) in vals.split(",")) != neg
+    return any(fnmatch.fnmatchcase(str(get(key)), v) for v in vals.split(",")) != neg
 
 
 def read_topojson(a):
@@ -147,7 +147,7 @@ def main():
                                                 "or drop them with FIELD!=V1,V2")
     ap.add_argument("--shift", action="append", default=[], metavar="CODES:DX,DY",
                     help="move outlying areas into an inset, in source units, before projecting: 35,38:5,7 moves the "
-                         "shapes with codes 35 and 38 (the Canary Islands) 5 east and 7 north. Repeatable")
+                         "shapes with codes 35 and 38 (the Canary Islands) 5 east and 7 north; codes may use * (35*). Repeatable")
     ap.add_argument("--source", default="", help="where the shapes come from and the credit the licence asks for")
     ap.add_argument("--licence", required=True,
                     help="the shapes' open licence, as the source states it (CC0-1.0, CC-BY-4.0, OGL-UK-3.0, ...). "
@@ -171,7 +171,8 @@ def main():
         codes, _, d = spec.partition(":")
         dx, dy = (float(v) for v in d.split(","))
         codes = codes.split(",")
-        shapes = [(n, c, [[(p[0] + dx, p[1] + dy) for p in r] for r in rings]) if str(c) in codes else (n, c, rings)
+        shapes = [(n, c, [[(p[0] + dx, p[1] + dy) for p in r] for r in rings])
+                  if any(fnmatch.fnmatchcase(str(c), k) for k in codes) else (n, c, rings)
                   for n, c, rings in shapes]
     lats = [p[1] for _, _, rings in shapes for r in rings for p in r]
     k = math.cos(math.radians((min(lats) + max(lats)) / 2)) if a.project == "lonlat" else 1.0
@@ -192,7 +193,8 @@ def main():
                     pts.append(p)
             if len(pts) < 3:
                 continue
-            d += "M" + "L".join(f"{x} {y}" for x, y in pts) + "Z"
+            # Relative steps after the first point keep the file small (a commune map has 35,000 shapes)
+            d += f"M{pts[0][0]} {pts[0][1]}l" + " ".join(f"{x - px} {y - py}" for (px, py), (x, y) in zip(pts, pts[1:])) + "z"
             xs += [p[0] for p in pts]; ys += [p[1] for p in pts]; npts += len(pts)
         if d:
             units.append({"name": str(name), "code": str(code or ""), "path": d})

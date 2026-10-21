@@ -8,20 +8,18 @@ A seventh worked example. Spain still levies the Impuesto sobre el Patrimonio, b
 |---|---|---|
 | national | Cortes Generales (Congreso, Senado), Gobierno | Roll calls are open data on congreso.es; the server blocks heavy scanning (HTTP 403 after about 10,000 requests), so fetch only the votes you need |
 | region | 17 autonomous communities and Ceuta and Melilla | ISO 3166-2:ES codes (`ES-CT`), because INE numbers communities and provinces from 01 alike. Names in English (Catalonia, Community of Madrid) |
-| county | 52 provinces, Ceuta and Melilla | The map tier, with the two-digit INE code. Deputies and senators are elected by province, so they go there. The 8,100 municipios are place text after the province (`Spain > Galicia > Pontevedra > Vigo`) |
+| county | 52 provinces, Ceuta and Melilla | Two-digit INE code. Deputies and senators are elected by province, so they go there |
+| council | 8,132 municipios (INE list of 1 January 2026) | The map tier, with the five-digit INE code. INE writes articles last ("Coruña, A", "Rozas de Madrid, Las"); the register puts them first (A Coruña, Las Rozas de Madrid) |
 
-**Map:** `data/es/boundaries.json` uses the IGN's reference boundaries (CC BY 4.0, credit "© Instituto Geográfico Nacional"), as packaged in TopoJSON by the npm package es-atlas (`es/provinces.json` and `es/autonomous_regions.json`, ids are INE codes). Gibraltar (54 and 20) is dropped and the Canary Islands are moved into an inset.
+**Map:** `data/es/boundaries.json` uses the IGN's reference boundaries (CC BY 4.0, credit "© Instituto Geográfico Nacional"), as packaged in TopoJSON by the npm package es-atlas (`es/municipalities.json`, whose ids are INE codes, with the provinces and communities in the same file, so the lines agree). The shared lands (codes 53xxx) and Gibraltar (54) are dropped and the Canary Islands are moved into an inset. es-atlas predates a few municipios created since, so a handful of register units have no shape.
 
 ```bash
 npm pack es-atlas@0.6.0 && tar xzf es-atlas-0.6.0.tgz
-python skill/scripts/topo_to_boundaries.py package/es/provinces.json --object provinces --code-prop id --where "id!=54" \
-  --shift 35,38:17,6.8 --project lonlat --scale 100 --simplify 0.4 --licence CC-BY-4.0 \
-  --licence-url https://creativecommons.org/licenses/by/4.0/ --code-scheme "INE province codes" \
-  --source "© Instituto Geográfico Nacional (IGN), CNIG reference data via es-atlas, CC BY 4.0" --out prov.json
-python skill/scripts/topo_to_boundaries.py package/es/autonomous_regions.json --object autonomous_regions --code-prop id \
-  --where "id!=20" --shift 05:17,6.8 --project lonlat --scale 100 --simplify 0.6 --licence CC-BY-4.0 \
-  --licence-url https://creativecommons.org/licenses/by/4.0/ --code-scheme "INE autonomous community codes" --out ccaa.json
-# then copy ccaa.json's units into prov.json as "regions" (codes rewritten to ISO 3166-2:ES) and save as data/es/boundaries.json
+M=package/es/municipalities.json; L="--project lonlat --scale 300 --licence CC-BY-4.0 --licence-url https://creativecommons.org/licenses/by/4.0/"
+python skill/scripts/topo_to_boundaries.py $M --object municipalities --code-prop id --where "id!=53*,54*"   --shift "35*,38*:17,6.8" --simplify 0.5 $L --code-scheme "INE municipality codes"   --source "© Instituto Geográfico Nacional (IGN), CNIG reference data via es-atlas, CC BY 4.0" --out mun.json
+python skill/scripts/topo_to_boundaries.py $M --object provinces --code-prop id --where "id!=54" --shift "35,38:17,6.8"   --simplify 0.8 $L --code-scheme "INE province codes" --out prov.json
+python skill/scripts/topo_to_boundaries.py $M --object autonomous_regions --code-prop id --where "id!=20" --shift "05:17,6.8"   --simplify 1 $L --code-scheme INE --out ccaa.json
+python skill/scripts/merge_boundaries.py mun.json --regions prov.json --upper ccaa.json --out data/es/boundaries.json
 ```
 
 ## Where supporters were found (seed pass, October 2026)
