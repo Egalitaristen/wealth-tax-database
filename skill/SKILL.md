@@ -87,6 +87,8 @@ A tax on the **stock of wealth** (net assets) of the wealthy, rather than on inc
 
 **Not enough on their own:** "tax the wealthy", "tax billionaires more", "make the rich pay their fair share", and support for bills that change income or capital-gains tax (a millionaires' surtax, a minimum income tax on realised income). Count them only when the person's own words or the named bill refer to wealth, net worth or unrealised gains, as in the table above. Record the near-misses in `exclusions.csv` (`out_of_definition` or `insufficient_evidence`) so nobody re-checks them.
 
+**Wealth caps.** A cap on individual wealth (the limitarian position, for example The Wealth Cap Project) counts as a 100% levy above a threshold. Record it under the closest design (usually `wealth_tax_unspecified`) and say "wealth cap" in `design_detail`.
+
 Someone who supports both an included design and an excluded one qualifies on the included evidence; record only that evidence.
 
 ---
