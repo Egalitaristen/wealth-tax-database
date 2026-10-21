@@ -9,7 +9,8 @@ office (P39) or is a politician by occupation; an economist, academic, journalis
 occupation. Other types (campaigners, wealthy signers) are not matched. An organisation needs exactly one
 non-human item with the exact label and that country (P17); aliases are not used, since they join national
 branches to their parent. Anything ambiguous is left blank and listed. --any-country drops the citizenship tie
-(for foreign economists on a national list, say). A spot check of an earlier, looser version found one wrong match
+(for foreign economists on a national list, say); a foreign figure also gets the QID another country's register
+already holds for the same exact name and type. A spot check of an earlier, looser version found one wrong match
 in eight. The QID is the key that links one person across
 countries on the site, so a wrong match is worse than none: spot-check a sample of what it fills. Standard library only.
 """
@@ -103,6 +104,18 @@ def main():
             r["wikidata_qid"] = next(iter(q)); taken.add(r["wikidata_qid"]); filled += 1
         elif len(q) > 1:
             unclear.append(f"{r['actor_id']} {r['name']}: {', '.join(sorted(q))}")
+    # Foreign figures (Zucman on the Spanish register) fail the citizenship tie; take the QID that another country's
+    # register already holds for the same exact name and type, when there is exactly one.
+    known = {}
+    for other in Path(a.dir).parent.iterdir():
+        if other.resolve() != Path(a.dir).resolve() and (other / "actors.csv").exists():
+            for o in wtdb.load(str(other), "actors"):
+                if o.get("wikidata_qid"):
+                    known.setdefault((o["name"], o["actor_type"]), set()).add(o["wikidata_qid"])
+    for r in todo:
+        q = known.get((r["name"], r["actor_type"]), set())
+        if not r.get("wikidata_qid") and len(q) == 1 and next(iter(q)) not in taken:
+            r["wikidata_qid"] = next(iter(q)); taken.add(r["wikidata_qid"]); filled += 1
     print(f"{filled} of {len(todo)} actors without a QID matched; {len(unclear)} ambiguous (left blank):")
     for u in unclear:
         print("  " + u)
