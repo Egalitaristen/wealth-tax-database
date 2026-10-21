@@ -1,0 +1,74 @@
+geo_unit_id,name,level,unit_type,parent_id,website,sweep_status,swept_run,swept_date,queries_run,hits,notes,code
+G0001,Spain,national,country,,https://www.lamoncloa.gob.es,in_progress,R001,2026-10-21,25,70,R001 seed: national level only.,ES
+G0002,Cortes Generales,national,legislature,G0001,https://www.congreso.es,in_progress,R001,2026-10-21,8,59,"R001: Congreso roll call of 7 Jun 2022 (H0001) and the text of Ley 38/2022 read. Not done: final Congreso and Senate votes on Ley 38/2022, the Jan 2024 decree that extended the tax, XV-legislature bills and motions, Senate. R002: the Congreso blocked the open-data scanner (HTTP 403 from 21 Oct 2026 after ~10,000 requests), so XV-legislature votes, BOCG-15-B-53-1 and -65-1 (Podemos bills of 2024) and the 17 Feb 2022 roll call were not read.",
+G0003,Andalusia,region,autonomous community,G0001,,pending,,,,,ISO 3166-2:ES code.,ES-AN
+G0004,Aragon,region,autonomous community,G0001,,pending,,,,,,ES-AR
+G0005,Asturias,region,autonomous community,G0001,,pending,,,,,,ES-AS
+G0006,Balearic Islands,region,autonomous community,G0001,,pending,,,,,,ES-IB
+G0007,Canary Islands,region,autonomous community,G0001,,pending,,,,,,ES-CN
+G0008,Cantabria,region,autonomous community,G0001,,pending,,,,,,ES-CB
+G0009,Castile and León,region,autonomous community,G0001,,pending,,,,,,ES-CL
+G0010,Castilla-La Mancha,region,autonomous community,G0001,,pending,,,,,,ES-CM
+G0011,Catalonia,region,autonomous community,G0001,,in_progress,R002,2026-10-21,3,2,"R002: Decree-law 10/2024 (wealth-tax scale kept while the state tax lasts) and the Parlament convalidation of 11 Dec 2024 read via INAP copies of the DOGC text. Not done: Parlament vote tally, the Parlament motions, Catalan-language searches.",ES-CT
+G0012,Valencian Community,region,autonomous community,G0001,,in_progress,R003,2026-10-21,1,1,R003: one coalition (Campanya per una Justícia Fiscal). Parliament and government not searched.,ES-VC
+G0013,Extremadura,region,autonomous community,G0001,,pending,,,,,,ES-EX
+G0014,Galicia,region,autonomous community,G0001,,in_progress,R002,2026-10-21,1,1,R002: one local find (the mayor of Vigo). Not swept.,ES-GA
+G0015,Community of Madrid,region,autonomous community,G0001,,in_progress,R003,2026-10-21,2,3,"R003: PSOE-M motion of 2 Nov 2023 to reinstate the regional wealth tax above EUR 3m (press report); Mónica García, Juan Lobato, Más Madrid. Assembly record not read.",ES-MD
+G0016,Region of Murcia,region,autonomous community,G0001,,pending,,,,,,ES-MC
+G0017,Navarre,region,autonomous community,G0001,,in_progress,R007,2026-10-21,2,1,"R007: Ley Foral 36/2022 and its extension (3.5% band above EUR 11,003,784.50) via a law-firm summary; BON text and Parliament debates not read.",ES-NC
+G0018,Basque Country,region,autonomous community,G0001,,in_progress,R007,2026-10-21,4,6,"R006-R007: EH Bildu amendments in the Juntas Generales (2023), the Juntas Generales de Álava (Norma Foral 23/2023) and the Diputación de Gipuzkoa draft. Bizkaia and the foral parliaments of Bizkaia and Gipuzkoa not read.",ES-PV
+G0019,La Rioja,region,autonomous community,G0001,,pending,,,,,,ES-RI
+G0020,Ceuta,region,autonomous city,G0001,,pending,,,,,,ES-CE
+G0021,Melilla,region,autonomous city,G0001,,pending,,,,,,ES-ML
+G0022,Álava,county,province,G0018,,pending,,,,,,01
+G0023,Albacete,county,province,G0010,,pending,,,,,,02
+G0024,Alicante,county,province,G0012,,pending,,,,,,03
+G0025,Almería,county,province,G0003,,pending,,,,,,04
+G0026,Ávila,county,province,G0009,,pending,,,,,,05
+G0027,Badajoz,county,province,G0013,,pending,,,,,,06
+G0028,Balearic Islands,county,province,G0006,,pending,,,,,,07
+G0029,Barcelona,county,province,G0011,,pending,,,,,,08
+G0030,Burgos,county,province,G0009,,pending,,,,,,09
+G0031,Cáceres,county,province,G0013,,pending,,,,,,10
+G0032,Cádiz,county,province,G0003,,pending,,,,,,11
+G0033,Castellón,county,province,G0012,,pending,,,,,,12
+G0034,Ciudad Real,county,province,G0010,,pending,,,,,,13
+G0035,Córdoba,county,province,G0003,,pending,,,,,,14
+G0036,A Coruña,county,province,G0014,,pending,,,,,,15
+G0037,Cuenca,county,province,G0010,,pending,,,,,,16
+G0038,Girona,county,province,G0011,,pending,,,,,,17
+G0039,Granada,county,province,G0003,,pending,,,,,,18
+G0040,Guadalajara,county,province,G0010,,pending,,,,,,19
+G0041,Gipuzkoa,county,province,G0018,,pending,,,,,,20
+G0042,Huelva,county,province,G0003,,pending,,,,,,21
+G0043,Huesca,county,province,G0004,,pending,,,,,,22
+G0044,Jaén,county,province,G0003,,pending,,,,,,23
+G0045,León,county,province,G0009,,pending,,,,,,24
+G0046,Lleida,county,province,G0011,,pending,,,,,,25
+G0047,La Rioja,county,province,G0019,,pending,,,,,,26
+G0048,Lugo,county,province,G0014,,pending,,,,,,27
+G0049,Madrid,county,province,G0015,,pending,,,,,,28
+G0050,Málaga,county,province,G0003,,pending,,,,,,29
+G0051,Murcia,county,province,G0016,,pending,,,,,,30
+G0052,Navarre,county,province,G0017,,pending,,,,,,31
+G0053,Ourense,county,province,G0014,,pending,,,,,,32
+G0054,Asturias,county,province,G0005,,pending,,,,,,33
+G0055,Palencia,county,province,G0009,,pending,,,,,,34
+G0056,Las Palmas,county,province,G0007,,pending,,,,,,35
+G0057,Pontevedra,county,province,G0014,,pending,,,,,,36
+G0058,Salamanca,county,province,G0009,,pending,,,,,,37
+G0059,Santa Cruz de Tenerife,county,province,G0007,,pending,,,,,,38
+G0060,Cantabria,county,province,G0008,,pending,,,,,,39
+G0061,Segovia,county,province,G0009,,pending,,,,,,40
+G0062,Seville,county,province,G0003,,pending,,,,,,41
+G0063,Soria,county,province,G0009,,pending,,,,,,42
+G0064,Tarragona,county,province,G0011,,pending,,,,,,43
+G0065,Teruel,county,province,G0004,,pending,,,,,,44
+G0066,Toledo,county,province,G0010,,pending,,,,,,45
+G0067,Valencia,county,province,G0012,,pending,,,,,,46
+G0068,Valladolid,county,province,G0009,,pending,,,,,,47
+G0069,Bizkaia,county,province,G0018,,pending,,,,,,48
+G0070,Zamora,county,province,G0009,,pending,,,,,,49
+G0071,Zaragoza,county,province,G0004,,pending,,,,,,50
+G0072,Ceuta,county,province,G0020,,pending,,,,,,51
+G0073,Melilla,county,province,G0021,,pending,,,,,,52

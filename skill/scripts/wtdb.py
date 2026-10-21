@@ -378,6 +378,9 @@ def validate(db):
 # Licences that let anyone republish map shapes. A map from a source with no stated licence is not published.
 OPEN_LICENCES = ("cc0", "cc-by", "cc by", "odbl", "pddl", "public domain", "ogl", "open government licence", "dl-de",
                  "datenlizenz deutschland", "godl", "licence ouverte", "etalab", "nlod")
+LOCAL_LEVELS = {"county", "combined_authority", "council", "sub_council"}
+LEGISLATOR = re.compile(r"(?i)\b(member of (the )?(congress|parliament|bundestag|lok sabha|riksdag|house of|assembl|national assembly)"
+                        r"|MP\b|MdB\b|député|diputad|deputy\b|senator|sénat|congress(wo)?man|representative\b)")
 
 
 def check_boundaries(d, db):
@@ -387,8 +390,19 @@ def check_boundaries(d, db):
         meta = json.load(open(os.path.join(d, "meta.json"), encoding="utf-8"))
     except (OSError, ValueError):
         return errs, warns
+    units = [g for g in db["geo_units"] if g.get("level") in LOCAL_LEVELS]
+    if db["geo_units"] and not units:
+        errs.append("geo_units: the register stops above the local tier. Load the official list of local units with "
+                    "their codes (SKILL.md 6.7) before research; it is part of every seed pass")
+    root = next((g["name"] for g in db["geo_units"] if g.get("unit_type") == "country"), "")
+    seated = [a["name"] for a in db["actors"] if root and a.get("location") == root and LEGISLATOR.search(a.get("role", ""))]
+    if units and seated:
+        warns.append(f"actors: {len(seated)} legislators are placed at the country root, for example {', '.join(seated[:3])}. "
+                     f"Seats are places: put each in their constituency (SKILL.md 6.7)")
     bfile = meta.get("boundaries")
     if not bfile or not os.path.exists(os.path.join(d, bfile)):
+        warns.append("boundaries: no map. Every country gets a local-tier map from an open source (SKILL.md 5 and 6.7); "
+                     "if none exists, say which sources you checked in meta.json notes")
         return errs, warns
     b = json.load(open(os.path.join(d, bfile), encoding="utf-8"))
     lic = (b.get("licence") or "").strip()

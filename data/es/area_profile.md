@@ -1,0 +1,66 @@
+# Area profile — Spain
+
+First written 2026-10-21 (run R001). Seed pass, national level only. Lines marked *[verify]* come from a search summary or a secondary page and were not checked against the primary document.
+
+## 1. Scope
+- Area: Spain (Reino de España); unitary state with 17 autonomous communities and 2 autonomous cities. The communities run the Impuesto sobre el Patrimonio (ceded tax) and have their own rules; Navarre and the Basque provinces have their own tax regimes *[verify]*.
+- Depth: **Seed** (SKILL.md 6.1). National level (Cortes, government, parties, unions, NGOs, tax professionals). The register holds the root, the Cortes Generales, the 19 communities (ISO 3166-2:ES codes) and the 52 provinces and autonomous cities (INE codes), which are the map tier (R008). Municipalities (about 8,100) are place text. Deputies sit in the province they were elected for (Wikidata P768); three whose seat was not found stay at "Spain".
+- Languages to search in: Spanish (main), Catalan, Basque, Galician, English. Only Spanish and English were used in R001.
+- Date of first run: 2026-10-21.
+
+## 2. Wealth tax history and live proposals (2010 onwards)
+- The Impuesto sobre el Patrimonio dates from the Moncloa Pacts of 1977 and became permanent in 1991 ([Oxfam Intermón report, 2026](https://www.oxfamintermon.org/hubfs/Oxfam-Website/oi-informes/impuesto-patrimonio-siglo-XXI.pdf)). It is ceded to the communities, and several of them rebate it fully; Madrid and Andalusia charge nothing in practice *[verify, from search summaries]*.
+- 7 June 2022: the Congreso rejected taking into consideration the Unidas Podemos bill for a state tax on fortunes over EUR 10m, complementing the wealth tax (58 yes, 277 no, 4 abstentions; roll call in [vote file](https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion184/20220607/Votacion001/VOT_20230302184833.xml); bill text [BOCG 235-1](https://www.congreso.es/public_oficiales/L14/CONG/BOCG/B/BOCG-14-B-235-1.PDF)). The PSOE voted no.
+- 29 September 2022: Finance Minister María Jesús Montero announced the Impuesto Temporal de Solidaridad de las Grandes Fortunas ([PwC note](https://periscopiofiscalylegal.pwc.es/analisis-de-las-nuevas-medidas-fiscales-ii-impuesto-de-solidaridad-a-las-grandes-fortunas/)).
+- 27 December 2022: [Ley 38/2022](https://www.boe.es/buscar/act.php?id=BOE-A-2022-22684) created it, as a state tax complementing the wealth tax on net wealth above EUR 3m, with rates of 1.7%, 2.1% and 3.5% ([Valencia Plaza](https://valenciaplaza.com/valenciaplaza/sumar-plantea-subir-el-irpf-a-rentas-de-mas-de-120000-euros-y-un-tipo-minimo-del-15-en-sociedades)). It entered the Congreso as an amendment by the PSOE and Unidas Podemos groups to a bill on bank and energy levies; the Congreso voted on it on 24 Nov 2022 (session 218) and the Senate on 21 Dec 2022 *[verify]*.
+- Extension: Real Decreto-ley 8/2023 prolonged it, and the Congreso convalidated that decree on 10 Jan 2024 *[verify]*. The Constitutional Court upheld the tax (STC 149/2023) *[verify]*. Gestha reports EUR 623m collected for 2023, most of it in Madrid *[verify]*.
+- 2023: Sumar's election programme proposes making it permanent with rates of at least 4% ([Valencia Plaza](https://valenciaplaza.com/valenciaplaza/sumar-plantea-subir-el-irpf-a-rentas-de-mas-de-120000-euros-y-un-tipo-minimo-del-15-en-sociedades)).
+- 2025-2026: the Government pushes international taxation of large fortunes (Spain-Brazil paper at the UN financing conference in Seville, 1 July 2025: [El Salto](https://www.elsaltodiario.com/fiscalidad/espana-brasil-unen-proponer-mayores-impuestos-superricos-onu-sevilla)); Minister Bustinduy met Gabriel Zucman on 6 Feb 2026 to study a 2% tax above EUR 100m ([ministry release](https://www.dsca.gob.es/es/comunicacion/notas-prensa/bustinduy-se-reune-zucman-estudiar-como-funcionaria-su-impuesto)); Sánchez spoke for a global tax on wealth on 20 Feb 2026 ([Europa Press via Bolsamanía](https://www.bolsamania.com/noticias/economia/economia--sanchez-critica-los-regalos-fiscales-de-las-ccaa-a-las-elites-los-que-mas-tienen-deben-contribuir-mas--21774918.html)).
+- Opposition (not recorded as actors): the PP and Vox; the Consejo General de Economistas and its REAF argue against making it permanent (`exclusions.csv`).
+- Polls: none found yet.
+
+## 3. Legislatures and where their records are
+- **Congreso de los Diputados.** Roll calls with every deputy's vote are open data: list the votes of a day with `https://www.congreso.es/es/opendata/votaciones?p_p_id=votaciones&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&targetLegislatura=XIV&currentLegislatura=XV&targetDate=07%2F06%2F2022` (legislature in Roman numerals, date as dd/mm/yyyy); each vote has `.json`, `.xml` and `.pdf` files under `/webpublica/opendata/votaciones/Leg<n>/Sesion<n>/<yyyymmdd>/Votacion<nnn>/`. The XML (ISO-8859-1) holds the accents as plain text, so quotes taken from it can be checked; the JSON escapes them as `\uXXXX`.
+- Bills and motions: BOCG PDFs at `congreso.es/public_oficiales/L14/CONG/BOCG/B/BOCG-14-B-<n>-1.PDF` (series B: proposiciones de ley, with the spokesperson's signature).
+- Member register with party: `congreso.es/es/opendata/diputados` lists only the current deputies in `DiputadosActivos`; the other files carry names and legislatures. Party and the alive check came from Wikidata.
+- **Senado:** not opened. **Parliaments of the communities:** not opened.
+
+## 4. Parties
+- Left of the PSOE: Podemos, Izquierda Unida, Sumar, Catalunya en Comú, Más País, Compromís, BNG, Galicia en Común; nationalists ERC, EH Bildu and the CUP. In the 2022 vote, 33 of the 58 yes votes came from Unidas Podemos, 13 from ERC, 5 from EH Bildu, 4 from Plural and 3 from Mixto.
+- The PSOE opposed the 2022 Podemos bill and then enacted its own temporary tax three months later.
+- In the database (R002): Sumar, PSOE (via press reports of their 2023 programmes), Podemos and the Unidas Podemos group (via the 2022 bill), and ERC, EH Bildu, Más País, CUP, Compromís and BNG (via a press report of the joint proposal of 17 Feb 2022, grade B). No programme PDF has been read yet.
+
+## 5. Government below national level
+- 17 autonomous communities (parliament, government) and 2 autonomous cities; 50 provinces; about 8,100 municipalities. The communities set rebates and scales for the wealth tax, so regional governments and parliaments matter more than councils here. Catalonia kept its 2022 wealth-tax scale (top rate 3.48% above EUR 20m) by Decree-law 10/2024 of 26 Nov 2024, convalidated by the Parlament on 11 Dec 2024 (text via [INAP](https://laadministracionaldia.inap.es/noticia.asp?id=1250026), DOGC original not opened).
+
+## 6. Sources
+- Congreso open data and BOCG; BOE; PwC Tax & Legal; Oxfam Intermón; Gestha; elDiario.es and Europa Press for the unions; Moncloa; Ministry of Social Rights; Maldita.es; Wikidata for party and death dates.
+
+## 7. Blocked or hard to read
+- Nothing blocked in R001. The news sites used were read with a plain client. Google-style search summaries were used only to find leads.
+
+## 8. Map
+- None. A map needs official codes: INE codes for communities and provinces, or the IGN/CNIG boundaries. Check the licence before downloading (SKILL.md section 5, map licence rule). Decide the tier first: provinces (50) or municipalities (about 8,100).
+
+## 9. Run log
+- R001 (2026-10-21): seed. 70 actors, 74 evidence rows (58 deputies from one roll call, plus parties, a parliament, ministers, former prime ministers, Oxfam Intermón, Gestha and the two big unions). All rows `verified=n`; `checkquotes` found every quote on its page.
+
+- R002 (2026-10-21): gap-filling. +14 actors, +18 evidence rows (92 in all). The Club de Madrid letter was re-read in the original: it asks for a global deal and a minimum on billionaires' income, so the two Spanish signatories went from A to C. The Congreso blocked the vote scanner with HTTP 403 after about 10,000 requests; every Congreso item below is still open. The Senate site also answered 403.
+- R003 (2026-10-21): broader search terms. +10 actors, +11 evidence rows (103 in all). Found the Madrid PSOE-Más Madrid motion, Izquierda Unida's 2025 fiscal plan, Economistas Frente a la Crisis, two tax-justice coalitions, the Economy Minister's G20 stance and an economist from 2011. Still no journalist, wealthy individual, business figure, faith body or cultural figure; searches for them returned only opponents or foreign cases. The Congreso still returned 403.
+- R004 (2026-10-21): excluded opponent outlets from searches and followed organisation networks. +19 actors, +31 rows (134 in all, 113 actors). Key finds: the Plataforma por la Justicia Fiscal (19 member bodies; its proposals page backs a redistributive wealth tax), Oxfam Intermón's May 2026 report (a 3% minimum tax above EUR 50m) and its 25 May 2026 event where the finance-committee spokespeople of PSOE, Sumar and the PP all spoke for a Zucman-style tax, Sumar's Sept 2026 bill, Attac and Economistas Frente a la Crisis. Spain votes on 29 Nov 2026, so party programmes are due. Still no journalist, wealthy individual or business figure. The Congreso was still blocked.
+- R005 (2026-10-21): the Wealth Cap Project and the authors of its Spanish report (Marina Alcázar, Olga Cantó, Francisco García-Rodríguez) were added, on the project lead's ruling that a wealth cap is a 100% levy above a threshold and counts. The earlier exclusion was removed.
+- R006 (2026-10-21): more leads followed. The Catalan Parlament backed a Zucman-style 2% reform in Oct 2026 on a proposal of the Comuns; EH Bildu proposed a 3.5% band above EUR 11m in the Basque Juntas Generales (Nov 2023); a press report lists the ten groups that voted for Ley 38/2022 (Junts and Coalición Canaria added as parties); the Economy and Finance ministers signed a 2024 open letter on taxing the super-rich; the Wealth Cap Project advisers and an EFC limitarian author were added.
+- R007 (2026-10-21): foral bodies of Navarre and the Basque Country (their own versions of the large-fortunes tax), the European Citizens' Initiative "Tax the Rich" backers (CECU, Economistas sin Fronteras, a Catalan platform) and the Finance Minister. The Congreso open data has no vote on the whole of Ley 38/2022, so the 186 yes-voters cannot be listed by name from it.
+- R008 (2026-10-21): the Spanish backers of the "Tax the Rich" citizens' initiative (ActionAid, Attac, CCOO, Ecologistas en Acción, the Madrid platform, the Madrid NGO network), one journalist (Yago Álvarez Barba, El Salto, grade C) and Gimeno's infoLibre interview. No wealthy individual or business figure supports a wealth tax in the sources found; Juan Roig and others who defend paying taxes are in `exclusions.csv`.
+
+## 10. Plan for the next runs (by expected yield)
+0. **Retry the Congreso first**, slowly (at most 2 requests a second, one thread). Open BOCG-15-B-53-1 and -65-1 (Podemos bills of 2024 in the Grupo Mixto; a press result says the first is a large-fortunes bill) and read the signatories; then the roll call of 17 Feb 2022 (H0007).
+1. **Congreso roll calls, then the XV legislature (2023-2026).** Scan the votes of 24 Nov 2022 (final vote on Ley 38/2022; session 218 holds 39 amendment votes and a technical correction, the dictamen vote was not found), 10 Jan 2024 (decree extending the tax; omnibus, so weak) and any vote on Sumar, Podemos, ERC or Bildu bills and motions since 2023. Write a small scanner like the one in R001 only if the sample finds votes (it runs one request per vote file). Expect 50 to 150 more deputies, including PSOE deputies who voted for the tax itself (H0002, H0004, H0005).
+2. **Party programmes and motions:** Podemos, Izquierda Unida, Sumar (read the programme PDF to upgrade), Más Madrid, ERC, EH Bildu, BNG, CUP, Compromís, Catalunya en Comú, and the PSOE (2023 programme; its congress resolutions). About 10 organisations, mostly grade A from primary documents.
+3. **Unions, NGOs, tax professionals, think tanks:** CCOO and UGT primary pages (the 2019 rows rest on a news report), Economistas sin Fronteras, Attac España, Alianza Española contra la Pobreza, Fundación Alternativas, Fundación 1º de Mayo, Gestha reports, Tax Justice groups; Oxfam Intermón leaders.
+4. **Economists and academics:** the Comisión de expertos on tax reform (2022 white paper, authors), Spanish economists in the EU Tax Observatory orbit, signatories of letters for the G20 billionaire tax; Spanish public finance professors who have written for the wealth tax.
+5. **Club de Madrid letter (H0006):** open the primary letter and add other Spanish signatories if any.
+6. **Regional:** Catalonia (decree-law 10/2024 and the Parlament), Asturias, Valencia, Navarre, the Basque provinces and the Canary Islands; then sample Barcelona and Madrid city councils. The communities decide the rate, so expect motions in their parliaments.
+7. **Media:** opinion columns and editorials (elDiario.es, Público, La Marea, El Salto).
+8. **Wealthy individuals and business:** none found; the Spanish names on the 2020 Millionaires for Humanity letter were removed as false (`exclusions.csv`). Check Patriotic Millionaires and Proud to Pay More for Spanish signatories.
+9. **Map and register:** pick the tier, check the licence, load provinces or municipalities with INE codes.
