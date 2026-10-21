@@ -911,18 +911,40 @@ function countryMap(D, slug, onShowAll) {
   function detail(path) {
     const pl = D.placeList.find(p => p.path === path);
     const ids = [...idsForPlace(D, path)];
-    const people = ids.map(i => D.byId[i]).filter(Boolean).sort(byStrength);
+    const person = i => D.byId[i];
+    const people = ids.map(person).filter(Boolean).sort(byStrength);
     const name = pl ? pl.name : path.split(' > ').pop();
     const state = people.length ? `${fmt(people.length)} supporter${people.length === 1 ? '' : 's'}` : 'Nobody recorded yet';
+    const row = p => `<a class="prow" href="/${slug}/${enc(p[P_.id])}"><span>${glyph(p[P_.grade])}&nbsp; ${esc(p[P_.name])}<span class="sub">${esc([label(TYPE, p[P_.type]), p[P_.role]].filter(Boolean).join(' · ').slice(0, 80))}</span></span><span class="n">→</span></a>`;
+    // The wider area: each level above this place (nearest first, then the country) with the supporters placed at
+    // that level as a whole, such as a state's legislators. A place with nobody of its own shows the nearest of them.
+    const parts = path.split(' > ');
+    const own = new Map(D.places.map(q => [q.path, q.ids]));
+    const wider = parts.slice(0, -1).map((_, k) => parts.slice(0, k + 1).join(' > ')).reverse()
+      .map(a => ({path: a, name: a.includes(' > ') ? a.split(' > ').pop() : `${D.meta.name}, national level`,
+                  ids: (own.get(a) || []).filter(i => person(i))}))
+      .filter(w => w.ids.length);
+    const near = !people.length && wider[0];
+    const shown = near ? near.ids.map(person).sort(byStrength) : people;
     panel.innerHTML = `<div><button class="chip" type="button" id="pl-back">← All places</button></div>
       <h3 style="margin-top:16px">${esc(name)}</h3>
       <div class="path">${esc(path)}</div>
       <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><span class="tag ${people.length ? 'signal' : ''}">${esc(state)}</span></div>
-      <div class="scroll">${people.slice(0, 40).map(p => `<a class="prow" href="/${slug}/${enc(p[P_.id])}"><span>${glyph(p[P_.grade])}&nbsp; ${esc(p[P_.name])}<span class="sub">${esc([label(TYPE, p[P_.type]), p[P_.role]].filter(Boolean).join(' · ').slice(0, 80))}</span></span><span class="n">→</span></a>`).join('')}
+      <div class="scroll">
+        ${near ? `<div class="kicker" style="margin-top:6px">Known for ${esc(near.name)} as a whole · ${fmt(near.ids.length)}</div>` : ''}
+        ${shown.slice(0, 40).map(row).join('')}
+        ${wider.length ? `<div class="kicker" style="margin-top:18px">The wider area</div>
+          ${wider.map((w, k) => `<button type="button" class="prow" data-up="${k}"><span>${esc(w.name)}<span class="sub">supporters for the area as a whole</span></span><span class="n">${fmt(w.ids.length)} →</span></button>`).join('')}` : ''}
         ${pl && pl.notes ? `<p class="note">${esc(pl.notes)}</p>` : ''}</div>
-      ${people.length ? `<button class="btn sm" type="button" id="pl-all" style="margin-top:14px;justify-content:center">Show ${people.length > 40 ? 'all ' + fmt(people.length) : 'them'} in the directory ↓</button>` : `<a class="report" href="${esc(suggestUrl({country: D.meta.name, note: 'Place: ' + path}))}" target="_blank" rel="noopener">Know a public supporter here? Suggest them ↗</a>`}`;
+      <div class="pl-actions">
+        ${people.length ? `<button class="btn sm ghost" type="button" id="pl-all">Show ${people.length > 40 ? 'all ' + fmt(people.length) : 'them'} in the directory ↓</button>`
+          : near && near.ids.length > 40 ? `<button class="btn sm ghost" type="button" id="pl-near">Show all ${fmt(near.ids.length)} in ${esc(near.name)} ↓</button>` : ''}
+        <a class="btn sm" href="${esc(suggestUrl({country: D.meta.name, note: 'Place: ' + path}))}" target="_blank" rel="noopener">Suggest a supporter from ${esc(name)} ↗</a>
+      </div>`;
     $('#pl-back', panel).onclick = () => select(null);
     const all = $('#pl-all', panel); if (all) all.onclick = () => onShowAll(path);
+    const nb = $('#pl-near', panel); if (nb) nb.onclick = () => onShowAll(near.path);
+    $$('[data-up]', panel).forEach(b => b.onclick = () => { const w = wider[+b.dataset.up]; w.path.includes(' > ') ? select(w.path) : go(`/${slug}/directory?level=national`); });
   }
   fit(false); home();
   return {select};
