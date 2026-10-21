@@ -291,7 +291,7 @@ def validate(db):
         if e.get("grade") == "A" and e.get("evidence_type") not in FORMAL_TYPES and not e.get("design_detail") \
                 and e.get("wt_design") != "wealth_tax_unspecified":
             warns.append(f"{where}: grade A {e.get('evidence_type')} — add design_detail (rate, threshold or bill)")
-        if len(e.get("quote_original", "")) < 15:
+        if len(e.get("quote_original", "")) < 15 and e.get("evidence_type") != "vote":  # a vote quotes the member's name on the list
             warns.append(f"{where}: very short quote")
         if e.get("verified") == "failed":
             errs.append(f"{where}: verification failed — fix or remove the row")
@@ -926,6 +926,8 @@ def cmd_checkquotes(a):
         if page is None:
             skip.append(e["evidence_id"]); continue
         parts = [p for p in re.split(r"…|\.\.\.", _plain(e["quote_original"])) if len(p.split()) >= 3]
+        if not parts and (len(_plain(e["quote_original"]).split()) >= 2 or e.get("evidence_type") == "vote"):
+            parts = [_plain(e["quote_original"])]  # a short quote, such as a name on a roll-call list, is checked whole
 
         def found(pg):
             return bool(parts) and all(any(p.strip(" .") in v for v in (pg, _dehyphenate(pg))) for p in parts)
