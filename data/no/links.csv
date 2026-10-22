@@ -112,3 +112,18 @@ L0110,A0127,A0002,member_of,E00127,https://www.stortinget.no/no/Representanter-o
 L0111,A0128,A0001,member_of,E00128,https://www.stortinget.no/no/Representanter-og-komiteer/Representantene/Representant/?perid=PETAWA,Member of parliamentary group for Sosialistisk Venstreparti
 L0112,A0129,A0001,member_of,E00129,https://www.stortinget.no/no/Representanter-og-komiteer/Representantene/Representant/?perid=GREWOL,Member of parliamentary group for Sosialistisk Venstreparti
 L0113,A0130,A0001,member_of,E00130,https://www.stortinget.no/no/Representanter-og-komiteer/Representantene/Representant/?perid=FAØ,Member of parliamentary group for Sosialistisk Venstreparti
+L0114,A0131,A0005,member_of,E00131,https://www.lo.no/om-lo/ledelsen/peggy-hessen-folsvik/,President of Landsorganisasjonen i Norge (LO)
+L0115,A0132,A0005,member_of,E00132,https://www.lo.no/om-lo/ledelsen/kine-asper-vistnes/,First Deputy Leader of Landsorganisasjonen i Norge (LO)
+L0116,A0133,A0002,member_of,E00133,https://auf.no/om-oss/,Youth wing of Arbeiderpartiet
+L0117,A0134,A0133,leads,E00134,https://auf.no/sentralstyret/gaute-borstad-skjervo/,Leader of Arbeidernes Ungdomsfylking (AUF)
+L0118,A0135,A0001,member_of,E00135,https://su.no/om-oss/,Youth wing of Sosialistisk Venstreparti
+L0119,A0136,A0024,member_of,E00136,https://www.xn--rdungdom-54a.no/om-oss,Youth wing of Rødt
+L0120,A0137,A0004,member_of,E00137,https://gronnungdom.no/om-oss/,Youth wing of Miljøpartiet De Grønne
+L0121,A0138,A0137,member_of,E00138,https://gronnungdom.no/sentralstyret/,Deputy leader of Grønn Ungdom
+L0122,A0140,A0139,leads,E00140,https://www.unio.no/om-unio/ledelsen/,President of Unio
+L0123,A0141,A0005,member_of,E00141,https://www.fo.no/om-fo/,Affiliated national union of Landsorganisasjonen i Norge (LO)
+L0124,A0142,A0141,leads,E00142,https://www.fo.no/om-fo/politisk-ledelse/,President of Fellesorganisasjonen (FO)
+L0125,A0143,A0005,member_of,E00143,https://elogit.no/om-forbundet/,Affiliated national union of Landsorganisasjonen i Norge (LO)
+L0126,A0144,A0143,member_of,E00144,https://elogit.no/om-forbundet/ledelsen/,Former leader of EL og IT Forbundet
+L0127,A0145,A0005,member_of,E00145,https://www.hk.no/om-hk/,Affiliated national union of Landsorganisasjonen i Norge (LO)
+L0128,A0146,A0145,leads,E00146,https://www.hk.no/om-hk/forbundsledelsen/,President of Handel og Kontor i Norge
