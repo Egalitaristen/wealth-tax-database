@@ -127,3 +127,12 @@ L0125,A0143,A0005,member_of,E00143,https://elogit.no/om-forbundet/,Affiliated na
 L0126,A0144,A0143,member_of,E00144,https://elogit.no/om-forbundet/ledelsen/,Former leader of EL og IT Forbundet
 L0127,A0145,A0005,member_of,E00145,https://www.hk.no/om-hk/,Affiliated national union of Landsorganisasjonen i Norge (LO)
 L0128,A0146,A0145,leads,E00146,https://www.hk.no/om-hk/forbundsledelsen/,President of Handel og Kontor i Norge
+L0129,A0150,A0148,works_for,E00150,https://www.frisch.uio.no/personer/knut-roed/,Senior Research Fellow at Ragnar Frisch Centre for Economic Research
+L0130,A0151,A0148,leads,E00151,https://www.frisch.uio.no/personer/simen-markussen/,Director of Ragnar Frisch Centre for Economic Research
+L0131,A0152,A0148,works_for,E00152,https://www.nmbu.no/forskning/ny-forskning-hoyere-formuesskatt-gir-hoyere-sysselsetting-i-familieeide-bedrifter,Co-author and researcher on Frisch Centre wealth tax studies
+L0132,A0157,A0006,leads,E00157,https://www.fagforbundet.no/om-fagforbundet/politisk-ledelse/mette-nord/,President of Fagforbundet
+L0133,A0157,A0002,member_of,E00157,https://www.arbeiderpartiet.no/om/sentralstyret/,"Member of Central Board (sentralstyret), Arbeiderpartiet"
+L0134,A0158,A0002,member_of,E00158,https://www.stortinget.no/no/Representanter-og-komiteer/Representantene/Representant/?perid=TWA,Member and Mayor for Arbeiderpartiet
+L0135,A0159,A0005,works_for,E00159,https://www.lo.no,Chief Economist of Landsorganisasjonen i Norge (LO) (1998–2017)
+L0136,A0160,A0005,works_for,E00160,https://www.lo.no/om-lo/administrasjonen/samfunnspolitisk-avdeling/,Chief Economist of Landsorganisasjonen i Norge (LO) (2017–present)
+L0137,A0161,A0021,works_for,E00161,https://tankesmienagenda.no/,Former Deputy Director and economist at Tankesmien Agenda
