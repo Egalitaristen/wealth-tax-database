@@ -22,7 +22,7 @@ import wtdb  # noqa: E402
 
 UA = {"User-Agent": "wealth-tax-supporters/0.1 (https://github.com/Egalitaristen/wealth-tax-supporters)"}
 COUNTRY = {"DE": ("Q183", ["de", "en"]), "ES": ("Q29", ["es", "ca", "eu", "gl", "en"]), "FR": ("Q142", ["fr", "en"]),
-           "GB": ("Q145", ["en"]), "IN": ("Q668", ["en", "hi"]), "SE": ("Q34", ["sv", "en"]), "US": ("Q30", ["en"])}
+           "GB": ("Q145", ["en"]), "ID": ("Q252", ["id", "en"]), "IN": ("Q668", ["en", "hi"]), "SE": ("Q34", ["sv", "en"]), "US": ("Q30", ["en"])}
 
 
 def sparql(q):
