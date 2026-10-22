@@ -921,8 +921,9 @@ def cmd_checkquotes(a):
         page = cache[u]
         if page is None:
             skip.append(e["evidence_id"]); continue
-        parts = [p for p in re.split(r"…|\.\.\.", _plain(e["quote_original"])) if len(p.split()) >= 3]
-        if not parts and (len(_plain(e["quote_original"]).split()) >= 2 or e.get("evidence_type") == "vote"):
+        parts = [p for p in re.split(r"…|\.\.\.", _plain(e["quote_original"]))
+                 if len(p.split()) >= 3 or len(p.strip()) >= 8]
+        if not parts and (len(_plain(e["quote_original"]).split()) >= 2 or len(_plain(e["quote_original"]).strip()) >= 4 or e.get("evidence_type") == "vote"):
             parts = [_plain(e["quote_original"])]  # a short quote, such as a name on a roll-call list, is checked whole
 
         def found(pg):
