@@ -1,7 +1,7 @@
 ﻿# Poland
 
 ## Scope and depth
-National research in progress, 22 October 2026: **29 supporters and 31 evidence rows**, following R001 (4/6) and R002 (25/25). This is an incomplete national pass. A few hundred supporters is the research ambition; that yield remains to be established. All evidence remains verified=n for maintainer review. Polish and English sources were searched. Membership alone is never treated as personal endorsement.
+National research in progress, 22 October 2026: **262 supporters and 279 evidence rows**, following R001 (4/6), R002 (25/25) and R003 (233/248). This is an incomplete national pass. The broader research has established a few hundred public supporters, many through a published manifesto endorsement; further research remains open. All evidence remains verified=n for maintainer review. Polish and English sources were searched. Membership alone is never treated as personal endorsement.
 
 ## Parties, unions and campaigns
 Razem's dated 2020 statement proposes annual progressive wealth taxation above PLN 10m, with 1–8% rates. Its 2025 economic manifesto also backs an EU tax on large fortunes. The Greens' 2018 programme specifies a 5% tax on private fortunes above PLN 5m; frequency is unspecified. Małgorzata Tracz expressly reaffirmed that programme in a January 2020 interview. Young Left's programme supports a progressive wealth tax; the 2022 year is corroborated by page metadata and the programme PDF, without claiming an exact adoption day.
@@ -25,8 +25,16 @@ The [archived original amendment](https://web.archive.org/web/20231215085925id_/
 - The 2026 OKI optional investment-account wrapper is not used to import a bulk list of legislators. Its asset charge substitutes for capital-gains taxation within a savings incentive; a whole-bill vote does not establish general support for taxing wealthy people's wealth.
 - Maciej Danielewicz's contextual discussion of French wealth taxation remains a held lead, not an imported endorsement.
 - The FMS programme PDF could not be fetched from its original host. Search-result wording alone was not imported.
-- The May 2023 EP own-resources wealth-tax amendment is queued in H0004. Search discovery found explicit household wealth-tax wording and a Biedroń sponsor lead, but the original endpoint was bot-blocked. Obtain the original amendment and its exact roll call before importing; whole-resolution votes do not suffice.
+- H0004 is now processed: the archived May 2023 amendment and exact roll call were read. Sylwia Spurek is new; six affirmative voters repeat existing actors, and Biedroń also sponsored the amendment. Whole-resolution votes are not used.
 - An Oxfam report's reference to Polish EU-presidency wealth-tax discussions is only a lead pending the primary presidency paper and attribution (H0005).
+
+## Broad manifesto harvest and R003 expansion
+
+R003 screened the [483-entry Regeneracja zamiast tarczy roster](https://regeneracjamanifest.wordpress.com/manifest-popieraja/). It yielded **221 public-role endorsements, including215 new actors and6 existing actors**. These are gradeB campaign-reported endorsements. The [manifesto](https://regeneracjamanifest.wordpress.com/) separately advocates raising taxation of the highest incomes and wealth; no rate, recurrence or comprehensive net base is inferred. The evidence date 2021-04-19 is the roster edition last-modified date, not each individual's unknown endorsement day. Affiliated universities and employers are not attributed support. Four duplicate positions and four deceased public figures were excluded; eight titled identities and other entries without sufficient public-role proof were held. Ordinary petitioners, private professionals and students without independent public roles were not imported.
+
+The broader run also adds independently attributable publications/interviews, Beyond Growth environmental signers, the June 2025 EU own-resources letter and specific May 2023 parliamentary acts. Maciej Grodzicki has a separate29 May 2020 interview explicitly backing taxation of fortunes above several million PLN, supporting gradeA independently of the roster. Detailed decisions and sources are in the R003 research ledgers.
+
+Final R003 automated quote check:222 found,17 not found,9 skipped. Nine not-found results are short name-only roster quotations; all221 roster quotations were separately matched exactly to the raw publisher text. Eight not-found records and nine skipped records are PDF access/extraction limitations, checked directly against their originals. Seven short-name quote warnings are expected for verbatim roster entries. Independent QA sampled academic and public-role identities; all flags remain n for maintainer review. Schema validation, deduplication and the site build are repeated after the import.
 
 ## Geography and local sampling
 Official [TERYT/TERC full register](https://eteryt.stat.gov.pl/eTeryt/rejestr_teryt/udostepnianie_danych/baza_teryt/uzytkownicy_indywidualni/pobieranie/pliki_pelne.aspx), state 1 January 2026, downloaded 22 October: 16 voivodeships, 380 county-level units and 2479 gminas. Original two-, four- and seven-digit codes are retained. Only gmina kinds 1/2/3 are included, excluding components and city subdivisions. Urban/rural suffixes distinguish same-name units. scripts/import_pl_geography.py reproduces the import from the official ZIP. An initial historical BDL listing was replaced in full. Every subnational unit remains pending.
@@ -42,7 +50,7 @@ Agent Reach/Exa and opened web sources were used. Exa intermittently rate-limite
 
 ## Next runs, ordered by expected yield
 1. Named Sejm/Senat sponsors, motions and explicit statements, starting with Razem's designs and cross-party proposals. Seek bulk public acts; inspect the actual tax base before harvesting votes.
-2. Retrieve the May 2023 EP amendment and precise roll call; inspect further EU wealth-tax acts for additional Polish names and repeat evidence.
+2. Obtain independent personal statements for manifesto endorsers, and resolve held public-role identities. Inspect further EU wealth-tax acts for additional Polish names and repeat evidence; May 2023 H0004 is processed.
 3. Additional party/youth programmes, union/NGO coalition letters, FMS source recovery and named public campaign advocates. Deduplicate existing supporters across lists.
 4. Economists, business/wealthy supporters, cultural and faith figures. Preserve EU-only or partial-wealth qualifications.
 5. Revisit a small local sample only when a qualifying campaign or council motion offers a plausible route to personal endorsements.
