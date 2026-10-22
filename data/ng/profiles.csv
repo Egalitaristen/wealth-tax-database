@@ -1,0 +1,28 @@
+profile_id,actor_id,platform,url,source,checked
+P00001,A0001,website,https://nigeria.oxfam.org,actors.csv website column,2026-10-22
+P00002,A0002,website,https://cislac.org,actors.csv website column,2026-10-22
+P00003,A0003,website,https://taxjustice.ng,actors.csv website column,2026-10-22
+P00004,A0012,website,https://www.carenigeria.org,actors.csv website column,2026-10-22
+P00005,A0014,website,https://www.connecteddevelopment.org,actors.csv website column,2026-10-22
+P00006,A0016,website,https://taxjusticeafrica.net,actors.csv website column,2026-10-22
+P00007,A0026,website,https://www.oxfamnovib.nl,actors.csv website column,2026-10-22
+P00008,A0027,website,https://maketaxfair.net,actors.csv website column,2026-10-22
+P00009,A0028,website,https://ips-dc.org,actors.csv website column,2026-10-22
+P00010,A0029,website,https://patrioticmillionaires.org,actors.csv website column,2026-10-22
+P00011,A0030,website,https://www.fightinequality.org,actors.csv website column,2026-10-22
+P00012,A0034,website,https://www.southsouthecho.com,actors.csv website column,2026-10-22
+P00013,A0041,website,https://www.nlcng.org,actors.csv website column,2026-10-22
+P00014,A0043,website,https://nasu.org.ng,actors.csv website column,2026-10-22
+P00015,A0045,website,https://www.socialistnigeria.org,actors.csv website column,2026-10-22
+P00016,A0047,website,https://www.socialistnigeria.org,actors.csv website column,2026-10-22
+P00017,A0050,website,https://seyimakinde.com,actors.csv website column,2026-10-22
+P00018,A0051,website,https://punchng.com,actors.csv website column,2026-10-22
+P00019,A0052,website,https://nigeria.actionaid.org,actors.csv website column,2026-10-22
+P00020,A0002,wikipedia,https://en.wikipedia.org/wiki/Blake_Johnson,Wikidata Q111962564,2026-10-22
+P00021,A0014,wikipedia,https://en.wikipedia.org/wiki/2021_Senedd_election,Wikidata Q28403875,2026-10-22
+P00022,A0036,wikipedia,https://en.wikipedia.org/wiki/SA_49,Wikidata Q110443140,2026-10-22
+P00023,A0039,wikipedia,https://en.wikipedia.org/wiki/Patr%C3%ADcia_Ferreira_Par%C3%A1_Yxapy,Wikidata Q96182765,2026-10-22
+P00024,A0040,wikipedia,https://en.wikipedia.org/wiki/Boniface_Hie_Toh,Wikidata Q59656091,2026-10-22
+P00025,A0045,wikipedia,https://en.wikipedia.org/wiki/Sister_Phantom_Owl_Fish,Wikidata Q48802863,2026-10-22
+P00026,A0050,wikipedia,https://en.wikipedia.org/wiki/Henrik_Vorum,Wikidata Q61746910,2026-10-22
+P00027,A0051,wikipedia,https://en.wikipedia.org/wiki/The_Purple_Tape_Instrumentals,Wikidata Q3522367,2026-10-22
