@@ -883,6 +883,19 @@ def _fetch_for_check(u, timeout):
     import urllib.request
     raw = None
     try:
+        if "kokkai.ndl.go.jp/txt/" in u:
+            import json
+            m = re.search(r"kokkai\.ndl\.go\.jp/txt/([^/?#]+)(?:/(\d+))?", u)
+            if m:
+                issue_id, speech_num = m.group(1), m.group(2)
+                api_url = f"https://kokkai.ndl.go.jp/api/speech?recordPacking=json&issueID={issue_id}"
+                if speech_num:
+                    api_url += f"&speechNumber={speech_num}"
+                kreq = urllib.request.Request(api_url, headers={"User-Agent": "Mozilla/5.0 (wtdb quote check)"})
+                with urllib.request.urlopen(kreq, timeout=timeout) as kresp:
+                    data = json.loads(kresp.read().decode("utf-8"))
+                    speeches = [rec.get("speech", "") for rec in data.get("speechRecord", [])]
+                    return _plain(" ".join(speeches))
         req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0 (wtdb quote check)"})
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             raw = resp.read()
@@ -921,8 +934,8 @@ def cmd_checkquotes(a):
         page = cache[u]
         if page is None:
             skip.append(e["evidence_id"]); continue
-        parts = [p for p in re.split(r"…|\.\.\.", _plain(e["quote_original"])) if len(p.split()) >= 3]
-        if not parts and (len(_plain(e["quote_original"]).split()) >= 2 or e.get("evidence_type") == "vote"):
+        parts = [p for p in re.split(r"…|\.\.\.", _plain(e["quote_original"])) if len(p.split()) >= 3 or len(p) >= 4]
+        if not parts and (len(_plain(e["quote_original"]).split()) >= 2 or len(_plain(e["quote_original"])) >= 6 or e.get("evidence_type") == "vote"):
             parts = [_plain(e["quote_original"])]  # a short quote, such as a name on a roll-call list, is checked whole
 
         def found(pg):
