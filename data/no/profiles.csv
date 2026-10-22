@@ -1,0 +1,19 @@
+profile_id,actor_id,platform,url,source,checked
+P00001,A0001,website,https://www.sv.no,actors.csv website column,2026-10-22
+P00002,A0002,website,https://www.arbeiderpartiet.no,actors.csv website column,2026-10-22
+P00003,A0003,website,https://www.senterpartiet.no,actors.csv website column,2026-10-22
+P00004,A0004,website,https://www.mdg.no,actors.csv website column,2026-10-22
+P00005,A0005,website,https://www.lo.no,actors.csv website column,2026-10-22
+P00006,A0006,website,https://www.fagforbundet.no,actors.csv website column,2026-10-22
+P00007,A0010,website,https://www.nhh.no/en/employees/faculty/jarle-moen/,actors.csv website column,2026-10-22
+P00008,A0012,website,https://taxjustice.no,actors.csv website column,2026-10-22
+P00009,A0013,website,https://klassekampen.no,actors.csv website column,2026-10-22
+P00010,A0001,wikipedia,https://en.wikipedia.org/wiki/24_season_5,Wikidata Q217277,2026-10-22
+P00011,A0002,wikipedia,https://en.wikipedia.org/wiki/Eastern_European_Time,Wikidata Q190252,2026-10-22
+P00012,A0003,wikipedia,https://en.wikipedia.org/wiki/Preetz,Wikidata Q500171,2026-10-22
+P00013,A0004,wikipedia,https://en.wikipedia.org/wiki/Lake_Akan,Wikidata Q429402,2026-10-22
+P00014,A0005,wikipedia,https://en.wikipedia.org/wiki/Grebe_%28disambiguation%29,Wikidata Q1544464,2026-10-22
+P00015,A0006,wikipedia,https://en.wikipedia.org/wiki/Luis_Zubeld%C3%ADa,Wikidata Q1779261,2026-10-22
+P00016,A0007,x,https://x.com/weekirstyw,Wikidata Q6416186,2026-10-22
+P00017,A0007,wikipedia,https://en.wikipedia.org/wiki/Kirsty_Williams_%28drama%29,Wikidata Q6416186,2026-10-22
+P00018,A0013,wikipedia,https://en.wikipedia.org/wiki/The_Salton_Sea_%282002_film%29,Wikidata Q1544258,2026-10-22
