@@ -1,9 +1,9 @@
-﻿# Poland
+# Poland
 
 ## 1. Scope
-Initial national seed, 22 October 2026: five supporters and seven evidence rows.
+Initial national seed, 22 October 2026: four supporters and six evidence rows.
 This is an incomplete first pass. All evidence remains verified=n pending
-independent review. The author's quote check found all seven quotes.
+maintainer review. The author's quote check found all six retained quotes.
 Polish and English discovery searches were used; local advocacy is not searched.
 
 ## 2. Confirmed party proposals
@@ -18,10 +18,9 @@ Party membership alone does not establish personal endorsement.
 
 ## 3. Campaigns
 [WeMove Europe's Polish campaign](https://action.wemove.eu/sign/2023-12-tax-the-rich-petition-PL)
-calls for a European tax on the largest fortunes. The month is taken from the
-campaign URL identifier, not an exact publication timestamp. WeMove is a
-transnational organisation included for Polish outreach. No petition signers
-are recorded. Other domestic NGOs and unions remain to be substantively checked.
+calls for a European tax on the largest fortunes. No publication date could be corroborated; the URL identifier alone is
+insufficient. The organisation is queued in harvest.csv, not included among
+supporters. No petition signers are recorded. Other domestic NGOs and unions remain to be substantively checked.
 
 ## 4. Public commentary
 Included the bylined opinions of [Kamil Fejfer](https://www.money.pl/podatki/podatek-majatkowy-w-polsce-panstwo-musi-wydawac-opinia-7200084203342432a.html)
@@ -71,8 +70,11 @@ property-only, inheritance-only and income-only reforms do not qualify.
 Used agent-reach/Exa until its free service returned a rate limit, then web
 search and opened source pages. Some direct reads returned HTTP 403; the FMS
 host failed DNS resolution. No snippet-only actor was imported.
-checkquotes R001: seven found, zero missing, zero skipped. All seven rows were
-also read for context and grades by their author, not an independent reviewer.
+The initial checkquotes run found all seven submitted quotes. An independent
+reviewer reopened the original sources, confirmed quotes and attribution, and
+requested formal-act grade corrections and corroboration of the campaign date.
+Grades were corrected and the undated campaign moved to harvest.csv. All six
+retained evidence rows remain verified=n for maintainer review.
 
 ## 9. Coverage gaps
 Legislative sponsors and votes, other parties/youth wings, unions/NGOs,
