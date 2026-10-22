@@ -1,0 +1,8 @@
+{
+  "name": "Poland",
+  "iso2": "PL",
+  "lead": "",
+  "status": "in progress",
+  "boundaries": "",
+  "notes": "Depth: initial seed, incomplete. R001 (2026-10-22): five supporters, seven evidence rows covering Razem policy and manifesto, three Polish opinion authors and WeMove Europe's Polish campaign. All seven quotes passed checkquotes; evidence remains verified=n for independent review. Current official TERYT/TERC register: state at 2026-01-01, downloaded 2026-10-22; 16 voivodeships, 380 county-level units, 2479 gminas. All subnational units pending. No map: openly licensed current gmina shapes not checked. Legislature, other parties, unions/NGOs, economists, wealthy/business/faith/cultural supporters and local sampling remain open. Polish and English discovery searches. Exa hit its rate limit; some direct sources returned 403 or failed DNS. See area_profile.md for scope, exclusions and next runs."
+}

@@ -1,0 +1,6 @@
+actor_id,name,kind,actor_type,other_types,role,affiliation,party,affiliation_actor_id,country,level,location,wikidata_qid,website,status,alive_checked,prominence,notes,added_run,updated
+A0001,Razem,organisation,party,,Political party,,,,PL,national,Poland,,https://partiarazem.pl/,active,na,national,,R001,2026-10-22
+A0002,Kamil Fejfer,person,journalist,,Journalist and labour-market analyst,WP Opinie / money.pl,,,PL,national,Poland,,,active,y,national,Argues for a future net-wealth tax alongside nearer-term property-tax reform.,R001,2026-10-22
+A0003,Marcin Gerwin,person,campaigner,journalist,Sustainable-development and deliberative-democracy specialist,Krytyka Polityczna,,,PL,national,Poland,,,active,y,national,,R001,2026-10-22
+A0004,Artur Troost,person,journalist,academic,Columnist and doctoral researcher,Krytyka Polityczna / University of Warsaw,,,PL,national,Poland,,,active,y,national,Supports international coordination of wealth taxation in a Polish-language opinion column.,R001,2026-10-22
+A0005,WeMove Europe,organisation,ngo_campaign,,European campaign organisation,,,,PL,supranational,Poland,,https://www.wemove.eu/,active,na,international,Included for its Polish-language campaign for a European wealth tax; not a Polish domestic organisation.,R001,2026-10-22
