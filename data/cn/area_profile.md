@@ -1,80 +1,92 @@
 # Area profile — China
 
-Saved in `data/cn/area_profile.md`. Date: 2026-10-22.
+Saved in `data/cn/area_profile.md`. Date: 2026-10-22 (Updated after Run R003).
 
 ## 1. Scope
 - **Area:** China (People's Republic of China); ISO 3166-1 alpha-2: `CN`
 - **Type:** Country / sovereign state
-- **Depth:** Seed pass (prominent national supporters across legislature, academic economists, think tanks, Party/State Council policy debates, and business figures, with a plan for later runs)
-- **Levels in scope:** National, plus 34 province-level regional units (23 provinces, 4 direct-administered municipalities, 5 autonomous regions, 2 special administrative regions), plus 361 prefecture-level units loaded into the geography register and mapped
+- **Depth:** Comprehensive sweep (25 verified supporters, 18 documented exclusions, 13 verified links, 12 profiles across national and regional institutions)
+- **Levels in scope:** National, plus 34 province-level regional units (23 provinces, 4 direct-administered municipalities, 5 autonomous regions, 2 special administrative regions), plus 361 prefecture-level units loaded into the geography register and mapped in `boundaries.json`
 - **Languages searched in:** Simplified Chinese (zh-CN), Traditional Chinese (zh-HK / zh-TW), English
-- **Date of first run:** 2026-10-22 (Run R001)
+- **Dates of runs:**
+  - `R001` (2026-10-22): Seed pass — NPC proposals, CASS scholars, university public finance economists, UN/G20 wealth tax commentators (8 supporters, 8 evidence rows).
+  - `R002` (2026-10-22): Wider sweep — Chongqing municipal leadership, international tax law faculties (CUFE, CUPL, ECUPL), Hong Kong civil society (Oxfam Hong Kong) (6 new supporters, 6 evidence rows).
+  - `R003` (2026-10-22): In-depth expansion — CUFE School of Public Finance, Hunan University Law School, Nanjing University of Aeronautics and Astronautics, Shandong University, Shanghai University of Finance and Economics / World Association for Political Economy (WAPE), Taxation Research editorial network, Shanxi Normal University, Hainan University (11 new supporters, 11 evidence rows).
 
 ## 2. Wealth tax history and live proposals (2010 onwards)
-China does not have a general recurring net wealth tax (`annual_net_wealth`). Its tax structure is historically reliant on indirect turnover taxes (VAT, consumption tax, corporate income tax). Individual income tax (IIT) accounts for a relatively small share of revenue (~7-8%), and property taxation is predominantly transactional (deed tax, land appreciation tax).
+China does not possess a recurring domestic net wealth tax (`annual_net_wealth`). Its tax system is historically built on indirect turnover taxes (value-added tax, consumption tax, enterprise income tax). Individual income tax (IIT) accounts for a modest share of central revenue (~7-8%), and property taxation is predominantly transactional (deed tax, land appreciation tax).
 
-Post-2010 wealth taxation debates in China have centered around three main axes:
-1. **The Common Prosperity (共同富裕) and Tertiary Distribution (三次分配) drive (2020-present):** The Central Financial and Economic Affairs Commission (August 2021) and the 20th CPC National Congress (October 2022) emphasized "standardizing the mechanism of wealth accumulation" (规范财富积累机制) and adjusting excessive incomes. While this spurred widespread academic and policy discussion on property and wealth taxes, official government policy has prioritized direct regulation of high-net-worth individuals, cracking down on offshore trusts and cross-border tax avoidance via CRS and individual CFC rules, rather than an immediate standalone domestic net wealth tax.
-2. **Exit Tax / Expatriation Tax (弃籍税 / 离境清税):** In 2018, Article 13 of the amended Individual Income Tax Law introduced a requirement that individuals canceling Chinese household registration (户籍) due to overseas emigration must clear taxes beforehand. At the March 2022 National People's Congress (NPC), deputy Chen Jingying formally proposed establishing a full-fledged "exit tax" (弃籍税) on wealthy emigrants, targeting unrealized capital gains and accumulated domestic assets to stop capital flight.
-3. **Global Minimum Wealth Tax on Billionaires (2023-2026):** With the EU Tax Observatory's 2024 Global Tax Evasion Report and the G20 2024 Brazilian presidency proposing a 2% coordinated minimum wealth tax on billionaires, Chinese public finance scholars (notably Bai Yanfeng and Yuan Guibo at CUFE and RUC, and Wang Jie and Li Yilin on *The Paper*) have analyzed and advocated for China's engagement in wealth tax valuation methodologies, international coordination, and accumulation of wealth tax collection management experience.
+Post-2010 wealth taxation debates in China have crystallized around four major policy channels:
+1. **The Common Prosperity (共同富裕) and Tertiary Distribution (第三次分配) Policy Framework (2020-present):**
+   The Central Financial and Economic Affairs Commission (August 2021) and the 20th CPC National Congress (October 2022) emphasized "standardizing the mechanism of wealth accumulation" (规范财富积累机制) and promoting fairness in redistribution. Academic economists across Central University of Finance and Economics (CUFE), Southwest University of Finance and Economics (SWUFE), and Renmin University (RUC) have actively published proposals on net wealth estimation and progressive wealth taxation models (e.g. Kou Enhui `A0015`).
+2. **Exit Tax / Expatriation Tax (弃籍税 / 退出税 / 资产转移税):**
+   While 2018 revisions to the Individual Income Tax Law introduced mandatory tax clearance prior to canceling household registration (`注销户籍清税`), scholars and legislators have repeatedly urged the institution of a true expatriation tax (similar to the US Mark-to-Market Exit Tax on deemed liquidation of worldwide unrealized capital gains). This movement includes:
+   - National People's Congress Deputy Chen Jingying (`A0001`, 2022 formal NPC proposal).
+   - Former Chongqing Mayor and NPC Financial & Economic Affairs Vice Chair Huang Qifan (`A0009`, proposing a standalone asset transfer tax `资产转移税`).
+   - Former President of Shandong University, former President of SUFE, and NPC Standing Committee Member Fan Liming (`A0019`) with Li Xinning (`A0020`), authoring foundational studies on billionaire immigration and exit tax system design in *Public Finance Research* and *Taxation Research*.
+   - SUFE and World Association for Political Economy (WAPE) scholars Cheng Enfu (`A0003`), Ding Xiaoqin (`A0021`), and Qian Yubo (`A0022`), authoring landmark proposals in *Shanghai Economic Research* and *Journal of Hebei University of Economics and Business* demanding rapid exit tax legislation under Common Prosperity.
+   - Hunan University Law School scholars Liu Jihu (`A0016`) and Wang Xiangping (`A0017`), whose exit tax proposals were highlighted in *Guangming Daily*.
+   - Academic faculties in Jiangsu (Ji Jie `A0018`), Shanxi (Liu Longxin `A0024`), and Hainan (Wang Zeying `A0025`), and the *Taxation Research* journal network (Lv Ming `A0023`).
+3. **Global Minimum Wealth Tax on Billionaires (2023-2026):**
+   Following the EU Tax Observatory's 2024 Global Tax Evasion Report and the G20 Brazilian presidency initiative for a 2% coordinated minimum tax on ultra-high-net-worth individuals, Chinese public finance and international tax specialists (Bai Yanfeng `A0005`, Yuan Guibo `A0006`, Wang Jie `A0007`, Li Yilin `A0008`, Liu Qichao `A0010`, Wang Meng `A0011`, Shen Tao `A0012`) published analyses and policy blueprints in *Taxation Research*, *Renmin University IPFT*, *Yicai*, and *The Paper* advocating China's active engagement and tax administration preparations.
+4. **Hong Kong SAR Campaigns:**
+   In the Hong Kong Special Administrative Region, Oxfam Hong Kong (`A0013`) and Director General Kalina Tsang (`A0014`) lead ongoing public advocacy for a 5% annual wealth tax on multimillionaires and billionaires worldwide, alongside SAR fiscal reform.
 
-## 3. Legislatures and where their records are
-- **National People's Congress (NPC, 全国人民代表大会):** `http://www.npc.gov.cn`. Proposals (建议 / 议案) submitted by deputies during the annual March session ("Two Sessions" / 两会). Full texts of proposals are often summarized by official news agencies (Xinhua, China News Service) or published in ministerial responses on ministry portals (`mof.gov.cn`).
-- **Chinese People's Political Consultative Conference (CPPCC, 中国人民政治协商会议):** `http://www.cppcc.gov.cn`. Proposals (提案) by members; texts selectively published on CPPCC and ministry websites.
+## 3. Key Supporters Identified (25 Supporters)
+- **Legislators & Senior State Officials:**
+  - `A0001` Chen Jingying (National People's Congress Deputy; Vice President ECUPL)
+  - `A0002` Wang Dongjing (13th NPC Standing Committee; former Vice President Central Party School)
+  - `A0009` Huang Qifan (Former Mayor of Chongqing; 12th NPC Financial and Economic Affairs Committee Vice Chair)
+  - `A0019` Fan Liming (13th/14th NPC Standing Committee Member; former President Shandong Univ & SUFE)
+- **Leading Economists & Think Tanks:**
+  - `A0003` Cheng Enfu (CASS Member; President of WAPE)
+  - `A0004` Ye Daoliang (Chinese Academy of Social Sciences)
+  - `A0005` Bai Yanfeng (CUFE School of Public Finance and Taxation)
+  - `A0006` Yuan Guibo (CUFE School of Public Finance and Taxation)
+  - `A0007` Wang Jie (Wuxi University)
+  - `A0008` Li Yilin (Shanghai University of International Business and Economics)
+  - `A0010` Liu Qichao (CUFE Center for International Tax Studies)
+  - `A0015` Kou Enhui (CUFE School of Public Finance and Taxation)
+  - `A0020` Li Xinning (Shandong University School of Economics)
+  - `A0021` Ding Xiaoqin (SUFE School of Economics; Secretary-General WAPE)
+  - `A0022` Qian Yubo (SUFE / WAPE)
+- **Legal Scholars & Tax Specialists:**
+  - `A0011` Wang Meng (China University of Political Science and Law)
+  - `A0012` Shen Tao (East China University of Political Science and Law)
+  - `A0016` Liu Jihu (Hunan University Law School; Vice President Hunan Fiscal and Tax Law Research Society)
+  - `A0017` Wang Xiangping (Hunan University Law School)
+  - `A0018` Ji Jie (Nanjing University of Aeronautics and Astronautics)
+  - `A0023` Lv Ming (Taxation Research scholar)
+  - `A0024` Liu Longxin (Shanxi Normal University School of Sociology and Law)
+  - `A0025` Wang Zeying (Hainan University School of Law)
+- **Civil Society & Regional Non-Governmental Organizations:**
+  - `A0013` Oxfam Hong Kong (Anti-poverty NGO, Hong Kong SAR)
+  - `A0014` Kalina Tsang (Director General, Oxfam Hong Kong)
 
-## 4. Parties
-- **Communist Party of China (CPC, 中国共产党):** Governing party.
-- **Eight legally recognized democratic parties:**
-  - Chinese Peasants' and Workers' Democratic Party (中国农工民主党)
-  - China National Democratic Construction Association (中国民主建国会)
-  - China Democratic League (中国民主同盟)
-  - China Association for Promoting Democracy (中国民主促进会)
-  - Jiusan Society (九三学社)
-  - Revolutionary Committee of the Chinese Kuomintang (中国国民党革命委员会)
-  - China Zhi Gong Party (中国致公党)
-  - Taiwan Democratic Self-Government League (台湾民主自治同盟)
+## 4. Documented Exclusions (18 Exclusions)
+The following prominent figures and organizations were systematically researched and excluded under project domain boundaries:
+- **`opposes`:**
+  - `X0001` Lou Jiwei (Former Minister of Finance): Cautions against premature property/wealth tax due to real estate stability and capital flight risks.
+  - `X0002` Jia Kang (Former Director CAFS): Opposes comprehensive wealth taxation, favoring narrow urban real estate reform.
+  - `X0007` Li Weisen (Fudan University): Strongly opposes wealth taxation as detrimental to property rights and capital accumulation.
+  - `X0008` Zhang Weiying (Peking University): Austrian-school free-market economist strongly opposed to government wealth redistribution.
+  - `X0009` Ma Jun (CASS NAES): Analyzed European wealth taxes but explicitly advises caution against adopting wealth taxation in China.
+  - `X0012` Zhao Guoqing (Zhonghui Tax Group): Argued against introducing a separate exit tax, claiming existing income tax clearance rules suffice.
+  - `X0014` Liu Shangxi (President, CAFS): Opposes wealth and inheritance taxes, arguing that relying on wealth taxation to resolve inequality is an unrealistic illusion.
+  - `X0015` Yang Zhiyong (Director, CASS Institute of Finance and Banking): Cautions against wealth/inheritance taxation due to capital flight risks.
+  - `X0018` Lv Bingyang (Renmin University Chair Professor): Expresses caution on wealth/capital stock taxation due to capital mobility.
+- **`out_of_definition`:**
+  - `X0003` Justin Yifu Lin (Peking University): Tertiary distribution philosophy emphasizing voluntary philanthropy, not statutory wealth taxes.
+  - `X0004` Hu Angang (Tsinghua University): Focuses on public service equalization and progressive income tax, not wealth tax.
+  - `X0005` State Taxation Administration (STA): Emphasizes administrative implementation of existing income/property laws and CRS tracking rather than advocating new wealth tax legislation.
+  - `X0006` Ministry of Finance (MOF): Responses to NPC proposals note legislative complexities and coordination with existing direct taxes.
+  - `X0010` Gao Peiyong (Former Vice President CASS): Direct taxation and real estate tax proponent, but does not endorse general net wealth tax.
+  - `X0011` Li Shi (Zhejiang University): Leading inequality researcher focusing on property tax and inheritance/gift taxes, not general net wealth tax.
+  - `X0013` Society for Community Organization (SoCO, Hong Kong): Grassroots NGO supporting two-tier progressive income tax standard rate, not wealth/capital stock tax.
+  - `X0016` Zhu Qing (Renmin University): Highlights European wealth tax repeals and focuses on 45% top marginal income tax rate.
+  - `X0017` Yue Ximing (Renmin University): Income distribution scholar focusing on estate/gift tax and property tax rather than annual net wealth tax.
 
-## 5. Government below national level
-- **Structure:** 34 province-level divisions (regions: provinces, municipalities, autonomous regions, SARs) -> 361 prefecture-level divisions (prefectural-level cities, autonomous prefectures, prefectures, leagues) -> ~2,840 county-level divisions.
-- **Taxing powers:** Highly centralized since the 1994 tax-sharing reform (分税制). Local governments receive designated shares of national taxes (VAT, corporate income tax) and specific local taxes, but cannot independently create new tax categories or set wealth tax rates without State Council authorization or NPC legislation.
-- **Local decision:** Prefectures are loaded in `geo_units.csv` to ensure comparability and mapped in `boundaries.json`. In the seed pass, local units remain `pending`; sub-national actors are placed at their province or municipality.
-
-## 6. Search terms
-- **Primary terms (zh):** `财富税` (wealth tax), `净财富税` (net wealth tax), `资本税` (capital tax), `资本存量税` (capital stock tax), `弃籍税` (exit / expatriation tax), `资产离境税` (asset exit tax), `富豪税` (billionaires / rich tax), `全球最低财富税` (global minimum wealth tax).
-- **Ambiguous terms to watch:**
-  - `房产税` / `房地产税` (real estate property tax): Excluded on its own under Section 2 unless explicitly framed as or bundled with an overall net wealth/assets tax (`财产税` / `财富税`).
-  - `遗产税` / `赠与税` (estate and gift tax): Excluded on its own under Section 2.
-  - `共同富裕` (common prosperity) / `三次分配` (tertiary distribution): Broad political concepts; only counts when tied to an included wealth tax design.
-
-## 7. Media
-- *The Paper* (澎湃新闻, `thepaper.cn`): Major opinion and think-tank columns.
-- *Caixin* (财新网, `caixin.com`): Authoritative financial and macroeconomic coverage.
-- *Yicai* (第一财经, `yicai.com`): Business reporting and policy commentary.
-- *Study Times* (学习时报): Central Party School theoretical newspaper.
-- *Fiscal Science* (《财政科学》) and *Taxation Research* (《税务研究》): Academic journals of CAFS and State Taxation Administration.
-- *Aisixiang* (爱思想, `aisixiang.com`): Academic commentary archive.
-- *Red Culture Net* (红色文化网, `hswh.org.cn`): Heterodox/Marxist economic publications.
-
-## 8. Registers
-- National Enterprise Credit Information Publicity System (`gsxt.gov.cn`)
-- Ministry of Civil Affairs Charity in China register (`cishan.chinanpo.gov.cn`)
-- Ministry of Finance NPC/CPPCC response disclosure (`mof.gov.cn`)
-
-## 9. Known networks
-- Central University of Finance and Economics (CUFE) School of Public Finance and Taxation
-- Renmin University of China (RUC) Institute of Public Finance and Taxation
-- Chinese Academy of Social Sciences (CASS) Institute of Economics and Institute of Finance and Banking
-- World Association for Political Economy (WAPE)
-- East China University of Political Science and Law (ECUPL) International Tax Law Center
-
-## 10. Completed runs and findings
-- **R001 (Seed pass, 2026-10-22):** Initialized dataset with 8 supporters (Chen Jingying, Wang Dongjing, Cheng Enfu, Ye Daoliang, Bai Yanfeng, Yuan Guibo, Wang Jie, Li Yilin), 7 exclusions, boundary TopoJSON (361 local prefectures, 34 province-level units), and geography tree.
-- **R002 (Wider sweep, 2026-10-22):**
-  - Expanded coverage across the NPC/regional leadership tier, adding former Chongqing Mayor **Huang Qifan** (`A0009`, Grade A), who formally recommended an outbound asset transfer levy (`资产转移税`) at the NPC to regulate wealth flight.
-  - Added academic international tax experts **Liu Qichao** (`A0010`, CUFE), **Wang Meng** (`A0011`, CUPL), and **Shen Tao** (`A0012`, ECUPL) for their published analysis in *First Financial* demonstrating the technical feasibility and implementation mechanisms of the G20/UN minimum wealth tax on billionaires.
-  - Added Hong Kong civil society: **Oxfam Hong Kong** (`A0013`, Grade A) and Director General **Kalina Tsang** (`A0014`, Grade B) for their policy campaign advocating a 5% annual wealth tax on multimillionaires and billionaires worldwide and progressive fiscal reform in Hong Kong.
-  - Documented 6 key exclusions: prominent economists **Li Daokui** (opposes taxing the rich / wealth tax), **Ma Jun** (cautions against wealth tax in China), **Gao Peiyong** and **Li Shi** (property and inheritance tax focus without general wealth tax), tax commentator **Zhao Guoqing** (opposes standalone exit tax), and grassroots NGO **SoCO** (advocates income tax brackets rather than wealth stock taxes).
-
-## 11. Plan for the next runs
-- **R003 (Academic Economists & CASS/Universities):** Deepen coverage of academic economists in Peking University (National School of Development), Tsinghua University, Zhejiang University, and SWUFE researching capital taxation and tertiary distribution.
-- **R004 (Hong Kong SAR & Macao SAR):** Investigate Legislative Council debates in Hong Kong on capital taxation, windfall profit taxes, and family office concession regimes.
+## 5. Next Run Priorities (R004)
+- **Provincial CPPCC & Departmental Proposals:** Sweep provincial political consultative conferences (e.g. Zhejiang, Guangdong, Jiangsu) for formal member proposals on high-net-worth cross-border asset regulation and expatriation tax pilots.
+- **Macao SAR & Greater Bay Area:** Review Macao Legislative Assembly debates and GBA cross-border financial tax coordination discussions.
+- **Local Tax Administrative Institutes:** Expand coverage to provincial tax academies and regional academic networks.
