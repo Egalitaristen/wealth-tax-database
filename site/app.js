@@ -35,7 +35,7 @@ const glyph = g => `<i class="g ${esc(g)}" title="${esc(GRADE_LONG[g] || '')}"><
 const label = (map, k) => map[k] || String(k || '').replace(/_/g, ' ').replace(/^./, c => c.toUpperCase());
 // People rows from build_site.py
 const P_ = {id: 0, name: 1, kind: 2, type: 3, role: 4, aff: 5, level: 6, loc: 7, grade: 8, n: 9, first: 10, last: 11, des: 12, notes: 13, web: 14, party: 15, other: 16, prof: 17, qid: 18};
-const E_ = {actor: 0, date: 1, grade: 2, type: 3, des: 4, detail: 5, quote: 6, url: 7, title: 8, pub: 9, verified: 10, id: 11};
+const E_ = {actor: 0, date: 1, grade: 2, type: 3, des: 4, detail: 5, quote: 6, url: 7, title: 8, pub: 9, archive: 10, id: 11};
 
 // ---------- data ----------
 const cache = {};
@@ -1014,7 +1014,7 @@ function evCard(e, m, slug) {
     ${e[E_.detail] ? `<p class="muted" style="font-size:14px;margin-top:-4px">${esc(e[E_.detail])}</p>` : ''}
     <div class="ev-src">
       <div>${url ? ext(url, esc(e[E_.title] || e[E_.pub] || url) + ' ↗', 's') : esc(e[E_.title])}<span class="pub">${esc(e[E_.pub])}</span></div>
-      <div class="ev-foot"><a href="${esc(issueUrl(`[${m.iso2}] Report: ${e[E_.id]}`, {country: slug, entry: e[E_.id]}))}" target="_blank" rel="noopener">Report</a></div>
+      <div class="ev-foot">${safeUrl(e[E_.archive]) ? `<a href="${esc(safeUrl(e[E_.archive]))}" target="_blank" rel="noopener">Archived copy</a> · ` : ''}<a href="${esc(issueUrl(`[${m.iso2}] Report: ${e[E_.id]}`, {country: slug, entry: e[E_.id]}))}" target="_blank" rel="noopener">Report</a></div>
     </div>
   </article>`;
 }

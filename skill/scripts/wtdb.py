@@ -21,19 +21,19 @@ from collections import Counter, defaultdict
 
 SCHEMA = {
     "actors": ["actor_id", "name", "kind", "actor_type", "other_types", "role", "affiliation", "party", "affiliation_actor_id", "country",
-               "level", "location", "geo_unit_id", "wikidata_qid", "website", "status", "alive_checked", "prominence", "notes",
-               "added_run", "updated"],
+               "level", "location", "geo_unit_id", "location_source", "wikidata_qid", "website", "status", "alive_checked", "prominence", "notes",
+               "added_run", "updated", "refined"],
     "profiles": ["profile_id", "actor_id", "platform", "url", "source", "checked"],
     "evidence": ["evidence_id", "actor_id", "date", "stance", "grade", "evidence_type", "wt_design", "design_detail",
                  "quote_original", "quote_lang", "quote_en", "source_url", "source_title", "publisher", "archive_url",
-                 "accessed", "harvest_id", "grading_note", "verified", "run_id"],
+                 "accessed", "harvest_id", "grading_note", "run_id"],
     "geo_units": ["geo_unit_id", "name", "level", "unit_type", "parent_id", "website", "sweep_status", "swept_run",
                   "swept_date", "queries_run", "hits", "notes", "code"],
     "links": ["link_id", "from_actor_id", "to_actor_id", "link_type", "evidence_id", "source_url", "note"],
     "harvest": ["harvest_id", "title", "list_type", "url", "date", "est_size", "status", "actors_added", "notes"],
     "exclusions": ["exclusion_id", "name", "reason", "detail", "source_url", "run_id"],
     "runs": ["run_id", "date", "assistant", "focus", "targets", "queries_run", "sources_opened", "candidates_seen",
-             "new_actors", "new_evidence", "grade_upgrades", "verified_ok", "verified_failed", "saturation",
+             "new_actors", "new_evidence", "grade_upgrades", "saturation",
              "notes_next"],
 }
 PREFIX = {"actors": ("A", 4), "evidence": ("E", 5), "geo_units": ("G", 4), "links": ("L", 4),
@@ -67,7 +67,6 @@ ENUMS = {
                                     "coalition_membership", "testimony", "funding", "other"},
     ("evidence", "wt_design"): {"annual_net_wealth", "one_off_levy", "billionaire_minimum", "unrealised_gains",
                                 "exit_tax", "partial_wealth", "defend_existing", "wealth_tax_unspecified"},
-    ("evidence", "verified"): {"", "n", "y", "failed"},
     ("geo_units", "level"): {"supranational", "national", "devolved", "region", "county", "combined_authority",
                              "council", "sub_council"},
     ("geo_units", "sweep_status"): {"pending", "in_progress", "done", "skipped"},
@@ -210,7 +209,6 @@ def cmd_add(a):
                 r.setdefault("alive_checked", "na")
         if t == "evidence":
             r.setdefault("accessed", today)
-            r.setdefault("verified", "n")
             r.setdefault("stance", "support")
         if t == "geo_units":
             r.setdefault("sweep_status", "pending")
@@ -293,8 +291,6 @@ def validate(db):
             warns.append(f"{where}: grade A {e.get('evidence_type')} — add design_detail (rate, threshold or bill)")
         if len(e.get("quote_original", "")) < 15 and e.get("evidence_type") != "vote":  # a vote quotes the member's name on the list
             warns.append(f"{where}: very short quote")
-        if e.get("verified") == "failed":
-            errs.append(f"{where}: verification failed — fix or remove the row")
     geo = {g["geo_unit_id"] for g in db["geo_units"]}
     gidx = geo_index(db["geo_units"])
     names = defaultdict(list)
@@ -334,6 +330,10 @@ def validate(db):
             errs.append(f"{where}: affiliation_actor_id {r['affiliation_actor_id']} does not exist")
         if r.get("wikidata_qid") and not re.match(r"^Q\d+$", r["wikidata_qid"]):
             errs.append(f"{where}: wikidata_qid must look like Q12345")
+        if r.get("location_source") and not r["location_source"].startswith(("https://", "http://")):
+            errs.append(f"{where}: location_source must be a link to the page that shows where they are")
+        if r.get("refined") and not re.match(r"^\d{4}-\d{2}-\d{2}$", r["refined"]):
+            errs.append(f"{where}: refined must be a date (YYYY-MM-DD)")
         names[(norm_name(r.get("name", "")), r.get("kind"))].append(r.get("actor_id"))
         if r.get("wikidata_qid"):
             qids[r["wikidata_qid"]].append(r.get("actor_id"))
@@ -633,8 +633,6 @@ def cmd_status(a):
     hq = Counter(h["status"] for h in db["harvest"])
     print(f"\nHarvest lists: queued {hq['queued']}, in_progress {hq['in_progress']}, done {hq['done']}, "
           f"failed {hq['failed']}")
-    unver = sum(1 for e in db["evidence"] if e.get("verified") in ("", "n"))
-    print(f"Unverified evidence rows: {unver}")
     if db["runs"]:
         last = db["runs"][-1]
         print(f"\nLast run {last['run_id']} ({last['date']}): {last['focus']} → next: {last.get('notes_next','')}")
@@ -648,8 +646,6 @@ def cmd_status(a):
         sugg.append("thin actor types (cover these layers first): " + ", ".join(thin))
     if g["C"]:
         sugg.append(f"upgrade {g['C']} C-graded actors")
-    if unver:
-        sugg.append(f"quote-check and spot-check unverified evidence ({unver} rows)")
     pend = [(reg, c) for reg, c in prog.items() if c["pending"] or c["in_progress"]]
     if pend:
         pend.sort(key=lambda x: (-(x[1]["in_progress"]), -x[1]["done"]))
