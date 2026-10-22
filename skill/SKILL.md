@@ -313,6 +313,8 @@ For a new country, pick the tier that elects a council and runs local services (
 Loading the local tier is not a promise to sweep it: sweeping stays proportionate to what the sample finds (6.5), and unswept units stay `pending`. Place each actor at the finest unit the source shows (a mayor in the city's unit, a state legislator in the state). Finer places you meet are not lost: put them in `location` as place text after the last unit (`United States > California > Ventura County > Camarillo`). On the map, areas with their own supporters are shaded, and areas whose region only has supporters at region level get a light tint. Seats are places, not institutions: an MP belongs to the constituency, a US representative to the district. Roll calls rarely print the constituency, so look it up in bulk: Wikidata records it as the qualifier *electoral district* (P768) on the member's *position held* (P39) statement, one SPARQL query for the whole list. `validate` warns about legislators left at the country root. For a map, also build `boundaries.json` (see `scripts/topo_to_boundaries.py`).
 
 ### 6.8 Later runs
+Improving the supporters already found (links, finer places, more statements, a check that support is still current) is a separate workflow: `refine/SKILL.md`.
+
 Each run reads the folder (`status`, `notes_next`), picks the top of the plan, works it, and writes a new plan. A good run is one harvest list, or one region, plus one layer pass. Priority order when the plan is silent:
 1. suggestions sent from the site for this country (`python scripts/suggestions.py export new.csv`; check each against its source, then `mark` it added, duplicate or rejected)
 2. queued harvest lists

@@ -14,6 +14,7 @@ The aim is to make it easy for people who share the view that wealth should be t
 |---|---|
 | `data/<iso2>/` | One database per country or region, for example `data/gb/`. Plain CSV files plus a `meta.json`. |
 | `skill/` | The research workflow (`SKILL.md`), source playbook, country examples and helper scripts (`wtdb.py`, `profiles_wikidata.py`, `topo_to_boundaries.py`). Works for people and for AI assistants. |
+| `refine/` | The refinement workflow (`SKILL.md`) for supporters already in a register: links, finer places, more statements, and a check that support is still current. Uses the scripts in `skill/scripts/` (`refine_queue.py`, `archive_sources.py`). |
 | `site/` | The static front end: one page and one script, no framework. Home with search and a dot world map, country pages (area map, directory, timeline, method), a page per supporter, method and contribute pages. |
 | `scripts/build_site.py` | Turns `data/` into the site data, a search index and CSV downloads. Standard library plus `pycountry`. |
 | `scripts/share_cards.py`, `scripts/fonts/` | Link-preview images for every page (home, each country page, each supporter), drawn with Pillow. The build also writes a small HTML file per page with its own title, description and image, so previews on Discord and social media match the page. |
