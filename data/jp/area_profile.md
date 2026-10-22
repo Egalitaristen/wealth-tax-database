@@ -1,15 +1,16 @@
 # Area profile — Japan
 
-First written 2026-10-22 (run R001); expanded to multi-hundred supporters in run R002 (2026-10-23) across national parties, Diet chambers, regional assemblies, civil society coalitions, and election candidate slates across all 47 prefectures.
+First written 2026-10-22 (run R001); expanded to multi-hundred supporters in run R002 (2026-10-23); further scaled in run R003 (2026-10-23) to 594 supporters spanning all 47 prefectural assemblies, 20 major designated city councils, national Diet chambers, and nationwide election slates.
 
 ## 1. Scope
 - **Area**: Japan (日本国, Nippon-koku); unitary state with 47 prefectures (都道府県, *todōfuken*) and 1,749 municipalities (市区町村, *shikuchōson* across designated city wards, cities, towns, and villages).
-- **Depth**: **Wide sweep / full country register** (350 supporters, 348 links, 398 profiles). National Diet (House of Representatives / *Shūgiin*, House of Councillors / *Sangiin*), three national political parties (JCP, SDP, Reiwa Shinsengumi), Tokyo Metropolitan Assembly JCP caucus, Fair Tax Coalition initiators, national civil society organizations, and 50th General Election candidates slate spanning all 47 prefectures.
+- **Depth**: **Wide sweep / full country register** (594 supporters, 592 links, 642 profiles). National Diet (House of Representatives / *Shūgiin*, House of Councillors / *Sangiin*), three national political parties (JCP, SDP, Reiwa Shinsengumi), all 47 Prefectural Assembly JCP caucuses, 20 major designated city council caucuses (Sapporo, Kyoto, Yokohama, Kobe, Nagoya, Fukuoka, etc.), Fair Tax Coalition initiators, national civil society organizations, the 50th General Election candidates slate, and the 2022 Sangiin election candidate slate spanning all 47 prefectures.
 - **Geography register**: Root `G0001` (Japan), 4 national institutional units (`G0002`–`G0005`), all 47 prefectures (`G0006`–`G0052`, ISO 3166-2 `JP-01` to `JP-47`), and all 1,749 municipalities (`G0053`–`G1801`, 5-digit JIS X 0402 codes). Bound to TopoJSON boundaries in `boundaries.json` derived from GSI Global Map Japan.
 - **Languages searched**: Japanese (日本語, primary) and English.
 - **Dates of runs**: 
   - `R001` (2026-10-22): Seed pass across national Diet transcripts, party platform, and core economists/authors.
   - `R002` (2026-10-23): Multi-hundred expansion covering SDP and Reiwa Shinsengumi written endorsements, Tokyo assembly caucus, Fair Tax Coalition initiators, and nationwide general election candidate tickets.
+  - `R003` (2026-10-23): Subnational and upper house expansion across all 47 prefectural assemblies, 20 designated city councils, and 2022 House of Councillors candidate slates (bringing total to 594 supporters).
 
 ## 2. Wealth tax history and live proposals (2010 onwards)
 - **Historical background**: Japan enacted an annual net wealth tax (*Fuyūzei*, 富裕税) in 1950 following the Shoup Mission recommendation (*Shoup Report*, シャウプ勧告), levying an annual tax on individual net assets exceeding 5 million yen (at progressive rates of 0.5% to 3.0%). It was repealed in 1953 primarily due to difficulties in asset tracking prior to computerized banking, being replaced by interest/dividend income taxation and inheritance taxes.
