@@ -1,0 +1,2 @@
+harvest_id,title,list_type,url,date,est_size,status,actors_added,notes
+H0001,"Tweede Kamer motions and amendments on a wealth or millionaires tax, 2014-2026",other,https://gegevensmagazijn.tweedekamer.nl/OData/v4/2.0/Document,2026-10-22,25,done,17,"Open-data search of motion/amendment subjects (vermogensbelasting, miljonairsbelasting, miljardairs, Zucman ...), then each text read and graded. Party votes are recorded per fractie in the Stemming records, not per member."

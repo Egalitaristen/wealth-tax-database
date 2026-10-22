@@ -1,0 +1,22 @@
+{
+  "name": "Netherlands",
+  "iso2": "NL",
+  "lead": "Egalitaristen",
+  "status": "in progress",
+  "boundaries": "boundaries.json",
+  "notes": "Seed pass R001 (2026-10-22), national level: Tweede Kamer motions 2014-2026, party programmes (secondary), Oxfam Novib, FNV, Zucman's hearing, Dutch signers of millionaire letters, three commentators. Eerste Kamer, MEPs, provinces and municipalities not searched. Map: CBS/PDOK Gebiedsindelingen 2026, CC BY 4.0.",
+  "polls": [
+    {
+      "support": 72,
+      "oppose": null,
+      "scope": "Netherlands, adults",
+      "question": "Higher taxes for the super-rich (as cited by Oxfam Novib)",
+      "pollster": "cited in Oxfam Novib report",
+      "commissioned_by": "Oxfam Novib",
+      "fieldwork": "",
+      "sample": "",
+      "published": "2025-01-24",
+      "url": "https://www.accountancyvanmorgen.nl/2025/01/24/oxfam-ongelijkheid-groeit-door-fiscaal-beleid-dat-vermogens-bevoordeelt/"
+    }
+  ]
+}
