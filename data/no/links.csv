@@ -1,3 +1,12 @@
 link_id,from_actor_id,to_actor_id,link_type,evidence_id,source_url,note
 L0001,A0006,A0005,member_of,,,Fagforbundet is the largest member union of LO
 L0002,A0007,A0001,leads,,,Kirsti Bergstø is leader of Sosialistisk Venstreparti
+L0003,A0014,A0003,leads,,,Trygve Slagsvold Vedum is leader of Senterpartiet
+L0004,A0015,A0002,leads,,,Jonas Gahr Støre is leader of Arbeiderpartiet
+L0005,A0016,A0001,member_of,,,Kari Elisabeth Kaski is chief finance spokesperson and MP for SV
+L0006,A0017,A0024,member_of,,,Mímir Kristjánsson is chief finance spokesperson and MP for Rødt
+L0007,A0008,A0024,leads,,,Marie Sneve Martinussen is leader of Rødt
+L0008,A0009,A0024,member_of,,,Charlotte Therkelsen is deputy leader of Rødt
+L0009,A0018,A0004,member_of,,,Lan Marie Berg is MP and former deputy leader of MDG
+L0010,A0022,A0005,member_of,,,Fellesforbundet is the largest private-sector member union of LO
+L0011,A0023,A0022,leads,,,Jørn Eggum was leader of Fellesforbundet
