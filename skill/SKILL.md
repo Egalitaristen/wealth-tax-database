@@ -55,9 +55,9 @@ Files in this skill (use them if present; the rules in this file are sufficient 
    - Fetch tools that return a summary can paraphrase. Quote from the raw page text (download it, or use a browser) and run `wtdb.py checkquotes` on the rows you add. It reads PDFs with `pdftotext` and falls back to the headless browser (`fetch_page.py`) for pages that block plain clients.
    - Never compose a sentence of your own and put it in `quote_original`. For list or roster pages where the only text is a name, use the text the page itself prints for that entry: a claim sentence in the page's structured data (JSON-LD), an official bill-status field such as `Rep. Lee, Barbara [D-CA-13]`, or the name and role as listed. Keep quotes short (about 25 words or fewer).
 3. **Time window and the living.** Only evidence dated 2010-01-01 or later counts. Individuals are assumed alive unless a death record is found. Check before adding (Wikidata's date of death, or an obituary search when in doubt); anyone found dead goes in `exclusions.csv` (`deceased`), not in `actors.csv`. Record the check by setting `alive_checked=y`; do not narrate it in `notes`. Dissolved organisations may stay, marked `dissolved`.
-4. **Supporters only.** Opponents are not recorded as actors. If an existing supporter later retracts or votes against, add evidence with `stance=retracted`; they then show as a former supporter.
+4. **Supporters only.** Opponents are not recorded as actors. If an existing supporter later retracts or votes against, add evidence with `stance=retracted` (dated, quoted and sourced like any other row). An actor whose latest evidence is a retraction stays in the files but leaves the site.
 5. **Public role, public record.** Only people acting in a public capacity (elected officials, officials, published authors, journalists, organisation leaders, people who publicly declared themselves, e.g. signed a published letter). Never record private individuals (ordinary petition signers, private social-media users), and never record home addresses, personal phone numbers or personal emails. Organisation websites and official pages are fine.
-6. **The CSV files are the database.** Write each actor and its evidence to disk as soon as it is verified — never hold a batch in memory to write at the end. The xlsx is a generated export, never edited by hand.
+6. **The CSV files are the database.** Write each actor and its evidence to disk as soon as you have checked it — never hold a batch in memory to write at the end. The xlsx is a generated export, never edited by hand.
 7. **Controlled vocabularies only** (section 5). If nothing fits, use the closest value and say so in `notes`; propose a vocabulary change in the run log rather than inventing a value.
 8. **Report counts from the files**, not from memory (`wtdb.py status`, or count the CSV rows).
 9. **Search in every official language of the area** (local-language terms are in the source playbook). English-only searching misses most of the local layer.
@@ -142,19 +142,21 @@ International actors (Zucman, Oxfam International) are included in a country dat
 In this repository, `<area-slug>` is the lowercase ISO 3166-1 alpha-2 code (`gb`, `de`) or `<iso2>-<region>` (`us-ca`). Each folder also needs a `meta.json` (`name`, `iso2`, `lead`, `status`, `boundaries`, `notes`; `init` creates it). Put the scope you chose (levels covered, anything left out) in `notes` and in section 1 of `area_profile.md`. Everything lives in `data/<area-slug>/` (e.g. `data/gb/`, `data/us-california/`, `data/eu/`). Create it with `python skill/scripts/wtdb.py init data/<slug> --area "<Area name>"`, or by hand with exactly these headers. IDs are prefix + zero-padded number (A0001, E00001, G0001, L0001, H0001, X0001, R001).
 
 **actors.csv** — one row per actor
-`actor_id, name, kind, actor_type, other_types, role, affiliation, party, affiliation_actor_id, country, level, location, geo_unit_id, wikidata_qid, website, status, alive_checked, prominence, notes, added_run, updated`
+`actor_id, name, kind, actor_type, other_types, role, affiliation, party, affiliation_actor_id, country, level, location, geo_unit_id, location_source, wikidata_qid, website, status, alive_checked, prominence, notes, added_run, updated, refined`
 - `other_types`: extra `actor_type` values separated by `;`, for people who fit more than one (for example `journalist` primary with `economist` here). `actor_type` is the main role; the site and the coverage grid count a person under every type they hold.
 - `party`: for politicians, the party's common name in English (for example `Labour`, `Green Party`, `Democratic Party`; `Independent` if none). Use one name per party so the site can filter on it; a regional or state branch uses the national party's name (the Minnesota DFL is `Democratic Party`). Blank for non-politicians, and for local officials in non-partisan offices when the party is not known. `validate` warns about a missing party above local level.
 - `level`: supranational · national · regional · local (the level of government or society they act at)
 - `location`: where they are based or whom they represent, written as a path from the country down, separated by ` > `: `United States > California > Camarillo`, `United Kingdom > London > Hackney`, `United Kingdom > Yorkshire and The Humber > Leeds East`. The first part is the country root unit in `geo_units.csv`. Each next part that matches a register unit under the previous one is resolved to that unit; anything after that is plain place text (a city, district or constituency the register does not list yet). Give the finest place you can prove. If you only know the state, stop at the state; if you only know the country (a national union, a nationwide campaign), write just the country. Never guess a finer place. A national-level actor sits at the country; a legislator sits at the place they represent (the district, constituency, state or region), not at the institution (that goes in `role`). The site counts an actor for every unit on the path, so a city actor counts for their state and the country.
 - `geo_unit_id`: the register unit the actor is placed in, the deepest unit `location` resolves to. It is the stable key (names change: Araba became Álava, and Connecticut's counties became planning regions). `wtdb.py add` fills it from `location`; `wtdb.py locate` fills any that are empty and, after a unit is renamed or moved, rewrites the unit part of `location` from the register and keeps the place text after it. `validate` fails when the two disagree.
+- `location_source`: the page that shows the place, when it is not obvious from the evidence (a news profile saying where they are from, their organisation's address, a university page). A legislator's seat needs none. Never a home address.
+- `refined`: the date of the last refinement pass on this actor (the `refine` skill), so the next pass can skip them.
 - `status`: active · former_role · dissolved
 - `alive_checked`: y · na (organisations and institutions). `y` means you looked for a death record and found none.
 - `notes`: only what a reader needs: an identity caveat (a common name, a role taken from a list), where the party or role came from, or context the evidence rows do not show. **Never** write that the person is alive, that Wikidata has no match, or that no death record was found; `alive_checked` already says it, and the site shows the notes to readers. Leave `notes` empty when there is nothing to add.
 - `prominence`: international · national · regional · local (how widely they are known on this issue)
 
 **evidence.csv** — one row per piece of evidence (an actor can have many)
-`evidence_id, actor_id, date, stance, grade, evidence_type, wt_design, design_detail, quote_original, quote_lang, quote_en, source_url, source_title, publisher, archive_url, accessed, harvest_id, grading_note, verified, run_id`
+`evidence_id, actor_id, date, stance, grade, evidence_type, wt_design, design_detail, quote_original, quote_lang, quote_en, source_url, source_title, publisher, archive_url, accessed, harvest_id, grading_note, run_id`
 - `date`: YYYY-MM-DD (or YYYY-MM / YYYY if that is all that is known); the date of the act or statement, not of a later article about it
 - `stance`: support · retracted
 - `grade`: A · B · C
@@ -162,7 +164,7 @@ In this repository, `<area-slug>` is the lowercase ISO 3166-1 alpha-2 code (`gb`
 - `wt_design`: values in section 2
 - `design_detail`: rate, threshold, bill name or number (e.g. "2% over £10m")
 - `quote_original`: verbatim from the source page; `quote_lang`: ISO code; `quote_en`: translation if not English
-- `verified`: n · y · failed (y means re-opened in QA and the quote was found)
+- `archive_url`: a Wayback Machine copy of the source (`skill/scripts/archive_sources.py` fills it), so the quote stays checkable when the page moves or goes behind a paywall
 
 **geo_units.csv** — the tree of places you report on, and the checklist for regional and local sweeps (6.5, 6.7)
 `geo_unit_id, name, level, unit_type, parent_id, website, sweep_status, swept_run, swept_date, queries_run, hits, notes, code`
@@ -205,7 +207,7 @@ A personal GitHub repository or blog with no licence file, a "free to use" note,
 - `reason`: out_of_definition · pre_2010_only · deceased · private_individual · opposes · insufficient_evidence · duplicate
 
 **runs.csv** — one row per run
-`run_id, date, assistant, focus, targets, queries_run, sources_opened, candidates_seen, new_actors, new_evidence, grade_upgrades, verified_ok, verified_failed, saturation, notes_next`
+`run_id, date, assistant, focus, targets, queries_run, sources_opened, candidates_seen, new_actors, new_evidence, grade_upgrades, saturation, notes_next`
 
 **area_profile.md** — the area profile (section 6.2).
 
@@ -325,7 +327,7 @@ Each run reads the folder (`status`, `notes_next`), picks the top of the plan, w
 ### 6.9 QA, and the pull request (end of every run)
 1. `validate` → fix every error. Warnings: fix or justify in `notes`.
 2. `dedupe` → merge true duplicates with `merge`.
-3. **Quote check:** `checkquotes --run <this run>`. Fix or remove every row it reports as not found. Rows it skips (PDFs, blocked pages) need a manual look: open the page, find the quote. Then spot-check at least 10% of the run's rows (minimum 5) by hand for grade and meaning, not just wording. **`verified=y` is set only by someone other than the row's author**: a person, or a separate agent that has not seen the work. Authors leave rows at `n`. A row whose quote cannot be found is set to `failed` and then fixed or removed.
+3. **Quote check:** `checkquotes --run <this run>`. Fix or remove every row it reports as not found. Rows it skips (PDFs, blocked pages) need a manual look: open the page, find the quote. Then spot-check at least 10% of the run's rows (minimum 5) by hand for grade and meaning, not just wording. There is no separate verification mark: a row is in the database because its quote was found on its source, and readers report mistakes from the site.
 4. `profiles_wikidata.py` for new actors with Wikidata IDs. Check that `boundaries.json` exists (6.7); `validate` warns when it does not.
 5. Append the run row to `runs.csv`, including `saturation` and `notes_next` (the plan).
 6. Open or update the pull request and report to the user: new actors and evidence by type and level, what was left out and why, the plan for the next runs, and numbers from `status`, not from memory.
@@ -359,7 +361,7 @@ The xlsx export contains: **Overview** (counts, grade mix, coverage and sweep pr
 - Party names written several ways ("Labour Party", "Labour", "Welsh Labour"; "Democratic-Farmer-Labor") → one common name per party, branches use the national name.
 - Pages that said "tax the wealthy" but not wealth tax were nearly counted → apply section 2 to the speaker's own words.
 - Progress reports that ignored higher-level units ("no geography units loaded") → `status` counts the lowest units of whatever depth you loaded.
-- Pushing straight to `main`, or setting `verified=y` on one's own rows → branch, pull request, and a different checker for `verified=y`.
+- Pushing straight to `main` → branch and pull request.
 - A run began by writing a crawler for 290 municipalities' protocols before the national legislature, parties and major organisations had been searched, because "every unit, no exceptions" was read as an order → touch every layer once first, sample local units, and build tooling only when a sample shows it pays (6.5).
 - Several scoping questions asked one after another before any research → one short message with recommended defaults, then start.
 - Brazil's seed pass shipped without a map because IBGE's own pages state no licence, though OCHA republishes the same IBGE shapes with IBGE codes under CC BY-IGO → check HDX and geoBoundaries before giving up on a map (section 5). The same run quoted the roll call's result line on all 136 vote rows, so no row proved its member's vote → quote the member's own entry on the per-member list (6.4).

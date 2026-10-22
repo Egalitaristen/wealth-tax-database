@@ -154,6 +154,12 @@ def build_country(folder):
     meta = json.load(open(folder / "meta.json", encoding="utf-8"))
     slug = folder.name
     actors, ev, geo = rd(folder / "actors.csv"), rd(folder / "evidence.csv"), rd(folder / "geo_units.csv")
+    # Supporters whose latest evidence is a retraction (stance=retracted) stay in the files but leave the site.
+    latest = {}
+    for e in sorted(ev, key=lambda e: e["date"]):
+        latest[e["actor_id"]] = e.get("stance", "support")
+    gone = {i for i, st in latest.items() if st == "retracted"}
+    actors, ev = [a for a in actors if a["actor_id"] not in gone], [e for e in ev if e["actor_id"] not in gone]
     prof = collections.defaultdict(list)
     for p in rd(folder / "profiles.csv"):
         if p["url"].startswith("https://"):
@@ -166,7 +172,7 @@ def build_country(folder):
         by[e["actor_id"]].append(e)
 
     E = [[e["actor_id"], e["date"], e["grade"], e["evidence_type"], e["wt_design"], e["design_detail"],
-          e["quote_original"][:420], e["source_url"], e["source_title"], e["publisher"], e["verified"],
+          e["quote_original"][:420], e["source_url"], e["source_title"], e["publisher"], e.get("archive_url", ""),
           e["evidence_id"]] for e in ev]
     P = []
     for a in actors:
@@ -235,14 +241,13 @@ def build_country(folder):
         name = g["name"] + (" (country level)" if uid in roots else "")
         O.append([name, g["level"], g["sweep_status"], g["notes"][:500], here[uid], unit_path(uid, by_id)])
     L = [[l["from_actor_id"], l["to_actor_id"], l["link_type"], l["note"]] for l in links]
-    verified = sum(1 for e in ev if e["verified"] == "y")
     last = max([r.get("date", "") for r in runs] or [""])
     done = sum(1 for g in geo if g["sweep_status"] == "done")
     with_sup = sum(1 for u, ids in inside.items() if ids and u not in roots)
     grades = collections.Counter(p[8] for p in P)
     summary = dict(slug=slug, iso2=meta.get("iso2", slug.split("-")[0].upper()), name=meta["name"],
                    status=meta.get("status", ""), lead=meta.get("lead", ""), notes=meta.get("notes", ""),
-                   supporters=len(P), evidence=len(E), verified=verified, A=grades["A"], B=grades["B"], C=grades["C"],
+                   supporters=len(P), evidence=len(E), A=grades["A"], B=grades["B"], C=grades["C"],
                    units=len(geo) - len(roots), units_done=done, units_with_supporters=with_sup, updated=last, excluded=len(excl),
                    polls=[p for p in meta.get("polls", []) if str(p.get("url", "")).startswith("https://")])
     summary["map_source"] = (bounds or {}).get("source", "")
