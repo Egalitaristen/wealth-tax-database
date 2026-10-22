@@ -67,7 +67,14 @@ Post-2010 wealth taxation debates in China have centered around three main axes:
 - World Association for Political Economy (WAPE)
 - East China University of Political Science and Law (ECUPL) International Tax Law Center
 
-## 10. Plan for the next runs
-- **R002 (NPC/CPPCC Proposals & Ministry Responses):** Systematic sweep of Ministry of Finance published responses to NPC/CPPCC proposals from 2018-2025 touching `财产税` / `弃籍税` / `财富调节`.
-- **R003 (Academic Economists & CASS/Universities):** Deepen coverage of academic economists in Peking University, Tsinghua University, Zhejiang University (Center for Research on Shared Prosperity), and SWUFE.
-- **R004 (Hong Kong SAR & Macao SAR):** Investigate Legislative Council debates in Hong Kong on capital taxation and family office / wealth management regulatory regimes.
+## 10. Completed runs and findings
+- **R001 (Seed pass, 2026-10-22):** Initialized dataset with 8 supporters (Chen Jingying, Wang Dongjing, Cheng Enfu, Ye Daoliang, Bai Yanfeng, Yuan Guibo, Wang Jie, Li Yilin), 7 exclusions, boundary TopoJSON (361 local prefectures, 34 province-level units), and geography tree.
+- **R002 (Wider sweep, 2026-10-22):**
+  - Expanded coverage across the NPC/regional leadership tier, adding former Chongqing Mayor **Huang Qifan** (`A0009`, Grade A), who formally recommended an outbound asset transfer levy (`资产转移税`) at the NPC to regulate wealth flight.
+  - Added academic international tax experts **Liu Qichao** (`A0010`, CUFE), **Wang Meng** (`A0011`, CUPL), and **Shen Tao** (`A0012`, ECUPL) for their published analysis in *First Financial* demonstrating the technical feasibility and implementation mechanisms of the G20/UN minimum wealth tax on billionaires.
+  - Added Hong Kong civil society: **Oxfam Hong Kong** (`A0013`, Grade A) and Director General **Kalina Tsang** (`A0014`, Grade B) for their policy campaign advocating a 5% annual wealth tax on multimillionaires and billionaires worldwide and progressive fiscal reform in Hong Kong.
+  - Documented 6 key exclusions: prominent economists **Li Daokui** (opposes taxing the rich / wealth tax), **Ma Jun** (cautions against wealth tax in China), **Gao Peiyong** and **Li Shi** (property and inheritance tax focus without general wealth tax), tax commentator **Zhao Guoqing** (opposes standalone exit tax), and grassroots NGO **SoCO** (advocates income tax brackets rather than wealth stock taxes).
+
+## 11. Plan for the next runs
+- **R003 (Academic Economists & CASS/Universities):** Deepen coverage of academic economists in Peking University (National School of Development), Tsinghua University, Zhejiang University, and SWUFE researching capital taxation and tertiary distribution.
+- **R004 (Hong Kong SAR & Macao SAR):** Investigate Legislative Council debates in Hong Kong on capital taxation, windfall profit taxes, and family office concession regimes.

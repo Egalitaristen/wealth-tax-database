@@ -890,6 +890,21 @@ def _fetch_for_check(u, timeout):
         if raw[:4] == b"%PDF" or "pdf" in ctype:
             text = _pdf_to_text(raw)
             return _plain(text, tags=False) if text else None  # a "<" in PDF text must not swallow what follows
+        cs = resp.headers.get_content_charset()
+        if not cs:
+            m = re.search(rb'charset=["\']?([a-zA-Z0-9_-]+)', raw[:2048])
+            if m:
+                try:
+                    cs = m.group(1).decode("ascii", "ignore")
+                except Exception:
+                    pass
+        for enc in (cs, "utf-8", "gb18030", "latin1"):
+            if not enc:
+                continue
+            try:
+                return _plain(raw.decode(enc))
+            except Exception:
+                pass
         return _plain(raw.decode("utf-8", "ignore"))
     except Exception:
         text = _browser_text(u)
