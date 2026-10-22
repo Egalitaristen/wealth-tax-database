@@ -1,0 +1,8 @@
+{
+  "name": "Japan",
+  "iso2": "JP",
+  "lead": "Egalitaristen",
+  "status": "in progress",
+  "boundaries": "boundaries.json",
+  "notes": "Scope: national (Diet, parties, unions, economists, commentators), 47 prefectures and 1,749 municipalities (JIS X 0401/0402). Seed pass R001."
+}
