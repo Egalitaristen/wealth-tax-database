@@ -23,6 +23,7 @@ First written 2026-10-22 (run R001). Seed pass, national level focus with comple
     - **Anies Baswedan & Muhaimin Iskandar (Koalisi Perubahan):** Championed fiscal justice through progressive wealth and asset redistribution (*pajak kekayaan orang super kaya*), with campaign economic directors Thomas Lembong and Handi Risza detailing proposals to broaden direct taxation.
   - **International Alignment:** Indonesian civil society and economists actively pushed for the Indonesian government to adopt the UN Tax Convention framework and the G20 2% billionaire minimum wealth tax proposal during the 2024 G20 discussions.
 - **Public Opinion Polls:**
+  - *CELIOS National Perception Survey (April 2026):* Found 89.77% public approval across Indonesia for a 2% annual wealth tax on the top 50 richest individuals to fund social protection and combat extreme inequality (reported by *Harian Kontan*).
   - *Earth4All / Ipsos Global Survey (June 2024):* Found 86% public support in Indonesia for establishing a wealth tax on the very wealthy to fund public health, education, and climate action (highest amongst surveyed G20 countries).
   - *Glocalities / Millionaires for Humanity Poll (May 2021):* Found 79% support among Indonesian respondents for a 1% annual wealth tax on fortunes above IDR 140 billion ($10 million).
 
@@ -42,8 +43,9 @@ First written 2026-10-22 (run R001). Seed pass, national level focus with comple
 ## 4. Parties
 - **Partai Demokrasi Indonesia Perjuangan (PDI-P):** Centre-left, social-democratic. Candidate Ganjar Pranowo explicitly proposed evaluating wealth taxes on the super-rich in 2024.
 - **Partai Kebangkitan Bangsa (PKB):** Moderate Islamic, traditionalist. VP candidate Muhaimin Iskandar (*Cak Imin*) advocated progressive taxation of extreme wealth.
-- **Partai Keadilan Sejahtera (PKS):** Islamic conservative/welfare party. Economic advisor Handi Risza and spokesperson Anis Byarwati in Komisi XI pushed for progressive asset levies over regressive VAT hikes.
-- **Other Parties (Golkar, Gerindra, NasDem, PAN, Demokrat):** Tend to prioritise broadening personal income tax (PPh), voluntary disclosure programs (*Tax Amnesty* / *Program Pengungkapan Sukarela*), and consumption taxes (PPN 12%), but have members engaged in tax justice discourse.
+- **Partai Keadilan Sejahtera (PKS):** Islamic welfare and democratic party. DPP Head of Economy Handi Risza and parliamentary representatives officially urged serious consideration and implementation of net wealth taxes to boost the tax ratio and curb structural inequality.
+- **Partai Buruh (Labour Party):** Left-wing, labour confederation party revived in 2021. Formally champions a 2% net wealth tax raising Rp 152 trillion per annum as the primary fiscal alternative to regressive VAT (PPN 12%) hikes and recurring tax amnesties.
+- **Other Parties (Golkar, Gerindra, NasDem, PAN, Demokrat):** Tend to prioritise broadening personal income tax (PPh), voluntary disclosure programs (*Tax Amnesty* / *Program Pengungkapan Sukarela*), and consumption taxes (PPN 12%), though transition figures such as HIPMI Secretary General Anggawira (TKN Fanta) noted that wealth taxes on high-asset holders are an active policy consideration.
 
 ## 5. Government below national level
 - **Structure:**
@@ -96,11 +98,15 @@ First written 2026-10-22 (run R001). Seed pass, national level focus with comple
 - **Transparency International Indonesia (TII):** Anti-corruption body highlighting illicit asset accumulation and fiscal opacity.
 - **Seknas FITRA (Forum Indonesia untuk Transparansi Anggaran):** Budget transparency network monitoring regional and national fiscal distribution.
 - **Liga Mahasiswa Nasional untuk Demokrasi (LMND):** National progressive student organisation actively campaigning for wealth taxes on conglomerates.
+- **Civil 20 (C20) Indonesia:** Official civil society engagement group of the G20 during Indonesia's 2022 presidency; issued summit communique demanding global wealth taxation and a UN Tax Convention.
+- **Institute for Demographic and Poverty Studies (IDEAS):** Poverty research institute advocating wealth taxation on UHNWIs and conglomerates for fiscal justice.
+- **Botax Consulting Indonesia:** Independent tax consultancy founded by former DJP auditors arguing for net wealth taxation to eliminate corporate profit-hoarding tax shelters.
 
-## 10. Plan for the next runs
-- **R002 (Standard Pass):**
-  1. **DPR RI Komisi XI Deep-Dive:** Sweep all 54 members of Komisi XI for statements on progressive asset taxes, wealth taxation, and alternatives to VAT increases during the 2024-2025 budget cycles.
-  2. **Academic & University Economists:** Expand coverage of economists at Universitas Indonesia (UI), Universitas Gadjah Mada (UGM), Universitas Airlangga (UNAIR), and CSIS.
-  3. **Trade Union Confederations:** Survey major labour unions (KSPI, KSPSI, KSBSI, KASBI) for formal tax policy resolutions submitted to the Ministry of Manpower or DPR.
-  4. **Regional Assemblies (DPRD):** Sample major provincial councils (DKI Jakarta, Jawa Barat, Jawa Timur) for local party leader statements calling on national wealth tax legislation.
-  5. **Faith & Religious Organizations:** Explore statements from Nahdlatul Ulama (NU) and Muhammadiyah regarding *zakat mal* integration and economic redistribution.
+## 10. Completed runs and plan for next runs
+- **R001 (Seed Pass, 2026-10-22):** Initial seed coverage across presidential candidates (Ganjar, Lembong, Anies, Cak Imin), lead think tanks (The PRAKARSA, CELIOS, INDEF, PKHA), FPBI coalition partners (PWYP, FITRA, Lokataru, IGJ, Trend Asia, TII, Aksi!), and student movement (LMND). Established 41 supporters, 514 local units, and standardized boundary definitions.
+- **R002 (Wide Sweep Across Missing Actor Layers, 2026-10-22):** Expanded database by 15 supporters (+19 evidence rows) covering business associations (HIPMI / Anggawira), political parties (Partai Buruh / Gede Sandra), tax professionals (Botax Consulting / Raden Agus Suparman), constitutional legal scholars (STHI Jentera / Bivitri Susanti), poverty think tanks (IDEAS / Muhammad Anwar), macroeconomists (CELIOS / Nailul Huda), national media editorial boards (Harian Kontan), multilateral civil society (Civil 20 Indonesia / Aryanto Nugroho), public expenditure watchdogs (MBG Watch / Annette Mau), and international UN testimonies (Ah Maftuchan at UN ECOSOC). Verified third national opinion poll (CELIOS April 2026, 89.77% support). Total: 56 supporters, 62 evidence rows, 51 links, 6 exclusions, 100% verified quotes.
+- **R003 Plan (Legislative & Regional Deep-Dive):**
+  1. **DPR RI Komisi XI Deep-Dive:** Systematically sweep committee records for tax reform and fiscal accountability debates.
+  2. **Major Industrial Regional Councils (DPRD):** Sample provincial and city councils in high-density industrial hubs (Jawa Barat, Jawa Timur, Banten, Sumatera Utara) for local legislative resolutions.
+  3. **Sectoral Labour Confederations:** Target resolutions and public testimonies from KASBI, KSBSI, and KSPSI.
+  4. **Academic Economists:** Survey faculty members across FEB Universitas Indonesia (UI), FEB Universitas Gadjah Mada (UGM), and FEB Universitas Padjadjaran (Unpad).
