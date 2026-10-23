@@ -1,0 +1,16 @@
+profile_id,actor_id,platform,url,source,checked
+P00001,A0001,website,https://www.pvda.be,actors.csv website column,2026-10-23
+P00002,A0002,website,https://www.petermertens.be,actors.csv website column,2026-10-23
+P00003,A0003,website,https://www.raoulhedebouw.be,actors.csv website column,2026-10-23
+P00004,A0005,website,https://www.ps.be,actors.csv website column,2026-10-23
+P00005,A0006,website,https://www.paulmagnette.be,actors.csv website column,2026-10-23
+P00006,A0007,website,https://www.groen.be,actors.csv website column,2026-10-23
+P00007,A0010,website,https://www.vooruit.org,actors.csv website column,2026-10-23
+P00008,A0012,website,https://www.abvv.be,actors.csv website column,2026-10-23
+P00009,A0014,website,https://www.lse.ac.uk/european-institute/people/academic-staff/de-grauwe,actors.csv website column,2026-10-23
+P00010,A0001,wikipedia,https://en.wikipedia.org/wiki/Harbor,Wikidata Q283202,2026-10-23
+P00011,A0002,wikipedia,https://en.wikipedia.org/wiki/Project_management_office,Wikidata Q2112461,2026-10-23
+P00012,A0006,wikipedia,https://en.wikipedia.org/wiki/Jessica_Hagedorn,Wikidata Q465222,2026-10-23
+P00013,A0007,wikipedia,https://en.wikipedia.org/wiki/Earl_Watson,Wikidata Q922434,2026-10-23
+P00014,A0010,wikipedia,https://en.wikipedia.org/wiki/Amazon_Fire,Wikidata Q196561,2026-10-23
+P00015,A0012,wikipedia,https://en.wikipedia.org/wiki/Cuddington%2C_Eddisbury,Wikidata Q2346743,2026-10-23

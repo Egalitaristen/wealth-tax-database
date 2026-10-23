@@ -1,0 +1,4 @@
+run_id,date,assistant,focus,targets,queries_run,sources_opened,candidates_seen,new_actors,new_evidence,grade_upgrades,saturation,notes_next
+R001,2026-10-23,Antigravity,Seed pass across all primary layers at national and regional tier; complete 581-municipality geographic register and boundaries,"Federal parliament, major parties (PTB-PVDA, PS, Groen, Vooruit), trade unions (ABVV/FGTB), prominent economists (Paul De Grauwe), and wealthy supporters (Bruno Fierens)",25,18,22,15,15,0,0.15,"1. Flemish and Walloon regional parliaments motions and resolutions (R002)
+2. Roll-call votes and cosponsors on federal wealth tax bills (R003)
+3. Municipal sweep of top 5 cities: Brussels, Antwerp, Ghent, Charleroi, Liège (R004)"
