@@ -852,17 +852,22 @@ def _plain(s, tags=True):
 
 
 def _pdf_to_text(data):
-    """Text of a PDF via poppler's pdftotext when installed, else None."""
+    """Text of a PDF via poppler's pdftotext when installed, else pypdf if installed, else None."""
     import shutil, subprocess, tempfile
-    if not shutil.which("pdftotext"):
-        return None
-    with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
-        f.write(data)
-        path = f.name
+    if shutil.which("pdftotext"):
+        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
+            f.write(data)
+            path = f.name
+        try:
+            return subprocess.run(["pdftotext", path, "-"], capture_output=True, text=True).stdout
+        finally:
+            os.unlink(path)
     try:
-        return subprocess.run(["pdftotext", path, "-"], capture_output=True, text=True).stdout
-    finally:
-        os.unlink(path)
+        import pypdf, io
+        reader = pypdf.PdfReader(io.BytesIO(data))
+        return "\n".join(page.extract_text() or "" for page in reader.pages)
+    except Exception:
+        return None
 
 
 def _browser_text(url):
