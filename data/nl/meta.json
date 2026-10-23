@@ -4,7 +4,7 @@
   "lead": "Egalitaristen",
   "status": "in progress",
   "boundaries": "boundaries.json",
-  "notes": "Seed pass R001 (2026-10-22), national level: Tweede Kamer motions 2014-2026, party programmes (secondary), Oxfam Novib, FNV, Zucman's hearing, Dutch signers of millionaire letters, three commentators. Eerste Kamer, MEPs, provinces and municipalities not searched. Map: CBS/PDOK Gebiedsindelingen 2026, CC BY 4.0.",
+  "notes": "Depth: seed; national first pass in progress, not saturated. R001–R002 (2026-10-22 to 2026-10-23): 48 supporters and 75 evidence rows across named legislators, parties, NGOs, a regional union branch, experts and public open-letter signatories. All verified=n for maintainer review. Box 3 stock-tax proposals are explicitly limited to partial wealth; income and realised-gains reforms alone excluded. Map: 342 European-Netherlands municipalities and 12 provinces, official CBS 2026 codes and CBS/PDOK shapes under CC BY 4.0. Caribbean public bodies outside register/map. Five-city official-site search pilot did not confirm local support; wider subnational coverage pending. No private petition signers. R002 added 13 actors and 33 evidence rows to the pre-existing seed; older R001 evidence is retained and has not all been rechecked. See area_profile.md and research ledgers for scope, QA and next priorities.",
   "polls": [
     {
       "support": 72,

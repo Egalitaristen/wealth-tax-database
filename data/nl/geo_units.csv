@@ -1,5 +1,5 @@
 geo_unit_id,name,level,unit_type,parent_id,website,sweep_status,swept_run,swept_date,queries_run,hits,notes,code
-G0001,Netherlands,national,country,,,pending,,,,,,
+G0001,Netherlands,national,country,,,in_progress,,,,,,
 G0002,Tweede Kamer,national,legislature,G0001,https://www.tweedekamer.nl,pending,,,,,,
 G0003,Eerste Kamer,national,legislature,G0001,https://www.eerstekamer.nl,pending,,,,,,
 G0004,Kabinet (Government of the Netherlands),national,executive,G0001,https://www.rijksoverheid.nl,pending,,,,,,
@@ -16,7 +16,7 @@ G0014,Overijssel,region,province,G0001,,pending,,,,,,PV23
 G0015,Utrecht,region,province,G0001,,pending,,,,,,PV26
 G0016,Zeeland,region,province,G0001,,pending,,,,,,PV29
 G0017,Zuid-Holland,region,province,G0001,,pending,,,,,,PV28
-G0018,'s-Gravenhage,council,municipality,G0017,,pending,,,,,,GM0518
+G0018,'s-Gravenhage,council,municipality,G0017,,in_progress,R002,2026-10-23,1,0,One official-site web query pilot; no qualifying local institutional source confirmed. Not a completed sweep.,GM0518
 G0019,'s-Hertogenbosch,council,municipality,G0012,,pending,,,,,,GM0796
 G0020,Aa en Hunze,council,municipality,G0006,,pending,,,,,,GM1680
 G0021,Aalsmeer,council,municipality,G0013,,pending,,,,,,GM0358
@@ -33,7 +33,7 @@ G0031,Altena,council,municipality,G0012,,pending,,,,,,GM1959
 G0032,Ameland,council,municipality,G0008,,pending,,,,,,GM0060
 G0033,Amersfoort,council,municipality,G0015,,pending,,,,,,GM0307
 G0034,Amstelveen,council,municipality,G0013,,pending,,,,,,GM0362
-G0035,Amsterdam,council,municipality,G0013,,pending,,,,,,GM0363
+G0035,Amsterdam,council,municipality,G0013,,in_progress,R002,2026-10-23,1,0,One official-site web query pilot; no qualifying local institutional source confirmed. Not a completed sweep.,GM0363
 G0036,Apeldoorn,council,municipality,G0009,,pending,,,,,,GM0200
 G0037,Arnhem,council,municipality,G0009,,pending,,,,,,GM0202
 G0038,Assen,council,municipality,G0006,,pending,,,,,,GM0106
@@ -124,7 +124,7 @@ G0122,Goirle,council,municipality,G0012,,pending,,,,,,GM0785
 G0123,Gooise Meren,council,municipality,G0013,,pending,,,,,,GM1942
 G0124,Gorinchem,council,municipality,G0017,,pending,,,,,,GM0512
 G0125,Gouda,council,municipality,G0017,,pending,,,,,,GM0513
-G0126,Groningen,council,municipality,G0010,,pending,,,,,,GM0014
+G0126,Groningen,council,municipality,G0010,,in_progress,R002,2026-10-23,1,0,One official-site web query pilot; no qualifying local institutional source confirmed. Not a completed sweep.,GM0014
 G0127,Gulpen-Wittem,council,municipality,G0011,,pending,,,,,,GM1729
 G0128,Haaksbergen,council,municipality,G0014,,pending,,,,,,GM0158
 G0129,Haarlem,council,municipality,G0013,,pending,,,,,,GM0392
@@ -259,7 +259,7 @@ G0257,Rijswijk (ZH.),council,municipality,G0017,,pending,,,,,,GM0603
 G0258,Roerdalen,council,municipality,G0011,,pending,,,,,,GM1669
 G0259,Roermond,council,municipality,G0011,,pending,,,,,,GM0957
 G0260,Roosendaal,council,municipality,G0012,,pending,,,,,,GM1674
-G0261,Rotterdam,council,municipality,G0017,,pending,,,,,,GM0599
+G0261,Rotterdam,council,municipality,G0017,,in_progress,R002,2026-10-23,1,0,One official-site web query pilot; no qualifying local institutional source confirmed. Not a completed sweep.,GM0599
 G0262,Rozendaal,council,municipality,G0009,,pending,,,,,,GM0277
 G0263,Rucphen,council,municipality,G0012,,pending,,,,,,GM0840
 G0264,Schagen,council,municipality,G0013,,pending,,,,,,GM0441
@@ -298,7 +298,7 @@ G0296,Tytsjerksteradiel,council,municipality,G0008,,pending,,,,,,GM0737
 G0297,Uitgeest,council,municipality,G0013,,pending,,,,,,GM0450
 G0298,Uithoorn,council,municipality,G0013,,pending,,,,,,GM0451
 G0299,Urk,council,municipality,G0007,,pending,,,,,,GM0184
-G0300,Utrecht,council,municipality,G0015,,pending,,,,,,GM0344
+G0300,Utrecht,council,municipality,G0015,,in_progress,R002,2026-10-23,1,0,One official-site web query pilot; no qualifying local institutional source confirmed. Not a completed sweep.,GM0344
 G0301,Utrechtse Heuvelrug,council,municipality,G0015,,pending,,,,,,GM1581
 G0302,Vaals,council,municipality,G0011,,pending,,,,,,GM0981
 G0303,Valkenburg aan de Geul,council,municipality,G0011,,pending,,,,,,GM0994
