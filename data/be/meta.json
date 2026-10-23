@@ -1,0 +1,22 @@
+{
+  "name": "Belgium",
+  "iso2": "BE",
+  "lead": "Egalitaristen",
+  "status": "in progress",
+  "boundaries": "boundaries.json",
+  "notes": "Scope: national (federal parliament, parties, unions, economists, NGOs), 3 regions (Flanders, Wallonia, Brussels), 10 provinces, and 581 municipalities (REFNIS codes). Seed pass R001.",
+  "polls": [
+    {
+      "support": 80,
+      "support_text": "8 in 10",
+      "scope": "Belgian adults",
+      "question": "Introduction of a wealth tax on fortunes exceeding 1 million euros (excluding main residence)",
+      "question_original": "Instauration d'un impôt sur les grandes fortunes de plus d'un million d'euros (hors résidence principale)",
+      "pollster": "Dedicated / Ipsos",
+      "commissioned_by": "Le Vif and CNCD-11.11.11",
+      "fieldwork": "2023-10",
+      "published": "2023-11",
+      "url": "https://www.levif.be"
+    }
+  ]
+}
