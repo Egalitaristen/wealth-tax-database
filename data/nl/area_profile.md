@@ -1,6 +1,8 @@
-# Area profile — Netherlands
+# Area profile â€” Netherlands
 
-Updated 2026-10-23. Depth: seed, in progress; not saturated. R001 is the pre-existing 22 October seed. R002 adds 13 actors and 33 evidence records; combined CSV counts are 48 supporters and 75 evidence rows. All remain unverified for maintainer review. R001 evidence is retained and has not all been rechecked in R002.
+Updated 2026-10-23. Depth: wide national and supranational research, in progress and not saturated. R003 adds **113 actors and 123 evidence rows**, bringing the combined CSV totals to **161 supporters and 198 evidence records**. All remain unverified for maintainer review. Earlier records are retained and have not all been rechecked.
+
+**Design scope:** 62 of the new actors currently have only evidence of support for developing a wealth-related exit-tax proposal. They must not be described as supporters of the same annual domestic wealth tax. The database records each design separately.
 
 ## Scope and definition
 
@@ -8,13 +10,13 @@ National legislature, parties, NGOs/unions, public experts/commentators and publ
 
 Dutch vermogensbelasting can refer to tax on savings/investment income. [CBS explains the history](https://www.cbs.nl/nl-nl/onze-diensten/methoden/begrippen/vermogensbelasting). Income and realised-gains reforms alone do not qualify.
 
-[Bill 36173](https://www.tweedekamer.nl/kamerstukken/detail?did=2022D30994&id=2022Z14996) taxes the annual stock of net Box 3 assets, with 1–5% progressive bands and a EUR 100,000 allowance; Box 1/2 assets are excluded. Record this as partial wealth taxation and a bill, not enacted law. Its nine named sponsors/co-defenders are documented in [letter 1](https://zoek.officielebekendmakingen.nl/kst-36173-1.html), [letter 4](https://zoek.officielebekendmakingen.nl/kst-36173-4.html), [letter 5](https://zoek.officielebekendmakingen.nl/kst-36173-5.html) and [letter 6](https://zoek.officielebekendmakingen.nl/kst-36173-6.html).
+[Bill 36173](https://www.tweedekamer.nl/kamerstukken/detail?did=2022D30994&id=2022Z14996) taxes the annual stock of net Box 3 assets, with 1â€“5% progressive bands and a EUR 100,000 allowance; Box 1/2 assets are excluded. Record this as partial wealth taxation and a bill, not enacted law. Its nine named sponsors/co-defenders are documented in [letter 1](https://zoek.officielebekendmakingen.nl/kst-36173-1.html), [letter 4](https://zoek.officielebekendmakingen.nl/kst-36173-4.html), [letter 5](https://zoek.officielebekendmakingen.nl/kst-36173-5.html) and [letter 6](https://zoek.officielebekendmakingen.nl/kst-36173-6.html).
 
 [Motion 36202-102](https://www.tweedekamer.nl/kamerstukken/detail?did=2022D46539&id=2022Z21555) positively evaluates a millionaire tax but seeks a feasibility study, illustrated by 1% on Box 3 wealth above EUR 1m; it is not an implementation commitment. Party hand votes are not individual roll calls. [The 10 December 2024 Senate debate](https://www.eerstekamer.nl/9370000/1/j9vvkfvj6b325az/vmj2ybzj8oym) supplies Bastiaan van Apeldoorn's 5%-above-EUR-5m proposal.
 
 ## Sources, parties and networks
 
-The [Tweede Kamer](https://www.tweedekamer.nl/kamerstukken) publishes bills, motions, sponsors, debates and party voting results. R001 used official OData resources; R002 adds human-readable parliament and Officiële Bekendmakingen originals. Dutch MEP research remains open.
+The [Tweede Kamer](https://www.tweedekamer.nl/kamerstukken) publishes bills, motions, sponsors, debates and party voting results. R001 used official OData resources; R002 adds human-readable parliament and OfficiÃ«le Bekendmakingen originals. Dutch MEP research remains open.
 
 R002 primary sources cover SP, D66's adopted congress motion, BIJ1, PvdD, GroenLinks-PvdA, Volt, Oxfam Novib, Tax Justice NL and FNV Noord. Exact source URLs and caveats: [organisation ledger](research_orgs_R002.md). The joint alliance is recorded once. Regional FNV publication does not establish national congress policy. Primary sources supplement the existing R001 secondary party evidence.
 
@@ -30,7 +32,7 @@ One official-site web query each sampled Amsterdam, Rotterdam, The Hague, Utrech
 
 Terms: vermogensbelasting, miljonairsbelasting, miljardairsbelasting, vermogensheffing, minimumvermogensbelasting, vermogensplafond, Zucman-belasting; Netherlands wealth tax, Dutch millionaires, wealth cap. Distinguish these from vermogensrendementsheffing and ordinary realised-gains, property or inheritance reforms.
 
-R002 touched legislature, parties, NGOs/unions, economists/academics, commentators, public wealthy/business, faith/culture/funders and regional/local layers. Faith/culture/funder searches produced leads, not completed coverage. [CE Delft's June 2025 report](https://ce.nl/publicaties/green-and-progressive-tax-proposals-for-the-netherlands/) and [Stek faith column](https://www.stekdenhaag.nl/nieuws-verhalen/stekje-25/) are queued: report recommendations/authors and the column's date/identity need checking before import.
+R002 touched legislature, parties, NGOs/unions, economists/academics, commentators, public wealthy/business, faith/culture/funders and regional/local layers. Faith/culture/funder searches produced leads, not completed coverage. The [CE Delft report](https://ce.nl/publicaties/green-and-progressive-tax-proposals-for-the-netherlands/) and [Stek faith column](https://www.stekdenhaag.nl/nieuws-verhalen/stekje-25/) were followed in R003: qualifying report authors and the identified faith leader were added with the source/date qualifications documented below.
 
 Original sources included ESB, Follow the Money, NPO Radio 1, Utrecht University and a foundation magazine. Exa access failed; web search and original retrieval were used. ESB needed the public Jina reader. No private accounts/messages were accessed.
 
@@ -40,13 +42,25 @@ R002 automated quotation check: 28 of 33 found, zero misses, five PDF sources sk
 
 [Independent sample review](qa_R002.md) checked 16 records and corrected FNV Noord to annual net wealth: its 2% Quote-500 levy specifies no top-up mechanism. The people researcher separately checked SP and D66. R001 records are outside this sample. All rows remain verified=n. Identity/death checks are represented by alive_checked; exclusions preserve uncertain identities and rejected definitions.
 
-## Next runs, ordered by expected yield
-
-1. Original programmes for secondary-only R001 party entries, especially DENK and ChristenUnie; youth motions and named national/European legislative acts.
-2. CE Delft report and its four authors; commissioned reports behind the Eerlijke Belastinggids. Separate recommendations from neutral modelling before attribution.
-3. National FNV stock-tax policy and other coalition bodies; membership alone is not endorsement.
-4. Further expert/commentator originals and direct wealthy declarations; resolve queued names and date the Stek faith column.
-5. Better local party/coalition and provincial pilot; expand only when yield justifies it.
-6. Review retained R001 evidence, party roles and historical qualifications. Check broad surveys before presenting them as wealth-tax-specific support.
-
 Validation warning: Senator Bastiaan van Apeldoorn is placed at the Netherlands root because the cited Eerste Kamer act has a national mandate, not a municipal constituency; his residence is not substituted for the represented jurisdiction.
+
+
+## R003 wide sweep results
+
+The [individual 23 April 2024 roll call](https://zoek.officielebekendmakingen.nl/h-tk-20232024-68-33.html) supplies 72 named affirmative votes on the exit-tax development motion, including 64 new actors. These are actual individual votes, not inferred party positions. The explicit wealth-stock connection was confirmed in the [original debate](https://www.tweedekamer.nl/kamerstukken/plenaire_verslagen/detail/2023-2024/61). Rate, feasibility and implementation limits are preserved in every row.
+
+Seven Dutch MEPs voted for the explicit A9-0336/2023 Amendment2, and three additional Dutch MEPs are named sponsors. The [official minutes](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:C_202500480) and [archived amendment](https://web.archive.org/web/20231215085925id_/https://www.europarl.europa.eu/doceo/document/A-9-2023-0336-AM-002-003_EN.pdf) were used, not whole-report or party-membership inference.
+
+Other additions follow the CE Delft report's four coauthors and organisation, Milieudefensie/Postgroei publications and their named writers, three youth organisations and a named amendment submitter, further national/Senate speakers, public millionaire/campaign participants, philosophers, tax professionals and a faith leader. New primary types: 85 politicians, 7 economists, 4 tax professionals, 4 campaigners, 3 journalists, 3 parties/youth bodies, 2 academics, 2 think tanks, 1 NGO, 1 faith leader and 1 public wealthy supporter. New levels: 101 national, 10 supranational and 2 local. Categories can overlap through other_types.
+
+Eduard de Jong's prior identity exclusion is now resolved with corroborated public inventor identity. Geert Reuten is excluded following the Senate's official death record; he is distinct from living MEP Thijs Reuten. Four historical SP canvassers are included only because the source individually identifies their participation in a millionaire-tax campaign, not merely their party membership.
+
+Full source/meaning checks, PDF pages, short-name warnings and access limitations are in [qa_R003.md](qa_R003.md). Of123 new records,96 unique quotations were automatically found and27 were confirmed in original PDFs/manual checks. Seven automated EUR-Lex false misses were traced to an HTTP202 empty/anti-bot response, then checked in the actual affirmative roster. All remain verified=n. The fuzzy Jimmy/Jasper van Dijk pair represents two different people; senator national-mandate warnings and short formal roster quotes are intentional.
+
+### Next priorities after R003
+
+1. Recover original national FNV stock-tax policy, named union officials and remaining primary DENK/ChristenUnie policies; secondary programme rows remain weaker than original party records.
+2. Recover Piketty's Netherlands testimony and further personally attributable expert originals (Mirjam de Rijk, Sweder van Wijnbergen, Arnoud Boot). Do not promote secondary reports or ordinary Box3/gains statements into qualifying evidence.
+3. Further named youth/coalition proposals and public wealthy declarations; no mass membership or private petition imports.
+4. Improve local party/coalition pilots and provincial sources. Two new local people do not establish municipal institutional endorsement or justify a full342-municipality sweep.
+5. Review older R001/R002 rows, historical party/role changes and design qualifications. Neither national nor local saturation is claimed.
