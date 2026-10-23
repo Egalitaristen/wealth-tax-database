@@ -1,0 +1,5 @@
+link_id,from_actor_id,to_actor_id,link_type,evidence_id,source_url,note
+L0001,A0005,A0007,leads,E00006,https://partisosialis.org,Chairperson of Parti Sosialis Malaysia
+L0002,A0006,A0007,leads,E00008,https://partisosialis.org,Deputy Chairperson of Parti Sosialis Malaysia
+L0003,A0009,A0008,works_for,E00011,https://www.malaysiakini.com/news/745907,Manager at Monitoring Sustainability of Globalisation (MSN)
+L0004,A0013,A0012,works_for,E00016,https://refsa.org/tax-tax-tax-for-the-common-good/,Research Officer at REFSA

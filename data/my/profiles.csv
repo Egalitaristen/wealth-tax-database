@@ -1,0 +1,26 @@
+profile_id,actor_id,platform,url,source,checked
+P0001,A0001,official_page,https://www.parlimen.gov.my/ahli-dewan.html?uweb=dr&id=1073,https://www.parlimen.gov.my,2026-10-23
+P0002,A0002,official_page,https://www.parlimen.gov.my/ahli-dewan.html?uweb=dr&id=876,https://www.parlimen.gov.my,2026-10-23
+P0003,A0004,website,https://charlessantiago.com,https://charlessantiago.com,2026-10-23
+P0004,A0005,website,https://partisosialis.org,https://partisosialis.org,2026-10-23
+P0005,A0007,website,https://partisosialis.org,https://partisosialis.org,2026-10-23
+P0006,A0012,website,https://refsa.org,https://refsa.org,2026-10-23
+P00007,A0006,website,https://partisosialis.org,actors.csv website column,2026-10-23
+P00008,A0001,facebook,https://www.facebook.com/ustmadya,Wikidata Q25486148,2026-10-23
+P00009,A0001,wikipedia,https://en.wikipedia.org/wiki/Ahmad_Yahaya,Wikidata Q25486148,2026-10-23
+P00010,A0002,x,https://x.com/hakarim,Wikidata Q55847624,2026-10-23
+P00011,A0002,facebook,https://www.facebook.com/hassankarim2013,Wikidata Q55847624,2026-10-23
+P00012,A0002,wikipedia,https://en.wikipedia.org/wiki/Hassan_Abdul_Karim,Wikidata Q55847624,2026-10-23
+P00013,A0003,x,https://x.com/UstDrTakiri,Wikidata Q55847008,2026-10-23
+P00014,A0003,instagram,https://www.instagram.com/drmohdkhairuddin/,Wikidata Q55847008,2026-10-23
+P00015,A0003,facebook,https://www.facebook.com/drtakiri,Wikidata Q55847008,2026-10-23
+P00016,A0003,wikipedia,https://en.wikipedia.org/wiki/Khairuddin_Razali,Wikidata Q55847008,2026-10-23
+P00017,A0004,wikipedia,https://en.wikipedia.org/wiki/Charles_Santiago,Wikidata Q5082352,2026-10-23
+P00018,A0005,wikipedia,https://en.wikipedia.org/wiki/Michael_Jeyakumar_Devaraj,Wikidata Q3524062,2026-10-23
+P00019,A0006,wikipedia,https://en.wikipedia.org/wiki/Arutchelvan_Subramaniam,Wikidata Q127604343,2026-10-23
+P00020,A0007,x,https://x.com/partisosialis,Wikidata Q857555,2026-10-23
+P00021,A0007,facebook,https://www.facebook.com/partisosialis,Wikidata Q857555,2026-10-23
+P00022,A0007,wikipedia,https://en.wikipedia.org/wiki/Socialist_Party_of_Malaysia,Wikidata Q857555,2026-10-23
+P00023,A0010,wikipedia,https://en.wikipedia.org/wiki/Kua_Kia_Soong,Wikidata Q6774964,2026-10-23
+P00024,A0011,wikipedia,https://en.wikipedia.org/wiki/Jomo_Kwame_Sundaram,Wikidata Q6270219,2026-10-23
+P00025,A0012,facebook,https://www.facebook.com/refsa,Wikidata Q117662848,2026-10-23
