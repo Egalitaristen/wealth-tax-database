@@ -2,3 +2,9 @@ link_id,from_actor_id,to_actor_id,link_type,evidence_id,source_url,note
 L0001,A0001,A0002,member_of,E00001,https://www.wp.sg,Member of Parliament representing The Workers' Party
 L0002,A0003,A0002,leads,E00003,https://www.wp.sg,Secretary-General of The Workers' Party
 L0003,A0004,A0002,member_of,E00004,https://www.wp.sg,Member of Parliament representing The Workers' Party
+L0004,A0012,A0002,member_of,E00012,https://www.wp.sg,Member of Parliament representing The Workers' Party
+L0005,A0013,A0002,member_of,E00013,https://www.wp.sg,Member of Parliament representing The Workers' Party
+L0006,A0014,A0006,leads,E00014,https://psp.org.sg,Secretary-General of Progress Singapore Party
+L0007,A0015,A0006,member_of,E00015,https://psp.org.sg,First Vice-Chairperson of Progress Singapore Party
+L0008,A0016,A0007,member_of,E00016,https://reddotunited.sg,Head of Welfare and Policy Council member of Red Dot United
+L0009,A0017,A0010,co_author,E00017,https://www.academia.sg/academic-views/ultra-rich-philanthropy-or-taxes/,Co-authored policy analysis on wealth taxation and philanthropy with Linda Lim

@@ -5,7 +5,7 @@
 - **Depth**: Seed pass (prominent supporters across every layer at the national level, with verifiable evidence and a plan for next runs).
 - **Levels of government in scope**: National level (Parliament of Singapore, political parties, ministries, civil society, academic institutions). The geography register covers the 5 administrative Regions (Central, East, North, North-East, West) and the 55 Urban Redevelopment Authority (URA) Planning Areas as the local statistical tier.
 - **Languages to search in**: English (primary official and working language in government, parliament, business, and media), Malay, Mandarin Chinese, Tamil.
-- **Date of first run**: 2026-10-23 (Run R001).
+- **Date of first run**: 2026-10-23 (Run R001; expanded in Run R002 on 2026-10-23 to 17 supporters, 17 evidence items, 9 links, and 9 exclusions).
 
 ## 2. Wealth tax history and live proposals (2010 onwards)
 - **Historical context**: Singapore previously had an estate duty introduced in 1929, which was abolished on 15 February 2008 by then-Finance Minister Tharman Shanmugaratnam to encourage high-net-worth individuals and family offices to site capital in Singapore. There is no capital gains tax, dividend tax, or general wealth tax.
@@ -55,8 +55,10 @@
 - **Research & Academic Groups**: Institute of Policy Studies (IPS) at LKYSPP NUS, Academia.SG.
 - **Trade Unions**: National Trades Union Congress (NTUC) - note: closely affiliated with the ruling party and government.
 
-## 10. Plan for the next runs
-1. **Parliamentary archive sweep (2010–2020)**: Run focused Hansard text searches on `sprs.parl.gov.sg` for wealth tax mentions by earlier MPs and NMPs during Committee of Supply and Budget debates.
-2. **Academic & Think Tank Publications**: Systematically review IPS and LKYSPP policy working papers and Singapore Economic Review articles on wealth inequality.
-3. **Opposition party manifestos for GE2015 and GE2011**: Check earlier manifesto releases of WP, Reform Party, NSP, and SPP for earlier wealth tax references.
-4. **Trade Union Congress (NTUC) statements**: Survey whether any affiliated unions or NTUC leaders ever raised net wealth levies or estate duty reintroduction.
+## 10. Run Summary and Next Steps
+- **R001 (Seed pass, 2026-10-23)**: 11 actors (7 persons, 4 organisations), 11 evidence items, 3 links, 3 exclusions. Established geographic register (5 regions, 55 URA planning areas) and boundary GeoJSON.
+- **R002 (Expansion pass, 2026-10-23)**: Followed key leads and performed wide sweeps across legislature, party leadership, and academia. Added 6 supporters (Gerald Giam, He Ting Ru, Leong Mun Wai, Hazel Poa, David Pang, Teo You Yenn), 6 evidence items, 6 links, and 6 exclusions (Ravi Menon, Kenneth Jeyaretnam, Christopher Gee, Chee Soon Juan, Paul Tambyah, Lawrence Wong). All 17 quotes verified on live web pages. Total: 17 supporters (13 persons, 4 organisations), 17 evidence rows, 9 links, 9 exclusions, 51 profile links.
+- **R003 Plan**:
+  1. **Parliamentary archive sweep (2010–2020)**: Run focused Hansard text searches on `sprs.parl.gov.sg` for wealth tax mentions by earlier MPs and NMPs during Committee of Supply and Budget debates.
+  2. **Academic & Think Tank Publications**: Review IPS, LKYSPP, and ISEAS working papers on wealth inequality and taxation.
+  3. **Trade Union Congress (NTUC)**: Survey NTUC pre-Budget recommendations and statements by labour MPs to check whether any union leaders raised net wealth levies.
