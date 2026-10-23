@@ -1,0 +1,4 @@
+link_id,from_actor_id,to_actor_id,link_type,evidence_id,source_url,note
+L0001,A0001,A0002,member_of,E00001,https://www.wp.sg,Member of Parliament representing The Workers' Party
+L0002,A0003,A0002,leads,E00003,https://www.wp.sg,Secretary-General of The Workers' Party
+L0003,A0004,A0002,member_of,E00004,https://www.wp.sg,Member of Parliament representing The Workers' Party
