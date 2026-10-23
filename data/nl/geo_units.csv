@@ -16,7 +16,7 @@ G0014,Overijssel,region,province,G0001,,pending,,,,,,PV23
 G0015,Utrecht,region,province,G0001,,pending,,,,,,PV26
 G0016,Zeeland,region,province,G0001,,pending,,,,,,PV29
 G0017,Zuid-Holland,region,province,G0001,,pending,,,,,,PV28
-G0018,'s-Gravenhage,council,municipality,G0017,,in_progress,R002,2026-10-23,1,0,One official-site web query pilot; no qualifying local institutional source confirmed. Not a completed sweep.,GM0518
+G0018,'s-Gravenhage,council,municipality,G0017,,in_progress,R004,2026-10-23,1,2,"R004 targeted branch programme/campaign follow-up found public supporters. Party/campaign advocacy, not municipal institutional adoption. No exhaustive local sweep claimed.",GM0518
 G0019,'s-Hertogenbosch,council,municipality,G0012,,pending,,,,,,GM0796
 G0020,Aa en Hunze,council,municipality,G0006,,pending,,,,,,GM1680
 G0021,Aalsmeer,council,municipality,G0013,,pending,,,,,,GM0358
@@ -33,7 +33,7 @@ G0031,Altena,council,municipality,G0012,,pending,,,,,,GM1959
 G0032,Ameland,council,municipality,G0008,,pending,,,,,,GM0060
 G0033,Amersfoort,council,municipality,G0015,,pending,,,,,,GM0307
 G0034,Amstelveen,council,municipality,G0013,,pending,,,,,,GM0362
-G0035,Amsterdam,council,municipality,G0013,,in_progress,R002,2026-10-23,1,0,One official-site web query pilot; no qualifying local institutional source confirmed. Not a completed sweep.,GM0363
+G0035,Amsterdam,council,municipality,G0013,,in_progress,R004,2026-10-23,1,1,"R004 targeted branch programme/campaign follow-up found public supporters. Party/campaign advocacy, not municipal institutional adoption. No exhaustive local sweep claimed.",GM0363
 G0036,Apeldoorn,council,municipality,G0009,,pending,,,,,,GM0200
 G0037,Arnhem,council,municipality,G0009,,pending,,,,,,GM0202
 G0038,Assen,council,municipality,G0006,,pending,,,,,,GM0106
@@ -139,7 +139,7 @@ G0137,Heemskerk,council,municipality,G0013,,pending,,,,,,GM0396
 G0138,Heemstede,council,municipality,G0013,,pending,,,,,,GM0397
 G0139,Heerde,council,municipality,G0009,,pending,,,,,,GM0246
 G0140,Heerenveen,council,municipality,G0008,,pending,,,,,,GM0074
-G0141,Heerlen,council,municipality,G0011,,pending,,,,,,GM0917
+G0141,Heerlen,council,municipality,G0011,,in_progress,R004,2026-10-23,,5,"R004 targeted branch programme/campaign follow-up found public supporters. Party/campaign advocacy, not municipal institutional adoption. No exhaustive local sweep claimed.",GM0917
 G0142,Heeze-Leende,council,municipality,G0012,,pending,,,,,,GM1658
 G0143,Heiloo,council,municipality,G0013,,pending,,,,,,GM0399
 G0144,Hellendoorn,council,municipality,G0014,,pending,,,,,,GM0163
@@ -298,7 +298,7 @@ G0296,Tytsjerksteradiel,council,municipality,G0008,,pending,,,,,,GM0737
 G0297,Uitgeest,council,municipality,G0013,,pending,,,,,,GM0450
 G0298,Uithoorn,council,municipality,G0013,,pending,,,,,,GM0451
 G0299,Urk,council,municipality,G0007,,pending,,,,,,GM0184
-G0300,Utrecht,council,municipality,G0015,,in_progress,R002,2026-10-23,1,0,One official-site web query pilot; no qualifying local institutional source confirmed. Not a completed sweep.,GM0344
+G0300,Utrecht,council,municipality,G0015,,in_progress,R004,2026-10-23,1,2,"R004 targeted branch programme/campaign follow-up found public supporters. Party/campaign advocacy, not municipal institutional adoption. No exhaustive local sweep claimed.",GM0344
 G0301,Utrechtse Heuvelrug,council,municipality,G0015,,pending,,,,,,GM1581
 G0302,Vaals,council,municipality,G0011,,pending,,,,,,GM0981
 G0303,Valkenburg aan de Geul,council,municipality,G0011,,pending,,,,,,GM0994
@@ -354,7 +354,7 @@ G0352,Zoetermeer,council,municipality,G0017,,pending,,,,,,GM0637
 G0353,Zoeterwoude,council,municipality,G0017,,pending,,,,,,GM0638
 G0354,Zuidplas,council,municipality,G0017,,pending,,,,,,GM1892
 G0355,Zundert,council,municipality,G0012,,pending,,,,,,GM0879
-G0356,Zutphen,council,municipality,G0009,,pending,,,,,,GM0301
+G0356,Zutphen,council,municipality,G0009,,in_progress,R004,2026-10-23,,1,"R004 targeted branch programme/campaign follow-up found public supporters. Party/campaign advocacy, not municipal institutional adoption. No exhaustive local sweep claimed.",GM0301
 G0357,Zwartewaterland,council,municipality,G0014,,pending,,,,,,GM1896
 G0358,Zwijndrecht,council,municipality,G0017,,pending,,,,,,GM0642
 G0359,Zwolle,council,municipality,G0014,,pending,,,,,,GM0193

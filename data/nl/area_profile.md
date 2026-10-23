@@ -1,8 +1,8 @@
 # Area profile â€” Netherlands
 
-Updated 2026-10-23. Depth: wide national and supranational research, in progress and not saturated. R003 adds **113 actors and 123 evidence rows**, bringing the combined CSV totals to **161 supporters and 198 evidence records**. All remain unverified for maintainer review. Earlier records are retained and have not all been rechecked.
+Updated 2026-10-23. Depth: wide national, supranational and targeted local research, in progress and not saturated. R004 adds **28 actors and 31 evidence rows**, bringing the combined CSV totals to **189 supporters and 229 evidence records**. All remain unverified for maintainer review; earlier records have not all been rechecked.
 
-**Design scope:** 62 of the new actors currently have only evidence of support for developing a wealth-related exit-tax proposal. They must not be described as supporters of the same annual domestic wealth tax. The database records each design separately.
+**Design scope:** 60 supporters currently have only evidence of support for developing a wealth-related exit-tax proposal. R004 adds direct domestic millionaire-tax advocacy for two previously exit-only actors. Each tax design, wealth cap and conditional or global proposal remains distinct.
 
 ## Scope and definition
 
@@ -16,7 +16,7 @@ Dutch vermogensbelasting can refer to tax on savings/investment income. [CBS exp
 
 ## Sources, parties and networks
 
-The [Tweede Kamer](https://www.tweedekamer.nl/kamerstukken) publishes bills, motions, sponsors, debates and party voting results. R001 used official OData resources; R002 adds human-readable parliament and OfficiÃ«le Bekendmakingen originals. Dutch MEP research remains open.
+The [Tweede Kamer](https://www.tweedekamer.nl/kamerstukken) publishes bills, motions, sponsors, debates and party voting results. R001 used official OData resources; R002 adds human-readable parliament and OfficiÃ«le Bekendmakingen originals. Dutch MEP amendment research was added in R003; further sources remain open.
 
 R002 primary sources cover SP, D66's adopted congress motion, BIJ1, PvdD, GroenLinks-PvdA, Volt, Oxfam Novib, Tax Justice NL and FNV Noord. Exact source URLs and caveats: [organisation ledger](research_orgs_R002.md). The joint alliance is recorded once. Regional FNV publication does not establish national congress policy. Primary sources supplement the existing R001 secondary party evidence.
 
@@ -64,3 +64,21 @@ Full source/meaning checks, PDF pages, short-name warnings and access limitation
 3. Further named youth/coalition proposals and public wealthy declarations; no mass membership or private petition imports.
 4. Improve local party/coalition pilots and provincial sources. Two new local people do not establish municipal institutional endorsement or justify a full342-municipality sweep.
 5. Review older R001/R002 rows, historical party/role changes and design qualifications. Neither national nor local saturation is claimed.
+
+## R004 follow-up results
+
+The next broad pass added 28 supporters and 31 evidence records: seven politicians, six parties or branches, six campaigners, three opinion writers, a tax professional, an economist, an academic, a wealthy individual, a union official and a local campaign committee. Levels:16 national,9 local,2 supranational and1 regional. Existing ChristenUnie gains its original programme; Bart van Kent and Michiel van Nispen gain direct millionaire-tax statements.
+
+The original Piketty presentation to the Dutch parliament (5 November 2014) resolves an existing testimony lead. Other additions include Mirjam de Rijk's annual1% proposal, wealth-cap advocacy, Charlie Bruijsten's safeguarded stock-tax alternative, named Oxfam/FNV spokespeople and the Pirate Party programme. Foreign experts are included only for Netherlands-directed acts; their proposals are not Dutch enactments.
+
+The improved local sample found explicit branch advocacy in Amsterdam, Heerlen, Utrecht, The Hague and Zutphen, plus individually named public campaign participants. This justifies targeted snowballing, not a complete crawl of342 municipalities. No municipal institution is added from a party branch's position. The historical Heerlen committee's present activity remains unknown and is noted. Robin Fransman is withheld as deceased; mere discussion, generic rich-tax language and private petition signers remain excluded.
+
+[QA](qa_R004.md), [independent peer sample](qa_R004_peer.md) and the four R004 research ledgers document quotations, source context, dates, identities, exclusions and access limitations. All31 new quotations were confirmed:18 by the automatic checker and13 through original PDF extraction/manual reading. Nine validation warnings are documented, and the sole fuzzy duplicate candidate is two different people.
+
+### Next priorities after R004
+
+1. Recover reliable publication metadata for the national FNV consultation response, rather than treating its undated PDF as a dated endorsement. Follow named union officials' original stock-tax statements.
+2. Listen to original Arnoud Boot and Sweder van Wijnbergen audio; recover original Peter de Waard columns and Marnix van Rij's12October2026 interview. Headlines and reposts are discovery leads only.
+3. Recover original Splinter/De Groenen party responses and an explicit DENK stock-tax policy. Reconcile Stop Corruptie NL's dated20m statement with its undated10m homepage before assigning organisational policy.
+4. Follow identified local programme and campaign leads proportionately; regional/local institutional endorsement remains largely unresearched. Record negative samples honestly, without claiming absence of support.
+5. Review older records' source strength and historical roles/affiliations. The existing joint-party filter includes historical PvdA/GroenLinks and is explained in notes; further current-role reconciliation remains separate work.
