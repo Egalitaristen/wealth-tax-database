@@ -5,7 +5,7 @@
 - **Depth**: Seed pass (prominent supporters across every layer at the national level, with verifiable evidence and a plan for next runs).
 - **Levels of government in scope**: National level (Parliament of Singapore, political parties, ministries, civil society, academic institutions). The geography register covers the 5 administrative Regions (Central, East, North, North-East, West) and the 55 Urban Redevelopment Authority (URA) Planning Areas as the local statistical tier.
 - **Languages to search in**: English (primary official and working language in government, parliament, business, and media), Malay, Mandarin Chinese, Tamil.
-- **Date of first run**: 2026-10-23 (Run R001; expanded in Run R002 and R003 on 2026-10-23 to 23 supporters, 23 evidence items, 14 links, and 12 exclusions).
+- **Date of first run**: 2026-10-23 (Run R001; expanded in Runs R002, R003, and R004 on 2026-10-23 to 29 supporters, 29 evidence items, 18 links, and 14 exclusions).
 
 ## 2. Wealth tax history and live proposals (2010 onwards)
 - **Historical context**: Singapore previously had an estate duty introduced in 1929, which was abolished on 15 February 2008 by then-Finance Minister Tharman Shanmugaratnam to encourage high-net-worth individuals and family offices to site capital in Singapore. There is no capital gains tax, dividend tax, or general wealth tax.
@@ -58,9 +58,10 @@
 ## 10. Run Summary and Next Steps
 - **R001 (Seed pass, 2026-10-23)**: 11 actors (7 persons, 4 organisations), 11 evidence items, 3 links, 3 exclusions. Established geographic register (5 regions, 55 URA planning areas) and boundary GeoJSON.
 - **R002 (Expansion pass, 2026-10-23)**: Followed key leads and performed wide sweeps across legislature, party leadership, and academia. Added 6 supporters (Gerald Giam, He Ting Ru, Leong Mun Wai, Hazel Poa, David Pang, Teo You Yenn), 6 evidence items, 6 links, and 6 exclusions.
-- **R003 (Budget debates & leadership pass, 2026-10-23)**: Deep sweep of Parliamentary Budget 2022 debates and party leadership. Added 6 supporters (Prof Hoon Hian Teck, Dr Tan Cheng Bock, Ravi Philemon, Dennis Tan Lip Fong, Sylvia Lim, Muhamad Faisal Manap), 6 evidence items, 5 links, and 3 exclusions (Singapore People's Party, National Solidarity Party, Yip Hon Weng). All 23 quotes verified on live web pages. Total: 23 supporters (19 persons, 4 organisations), 23 evidence rows, 14 links, 12 exclusions, 66 profile links.
-- **R004 Plan**:
+- **R003 (Budget debates & leadership pass, 2026-10-23)**: Deep sweep of Parliamentary Budget 2022 debates and party leadership. Added 6 supporters (Prof Hoon Hian Teck, Dr Tan Cheng Bock, Ravi Philemon, Dennis Tan Lip Fong, Sylvia Lim, Muhamad Faisal Manap), 6 evidence items, 5 links, and 3 exclusions.
+- **R004 (Civil society, climate, labour & academia pass, 2026-10-23)**: Wide sweeps across grassroots labour movement, youth climate justice advocacy, policy academia (LKYSPP NUS), and parliamentary slates. Added 6 supporters (Workers Make Possible, SG Climate Rally, Prof Ramkishen S. Rajan, Bhavya Gupta, Leon Perera, Raeesah Khan), 6 evidence items, 4 links, and 2 exclusions (Sudhir Vadaketh, Lim Tean). All 29 quotes verified on live web pages. Total: 29 supporters (23 persons, 6 organisations), 29 evidence rows, 18 links, 14 exclusions, 78 profile links.
+- **R005 Plan**:
   1. **Parliamentary archive sweep (2010–2020)**: Run focused Hansard text searches on `sprs.parl.gov.sg` for wealth tax mentions by earlier MPs and NMPs during Committee of Supply and Budget debates.
   2. **Academic & Think Tank Publications**: Review IPS, LKYSPP, and ISEAS working papers on wealth inequality and taxation.
   3. **Trade Union Congress (NTUC)**: Survey NTUC pre-Budget recommendations and statements by labour MPs to check whether any union leaders raised net wealth levies.
-  4. **Youth and Climate Coalitions**: Survey statements from civil society platforms (e.g., SG Climate Rally, Workers Make Possible).
+  4. **Student and campus groups**: Survey NUS and NTU student union policy resolutions and campus publications.
