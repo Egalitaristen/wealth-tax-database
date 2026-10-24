@@ -42,10 +42,16 @@ The [30 October 2025 public letter](https://patrioticmillionaires.ca/media/press
 
 Exa search was blocked; research continued with the available web tool. Direct Commons downloads return403, though the page opens in the web reader. Some PDFs need the web reader, and KAIROS serves the quotation helper a different page variant. See QA for manual checks. French Quebec NGOs/unions, broader academics, public business leaders, cultural figures, funders and later political retractions remain incomplete. No saturation is claimed.
 
-## 10. Next runs, ordered by expected yield
+## 10. R002 broad sweep and next runs
 
-1. Harvest Quebec division477 of 22 May2025: nine Yeas, minus existing actors after matching; then later federal wealth-tax motions and sponsors.
-2. Search French-language IRIS, Oxfam Québec, CSN, FTQ and Quebec coalition statements; use originals rather than generic fair-share slogans.
-3. Follow published economists' letters, report co-authors and commentators; expand provincial party and union sources.
-4. Resolve the held letter signer's identity; seek stronger individual evidence and check current roles/retractions.
-5. Revisit municipal work through campaign aggregators if they yield named proponents. Do not scale the zero-yield sample into a crawler. Update geography when a new official snapshot is adopted, separately from research coverage.
+R002 added 125 actors and 127 evidence rows, bringing Canada to 222 supporters and 226 evidence rows. English/French searches expanded Quebec unions, NGOs, report authors and economists; regional sources in BC, Alberta, Saskatchewan, Ontario, Quebec, Nova Scotia and Newfoundland and Labrador; federal sponsors and local party resolution submitters. Sources include formal policy publications, convention submissions, testimony and named campaign statements. This is a broad sampled sweep, not an exhaustive provincial or municipal register.
+
+The Nova Scotia housing report yielded a named consensus working group. Its wealth tax is one possible fiscal proposal; no exclusive adoption is implied. CLC/NDP entries concern formal submitters, without inferring delegate, MP or affiliate support. The nine-member Quebec study-only division was screened and yielded no automatic supporter import; Bouazzi has separate direct evidence. See qa_R002.md for caveats and exclusions.
+
+Priority plan:
+
+1. Current federal leadership platforms and later wealth-tax motion sponsors; continue original-source checks for Avi Lewis and other leadership candidates.
+2. NDP 2023 convention books and further explicit union resolutions, distinguishing proposals from adoption.
+3. Manitoba, New Brunswick, PEI and the territories through provincial campaigns and public organisations. Thin coverage means more research is needed.
+4. Published economists and opinion writers, faith leaders, cultural figures, funders and editorial boards; search their own arguments.
+5. Resolve the held letter signer's identity and check newer statements/retractions. Use campaign aggregators before further municipal sampling.

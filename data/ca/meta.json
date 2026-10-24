@@ -4,5 +4,5 @@
   "lead": "",
   "status": "in progress",
   "boundaries": "boundaries.json",
-  "notes": "R001 seed: national first pass plus Quebec and British Columbia policy sources; English/French searches. Municipal search sample of7 cities, not exhaustive. Official2025 register:5054 census subdivisions, including municipal equivalents, reserves and unorganized areas;13 provincial/territorial parents. Province map outlines are2021; local boundaries2025, both Statistics Canada EPSG3347, Open Government Licence–Canada. All evidence remains unverified. Other provinces, later federal votes and French-language organisations need further research."
+  "notes": "R001 seed and R002 broad English/French sweep across federal politics, Quebec organisations, labour, economists and regional housing advocates. Coverage remains partial: no exhaustive province or municipal sweep. Official 2025 register: 5,054 census subdivisions and 13 provincial/territorial parents; Statistics Canada local boundaries 2025 and province outlines 2021, Open Government Licence–Canada. See area profile and QA for searched layers, source limitations and next priorities."
 }
