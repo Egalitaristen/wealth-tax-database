@@ -1,8 +1,8 @@
 # Area profile â€” Netherlands
 
-Updated 2026-10-23. Depth: wide national, supranational and targeted local research, in progress and not saturated. R004 adds **28 actors and 31 evidence rows**, bringing the combined CSV totals to **189 supporters and 229 evidence records**. All remain unverified for maintainer review; earlier records have not all been rechecked.
+Updated 2026-10-24. Research remains in progress and not saturated. R005 adds **14 actors and 15 evidence rows**, bringing the CSV totals to **203 supporters and 244 evidence records**. All remain unverified for maintainer review; earlier records have not all been rechecked.
 
-**Design scope:** 60 supporters currently have only evidence of support for developing a wealth-related exit-tax proposal. R004 adds direct domestic millionaire-tax advocacy for two previously exit-only actors. Each tax design, wealth cap and conditional or global proposal remains distinct.
+**Design scope:** 59 supporters currently have only evidence for developing a wealth-related exit-tax proposal. R005 adds international wealth-tax letter evidence for Joris Thijssen. Each domestic/global design, temporary levy, wealth cap and conditional proposal remains distinct.
 
 ## Scope and definition
 
@@ -82,3 +82,11 @@ The improved local sample found explicit branch advocacy in Amsterdam, Heerlen, 
 3. Recover original Splinter/De Groenen party responses and an explicit DENK stock-tax policy. Reconcile Stop Corruptie NL's dated20m statement with its undated10m homepage before assigning organisational policy.
 4. Follow identified local programme and campaign leads proportionately; regional/local institutional endorsement remains largely unresearched. Record negative samples honestly, without claiming absence of support.
 5. Review older records' source strength and historical roles/affiliations. The existing joint-party filter includes historical PvdA/GroenLinks and is explained in notes; further current-role reconciliation remains separate work.
+
+## R005 follow-up results
+
+The original Tax Extreme Wealth letter roster yields12 new public Dutch signatories (11 economists as listed and one publicly declared millionaire), plus a non-exit-tax record for Joris Thijssen. The letter explicitly calls for international wealth taxes, without specifying a rate, threshold or recurrence. The organiser release dates the letter to5September2023; individual signing dates are unknown. Professional roles and NL association are attributed to the published roster, without guessing employers or finer locations.
+
+Frank Herreveld proposes a temporary1.2% stock levy on the former box3 asset base, while Gerard Bosman proposes a progressive tax above EUR1m in his personal policy essay. Neither claim is represented as adopted organisational policy. Balkenende's G20 letter remains a lead because the opened original does not by itself clearly settle a wealth-stock minimum rather than income-tax support. Peter Leest's existing unresolved identity exclusion remains unchanged. Ronald van Raak's retelling of an anonymous millionaire's views is not imported as his own explicit endorsement.
+
+[Research ledger](research_R005.md), [QA](qa_R005.md) and [independent source review](qa_R005_peer.md) record scope, identity limits and checks. Existing union, original interview/audio, party-policy and targeted local leads remain open. No national or local saturation is claimed.
