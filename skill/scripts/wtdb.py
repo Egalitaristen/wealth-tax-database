@@ -890,6 +890,21 @@ def _fetch_for_check(u, timeout):
         if raw[:4] == b"%PDF" or "pdf" in ctype:
             text = _pdf_to_text(raw)
             return _plain(text, tags=False) if text else None  # a "<" in PDF text must not swallow what follows
+        cs = resp.headers.get_content_charset()
+        if not cs:
+            m = re.search(rb'charset=["\']?([a-zA-Z0-9_-]+)', raw[:2048])
+            if m:
+                try:
+                    cs = m.group(1).decode("ascii", "ignore")
+                except Exception:
+                    pass
+        for enc in (cs, "utf-8", "gb18030", "latin1"):
+            if not enc:
+                continue
+            try:
+                return _plain(raw.decode(enc))
+            except Exception:
+                pass
         return _plain(raw.decode("utf-8", "ignore"))
     except Exception:
         text = _browser_text(u)
@@ -921,8 +936,9 @@ def cmd_checkquotes(a):
         page = cache[u]
         if page is None:
             skip.append(e["evidence_id"]); continue
-        parts = [p for p in re.split(r"…|\.\.\.", _plain(e["quote_original"])) if len(p.split()) >= 3]
-        if not parts and (len(_plain(e["quote_original"]).split()) >= 2 or e.get("evidence_type") == "vote"):
+        parts = [p for p in re.split(r"…|\.\.\.", _plain(e["quote_original"]))
+                 if len(p.split()) >= 3 or len(p.strip()) >= 8]
+        if not parts and (len(_plain(e["quote_original"]).split()) >= 2 or len(_plain(e["quote_original"]).strip()) >= 4 or e.get("evidence_type") == "vote"):
             parts = [_plain(e["quote_original"])]  # a short quote, such as a name on a roll-call list, is checked whole
 
         def found(pg):
