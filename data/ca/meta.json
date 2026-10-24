@@ -1,0 +1,8 @@
+{
+  "name": "Canada",
+  "iso2": "CA",
+  "lead": "",
+  "status": "in progress",
+  "boundaries": "boundaries.json",
+  "notes": "R001 seed: national first pass plus Quebec and British Columbia policy sources; English/French searches. Municipal search sample of7 cities, not exhaustive. Official2025 register:5054 census subdivisions, including municipal equivalents, reserves and unorganized areas;13 provincial/territorial parents. Province map outlines are2021; local boundaries2025, both Statistics Canada EPSG3347, Open Government Licence–Canada. All evidence remains unverified. Other provinces, later federal votes and French-language organisations need further research."
+}
