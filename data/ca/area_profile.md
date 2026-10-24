@@ -55,3 +55,17 @@ Priority plan:
 3. Manitoba, New Brunswick, PEI and the territories through provincial campaigns and public organisations. Thin coverage means more research is needed.
 4. Published economists and opinion writers, faith leaders, cultural figures, funders and editorial boards; search their own arguments.
 5. Resolve the held letter signer's identity and check newer statements/retractions. Use campaign aggregators before further municipal sampling.
+
+## 11. R003 follow-up sweep
+
+R003 added 114 supporters and 121 evidence rows: Canada now has 336 supporters and 347 records. New layers include direct leadership platforms, regional climate campaigns, a PEI party platform, a Manitoba candidate interview, a New Brunswick faith author, Canadian public commentators, and all 14 Canadian signers of the G20 letter (seven new actors).
+
+The most productive new source is H0009, the Manifeste pour un Québec sans pauvreté: 1,443 organisational signatures, last updated 22 October 2026. Eighty selected identifiable organisations plus the organiser are recorded. This is a sample, with formal signatures establishing endorsement of an actual net-assets tax; it does not imply every affiliate, employer or employee endorses it. Snapshot dates are distinguished from individual signing dates. Philanthropic endorsers are not labelled funders of wealth-tax work without funding evidence. See qa_R003.md and independent checks.
+
+Updated priority plan:
+
+1. Continue H0009 systematically: regional community organisations, student bodies, local unions and faith/cultural organisations. Check every identity/type and existing actor aliases; use exact roster names as evidence quotes. Do not harvest ordinary private signers.
+2. Follow remaining direct political leads: Annamie Paul original 2021 debate; Amita Kuttner and Meryam Haddad own platforms; Bonita Zarrillo M-3 through an accessible original. Complete blocked NDP 2023 section without recasting income thresholds as wealth.
+3. Recover PEI NDP original platform; find dated 350 Canada advocacy and clarify the New Brunswick letter tax base. Expand thin territories through direct own statements.
+4. Public cultural/faith individuals and specific funding records remain thin. Hosting a campaign or employing a supporter is insufficient by itself.
+5. Resolve Brian Alkerton identity and check newer retractions. Maintain proportional municipal sampling; no exhaustive crawl justified.
